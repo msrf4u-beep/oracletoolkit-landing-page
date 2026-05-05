@@ -4,109 +4,214 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OracleToolkit | Oracle Cloud Implementation Accelerators</title>
+  <meta name="description" content="OracleToolkit is a growing suite of Oracle Cloud implementation accelerators for Finance, PPM, SCM, and HR teams." />
 
   <style>
+    :root {
+      --navy: #07111f;
+      --navy-2: #0b1729;
+      --ink: #0f172a;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --soft: #f8fafc;
+      --gold: #facc15;
+      --gold-dark: #ca8a04;
+      --green: #047857;
+      --green-bg: #d1fae5;
+      --white: #ffffff;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.10);
+      --radius: 22px;
+    }
+
     * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: #f6f7fb;
-      color: #111827;
+      background: #f4f7fb;
+      color: var(--ink);
     }
+
+    a { color: inherit; }
 
     .nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 24px 8%;
-      background: #0b1120;
+      padding: 22px 8%;
+      background: rgba(7, 17, 31, 0.98);
       color: white;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
     .logo {
       font-size: 24px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
+      font-weight: 900;
+      letter-spacing: -0.7px;
     }
 
-    .nav span {
-      color: #cbd5e1;
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
       font-size: 14px;
+      color: #cbd5e1;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    .nav-links a:hover { color: white; }
+
+    .nav-cta {
+      background: var(--gold);
+      color: #111827 !important;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 800;
     }
 
     .hero {
-      padding: 90px 8% 70px;
-      background: linear-gradient(135deg, #0b1120, #111827);
+      padding: 88px 8% 78px;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(250, 204, 21, 0.20), transparent 30%),
+        linear-gradient(135deg, #07111f 0%, #0b1729 52%, #111827 100%);
       color: white;
     }
 
     .badge {
       display: inline-block;
       padding: 8px 14px;
-      border: 1px solid #334155;
+      border: 1px solid rgba(250, 204, 21, 0.35);
+      background: rgba(250, 204, 21, 0.08);
       border-radius: 999px;
-      color: #facc15;
+      color: var(--gold);
       font-size: 14px;
+      font-weight: 800;
       margin-bottom: 24px;
     }
 
     h1 {
-      font-size: 58px;
-      line-height: 1.05;
+      font-size: 60px;
+      line-height: 1.04;
       margin: 0 0 24px;
-      max-width: 980px;
-      letter-spacing: -2px;
+      max-width: 1050px;
+      letter-spacing: -2.2px;
     }
 
     .hero p {
       font-size: 21px;
-      line-height: 1.6;
+      line-height: 1.62;
       color: #cbd5e1;
-      max-width: 900px;
-      margin-bottom: 34px;
+      max-width: 920px;
+      margin: 0 0 34px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 26px;
     }
 
     .cta {
       display: inline-block;
-      padding: 16px 26px;
-      background: #facc15;
+      padding: 16px 24px;
+      background: var(--gold);
       color: #111827;
-      font-weight: 800;
+      font-weight: 900;
       text-decoration: none;
-      border-radius: 10px;
-      margin-right: 12px;
-      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 14px 30px rgba(250, 204, 21, 0.22);
     }
 
     .secondary {
       display: inline-block;
-      padding: 16px 26px;
+      padding: 16px 24px;
       background: transparent;
       color: white;
-      border: 1px solid #475569;
+      border: 1px solid rgba(203, 213, 225, 0.38);
       text-decoration: none;
-      border-radius: 10px;
-      font-weight: 700;
-      text-align: center;
+      border-radius: 12px;
+      font-weight: 800;
+    }
+
+    .hero-proof {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 980px;
+      margin-top: 50px;
+    }
+
+    .proof-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 20px;
+      border-radius: 16px;
+      color: #e2e8f0;
+    }
+
+    .proof-card strong {
+      display: block;
+      color: white;
+      font-size: 18px;
+      margin-bottom: 6px;
     }
 
     .section {
-      padding: 70px 8%;
+      padding: 74px 8%;
     }
 
     .section h2 {
-      font-size: 38px;
+      font-size: 40px;
       margin: 0 0 14px;
-      letter-spacing: -1px;
+      letter-spacing: -1.1px;
     }
 
     .section-subtitle {
       font-size: 18px;
-      color: #64748b;
+      color: var(--muted);
       max-width: 900px;
-      margin-bottom: 34px;
-      line-height: 1.6;
+      margin: 0 0 36px;
+      line-height: 1.65;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      align-items: start;
+    }
+
+    .panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel h3 {
+      font-size: 26px;
+      margin: 0 0 14px;
+    }
+
+    .panel p, .panel li {
+      color: #475569;
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    .risk-list {
+      padding-left: 20px;
+      margin: 12px 0 0;
     }
 
     .domain-grid {
@@ -117,7 +222,7 @@
 
     .card {
       background: white;
-      border: 1px solid #e5e7eb;
+      border: 1px solid var(--line);
       border-radius: 18px;
       padding: 28px;
       box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
@@ -129,13 +234,15 @@
     }
 
     .card p {
-      color: #64748b;
-      line-height: 1.55;
+      color: var(--muted);
+      line-height: 1.58;
       font-size: 15px;
+      margin: 0;
     }
 
     .active-domain {
-      border: 2px solid #facc15;
+      border: 2px solid var(--gold);
+      background: linear-gradient(180deg, #ffffff, #fffdf2);
     }
 
     .module-grid {
@@ -146,27 +253,25 @@
 
     .module {
       background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 26px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.055);
     }
 
     .module h3 {
       margin: 0 0 14px;
-      font-size: 21px;
+      font-size: 22px;
     }
 
     .module ul {
       padding-left: 0;
       list-style: none;
       margin: 0;
-      color: #475569;
-      line-height: 1.8;
     }
 
     .module li {
-      margin: 9px 0;
+      margin: 10px 0;
     }
 
     .module a {
@@ -175,9 +280,10 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
-      padding: 8px 0;
-      border-bottom: 1px solid #f1f5f9;
+      gap: 12px;
+      border-bottom: 1px dashed #e2e8f0;
+      padding-bottom: 9px;
+      line-height: 1.4;
     }
 
     .module a:hover {
@@ -189,7 +295,7 @@
       font-size: 12px;
       color: #64748b;
       background: #f1f5f9;
-      padding: 3px 8px;
+      padding: 4px 8px;
       border-radius: 999px;
       white-space: nowrap;
     }
@@ -197,101 +303,249 @@
     .module .live {
       color: #065f46;
       background: #d1fae5;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .active-tool {
-      border: 2px solid #facc15;
+      border: 2px solid var(--gold);
+      background: linear-gradient(180deg, #ffffff, #fffdf2);
     }
 
     .tool-box {
-      background: #0b1120;
+      background:
+        radial-gradient(circle at 90% 10%, rgba(250, 204, 21, 0.16), transparent 28%),
+        var(--navy);
       color: white;
-      border-radius: 22px;
-      padding: 38px;
+      border-radius: 26px;
+      padding: 42px;
       display: grid;
       grid-template-columns: 2fr 1fr;
-      gap: 30px;
+      gap: 34px;
       align-items: center;
+      box-shadow: 0 18px 50px rgba(7, 17, 31, 0.25);
     }
+
+    .tool-box h2 { color: white; margin-bottom: 14px; }
 
     .tool-box p {
       color: #cbd5e1;
-      line-height: 1.6;
+      line-height: 1.7;
       font-size: 17px;
+      margin: 0 0 14px;
     }
 
     .tool-tag {
       display: inline-block;
       background: #1e293b;
-      color: #facc15;
-      padding: 7px 12px;
+      color: var(--gold);
+      padding: 8px 13px;
       border-radius: 999px;
       font-size: 13px;
+      font-weight: 900;
       margin-bottom: 12px;
     }
 
-    .beta {
+    .mini-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .mini-metric {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      padding: 14px;
+      border-radius: 14px;
+      color: #e2e8f0;
+      font-size: 13px;
+    }
+
+    .mini-metric strong {
+      display: block;
+      color: white;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      position: relative;
+    }
+
+    .step-number {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #0b1120;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .step h3 { margin: 0 0 8px; font-size: 19px; }
+    .step p { color: var(--muted); line-height: 1.6; margin: 0; }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .audience {
+      background: white;
+      border: 1px solid var(--line);
+      padding: 22px;
+      border-radius: 18px;
+      font-weight: 800;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+    }
+
+    .coming {
       background: #fff7ed;
       border: 1px solid #fed7aa;
-      padding: 30px;
-      border-radius: 18px;
+      padding: 34px;
+      border-radius: 22px;
       margin-top: 30px;
     }
 
-    .beta p {
-      color: #475569;
-      line-height: 1.6;
+    .coming h3 { margin: 0 0 10px; font-size: 25px; }
+
+    .coming p {
+      color: #7c2d12;
+      line-height: 1.65;
+      max-width: 920px;
     }
+
+    .request-link {
+      display: inline-block;
+      margin-top: 8px;
+      color: #111827;
+      border: 1px solid #111827;
+      text-decoration: none;
+      padding: 13px 18px;
+      border-radius: 12px;
+      font-weight: 900;
+    }
+
+    .final-cta {
+      text-align: center;
+      background: white;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .final-cta h2 { max-width: 880px; margin-left: auto; margin-right: auto; }
+    .final-cta p { margin-left: auto; margin-right: auto; }
 
     .footer {
-      padding: 36px 8%;
-      background: #0b1120;
-      color: #94a3b8;
+      padding: 40px 8%;
+      background: var(--navy);
+      color: #cbd5e1;
       font-size: 14px;
+      text-align: center;
     }
 
-    @media (max-width: 900px) {
-      h1 { font-size: 40px; }
-      .domain-grid, .module-grid, .tool-box {
+    @media (max-width: 1050px) {
+      h1 { font-size: 46px; }
+      .domain-grid, .module-grid, .workflow, .audience-grid, .hero-proof {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .tool-box, .split {
         grid-template-columns: 1fr;
       }
-      .nav {
-        flex-direction: column;
-        gap: 8px;
-        align-items: flex-start;
+    }
+
+    @media (max-width: 640px) {
+      .nav { align-items: flex-start; gap: 14px; flex-direction: column; }
+      .nav-links { flex-wrap: wrap; }
+      h1 { font-size: 36px; letter-spacing: -1px; }
+      .hero { padding-top: 58px; }
+      .domain-grid, .module-grid, .workflow, .audience-grid, .hero-proof, .mini-metrics {
+        grid-template-columns: 1fr;
       }
-      .cta, .secondary {
-        display: block;
-        width: 100%;
-        margin: 10px 0;
-      }
+      .section { padding: 52px 6%; }
+      .hero { padding-left: 6%; padding-right: 6%; }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="nav">
+  <nav class="nav">
     <div class="logo">OracleToolkit</div>
-    <span>Oracle Cloud Implementation Accelerators</span>
-  </div>
+    <div class="nav-links">
+      <a href="#domains">Domains</a>
+      <a href="#finance">Finance</a>
+      <a href="#per-diem">Live Tool</a>
+      <a href="mailto:contact@oracletoolkit.com">Contact</a>
+      <a class="nav-cta" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank">Launch Tool</a>
+    </div>
+  </nav>
 
   <section class="hero">
     <div class="badge">Beta Platform for Oracle Cloud Consultants</div>
-    <h1>Build faster, validate smarter, and reduce Oracle Cloud implementation risk.</h1>
+    <h1>Oracle Cloud implementation accelerators built for real project execution.</h1>
     <p>
-      OracleToolkit is a growing collection of practical accelerators for Oracle Cloud implementations across Finance, PPM, SCM, and HR.
-      Built for consultants, solution architects, and implementation teams who need reusable tools — not theory.
+      OracleToolkit is a growing suite of practical tools for Oracle Cloud implementations across Finance, PPM, SCM, and HR.
+      It is designed for consultants, solution architects, and project teams who need reusable accelerators that reduce manual effort,
+      validation gaps, and implementation risk.
     </p>
-    <a class="cta" href="#finance">Explore Finance Tools</a>
-    <a class="secondary" href="mailto:contact@oracletoolkit.com">Request Demo</a>
+
+    <div class="cta-row">
+      <a class="cta" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank">Launch Per Diem Engine</a>
+      <a class="secondary" href="#finance">Explore Tool Library</a>
+    </div>
+
+    <div class="hero-proof">
+      <div class="proof-card"><strong>Implementation-focused</strong>Built around real Oracle Cloud project pain points.</div>
+      <div class="proof-card"><strong>Module-wise library</strong>Finance first, with PPM, SCM, and HR expansion planned.</div>
+      <div class="proof-card"><strong>Reusable output</strong>Designed to produce review-ready workbooks and accelerators.</div>
+    </div>
   </section>
 
   <section class="section">
+    <div class="split">
+      <div class="panel">
+        <h3>Why OracleToolkit exists</h3>
+        <p>
+          Oracle Cloud implementation teams lose time on repeated cleanup, validation, conversion checks, testing packs, and setup readiness reviews.
+          Many of these activities are predictable, repeatable, and should not be rebuilt from scratch on every project.
+        </p>
+        <p>
+          OracleToolkit converts field-tested implementation knowledge into structured accelerators that help teams move faster with better control.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3>The risk it reduces</h3>
+        <ul class="risk-list">
+          <li>Manual spreadsheet cleanup creating inconsistent results.</li>
+          <li>Incomplete validation before SIT, UAT, or conversion cycles.</li>
+          <li>Repeated effort across similar Oracle Cloud projects.</li>
+          <li>Late discovery of configuration and data readiness issues.</li>
+          <li>Dependency gaps between functional, technical, and business teams.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="domains">
     <h2>Tool Domains</h2>
     <p class="section-subtitle">
-      The platform is structured by Oracle Cloud business domains, with each domain expanding into module-level toolkits and implementation accelerators.
+      The platform is structured by Oracle Cloud business domains. Finance is the first active domain, with additional tools planned across PPM, SCM, and HR.
     </p>
 
     <div class="domain-grid">
@@ -302,17 +556,17 @@
 
       <div class="card">
         <h3>PPM</h3>
-        <p>Future toolkits for project costing, project billing, grants, capitalization, and project budget controls.</p>
+        <p>Future accelerators for project costing, billing, grants, capitalization, project controls, and project budget readiness.</p>
       </div>
 
       <div class="card">
         <h3>SCM</h3>
-        <p>Future accelerators for procurement, receiving, inventory, supplier setup, and purchasing controls.</p>
+        <p>Future toolkits for procurement, suppliers, receiving, inventory, purchasing controls, and operational readiness.</p>
       </div>
 
       <div class="card">
         <h3>HR</h3>
-        <p>Future tools for employee setup validation, approvals dependency checks, job/position mapping, and security readiness.</p>
+        <p>Future tools for employee setup, approval dependencies, job and position mapping, and security readiness.</p>
       </div>
     </div>
   </section>
@@ -320,8 +574,7 @@
   <section class="section" id="finance">
     <h2>Finance Toolkit Categories</h2>
     <p class="section-subtitle">
-      Finance is the first active domain. Each module will gradually include validation engines, testing packs,
-      mapping tools, conversion checkers, and implementation readiness accelerators.
+      Finance is the first active domain. Each module will gradually include validation engines, testing packs, mapping tools, conversion checkers, and implementation readiness accelerators.
     </p>
 
     <div class="module-grid">
@@ -366,7 +619,7 @@
         <h3>Expenses</h3>
         <ul>
           <li>
-            <a class="live-link" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank">
+            <a href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank">
               Per Diem Transformation Engine <span class="live">Live</span>
             </a>
           </li>
@@ -387,7 +640,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="per-diem">
     <div class="tool-box">
       <div>
         <div class="tool-tag">Active Beta Tool</div>
@@ -397,8 +650,13 @@
           standard rate rows, lodging helper rows, validation summary, and review flags.
         </p>
         <p>
-          Designed to reduce manual cleanup effort during Oracle Cloud Expenses policy setup and testing.
+          Designed to reduce manual cleanup effort during Oracle Cloud Expenses policy setup, testing, and review cycles.
         </p>
+        <div class="mini-metrics">
+          <div class="mini-metric"><strong>1 input</strong>Upload Zip Code File</div>
+          <div class="mini-metric"><strong>Multiple sheets</strong>Review-ready workbook</div>
+          <div class="mini-metric"><strong>Beta</strong>Open for feedback</div>
+        </div>
       </div>
 
       <div>
@@ -409,22 +667,78 @@
     </div>
   </section>
 
+  <section class="section">
+    <h2>How the live tool works</h2>
+    <p class="section-subtitle">
+      The current beta tool uses a simple upload-to-output workflow designed for quick project use and early user feedback.
+    </p>
+
+    <div class="workflow">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Upload</h3>
+        <p>Upload the GSA Zip Code File into the Per Diem Engine.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Normalize</h3>
+        <p>The engine cleans and structures geography-related data into usable review tables.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Validate</h3>
+        <p>Review flags highlight rows that need attention before Oracle setup usage.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Download</h3>
+        <p>Download an Oracle-ready helper workbook for review, testing, or setup support.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Built for implementation professionals</h2>
+    <p class="section-subtitle">
+      OracleToolkit is designed for people who work inside real Oracle Cloud programs and need practical execution support.
+    </p>
+
+    <div class="audience-grid">
+      <div class="audience">Oracle Cloud Finance Consultants</div>
+      <div class="audience">Solution Architects</div>
+      <div class="audience">Implementation Teams</div>
+      <div class="audience">Public Sector / K-12 Projects</div>
+    </div>
+  </section>
+
   <section class="section" id="coming-soon">
-    <div class="beta">
+    <div class="coming">
       <h3>More OracleToolkit accelerators are coming soon</h3>
       <p>
         This toolkit library is being built module by module. Current live tool: Expenses → Per Diem Transformation Engine.
         Upcoming tools will be released across GL & BCEA, Payables, Receivables, Fixed Assets, Cash Management, PPM, SCM, and HR.
       </p>
-      <a class="secondary" style="color:#111827;border-color:#111827;" href="mailto:contact@oracletoolkit.com">
-        Request Early Access / Suggest a Tool
-      </a>
+      <a class="request-link" href="mailto:contact@oracletoolkit.com">Request Early Access / Suggest a Tool</a>
     </div>
   </section>
 
-  <div class="footer">
-    © OracleToolkit. Independent Oracle Cloud implementation accelerator platform. Not affiliated with Oracle Corporation.
-  </div>
+  <section class="section final-cta">
+    <h2>Start with the live Per Diem Engine. Help shape the next OracleToolkit accelerators.</h2>
+    <p class="section-subtitle">
+      Early feedback will guide which Finance, PPM, SCM, and HR tools are prioritized next.
+    </p>
+    <div class="cta-row" style="justify-content:center;">
+      <a class="cta" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank">Launch Per Diem Engine</a>
+      <a class="secondary" style="color:#111827;border-color:#111827;" href="mailto:contact@oracletoolkit.com">Contact / Request Demo</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    © OracleToolkit. Independent platform for Oracle Cloud implementation accelerators. Not affiliated with Oracle Corporation.
+  </footer>
 
 </body>
 </html>
