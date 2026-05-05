@@ -7,6 +7,7 @@
 
   <style>
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
@@ -75,6 +76,7 @@
       text-decoration: none;
       border-radius: 10px;
       margin-right: 12px;
+      text-align: center;
     }
 
     .secondary {
@@ -86,6 +88,7 @@
       text-decoration: none;
       border-radius: 10px;
       font-weight: 700;
+      text-align: center;
     }
 
     .section {
@@ -101,7 +104,7 @@
     .section-subtitle {
       font-size: 18px;
       color: #64748b;
-      max-width: 850px;
+      max-width: 900px;
       margin-bottom: 34px;
       line-height: 1.6;
     }
@@ -131,7 +134,7 @@
       font-size: 15px;
     }
 
-    .active {
+    .active-domain {
       border: 2px solid #facc15;
     }
 
@@ -146,17 +149,59 @@
       border: 1px solid #e5e7eb;
       border-radius: 16px;
       padding: 24px;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04);
     }
 
     .module h3 {
-      margin: 0 0 10px;
+      margin: 0 0 14px;
       font-size: 21px;
     }
 
     .module ul {
-      padding-left: 18px;
+      padding-left: 0;
+      list-style: none;
+      margin: 0;
       color: #475569;
       line-height: 1.8;
+    }
+
+    .module li {
+      margin: 9px 0;
+    }
+
+    .module a {
+      color: #1e293b;
+      text-decoration: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .module a:hover {
+      color: #0f172a;
+      text-decoration: underline;
+    }
+
+    .module span {
+      font-size: 12px;
+      color: #64748b;
+      background: #f1f5f9;
+      padding: 3px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .module .live {
+      color: #065f46;
+      background: #d1fae5;
+      font-weight: 700;
+    }
+
+    .active-tool {
+      border: 2px solid #facc15;
     }
 
     .tool-box {
@@ -194,6 +239,11 @@
       margin-top: 30px;
     }
 
+    .beta p {
+      color: #475569;
+      line-height: 1.6;
+    }
+
     .footer {
       padding: 36px 8%;
       background: #0b1120;
@@ -205,6 +255,16 @@
       h1 { font-size: 40px; }
       .domain-grid, .module-grid, .tool-box {
         grid-template-columns: 1fr;
+      }
+      .nav {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
+      .cta, .secondary {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
       }
     }
   </style>
@@ -235,7 +295,7 @@
     </p>
 
     <div class="domain-grid">
-      <div class="card active">
+      <div class="card active-domain">
         <h3>Finance</h3>
         <p>GL, Budgetary Control, Payables, Receivables, Fixed Assets, Expenses, and Cash Management accelerators.</p>
       </div>
@@ -260,63 +320,70 @@
   <section class="section" id="finance">
     <h2>Finance Toolkit Categories</h2>
     <p class="section-subtitle">
-      Finance is the first active domain. Each module will gradually include validation engines, testing packs, mapping tools, conversion checkers, and implementation readiness accelerators.
+      Finance is the first active domain. Each module will gradually include validation engines, testing packs,
+      mapping tools, conversion checkers, and implementation readiness accelerators.
     </p>
 
     <div class="module-grid">
+
       <div class="module">
         <h3>GL & BCEA</h3>
         <ul>
-          <li>COA Crosswalk Toolkit</li>
-          <li>Budget Control Design Engine</li>
-          <li>Encumbrance Testing Toolkit</li>
+          <li><a href="#coming-soon">COA Crosswalk Toolkit <span>Coming Soon</span></a></li>
+          <li><a href="#coming-soon">Budget Control Design Engine <span>Coming Soon</span></a></li>
+          <li><a href="#coming-soon">Encumbrance Testing Toolkit <span>Coming Soon</span></a></li>
         </ul>
       </div>
 
       <div class="module">
         <h3>Payables</h3>
         <ul>
-          <li>Invoice Validation Toolkit</li>
-          <li>Payment Method Readiness</li>
-          <li>Supplier Setup Review</li>
+          <li><a href="#coming-soon">Invoice Validation Toolkit <span>Coming Soon</span></a></li>
+          <li><a href="#coming-soon">Payment Method Readiness <span>Coming Soon</span></a></li>
+          <li><a href="#coming-soon">Supplier Setup Review <span>Coming Soon</span></a></li>
         </ul>
       </div>
 
       <div class="module">
         <h3>Receivables</h3>
         <ul>
-          <li>AutoAccounting Review</li>
-          <li>Receipt Method Validation</li>
-          <li>Customer Site Readiness</li>
+          <li><a href="#coming-soon">AutoAccounting Review <span>Coming Soon</span></a></li>
+          <li><a href="#coming-soon">Receipt Method Validation <span>Coming Soon</span></a></li>
+          <li><a href="#coming-soon">Customer Site Readiness <span>Coming Soon</span></a></li>
         </ul>
       </div>
 
       <div class="module">
         <h3>Fixed Assets</h3>
         <ul>
-          <li>Asset Conversion Readiness</li>
-          <li>Book Setup Validation</li>
-          <li>Mass Additions Review</li>
+          <li><a href="#coming-soon">Asset Conversion Readiness <span>Coming Soon</span></a></li>
+          <li><a href="#coming-soon">Book Setup Validation <span>Coming Soon</span></a></li>
+          <li><a href="#coming-soon">Mass Additions Review <span>Coming Soon</span></a></li>
         </ul>
       </div>
 
-      <div class="module">
+      <div class="module active-tool">
         <h3>Expenses</h3>
         <ul>
-          <li>Per Diem Transformation Engine</li>
-          <li>Expense Approval Readiness</li>
-          <li>Policy Setup Validation</li>
+          <li>
+            <a class="live-link" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank">
+              Per Diem Transformation Engine <span class="live">Live</span>
+            </a>
+          </li>
+          <li><a href="#coming-soon">Expense Approval Readiness <span>Coming Soon</span></a></li>
+          <li><a href="#coming-soon">Policy Setup Validation <span>Coming Soon</span></a></li>
         </ul>
       </div>
 
       <div class="module">
         <h3>Cash Management</h3>
         <ul>
-          <li>Bank Account Setup Review</li>
-          <li>Pooled Cash Reconciliation Aid</li>
-          <li>Bank Statement Testing Pack</li>
+          <li><a href="#coming-soon">Bank Account Setup Review <span>Coming Soon</span></a></li>
+          <li><a href="#coming-soon">Pooled Cash Reconciliation Aid <span>Coming Soon</span></a></li>
+          <li><a href="#coming-soon">Bank Statement Testing Pack <span>Coming Soon</span></a></li>
         </ul>
       </div>
+
     </div>
   </section>
 
@@ -335,20 +402,22 @@
       </div>
 
       <div>
-        <a class="cta" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app"_blank">
+        <a class="cta" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank">
           Launch Per Diem Engine
         </a>
       </div>
     </div>
+  </section>
 
+  <section class="section" id="coming-soon">
     <div class="beta">
-      <h3>Beta Access</h3>
+      <h3>More OracleToolkit accelerators are coming soon</h3>
       <p>
-        OracleToolkit is currently in beta. Early access is available for Oracle Finance consultants, solution architects,
-        and implementation teams who want to test the Per Diem Engine and provide practical feedback.
+        This toolkit library is being built module by module. Current live tool: Expenses → Per Diem Transformation Engine.
+        Upcoming tools will be released across GL & BCEA, Payables, Receivables, Fixed Assets, Cash Management, PPM, SCM, and HR.
       </p>
       <a class="secondary" style="color:#111827;border-color:#111827;" href="mailto:contact@oracletoolkit.com">
-        Contact / Request Demo
+        Request Early Access / Suggest a Tool
       </a>
     </div>
   </section>
