@@ -467,6 +467,21 @@
       text-align: center;
     }
 
+    #login-area button {
+      background: var(--gold);
+      color: #111827;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 900;
+      cursor: pointer;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #login-area button:hover {
+      background: #fde047;
+    }
+
     @media (max-width: 1050px) {
       h1 { font-size: 46px; }
       .domain-grid, .module-grid, .workflow, .audience-grid, .hero-proof {
@@ -499,7 +514,8 @@
       <a href="#domains">Domains</a>
       <a href="#finance">Finance</a>
       <a href="#per-diem">Live Tool</a>
-      <a href="mailto:contact@oracletoolkit.com">Contact</a>
+      <a href="mailto:oracletoolkit5@gmail.com">Contact</a>
+      <div id="login-area"></div>
       <a class="nav-cta" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank"
         onclick="gtag('event','per_diem_tool_click')">
         Launch Tool</a>
@@ -738,9 +754,21 @@ Request Demo</a>
         This toolkit library is being built module by module. Current live tool: Expenses → Per Diem Transformation Engine.
         Upcoming tools will be released across GL & BCEA, Payables, Receivables, Fixed Assets, Cash Management, PPM, SCM, and HR.
       </p>
-      <a class="request-link" href="mailto:contact@oracletoolkit.com">Request Early Access / Suggest a Tool</a>
+      <a class="request-link" href="mailto:oracletoolkit5@gmail.com">Request Early Access / Suggest a Tool</a>
     </div>
   </section>
+
+  <div id="dashboard-area" style="display:none; padding:40px 8%;">
+    <div class="panel">
+      <h2>Member Dashboard</h2>
+      <p>Welcome to OracleToolkit member access.</p>
+      <a class="cta"
+        href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/"
+        target="_blank">
+        Launch Per Diem Engine
+      </a>
+    </div>
+  </div>
 
   <section class="section final-cta">
     <h2>Start with the live Per Diem Engine. Help shape the next OracleToolkit accelerators.</h2>
@@ -749,7 +777,7 @@ Request Demo</a>
     </p>
     <div class="cta-row" style="justify-content:center;">
       <a class="cta" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank">Launch Per Diem Engine</a>
-      <a class="secondary" style="color:#111827;border-color:#111827;" href="mailto:contact@oracletoolkit.com">Contact / Request Demo</a>
+      <a class="secondary" style="color:#111827;border-color:#111827;" href="mailto:oracletoolkit5@gmail.com">Contact / Request Demo</a>
     </div>
   </section>
 
@@ -757,5 +785,34 @@ Request Demo</a>
     © OracleToolkit. Independent platform for Oracle Cloud implementation accelerators. Not affiliated with Oracle Corporation.
   </footer>
 
+  <script
+  async
+  crossorigin="anonymous"
+  data-clerk-publishable-key="pk_test_dXNlZnVsLW1vbml0b3ItNTkuY2xlcmsuYWNjb3VudHMuZGV2JA"
+  src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"
+  type="text/javascript">
+</script>
+
+<script>
+  window.addEventListener("load", async function () {
+    await window.Clerk.load();
+
+    const loginArea = document.getElementById("login-area");
+    const dashboardArea = document.getElementById("dashboard-area");
+
+    if (window.Clerk.user) {
+      loginArea.innerHTML = '<div id="user-button"></div>';
+      window.Clerk.mountUserButton(document.getElementById("user-button"));
+      dashboardArea.style.display = "block";
+    } else {
+      loginArea.innerHTML = '<button id="login-button">Login / Sign Up</button>';
+      document.getElementById("login-button").addEventListener("click", function () {
+        window.Clerk.openSignIn();
+      });
+      dashboardArea.style.display = "none";
+    }
+  });
+</script>
+  
 </body>
 </html>
