@@ -467,6 +467,8 @@
       text-align: center;
     }
 
+
+
     #login-area button {
       background: var(--gold);
       color: #111827;
@@ -515,7 +517,9 @@
       <a href="#finance">Finance</a>
       <a href="#per-diem">Live Tool</a>
       <a href="mailto:oracletoolkit5@gmail.com">Contact</a>
-      <div id="login-area"></div>
+      <div id="login-area">
+        <button id="login-button">Login / Sign Up</button>
+      </div>
       <a class="nav-cta" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank"
         onclick="gtag('event','per_diem_tool_click')">
         Launch Tool</a>
@@ -758,6 +762,7 @@ Request Demo</a>
     </div>
   </section>
 
+
   <div id="dashboard-area" style="display:none; padding:40px 8%;">
     <div class="panel">
       <h2>Member Dashboard</h2>
@@ -794,23 +799,64 @@ Request Demo</a>
 </script>
 
 <script>
-  window.addEventListener("load", async function () {
-    await window.Clerk.load();
-
+  window.addEventListener("load", function () {
     const loginArea = document.getElementById("login-area");
     const dashboardArea = document.getElementById("dashboard-area");
 
-    if (window.Clerk.user) {
-      loginArea.innerHTML = '<div id="user-button"></div>';
-      window.Clerk.mountUserButton(document.getElementById("user-button"));
-      dashboardArea.style.display = "block";
-    } else {
-      loginArea.innerHTML = '<button id="login-button">Login / Sign Up</button>';
-      document.getElementById("login-button").addEventListener("click", function () {
-        window.Clerk.openSignIn();
-      });
-      dashboardArea.style.display = "none";
+    if (!loginArea) {
+      console.error("Login area not found.");
+      return;
     }
+
+    // Always show the login button first so it does not disappear if Clerk loads slowly.
+    loginArea.innerHTML = '<button id="login-button">Login / Sign Up</button>';
+
+    const loginButton = document.getElementById("login-button");
+
+    loginButton.addEventListener("click", async function () {
+      try {
+        if (!window.Clerk) {
+          alert("Authentication system is still loading. Please wait 2 seconds and try again.");
+          return;
+        }
+
+        await window.Clerk.load();
+
+        if (window.Clerk.user) {
+          loginArea.innerHTML = '<div id="user-button"></div>';
+          window.Clerk.mountUserButton(document.getElementById("user-button"));
+
+          if (dashboardArea) {
+            dashboardArea.style.display = "block";
+          }
+        } else {
+          window.Clerk.openSignIn();
+        }
+      } catch (err) {
+        console.error("Clerk Error:", err);
+        alert("Login temporarily unavailable. Please check the browser console error.");
+      }
+    });
+
+    // Optional: if Clerk is already available, load it quietly and update UI for signed-in user.
+    setTimeout(async function () {
+      try {
+        if (window.Clerk) {
+          await window.Clerk.load();
+
+          if (window.Clerk.user) {
+            loginArea.innerHTML = '<div id="user-button"></div>';
+            window.Clerk.mountUserButton(document.getElementById("user-button"));
+
+            if (dashboardArea) {
+              dashboardArea.style.display = "block";
+            }
+          }
+        }
+      } catch (err) {
+        console.warn("Clerk background load warning:", err);
+      }
+    }, 1200);
   });
 </script>
   
