@@ -484,6 +484,214 @@
       background: #fde047;
     }
 
+
+    /* Premium Member Dashboard */
+    .dashboard-section {
+      display: none;
+      padding: 72px 8%;
+      background:
+        radial-gradient(circle at 10% 5%, rgba(250, 204, 21, 0.14), transparent 28%),
+        linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+      border-top: 1px solid var(--line);
+    }
+
+    .dashboard-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .dashboard-hero {
+      background:
+        radial-gradient(circle at 88% 18%, rgba(250, 204, 21, 0.22), transparent 26%),
+        linear-gradient(135deg, #07111f 0%, #0b1729 58%, #111827 100%);
+      color: white;
+      border-radius: 28px;
+      padding: 36px;
+      box-shadow: 0 24px 60px rgba(7, 17, 31, 0.22);
+      display: grid;
+      grid-template-columns: 1.7fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .dashboard-eyebrow {
+      display: inline-block;
+      color: var(--gold);
+      background: rgba(250, 204, 21, 0.09);
+      border: 1px solid rgba(250, 204, 21, 0.32);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .dashboard-hero h2 {
+      color: white;
+      font-size: 38px;
+      line-height: 1.08;
+      letter-spacing: -1px;
+      margin: 0 0 12px;
+    }
+
+    .dashboard-hero p {
+      color: #cbd5e1;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .dashboard-status-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      color: #e2e8f0;
+      font-size: 14px;
+    }
+
+    .status-row:last-child { border-bottom: none; }
+    .status-row strong { color: white; text-align: right; }
+
+    .dashboard-kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 24px 0 28px;
+    }
+
+    .kpi-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+    }
+
+    .kpi-card strong {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .kpi-card span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .dashboard-section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin: 30px 0 18px;
+    }
+
+    .dashboard-section-title h3 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: -0.7px;
+    }
+
+    .dashboard-section-title p {
+      color: var(--muted);
+      margin: 8px 0 0;
+      line-height: 1.6;
+    }
+
+    .tool-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .tool-card-premium {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.07);
+      min-height: 246px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tool-card-premium.live-card {
+      border: 2px solid var(--gold);
+      background: linear-gradient(180deg, #ffffff 0%, #fffdf2 100%);
+    }
+
+    .tool-card-premium h4 {
+      margin: 12px 0 10px;
+      font-size: 21px;
+      letter-spacing: -0.3px;
+    }
+
+    .tool-card-premium p {
+      color: var(--muted);
+      line-height: 1.62;
+      margin: 0 0 18px;
+      font-size: 15px;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .pill-live { background: var(--green-bg); color: var(--green); }
+    .pill-soon { background: #fff7ed; color: #9a3412; }
+    .pill-premium { background: #fef3c7; color: #92400e; }
+
+    .dashboard-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .action-panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.06);
+    }
+
+    .action-panel h4 {
+      font-size: 22px;
+      margin: 0 0 8px;
+    }
+
+    .action-panel p {
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 0 0 18px;
+    }
+
     @media (max-width: 1050px) {
       h1 { font-size: 46px; }
       .domain-grid, .module-grid, .workflow, .audience-grid, .hero-proof {
@@ -505,6 +713,19 @@
       .section { padding: 52px 6%; }
       .hero { padding-left: 6%; padding-right: 6%; }
     }
+
+    @media (max-width: 1050px) {
+      .dashboard-hero, .dashboard-actions { grid-template-columns: 1fr; }
+      .dashboard-kpis, .tool-card-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .dashboard-section { padding: 48px 6%; }
+      .dashboard-hero { padding: 26px; }
+      .dashboard-hero h2 { font-size: 30px; }
+      .dashboard-kpis, .tool-card-grid, .dashboard-actions { grid-template-columns: 1fr; }
+    }
+
   </style>
 </head>
 
@@ -516,6 +737,7 @@
       <a href="#domains">Domains</a>
       <a href="#finance">Finance</a>
       <a href="#per-diem">Live Tool</a>
+      <a href="#dashboard-area">Dashboard</a>
       <a href="mailto:oracletoolkit5@gmail.com">Contact</a>
       <div id="login-area">
         <button id="login-button">Login / Sign Up</button>
@@ -763,17 +985,125 @@ Request Demo</a>
   </section>
 
 
-  <div id="dashboard-area" style="display:none; padding:40px 8%;">
-    <div class="panel">
-      <h2>Member Dashboard</h2>
-      <p>Welcome to OracleToolkit member access.</p>
-      <a class="cta"
-        href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/"
-        target="_blank">
-        Launch Per Diem Engine
-      </a>
+
+  <section id="dashboard-area" class="dashboard-section" aria-live="polite">
+    <div class="dashboard-shell">
+      <div class="dashboard-hero">
+        <div>
+          <div class="dashboard-eyebrow">Member Workspace</div>
+          <h2>OracleToolkit Member Dashboard</h2>
+          <p>
+            A private workspace for Oracle Cloud implementation accelerators. Launch the live tool,
+            review upcoming releases, and share practical feedback so the platform grows around real project needs.
+          </p>
+        </div>
+
+        <div class="dashboard-status-card">
+          <div class="status-row"><span>Access Level</span><strong>Free Beta</strong></div>
+          <div class="status-row"><span>Live Tools</span><strong>1 Active</strong></div>
+          <div class="status-row"><span>Next Focus</span><strong>Finance Accelerators</strong></div>
+          <div class="status-row"><span>Best Use</span><strong>SIT / UAT / Conversion Readiness</strong></div>
+        </div>
+      </div>
+
+      <div class="dashboard-kpis">
+        <div class="kpi-card"><strong>1</strong><span>Live Oracle Cloud accelerator available now.</span></div>
+        <div class="kpi-card"><strong>5</strong><span>Finance accelerator concepts in release pipeline.</span></div>
+        <div class="kpi-card"><strong>Beta</strong><span>Open access while platform validation is in progress.</span></div>
+        <div class="kpi-card"><strong>Client-ready</strong><span>Designed around real implementation project execution.</span></div>
+      </div>
+
+      <div class="dashboard-section-title">
+        <div>
+          <h3>Available Tools & Roadmap</h3>
+          <p>Start with the live Per Diem Engine. Upcoming tools are prioritized based on member feedback and implementation pain points.</p>
+        </div>
+      </div>
+
+      <div class="tool-card-grid">
+        <div class="tool-card-premium live-card">
+          <div>
+            <div class="pill-row">
+              <span class="pill pill-live">Live</span>
+              <span class="pill pill-premium">Expenses</span>
+            </div>
+            <h4>Per Diem Transformation Engine</h4>
+            <p>Convert GSA per diem data into Oracle-ready review output for Oracle Cloud Expenses setup, testing, and policy readiness.</p>
+          </div>
+          <a class="cta"
+            href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/"
+            target="_blank"
+            onclick="gtag('event','member_dashboard_per_diem_launch')">
+            Launch Tool
+          </a>
+        </div>
+
+        <div class="tool-card-premium">
+          <div>
+            <div class="pill-row"><span class="pill pill-soon">Coming Soon</span><span class="pill">GL / BCEA</span></div>
+            <h4>COA Crosswalk Accelerator</h4>
+            <p>Legacy-to-Oracle mapping readiness, validation rules, issue tracking, downstream reporting risks, and DOE-style mapping checks.</p>
+          </div>
+          <span class="pill pill-soon">Planned Release</span>
+        </div>
+
+        <div class="tool-card-premium">
+          <div>
+            <div class="pill-row"><span class="pill pill-soon">Coming Soon</span><span class="pill">Budgetary Control</span></div>
+            <h4>Budgetary Control Design Engine</h4>
+            <p>Control-budget design, advisory vs absolute control, encumbrance impact, funds-check logic, and testing readiness support.</p>
+          </div>
+          <span class="pill pill-soon">Planned Release</span>
+        </div>
+
+        <div class="tool-card-premium">
+          <div>
+            <div class="pill-row"><span class="pill pill-soon">Coming Soon</span><span class="pill">Expenses / PCard</span></div>
+            <h4>PCard Go-Live Reconciliation Planner</h4>
+            <p>Plan card-cycle timing, transaction date vs posting date, cutover windows, duplicate booking risk, and missed transaction controls.</p>
+          </div>
+          <span class="pill pill-soon">Planned Release</span>
+        </div>
+
+        <div class="tool-card-premium">
+          <div>
+            <div class="pill-row"><span class="pill pill-soon">Coming Soon</span><span class="pill">Approvals</span></div>
+            <h4>Approval Workflow Readiness Checker</h4>
+            <p>Identify over-engineered approval logic, ERP/HCM dependency risks, manager hierarchy gaps, and approval design issues before SIT/UAT.</p>
+          </div>
+          <span class="pill pill-soon">Planned Release</span>
+        </div>
+
+        <div class="tool-card-premium">
+          <div>
+            <div class="pill-row"><span class="pill pill-live">Feedback</span><span class="pill">Roadmap</span></div>
+            <h4>Suggest a New Tool</h4>
+            <p>Tell us which Oracle implementation accelerator would save the most time on your project and what output you expect.</p>
+          </div>
+          <a class="cta"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor"
+            target="_blank"
+            onclick="gtag('event','member_dashboard_feedback_click')">
+            Submit Feedback
+          </a>
+        </div>
+      </div>
+
+      <div class="dashboard-actions">
+        <div class="action-panel">
+          <h4>Need help using a tool?</h4>
+          <p>Send a short note with your module, use case, and blocker. Early feedback helps improve the next release.</p>
+          <a class="request-link" href="mailto:oracletoolkit5@gmail.com">Contact OracleToolkit</a>
+        </div>
+
+        <div class="action-panel">
+          <h4>Implementation accelerator roadmap</h4>
+          <p>Priority areas: COA mapping, Budgetary Control, PCard cutover, approval workflow readiness, and reconciliation controls.</p>
+          <a class="request-link" href="#finance">Review Tool Library</a>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
   <section class="section final-cta">
     <h2>Start with the live Per Diem Engine. Help shape the next OracleToolkit accelerators.</h2>
@@ -802,63 +1132,83 @@ Request Demo</a>
   window.addEventListener("load", function () {
     const loginArea = document.getElementById("login-area");
     const dashboardArea = document.getElementById("dashboard-area");
+    const currentPage = window.location.origin + window.location.pathname;
 
     if (!loginArea) {
       console.error("Login area not found.");
       return;
     }
 
-    // Always show the login button first so it does not disappear if Clerk loads slowly.
-    loginArea.innerHTML = '<button id="login-button">Login / Sign Up</button>';
-
-    const loginButton = document.getElementById("login-button");
-
-    loginButton.addEventListener("click", async function () {
-      try {
-        if (!window.Clerk) {
-          alert("Authentication system is still loading. Please wait 2 seconds and try again.");
-          return;
-        }
-
-        await window.Clerk.load();
-
-        if (window.Clerk.user) {
-          loginArea.innerHTML = '<div id="user-button"></div>';
-          window.Clerk.mountUserButton(document.getElementById("user-button"));
-
-          if (dashboardArea) {
-            dashboardArea.style.display = "block";
-          }
-        } else {
-          window.Clerk.openSignIn();
-        }
-      } catch (err) {
-        console.error("Clerk Error:", err);
-        alert("Login temporarily unavailable. Please check the browser console error.");
+    function showDashboard() {
+      if (dashboardArea) {
+        dashboardArea.style.display = "block";
       }
-    });
+    }
 
-    // Optional: if Clerk is already available, load it quietly and update UI for signed-in user.
+    function hideDashboard() {
+      if (dashboardArea) {
+        dashboardArea.style.display = "none";
+      }
+    }
+
+    function showLoginButton() {
+      loginArea.innerHTML = '<button id="login-button" type="button">Login / Sign Up</button>';
+      const loginButton = document.getElementById("login-button");
+
+      loginButton.addEventListener("click", async function () {
+        try {
+          if (!window.Clerk) {
+            alert("Authentication system is still loading. Please wait 2 seconds and try again.");
+            return;
+          }
+
+          await window.Clerk.load();
+
+          window.Clerk.openSignIn({
+            afterSignInUrl: currentPage + "#dashboard-area",
+            afterSignUpUrl: currentPage + "#dashboard-area"
+          });
+        } catch (err) {
+          console.error("Clerk Error:", err);
+          alert("Login temporarily unavailable. Please check the browser console error.");
+        }
+      });
+    }
+
+    function showUserButton() {
+      loginArea.innerHTML = '<div id="user-button"></div>';
+      window.Clerk.mountUserButton(document.getElementById("user-button"));
+    }
+
+    function renderAuthState() {
+      if (window.Clerk && window.Clerk.user) {
+        showUserButton();
+        showDashboard();
+      } else {
+        showLoginButton();
+        hideDashboard();
+      }
+    }
+
+    showLoginButton();
+
     setTimeout(async function () {
       try {
         if (window.Clerk) {
           await window.Clerk.load();
+          renderAuthState();
 
-          if (window.Clerk.user) {
-            loginArea.innerHTML = '<div id="user-button"></div>';
-            window.Clerk.mountUserButton(document.getElementById("user-button"));
-
-            if (dashboardArea) {
-              dashboardArea.style.display = "block";
-            }
-          }
+          window.Clerk.addListener(function () {
+            renderAuthState();
+          });
         }
       } catch (err) {
         console.warn("Clerk background load warning:", err);
       }
-    }, 1200);
+    }, 700);
   });
 </script>
+
   
 </body>
 </html>
