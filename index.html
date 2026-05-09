@@ -660,9 +660,182 @@
       font-size: 14px;
     }
 
+
+
+    .dashboard-welcome-strip {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 18px;
+      margin: 0 0 24px;
+    }
+
+    .welcome-card,
+    .next-action-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.065);
+    }
+
+    .welcome-card h3,
+    .next-action-card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: -0.4px;
+    }
+
+    .welcome-card p,
+    .next-action-card p {
+      margin: 0;
+      color: #475569;
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 18px 0 0;
+    }
+
+    .quick-action {
+      text-decoration: none;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 16px;
+      display: block;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .quick-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+      border-color: #cbd5e1;
+      text-decoration: none;
+    }
+
+    .quick-action strong {
+      display: block;
+      color: #0f172a;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .quick-action span {
+      display: block;
+      color: #64748b;
+      line-height: 1.45;
+      font-size: 13px;
+    }
+
+    .priority-stack {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .priority-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 12px;
+      color: #475569;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .priority-number {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: #07111f;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 38px rgba(15, 23, 42, 0.10);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .tool-card.featured {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-card.featured::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      top: -70px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(250, 204, 21, 0.18);
+      pointer-events: none;
+    }
+
+    .tool-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .tool-meta span {
+      font-size: 12px;
+      color: #334155;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      padding: 6px 9px;
+      border-radius: 999px;
+    }
+
+    .dashboard-insight-band {
+      margin-top: 26px;
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 18px;
+    }
+
+    .insight-block h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+
+    .insight-block p {
+      margin: 0;
+      color: #64748b;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .user-welcome {
+      color: var(--gold);
+      font-weight: 900;
+    }
+
     @media (max-width: 1050px) {
       h1 { font-size: 46px; }
-      .domain-grid, .module-grid, .workflow, .audience-grid, .hero-proof, .dashboard-grid {
+      .domain-grid, .module-grid, .workflow, .audience-grid, .hero-proof, .dashboard-grid, .dashboard-welcome-strip, .dashboard-insight-band {
         grid-template-columns: repeat(2, 1fr);
       }
       .tool-box, .split, .dashboard-hero { grid-template-columns: 1fr; }
@@ -673,7 +846,7 @@
       .nav-links { flex-wrap: wrap; gap: 12px; }
       h1 { font-size: 36px; letter-spacing: -1px; }
       .hero { padding: 58px 6% 60px; }
-      .domain-grid, .module-grid, .workflow, .audience-grid, .hero-proof, .mini-metrics, .dashboard-grid, .dashboard-stats {
+      .domain-grid, .module-grid, .workflow, .audience-grid, .hero-proof, .mini-metrics, .dashboard-grid, .dashboard-stats, .quick-actions, .dashboard-welcome-strip, .dashboard-insight-band {
         grid-template-columns: 1fr;
       }
       .section, #dashboard-area { padding-left: 6%; padding-right: 6%; }
@@ -730,6 +903,7 @@
         <div>
           <div class="dashboard-eyebrow">Member Workspace</div>
           <h2>OracleToolkit Dashboard</h2>
+          <p class="user-welcome" id="dashboard-user-name">Welcome back.</p>
           <p>
             Access live Oracle Cloud implementation accelerators, monitor upcoming tools, and help prioritize the next releases.
             This dashboard is designed to become your execution layer for repeatable Oracle project activities.
@@ -747,6 +921,38 @@
         </div>
       </div>
 
+      <div class="dashboard-welcome-strip">
+        <div class="welcome-card">
+          <h3>Your implementation accelerator workspace</h3>
+          <p>
+            Use this dashboard as the controlled entry point for OracleToolkit tools. The current beta is free, but the structure is already ready for future member tiers, usage tracking, and premium access control.
+          </p>
+          <div class="quick-actions">
+            <a class="quick-action" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" onclick="gtag('event','quick_action_per_diem')">
+              <strong>Launch live tool</strong>
+              <span>Open the Per Diem Engine.</span>
+            </a>
+            <a class="quick-action" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtag('event','quick_action_feedback')">
+              <strong>Give feedback</strong>
+              <span>Tell us what to improve.</span>
+            </a>
+            <a class="quick-action" href="mailto:oracletoolkit5@gmail.com">
+              <strong>Request access</strong>
+              <span>Discuss team or project use.</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="next-action-card">
+          <h3>Recommended next actions</h3>
+          <div class="priority-stack">
+            <div class="priority-item"><span class="priority-number">1</span><span>Use the live Per Diem tool and confirm if the output fits your Oracle Expenses setup process.</span></div>
+            <div class="priority-item"><span class="priority-number">2</span><span>Submit feedback on missing features, format expectations, or next tool priority.</span></div>
+            <div class="priority-item"><span class="priority-number">3</span><span>Join the beta list for COA, Budgetary Control, and PCard cutover accelerators.</span></div>
+          </div>
+        </div>
+      </div>
+
       <div class="dashboard-section-title">
         <div>
           <h2>Tool Library</h2>
@@ -761,6 +967,7 @@
             <span class="status-pill live-pill">Live</span>
             <h3>Per Diem Transformation Engine</h3>
             <p>Convert GSA per diem data into Oracle-ready review output for Expenses setup, testing, and validation.</p>
+            <div class="tool-meta"><span>Expenses</span><span>ADFdi-ready support</span><span>Live beta</span></div>
           </div>
           <div class="tool-card-footer">
             <a class="cta" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" onclick="gtag('event','dashboard_card_per_diem_launch')">Launch Tool</a>
@@ -772,6 +979,7 @@
             <span class="status-pill">Coming Soon</span>
             <h3>COA Crosswalk Accelerator</h3>
             <p>Legacy-to-Oracle mapping readiness, validation logic, issue tracking, and reconciliation support.</p>
+            <div class="tool-meta"><span>GL</span><span>COA mapping</span><span>High demand</span></div>
           </div>
           <div class="tool-card-footer"><span class="status-pill">Roadmap</span></div>
         </div>
@@ -781,6 +989,7 @@
             <span class="status-pill">Coming Soon</span>
             <h3>Budgetary Control Design Engine</h3>
             <p>Control budget design, advisory vs absolute control, funds check readiness, and testing guidance.</p>
+            <div class="tool-meta"><span>BCEA</span><span>Public sector</span><span>Design aid</span></div>
           </div>
           <div class="tool-card-footer"><span class="status-pill">Roadmap</span></div>
         </div>
@@ -790,6 +999,7 @@
             <span class="status-pill">Coming Soon</span>
             <h3>PCard Go-Live Reconciliation Planner</h3>
             <p>Handle card cycle timing, posting dates, fiscal year cutover, and missing or duplicate transaction risk.</p>
+            <div class="tool-meta"><span>Expenses</span><span>PCard</span><span>Cutover</span></div>
           </div>
           <div class="tool-card-footer"><span class="status-pill">Roadmap</span></div>
         </div>
@@ -799,6 +1009,7 @@
             <span class="status-pill">Coming Soon</span>
             <h3>Approval Workflow Readiness Checker</h3>
             <p>Identify over-engineered approval logic and ERP/HCM dependency risks before configuration becomes messy.</p>
+            <div class="tool-meta"><span>AP/EXP</span><span>Approvals</span><span>Readiness</span></div>
           </div>
           <div class="tool-card-footer"><span class="status-pill">Roadmap</span></div>
         </div>
@@ -812,6 +1023,21 @@
           <div class="tool-card-footer">
             <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtag('event','dashboard_suggest_tool_click')">Submit Feedback</a>
           </div>
+        </div>
+      </div>
+
+      <div class="dashboard-insight-band">
+        <div class="insight-block">
+          <h3>Built for real implementation execution</h3>
+          <p>OracleToolkit is not a generic template library. Each accelerator is designed around repeatable project pain points: conversion cleanup, validation, testing readiness, cutover control, and configuration review.</p>
+        </div>
+        <div class="insight-block">
+          <h3>Current beta focus</h3>
+          <p>Finance accelerators first: Expenses, GL, BCEA, Payables, Receivables, Fixed Assets, Cash Management, and PCard cutover support.</p>
+        </div>
+        <div class="insight-block">
+          <h3>Why feedback matters</h3>
+          <p>Your feedback directly controls the roadmap. The strongest use cases will become the next premium tools inside the member workspace.</p>
         </div>
       </div>
     </div>
@@ -964,6 +1190,7 @@
       const heroDashboardButton = document.getElementById("hero-dashboard-button");
       const finalDashboardButton = document.getElementById("final-dashboard-button");
       const toast = document.getElementById("login-toast");
+      const dashboardUserName = document.getElementById("dashboard-user-name");
 
       function showToast() {
         if (!toast) return;
@@ -995,6 +1222,7 @@
       }
 
       function renderLoggedOut() {
+        if (dashboardUserName) dashboardUserName.textContent = "Welcome back.";
         if (dashboardArea) dashboardArea.style.display = "none";
         if (loginArea) {
           loginArea.innerHTML = '<button id="login-button" type="button">Login / Sign Up</button>';
@@ -1008,6 +1236,10 @@
       }
 
       function renderLoggedIn() {
+        if (dashboardUserName && window.Clerk && window.Clerk.user) {
+          const firstName = window.Clerk.user.firstName || window.Clerk.user.fullName || "member";
+          dashboardUserName.textContent = "Welcome back, " + firstName + ".";
+        }
         if (loginArea) {
           loginArea.innerHTML = '<div id="user-button"></div>';
           window.Clerk.mountUserButton(document.getElementById("user-button"));
