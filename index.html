@@ -53,6 +53,8 @@
         <div class="dash-menu"><a class="active" href="#dashboard-area">⌂ Dashboard</a></div>
         <div class="dash-section-title">Implementation</div>
         <div class="dash-menu">
+          <a href="#workspace">▣ Project Workspace</a>
+          <a href="#saved-runs">◷ Saved Runs</a>
           <a href="#member-tools">▣ Tool Library</a><a href="#member-tools">▦ COA Accelerator</a><a href="#member-tools">◉ Per Diem Engine</a><a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank" onclick="gtag('event','sidebar_bcea_launch_click')">▧ BCEA Design <span class="beta live-mini">LIVE</span></a><a href="#member-tools">↔ Reconciliation Engine</a><a href="#dashboard-health">▤ Reports</a>
         </div>
         <div class="dash-section-title">Public Sector</div>
@@ -89,6 +91,109 @@
             <div class="dash-card"><div class="dash-card-head"><h3>Recommended Next Actions</h3><button class="dash-filter">Beta ▾</button></div><div class="health-table"><div class="table-row"><span>Test COA Accelerator</span><span class="status s-good">Live</span><span>Now</span><span>High</span></div><div class="table-row"><span>Test Per Diem Engine</span><span class="status s-good">Live</span><span>Now</span><span>Medium</span></div>
                 <div class="table-row"><span>Test BCEA Design Accelerator</span><span class="status s-good">Live</span><span>Now</span><span>High</span></div><div class="table-row"><span>Submit tool feedback</span><span class="status s-risk">Open</span><span>Beta</span><span>High</span></div><div class="table-row"><span>Request BCEA scenario</span><span class="status s-risk">Soon</span><span>Roadmap</span><span>High</span></div></div><a class="view-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Submit Feedback →</a></div>
           </div>
+
+          <section class="workspace-section" id="workspace">
+            <div class="workspace-header">
+              <div>
+                <span class="workspace-kicker">Member Project Workspace</span>
+                <h3>Save implementation context before launching tools.</h3>
+                <p>
+                  Create a lightweight project workspace, capture which accelerator you are using,
+                  and keep a local saved-run history for follow-up, feedback, and future premium project tracking.
+                </p>
+              </div>
+              <div class="workspace-note">
+                <strong>v12 Foundation</strong>
+                <span>Saved locally in browser now. Future version can connect to Supabase/Firebase for user-level cloud history.</span>
+              </div>
+            </div>
+
+            <div class="workspace-grid">
+              <form class="workspace-form" id="workspace-form">
+                <label>
+                  Project / Client Name
+                  <input id="project-name" type="text" placeholder="Example: Adams12 COA Design" />
+                </label>
+
+                <label>
+                  Module / Area
+                  <select id="project-module">
+                    <option value="COA Transformation">COA Transformation</option>
+                    <option value="BCEA Design">BCEA Design</option>
+                    <option value="Per Diem / Expenses">Per Diem / Expenses</option>
+                    <option value="Payables">Payables</option>
+                    <option value="Receivables">Receivables</option>
+                    <option value="Fixed Assets">Fixed Assets</option>
+                    <option value="Cash Management">Cash Management</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </label>
+
+                <label>
+                  Accelerator Used
+                  <select id="project-tool">
+                    <option value="COA Transformation Accelerator">COA Transformation Accelerator</option>
+                    <option value="BCEA Design Accelerator">BCEA Design Accelerator</option>
+                    <option value="Per Diem Transformation Engine">Per Diem Transformation Engine</option>
+                    <option value="Future / Roadmap Tool">Future / Roadmap Tool</option>
+                  </select>
+                </label>
+
+                <label>
+                  Status
+                  <select id="project-status">
+                    <option value="In Review">In Review</option>
+                    <option value="Testing">Testing</option>
+                    <option value="Client Review">Client Review</option>
+                    <option value="Ready for SIT/UAT">Ready for SIT/UAT</option>
+                    <option value="Needs Follow-up">Needs Follow-up</option>
+                  </select>
+                </label>
+
+                <label class="wide">
+                  Notes / Next Action
+                  <textarea id="project-notes" rows="4" placeholder="Example: Validate control level by fund and cost center before Sprint 2 decision."></textarea>
+                </label>
+
+                <div class="workspace-actions">
+                  <button type="submit" class="small-btn">Save Run</button>
+                  <button type="button" class="small-btn secondary-btn" id="clear-form-btn">Clear Form</button>
+                </div>
+              </form>
+
+              <div class="workspace-panel">
+                <h4>Workspace Benefits</h4>
+                <div class="benefit-row"><span>✓</span><p>Track which project used which accelerator.</p></div>
+                <div class="benefit-row"><span>✓</span><p>Capture notes before launching COA, BCEA, or Per Diem tools.</p></div>
+                <div class="benefit-row"><span>✓</span><p>Create saved-run history for returning users.</p></div>
+                <div class="benefit-row"><span>✓</span><p>Foundation for future paid project workspace and cloud history.</p></div>
+
+                <div class="workspace-metric-box">
+                  <div><strong id="saved-run-count">0</strong><span>Saved Runs</span></div>
+                  <div><strong id="last-run-tool">—</strong><span>Last Tool</span></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="saved-runs-section" id="saved-runs">
+            <div class="dash-card">
+              <div class="dash-card-head">
+                <h3>Saved Runs / Project History</h3>
+                <div class="saved-run-actions">
+                  <button class="dash-filter" id="export-runs-btn">Export JSON</button>
+                  <button class="dash-filter danger-lite" id="clear-runs-btn">Clear History</button>
+                </div>
+              </div>
+              <div class="saved-runs-list" id="saved-runs-list">
+                <div class="empty-runs">
+                  <strong>No saved runs yet.</strong>
+                  <span>Create your first project workspace entry above.</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <div class="member-tools" id="member-tools">
             <div class="member-tool-card" data-tool-card><span class="status-pill status-live">Live</span><h3>COA Transformation Accelerator</h3><p>Legacy-to-Oracle mapping, DOE/public sector readiness, validation dashboard, CVR intelligence, and export support.</p><div class="tool-actions"><a class="small-btn" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','member_dashboard_coa_launch')">Launch COA</a><a class="small-btn secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Feedback</a></div></div>
             <div class="member-tool-card" data-tool-card><span class="status-pill status-live">Live</span><h3>Per Diem Transformation Engine</h3><p>Convert GSA per diem data into Oracle-ready review output for Expenses setup and validation.</p><div class="tool-actions"><a class="small-btn" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" onclick="gtag('event','member_dashboard_per_diem_launch')">Launch Tool</a><a class="small-btn secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Feedback</a></div></div>
