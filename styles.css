@@ -273,3 +273,8 @@
     width: 100%;
   }
 }
+
+.live-mini {
+  background:#16a34a !important;
+  color:white !important;
+}
