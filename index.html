@@ -13,115 +13,90 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OracleToolkit | Oracle Cloud Implementation Accelerators</title>
-  <meta name="description" content="OracleToolkit is a growing suite of Oracle Cloud implementation accelerators for Finance, PPM, SCM, and HR teams." />
+  <meta name="description" content="OracleToolkit is a premium suite of Oracle Cloud implementation accelerators for Finance, Public Sector, K-12, PPM, SCM, and HR teams." />
 
   <style>
     :root {
       --navy: #07111f;
       --navy-2: #0b1729;
+      --sidebar: #061326;
+      --sidebar-2: #0a1c36;
       --ink: #0f172a;
       --muted: #64748b;
       --line: #e2e8f0;
       --soft: #f8fafc;
       --gold: #facc15;
-      --gold-dark: #ca8a04;
+      --gold-2: #f59e0b;
+      --blue: #0f5fb8;
+      --blue-2: #1d4ed8;
       --green: #047857;
-      --green-bg: #d1fae5;
+      --green-bg: #dcfce7;
+      --red: #dc2626;
+      --red-bg: #fee2e2;
+      --amber: #b45309;
+      --amber-bg: #fef3c7;
+      --purple: #7c3aed;
+      --purple-bg: #ede9fe;
       --white: #ffffff;
-      --shadow: 0 18px 45px rgba(15, 23, 42, 0.10);
-      --shadow-strong: 0 24px 70px rgba(15, 23, 42, 0.18);
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.10);
+      --soft-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
       --radius: 22px;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background: #f4f7fb;
       color: var(--ink);
     }
-
     a { color: inherit; }
 
     .nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 8%;
+      padding: 22px 8%;
       background: rgba(7, 17, 31, 0.98);
       color: white;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 50;
       border-bottom: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(10px);
     }
-
-    .logo {
-      font-size: 24px;
-      font-weight: 900;
-      letter-spacing: -0.7px;
-    }
-
+    .logo { font-size: 24px; font-weight: 900; letter-spacing: -0.7px; }
+    .logo span { color: var(--gold); }
     .nav-links {
       display: flex;
-      gap: 18px;
+      gap: 20px;
       align-items: center;
       font-size: 14px;
       color: #cbd5e1;
-      flex-wrap: wrap;
     }
-
-    .nav-links a,
-    .nav-link-button {
-      color: #cbd5e1;
-      text-decoration: none;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      font: inherit;
-      padding: 0;
-    }
-
-    .nav-links a:hover,
-    .nav-link-button:hover { color: white; }
-
-    .nav-cta {
-      background: var(--gold) !important;
-      color: #111827 !important;
-      padding: 10px 14px !important;
-      border-radius: 999px;
-      font-weight: 800;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #login-area button {
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover { color: white; }
+    .nav-cta, #login-area button {
       background: var(--gold);
-      color: #111827;
-      border: none;
+      color: #111827 !important;
       padding: 10px 14px;
       border-radius: 999px;
       font-weight: 900;
+      border: none;
       cursor: pointer;
       font-family: Arial, Helvetica, sans-serif;
-      box-shadow: 0 8px 20px rgba(250, 204, 21, 0.18);
+      text-decoration: none;
+      box-shadow: 0 10px 24px rgba(250, 204, 21, 0.18);
     }
-
-    #login-area button:hover { background: #fde047; }
+    #login-area button:hover, .nav-cta:hover { background: #fde047; color: #111827 !important; }
 
     .hero {
-      padding: 82px 8% 72px;
+      padding: 88px 8% 78px;
       background:
         radial-gradient(circle at 80% 20%, rgba(250, 204, 21, 0.20), transparent 30%),
         linear-gradient(135deg, #07111f 0%, #0b1729 52%, #111827 100%);
       color: white;
     }
-
     .badge {
       display: inline-block;
       padding: 8px 14px;
@@ -133,7 +108,6 @@
       font-weight: 800;
       margin-bottom: 24px;
     }
-
     h1 {
       font-size: 60px;
       line-height: 1.04;
@@ -141,7 +115,6 @@
       max-width: 1050px;
       letter-spacing: -2.2px;
     }
-
     .hero p {
       font-size: 21px;
       line-height: 1.62;
@@ -149,35 +122,21 @@
       max-width: 920px;
       margin: 0 0 34px;
     }
-
-    .cta-row {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 26px;
-    }
-
+    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 26px; }
     .cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      display: inline-block;
       padding: 16px 24px;
       background: var(--gold);
-      color: #111827 !important;
+      color: #111827;
       font-weight: 900;
       text-decoration: none;
       border-radius: 12px;
-      box-shadow: 0 14px 30px rgba(250, 204, 21, 0.22);
       border: none;
       cursor: pointer;
+      box-shadow: 0 14px 30px rgba(250, 204, 21, 0.22);
     }
-
-    .cta:hover { background: #fde047; }
-
     .secondary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      display: inline-block;
       padding: 16px 24px;
       background: transparent;
       color: white;
@@ -185,9 +144,7 @@
       text-decoration: none;
       border-radius: 12px;
       font-weight: 800;
-      cursor: pointer;
     }
-
     .hero-proof {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -195,7 +152,6 @@
       max-width: 980px;
       margin-top: 50px;
     }
-
     .proof-card {
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.10);
@@ -203,136 +159,34 @@
       border-radius: 16px;
       color: #e2e8f0;
     }
-
-    .proof-card strong {
-      display: block;
-      color: white;
-      font-size: 18px;
-      margin-bottom: 6px;
-    }
+    .proof-card strong { display: block; color: white; font-size: 18px; margin-bottom: 6px; }
 
     .section { padding: 74px 8%; }
-
-    .section h2 {
-      font-size: 40px;
-      margin: 0 0 14px;
-      letter-spacing: -1.1px;
-    }
-
-    .section-subtitle {
-      font-size: 18px;
-      color: var(--muted);
-      max-width: 900px;
-      margin: 0 0 36px;
-      line-height: 1.65;
-    }
-
-    .split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 26px;
-      align-items: start;
-    }
-
-    .panel {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 32px;
-      box-shadow: var(--shadow);
-    }
-
-    .panel h3 {
-      font-size: 26px;
-      margin: 0 0 14px;
-    }
-
-    .panel p, .panel li {
-      color: #475569;
-      line-height: 1.75;
-      font-size: 16px;
-    }
-
-    .risk-list {
-      padding-left: 20px;
-      margin: 12px 0 0;
-    }
-
-    .domain-grid, .audience-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
-    }
-
-    .module-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
+    .section h2 { font-size: 40px; margin: 0 0 14px; letter-spacing: -1.1px; }
+    .section-subtitle { font-size: 18px; color: var(--muted); max-width: 900px; margin: 0 0 36px; line-height: 1.65; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start; }
+    .panel { background: white; border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); }
+    .panel h3 { font-size: 26px; margin: 0 0 14px; }
+    .panel p, .panel li { color: #475569; line-height: 1.75; font-size: 16px; }
+    .risk-list { padding-left: 20px; margin: 12px 0 0; }
+    .domain-grid, .module-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+    .module-grid { grid-template-columns: repeat(3, 1fr); }
     .card, .module {
       background: white;
       border: 1px solid var(--line);
       border-radius: 18px;
-      padding: 28px;
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+      padding: 26px;
+      box-shadow: var(--soft-shadow);
     }
-
-    .card h3, .module h3 {
-      margin: 0 0 12px;
-      font-size: 24px;
-    }
-
-    .card p, .module p {
-      color: var(--muted);
-      line-height: 1.58;
-      font-size: 15px;
-      margin: 0;
-    }
-
-    .active-domain, .active-tool {
-      border: 2px solid var(--gold);
-      background: linear-gradient(180deg, #ffffff, #fffdf2);
-    }
-
-    .module ul {
-      padding-left: 0;
-      list-style: none;
-      margin: 0;
-    }
-
+    .card h3, .module h3 { margin: 0 0 12px; font-size: 22px; }
+    .card p, .module p { color: var(--muted); line-height: 1.58; font-size: 15px; margin: 0; }
+    .active-domain, .active-tool { border: 2px solid var(--gold); background: linear-gradient(180deg, #ffffff, #fffdf2); }
+    .module ul { padding-left: 0; list-style: none; margin: 0; }
     .module li { margin: 10px 0; }
-
-    .module a:not(.cta) {
-      color: #1e293b;
-      text-decoration: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      border-bottom: 1px dashed #e2e8f0;
-      padding-bottom: 9px;
-      line-height: 1.4;
-    }
-
-    .module a:hover { text-decoration: underline; }
-
-    .module span, .status-pill {
-      font-size: 12px;
-      color: #64748b;
-      background: #f1f5f9;
-      padding: 6px 10px;
-      border-radius: 999px;
-      white-space: nowrap;
-      display: inline-block;
-      font-weight: 800;
-    }
-
-    .module .live, .live-pill {
-      color: #065f46;
-      background: #d1fae5;
-      font-weight: 900;
-    }
+    .module a { color: #1e293b; text-decoration: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 9px; line-height: 1.4; }
+    .module a:hover { color: #0f172a; text-decoration: underline; }
+    .module span, .status-pill { font-size: 12px; color: #64748b; background: #f1f5f9; padding: 4px 8px; border-radius: 999px; white-space: nowrap; }
+    .module .live, .status-live { color: #065f46; background: #d1fae5; font-weight: 800; }
 
     .tool-box {
       background:
@@ -347,531 +201,353 @@
       align-items: center;
       box-shadow: 0 18px 50px rgba(7, 17, 31, 0.25);
     }
-
     .tool-box h2 { color: white; margin-bottom: 14px; }
-
-    .tool-box p {
-      color: #cbd5e1;
-      line-height: 1.7;
-      font-size: 17px;
-      margin: 0 0 14px;
-    }
-
-    .tool-tag {
-      display: inline-block;
-      background: #1e293b;
-      color: var(--gold);
-      padding: 8px 13px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 900;
-      margin-bottom: 12px;
-    }
-
-    .mini-metrics {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .mini-metric {
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.06);
-      padding: 14px;
-      border-radius: 14px;
-      color: #e2e8f0;
-      font-size: 13px;
-    }
-
-    .mini-metric strong {
-      display: block;
-      color: white;
-      font-size: 18px;
-      margin-bottom: 4px;
-    }
-
-    .workflow {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-
-    .step {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 24px;
-    }
-
-    .step-number {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: #0b1120;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      margin-bottom: 14px;
-    }
-
+    .tool-box p { color: #cbd5e1; line-height: 1.7; font-size: 17px; margin: 0 0 14px; }
+    .tool-tag { display: inline-block; background: #1e293b; color: var(--gold); padding: 8px 13px; border-radius: 999px; font-size: 13px; font-weight: 900; margin-bottom: 12px; }
+    .mini-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
+    .mini-metric { border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); padding: 14px; border-radius: 14px; color: #e2e8f0; font-size: 13px; }
+    .mini-metric strong { display: block; color: white; font-size: 18px; margin-bottom: 4px; }
+    .workflow, .audience-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .step, .audience { background: white; border: 1px solid var(--line); border-radius: 18px; padding: 24px; box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05); }
+    .step-number { width: 34px; height: 34px; border-radius: 50%; background: #0b1120; color: white; display: flex; align-items: center; justify-content: center; font-weight: 900; margin-bottom: 14px; }
     .step h3 { margin: 0 0 8px; font-size: 19px; }
     .step p { color: var(--muted); line-height: 1.6; margin: 0; }
-
-    .audience {
-      background: white;
-      border: 1px solid var(--line);
-      padding: 22px;
-      border-radius: 18px;
-      font-weight: 800;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
-    }
-
-    .coming {
-      background: #fff7ed;
-      border: 1px solid #fed7aa;
-      padding: 34px;
-      border-radius: 22px;
-      margin-top: 30px;
-    }
-
+    .audience { font-weight: 800; }
+    .coming { background: #fff7ed; border: 1px solid #fed7aa; padding: 34px; border-radius: 22px; margin-top: 30px; }
     .coming h3 { margin: 0 0 10px; font-size: 25px; }
-
-    .coming p {
-      color: #7c2d12;
-      line-height: 1.65;
-      max-width: 920px;
-    }
-
-    .request-link {
-      display: inline-block;
-      margin-top: 8px;
-      color: #111827;
-      border: 1px solid #111827;
-      text-decoration: none;
-      padding: 13px 18px;
-      border-radius: 12px;
-      font-weight: 900;
-    }
-
-    .final-cta {
-      text-align: center;
-      background: white;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
+    .coming p { color: #7c2d12; line-height: 1.65; max-width: 920px; }
+    .request-link { display: inline-block; margin-top: 8px; color: #111827; border: 1px solid #111827; text-decoration: none; padding: 13px 18px; border-radius: 12px; font-weight: 900; }
+    .final-cta { text-align: center; background: white; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .final-cta h2 { max-width: 880px; margin-left: auto; margin-right: auto; }
     .final-cta p { margin-left: auto; margin-right: auto; }
+    .footer { padding: 40px 8%; background: var(--navy); color: #cbd5e1; font-size: 14px; text-align: center; }
 
-    .footer {
-      padding: 40px 8%;
-      background: var(--navy);
-      color: #cbd5e1;
-      font-size: 14px;
-      text-align: center;
-    }
-
-    /* Premium Member Dashboard */
-    #dashboard-area {
-      display: none;
-      padding: 42px 8% 74px;
+    /* Premium Dashboard */
+    #dashboard-area { display: none; background: #f6f8fb; padding: 0; }
+    .dashboard-shell { display: grid; grid-template-columns: 270px 1fr; min-height: 880px; border-top: 1px solid #e5e7eb; }
+    .dash-sidebar {
       background:
-        radial-gradient(circle at 8% 10%, rgba(250, 204, 21, 0.12), transparent 28%),
-        linear-gradient(180deg, #f8fafc 0%, #eef4fb 100%);
-      border-bottom: 1px solid var(--line);
+        radial-gradient(circle at 20% 5%, rgba(250,204,21,.12), transparent 22%),
+        linear-gradient(180deg, #061326 0%, #06172d 55%, #04101f 100%);
+      color: #e2e8f0;
+      padding: 26px 18px;
+      position: sticky;
+      top: 80px;
+      height: calc(100vh - 80px);
+      overflow: auto;
     }
-
-    .dashboard-shell {
-      max-width: 1280px;
-      margin: 0 auto;
+    .dash-brand { display: flex; gap: 12px; align-items: center; margin-bottom: 28px; }
+    .cube-logo {
+      width: 42px; height: 42px; border-radius: 12px; border: 1px solid rgba(250,204,21,.55);
+      display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 22px; font-weight: 900;
+      background: rgba(250,204,21,.06);
     }
-
-    .dashboard-hero {
-      background:
-        radial-gradient(circle at 90% 12%, rgba(250, 204, 21, 0.22), transparent 25%),
-        linear-gradient(135deg, #07111f 0%, #0b1729 52%, #111827 100%);
-      color: white;
-      border-radius: 28px;
-      padding: 34px;
-      box-shadow: var(--shadow-strong);
-      display: grid;
-      grid-template-columns: 1.7fr 1fr;
-      gap: 26px;
-      align-items: center;
-      margin-bottom: 26px;
+    .dash-brand strong { display: block; color: white; font-size: 18px; letter-spacing: .4px; }
+    .dash-brand small { color: #cbd5e1; font-size: 12px; }
+    .dash-section-title { color: var(--gold); text-transform: uppercase; font-size: 11px; letter-spacing: .9px; font-weight: 900; margin: 24px 10px 10px; }
+    .dash-menu { display: flex; flex-direction: column; gap: 6px; }
+    .dash-menu a {
+      color: #dbeafe; text-decoration: none; padding: 11px 12px; border-radius: 12px; display: flex; align-items: center; gap: 10px; font-size: 14px;
     }
+    .dash-menu a:hover, .dash-menu a.active { background: rgba(29, 78, 216, .48); color: white; }
+    .dash-menu .beta { margin-left: auto; font-size: 10px; background: #1d4ed8; color: white; padding: 3px 6px; border-radius: 999px; font-weight: 900; }
+    .dash-user { margin-top: 34px; padding: 18px; border-top: 1px solid rgba(255,255,255,.10); display: flex; align-items: center; gap: 12px; }
+    .avatar { width: 46px; height: 46px; border-radius: 50%; background: rgba(250,204,21,.10); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; font-weight: 900; color: var(--gold); }
+    .dash-user strong { display: block; color: white; font-size: 14px; }
+    .dash-user small { color: #cbd5e1; }
 
-    .dashboard-eyebrow {
-      color: var(--gold);
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
+    .dash-main { padding: 0; min-width: 0; }
+    .dash-topbar {
+      height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 0 32px;
+      background: rgba(255,255,255,.92); border-bottom: 1px solid #e5e7eb; position: sticky; top: 80px; z-index: 20; backdrop-filter: blur(10px);
     }
+    .dash-search { flex: 1; max-width: 620px; display: flex; align-items: center; gap: 10px; background: white; border: 1px solid #dbe3ef; border-radius: 12px; padding: 12px 14px; color: #64748b; box-shadow: 0 6px 18px rgba(15,23,42,.04); }
+    .dash-search input { border: none; outline: none; flex: 1; font-size: 14px; }
+    .top-actions { display: flex; align-items: center; gap: 12px; }
+    .project-select, .icon-btn, .customize-btn { border: 1px solid #dbe3ef; background: white; border-radius: 12px; padding: 11px 13px; font-weight: 800; color: #0f172a; box-shadow: 0 6px 18px rgba(15,23,42,.04); }
+    .customize-btn { background: #07111f; color: white; }
+    .notification-dot { position: relative; }
+    .notification-dot::after { content: '12'; position: absolute; top: -8px; right: -8px; background: var(--gold); color: #111827; border-radius: 999px; padding: 2px 5px; font-size: 10px; font-weight: 900; }
 
-    .dashboard-hero h2 {
-      font-size: 38px;
-      line-height: 1.08;
-      letter-spacing: -1.1px;
-      margin: 0 0 12px;
+    .dash-content { padding: 30px 32px 42px; }
+    .welcome-row { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; margin-bottom: 26px; }
+    .welcome-row h2 { margin: 0 0 8px; font-size: 28px; letter-spacing: -.4px; }
+    .welcome-row h2 span { color: var(--blue); }
+    .welcome-row p { margin: 0; color: #64748b; }
+    .dashboard-note { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e3a8a; padding: 12px 14px; border-radius: 14px; font-size: 13px; line-height: 1.5; max-width: 440px; }
+
+    .stat-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 18px; }
+    .stat-card {
+      background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 18px; box-shadow: 0 12px 28px rgba(15,23,42,.055);
+      min-height: 140px;
     }
+    .stat-icon { width: 38px; height: 38px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 12px; }
+    .i-blue { background: #dbeafe; color: #1d4ed8; }
+    .i-purple { background: var(--purple-bg); color: var(--purple); }
+    .i-green { background: #ccfbf1; color: #0f766e; }
+    .i-red { background: var(--red-bg); color: var(--red); }
+    .i-amber { background: #fef3c7; color: #d97706; }
+    .stat-card small { color: #475569; font-weight: 800; }
+    .stat-card strong { display: block; font-size: 30px; margin: 12px 0 7px; letter-spacing: -.8px; }
+    .stat-card span { font-size: 12px; color: #16a34a; font-weight: 800; }
+    .stat-card .warning { color: #d97706; }
 
-    .dashboard-hero p {
-      color: #cbd5e1;
-      font-size: 16px;
-      line-height: 1.72;
-      margin: 0;
-    }
+    .dash-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; margin-top: 18px; }
+    .dash-card { background: white; border: 1px solid #e2e8f0; border-radius: 18px; box-shadow: 0 12px 28px rgba(15,23,42,.055); overflow: hidden; }
+    .dash-card-head { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid #e2e8f0; }
+    .dash-card-head h3 { margin: 0; font-size: 18px; }
+    .dash-filter { font-size: 12px; color: #334155; border: 1px solid #e2e8f0; border-radius: 10px; padding: 8px 10px; background: white; }
+    .health-wrap { display: grid; grid-template-columns: 210px 1fr; gap: 16px; padding: 24px; align-items: center; }
+    .ring { width: 176px; height: 176px; border-radius: 50%; background: conic-gradient(#16a34a 0 78%, #e5e7eb 78% 100%); display: flex; align-items: center; justify-content: center; margin: auto; }
+    .ring-inner { width: 124px; height: 124px; border-radius: 50%; background: white; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: inset 0 0 0 1px #e5e7eb; }
+    .ring-inner strong { font-size: 30px; }
+    .ring-inner span { color: var(--green); font-weight: 900; font-size: 13px; }
+    .risk-list-premium { display: grid; gap: 12px; }
+    .risk-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border-radius: 12px; background: #f8fafc; font-size: 14px; }
+    .risk-badge { border-radius: 999px; padding: 4px 8px; font-size: 12px; font-weight: 900; }
+    .rb-red { background: var(--red-bg); color: var(--red); }
+    .rb-amber { background: var(--amber-bg); color: var(--amber); }
+    .rb-green { background: var(--green-bg); color: var(--green); }
 
-    .dashboard-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 22px;
-    }
+    .chart-card-body { padding: 24px; }
+    .bars { height: 220px; display: flex; align-items: end; gap: 14px; border-left: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; padding: 20px 0 0 14px; }
+    .bar-group { flex: 1; display: flex; gap: 5px; align-items: end; height: 100%; position: relative; }
+    .bar { width: 50%; border-radius: 8px 8px 0 0; }
+    .budget { background: linear-gradient(180deg, #1d4ed8, #93c5fd); }
+    .actual { background: linear-gradient(180deg, #f59e0b, #fde68a); }
+    .chart-legend { display: flex; gap: 18px; margin-bottom: 12px; color: #64748b; font-size: 13px; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+    .dot-blue { background:#1d4ed8; } .dot-gold { background:#f59e0b; }
+    .budget-summary { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 18px; }
+    .summary-box { background: #f8fafc; border:1px solid #e2e8f0; border-radius: 14px; padding: 14px; }
+    .summary-box small { color:#64748b; } .summary-box strong { display:block; margin-top:6px; font-size:20px; }
+    .summary-box .green { color: var(--green); }
 
-    .dashboard-stats {
+    .dashboard-bottom { display: grid; grid-template-columns: 1fr .9fr .9fr; gap: 18px; margin-top: 18px; }
+    .health-table, .activity-list { padding: 0 20px 20px; }
+    .table-row { display: grid; grid-template-columns: 1.1fr .8fr .5fr .8fr; gap: 10px; padding: 12px 0; border-bottom: 1px solid #eef2f7; font-size: 13px; align-items: center; }
+    .table-head { color: #64748b; font-weight: 900; }
+    .status { display:inline-block; width:max-content; border-radius:999px; padding:5px 9px; font-size:12px; font-weight:900; }
+    .s-risk { background:var(--amber-bg); color:var(--amber); }
+    .s-critical { background:var(--red-bg); color:var(--red); }
+    .s-good { background:var(--green-bg); color:var(--green); }
+    .spark { height: 18px; width: 70px; border-radius: 999px; background: linear-gradient(90deg, transparent 0%, #e2e8f0 100%); position: relative; overflow: hidden; }
+    .spark::after { content:''; position:absolute; left:0; top:8px; width:100%; height:2px; background:#f59e0b; transform: skewY(-12deg); }
+    .spark.green::after { background:#16a34a; } .spark.red::after { background:#dc2626; }
+
+    .usage-row { display:grid; grid-template-columns: 1fr 120px 44px; gap:10px; align-items:center; padding: 12px 20px; border-bottom: 1px solid #eef2f7; font-size:13px; }
+    .progress { height: 7px; background:#e2e8f0; border-radius:999px; overflow:hidden; }
+    .progress span { display:block; height:100%; background:#1d4ed8; border-radius:999px; }
+    .activity-item { display:grid; grid-template-columns:44px 1fr auto; gap:12px; padding: 14px 0; border-bottom:1px solid #eef2f7; align-items:center; }
+    .activity-icon { width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:19px; background:#dbeafe; }
+    .activity-item strong { display:block; font-size:13px; margin-bottom:4px; }
+    .activity-item small { color:#64748b; }
+    .view-link { display:inline-block; padding: 16px 20px 20px; color:#0f5fb8; text-decoration:none; font-weight:900; font-size:13px; }
+
+    .member-tools { margin-top: 18px; display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .member-tool-card { background: white; border:1px solid #e2e8f0; border-radius:18px; padding:20px; box-shadow:0 12px 28px rgba(15,23,42,.055); }
+    .member-tool-card h3 { margin:0 0 8px; font-size:18px; }
+    .member-tool-card p { margin:0 0 18px; color:#64748b; line-height:1.55; font-size:14px; }
+    .tool-actions { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .small-btn { display:inline-block; text-decoration:none; border:none; padding:10px 13px; border-radius:11px; background:#07111f; color:white; font-weight:900; cursor:pointer; font-size:13px; }
+    .small-btn.secondary-btn { background:#f8fafc; color:#0f172a; border:1px solid #e2e8f0; }
+
+
+
+    /* Premium SaaS Product Suite */
+    .product-suite-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      gap: 24px;
+      margin-top: 18px;
     }
-
-    .dash-stat {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 18px;
-      padding: 18px;
-      color: #e2e8f0;
-      font-size: 13px;
-    }
-
-    .dash-stat strong {
-      display: block;
+    .premium-product-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 88% 8%, rgba(250,204,21,.18), transparent 28%),
+        linear-gradient(135deg, #07111f 0%, #0b1729 58%, #111827 100%);
       color: white;
-      font-size: 24px;
-      margin-bottom: 4px;
-    }
-
-    .dashboard-section-title {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 20px;
-      margin: 26px 0 18px;
-    }
-
-    .dashboard-section-title h2 {
-      margin: 0;
-      font-size: 30px;
-      letter-spacing: -0.8px;
-    }
-
-    .dashboard-section-title p {
-      margin: 6px 0 0;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .tool-card {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 26px;
-      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.07);
-      min-height: 245px;
+      border: 1px solid rgba(250,204,21,.20);
+      border-radius: 26px;
+      padding: 34px;
+      box-shadow: 0 24px 60px rgba(7,17,31,.24);
+      min-height: 430px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
-
-    .tool-card.featured {
-      border: 2px solid var(--gold);
-      background: linear-gradient(180deg, #ffffff 0%, #fffdf1 100%);
+    .premium-product-card.coa-card {
+      background:
+        radial-gradient(circle at 88% 8%, rgba(59,130,246,.22), transparent 28%),
+        radial-gradient(circle at 10% 92%, rgba(250,204,21,.12), transparent 24%),
+        linear-gradient(135deg, #061326 0%, #0b1729 56%, #0f172a 100%);
     }
-
-    .tool-card h3 {
-      margin: 12px 0 10px;
-      font-size: 22px;
-      letter-spacing: -0.4px;
+    .premium-product-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(255,255,255,.08), transparent 34%);
+      pointer-events: none;
     }
-
-    .tool-card p {
-      margin: 0;
-      color: #475569;
-      font-size: 15px;
-      line-height: 1.65;
-    }
-
-    .tool-card-footer {
+    .product-label-row {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 12px;
-      margin-top: 22px;
-      flex-wrap: wrap;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
     }
-
-    .locked-note {
-      margin: 20px 0 0;
-      padding: 18px 20px;
-      border-radius: 18px;
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      color: #78350f;
-      line-height: 1.6;
-      display: none;
+    .product-badge-live {
+      display: inline-block;
+      background: rgba(22,163,74,.15);
+      color: #bbf7d0;
+      border: 1px solid rgba(134,239,172,.35);
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .3px;
+      text-transform: uppercase;
     }
-
-    .toast {
-      position: fixed;
-      right: 22px;
-      bottom: 22px;
-      max-width: 360px;
-      background: #07111f;
-      color: white;
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 18px;
-      box-shadow: var(--shadow-strong);
-      padding: 18px 20px;
-      z-index: 9999;
-      display: none;
-    }
-
-    .toast strong {
-      display: block;
-      margin-bottom: 6px;
+    .product-badge-premium {
+      display: inline-block;
+      background: rgba(250,204,21,.12);
       color: var(--gold);
+      border: 1px solid rgba(250,204,21,.32);
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .3px;
+      text-transform: uppercase;
     }
-
-    .toast p {
-      margin: 0;
+    .premium-product-card h3 {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 14px;
+      font-size: 30px;
+      line-height: 1.15;
+      letter-spacing: -.7px;
+      color: white;
+    }
+    .premium-product-card p {
+      position: relative;
+      z-index: 1;
       color: #cbd5e1;
-      line-height: 1.5;
-      font-size: 14px;
+      line-height: 1.7;
+      font-size: 16px;
+      margin: 0 0 18px;
     }
-
-
-
-    .dashboard-welcome-strip {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr;
-      gap: 18px;
+    .product-feature-list {
+      position: relative;
+      z-index: 1;
+      list-style: none;
+      padding: 0;
       margin: 0 0 24px;
-    }
-
-    .welcome-card,
-    .next-action-card {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 24px;
-      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.065);
-    }
-
-    .welcome-card h3,
-    .next-action-card h3 {
-      margin: 0 0 10px;
-      font-size: 22px;
-      letter-spacing: -0.4px;
-    }
-
-    .welcome-card p,
-    .next-action-card p {
-      margin: 0;
-      color: #475569;
-      line-height: 1.65;
-      font-size: 15px;
-    }
-
-    .quick-actions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin: 18px 0 0;
-    }
-
-    .quick-action {
-      text-decoration: none;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 16px;
-      display: block;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-    }
-
-    .quick-action:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
-      border-color: #cbd5e1;
-      text-decoration: none;
-    }
-
-    .quick-action strong {
-      display: block;
-      color: #0f172a;
-      margin-bottom: 5px;
-      font-size: 14px;
-    }
-
-    .quick-action span {
-      display: block;
-      color: #64748b;
-      line-height: 1.45;
-      font-size: 13px;
-    }
-
-    .priority-stack {
       display: grid;
       gap: 10px;
-      margin-top: 14px;
     }
-
-    .priority-item {
+    .product-feature-list li {
+      color: #e2e8f0;
       display: flex;
       gap: 10px;
       align-items: flex-start;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 14px;
-      padding: 12px;
-      color: #475569;
-      line-height: 1.5;
+      line-height: 1.45;
       font-size: 14px;
     }
-
-    .priority-number {
-      width: 24px;
-      height: 24px;
-      border-radius: 999px;
-      background: #07111f;
-      color: white;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 900;
-      flex: 0 0 auto;
-    }
-
-    .tool-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 38px rgba(15, 23, 42, 0.10);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    .tool-card.featured {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .tool-card.featured::after {
-      content: "";
-      position: absolute;
-      right: -70px;
-      top: -70px;
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: rgba(250, 204, 21, 0.18);
-      pointer-events: none;
-    }
-
-    .tool-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .tool-meta span {
-      font-size: 12px;
-      color: #334155;
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
-      padding: 6px 9px;
-      border-radius: 999px;
-    }
-
-    .dashboard-insight-band {
-      margin-top: 26px;
-      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 24px;
-      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr;
-      gap: 18px;
-    }
-
-    .insight-block h3 {
-      margin: 0 0 8px;
-      font-size: 18px;
-      letter-spacing: -0.2px;
-    }
-
-    .insight-block p {
-      margin: 0;
-      color: #64748b;
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
-    .user-welcome {
+    .product-feature-list li::before {
+      content: '✓';
       color: var(--gold);
       font-weight: 900;
     }
+    .product-actions {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: auto;
+    }
+    .product-primary-btn, .product-secondary-btn {
+      display: inline-block;
+      padding: 14px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 14px;
+    }
+    .product-primary-btn {
+      background: var(--gold);
+      color: #111827;
+      box-shadow: 0 14px 30px rgba(250,204,21,.18);
+    }
+    .product-secondary-btn {
+      background: rgba(255,255,255,.06);
+      color: white;
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .early-access-strip {
+      margin-top: 24px;
+      background: linear-gradient(90deg, #fff7ed, #fffbeb);
+      border: 1px solid #fed7aa;
+      border-radius: 20px;
+      padding: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      box-shadow: 0 10px 24px rgba(15,23,42,.045);
+    }
+    .early-access-strip strong { display: block; margin-bottom: 5px; font-size: 18px; }
+    .early-access-strip span { color: #7c2d12; line-height: 1.55; }
 
+    @media (max-width: 1200px) {
+      .stat-grid { grid-template-columns: repeat(3, 1fr); }
+      .dashboard-shell { grid-template-columns: 1fr; }
+      .dash-sidebar { position: relative; top: auto; height: auto; }
+      .dash-menu { display: grid; grid-template-columns: repeat(2,1fr); }
+      .dashboard-bottom, .dash-grid { grid-template-columns: 1fr; }
+      .member-tools { grid-template-columns: repeat(2,1fr); }
+      .dash-topbar { top: 0; }
+    }
     @media (max-width: 1050px) {
       h1 { font-size: 46px; }
-      .domain-grid, .module-grid, .workflow, .audience-grid, .hero-proof, .dashboard-grid, .dashboard-welcome-strip, .dashboard-insight-band {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .tool-box, .split, .dashboard-hero { grid-template-columns: 1fr; }
+      .domain-grid, .module-grid, .workflow, .audience-grid, .hero-proof, .product-suite-grid { grid-template-columns: repeat(2, 1fr); }
+      .tool-box, .split { grid-template-columns: 1fr; }
     }
-
     @media (max-width: 760px) {
       .nav { align-items: flex-start; gap: 14px; flex-direction: column; }
       .nav-links { flex-wrap: wrap; gap: 12px; }
       h1 { font-size: 36px; letter-spacing: -1px; }
-      .hero { padding: 58px 6% 60px; }
-      .domain-grid, .module-grid, .workflow, .audience-grid, .hero-proof, .mini-metrics, .dashboard-grid, .dashboard-stats, .quick-actions, .dashboard-welcome-strip, .dashboard-insight-band {
-        grid-template-columns: 1fr;
-      }
-      .section, #dashboard-area { padding-left: 6%; padding-right: 6%; }
-      .dashboard-hero { padding: 26px; }
-      .dashboard-hero h2 { font-size: 30px; }
-      .toast { left: 16px; right: 16px; bottom: 16px; }
+      .hero { padding-top: 58px; }
+      .domain-grid, .module-grid, .workflow, .audience-grid, .hero-proof, .mini-metrics, .stat-grid, .member-tools, .budget-summary, .product-suite-grid { grid-template-columns: 1fr; }
+      .early-access-strip { flex-direction: column; align-items: flex-start; }
+      .section, .hero { padding-left: 6%; padding-right: 6%; }
+      .dash-content { padding: 22px 16px 30px; }
+      .dash-topbar { flex-direction: column; height: auto; padding: 16px; align-items: stretch; }
+      .welcome-row { flex-direction: column; }
+      .health-wrap { grid-template-columns: 1fr; }
+      .dash-menu { grid-template-columns: 1fr; }
+      .table-row { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 
 <body>
-
   <nav class="nav">
-    <div class="logo">OracleToolkit</div>
+    <div class="logo">Oracle<span>Toolkit</span></div>
     <div class="nav-links">
       <a href="#domains">Domains</a>
       <a href="#finance">Finance</a>
-      <a href="#per-diem">Live Tool</a>
-      <button class="nav-link-button" id="dashboard-nav-link" type="button">Dashboard</button>
+      <a href="#live-products">Live Tools</a>
+      <a id="dashboard-nav-link" href="#dashboard-area">Dashboard</a>
       <a href="mailto:oracletoolkit5@gmail.com">Contact</a>
-      <div id="login-area">
-        <button id="login-button" type="button">Login / Sign Up</button>
-      </div>
-      <a class="nav-cta" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" onclick="gtag('event','per_diem_tool_click')">Launch Tool</a>
-      <a class="nav-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtag('event','Feedback')">Feedback</a>
+      <div id="login-area"><button id="login-button">Login / Sign Up</button></div>
+      <a class="nav-cta" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','coa_accelerator_nav_click')">Launch COA</a>
+      <a class="nav-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtag('event','demo_request_click')">Request Demo</a>
     </div>
   </nav>
 
@@ -879,414 +555,283 @@
     <div class="badge">Beta Platform for Oracle Cloud Consultants</div>
     <h1>Oracle Cloud implementation accelerators built for real project execution.</h1>
     <p>
-      OracleToolkit is a growing suite of practical tools for Oracle Cloud implementations across Finance, PPM, SCM, and HR.
+      OracleToolkit is a premium suite of practical SaaS accelerators for Oracle Cloud implementations across Finance, Public Sector, K-12, PPM, SCM, and HR.
       It is designed for consultants, solution architects, and project teams who need reusable accelerators that reduce manual effort,
       validation gaps, and implementation risk.
     </p>
-
     <div class="cta-row">
-      <button class="cta" id="hero-dashboard-button" type="button">Open Member Dashboard</button>
+      <a class="cta" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','hero_coa_launch_click')">Launch COA Accelerator</a>
+      <a class="secondary" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" onclick="gtag('event','hero_per_diem_launch_click')">Launch Per Diem Engine</a>
       <a class="secondary" href="#finance">Explore Tool Library</a>
     </div>
-
     <div class="hero-proof">
       <div class="proof-card"><strong>Implementation-focused</strong>Built around real Oracle Cloud project pain points.</div>
       <div class="proof-card"><strong>Module-wise library</strong>Finance first, with PPM, SCM, and HR expansion planned.</div>
-      <div class="proof-card"><strong>Reusable output</strong>Designed to produce review-ready workbooks and accelerators.</div>
+      <div class="proof-card"><strong>Two live SaaS tools</strong>COA Accelerator and Per Diem Engine are ready for early access testing.</div>
     </div>
   </section>
 
-  <!-- Member Dashboard now appears near the top, immediately after hero -->
   <section id="dashboard-area">
     <div class="dashboard-shell">
-      <div class="dashboard-hero">
+      <aside class="dash-sidebar">
+        <div class="dash-brand">
+          <div class="cube-logo">◇</div>
+          <div><strong>ORACLE<span style="color:#facc15;">TOOLKIT</span></strong><small>Implementation Accelerators</small></div>
+        </div>
+        <div class="dash-menu"><a class="active" href="#dashboard-area">⌂ Dashboard</a></div>
+        <div class="dash-section-title">Implementation</div>
+        <div class="dash-menu">
+          <a href="#member-tools">▣ Tool Library</a>
+          <a href="#member-tools">▦ COA Accelerator</a>
+          <a href="#member-tools">◉ Per Diem Engine</a>
+          <a href="#member-tools">▧ Budgetary Control</a>
+          <a href="#member-tools">↔ Reconciliation Engine</a>
+          <a href="#dashboard-health">▤ Reports</a>
+        </div>
+        <div class="dash-section-title">Public Sector</div>
+        <div class="dash-menu">
+          <a href="#member-tools">◎ Fund Accounting</a>
+          <a href="#member-tools">✦ Grants Management</a>
+          <a href="#member-tools">⌁ K-12 DOE Advisor</a>
+          <a href="#dashboard-health">☑ Compliance Center</a>
+        </div>
+        <div class="dash-section-title">Platform</div>
+        <div class="dash-menu">
+          <a href="#member-tools">✧ AI Assistant <span class="beta">BETA</span></a>
+          <a href="#member-tools">▥ Templates</a>
+          <a href="#member-tools">ⓘ Knowledge Center</a>
+        </div>
+        <div class="dash-user"><div class="avatar">CU</div><div><strong id="sidebar-user-name">Consultant User</strong><small>Solution Architect</small></div></div>
+      </aside>
+
+      <main class="dash-main">
+        <div class="dash-topbar">
+          <div class="dash-search">⌕ <input type="text" placeholder="Search projects, modules, accelerators..." /></div>
+          <div class="top-actions"><button class="project-select">All Projects ▾</button><button class="icon-btn">📅</button><button class="icon-btn notification-dot">🔔</button><button class="customize-btn">⚙ Customize Dashboard</button></div>
+        </div>
+
+        <div class="dash-content">
+          <div class="welcome-row">
+            <div><h2>Welcome back, <span id="dashboard-user-name">Consultant User</span></h2><p>Here’s what’s happening with your Oracle implementation accelerators today.</p></div>
+            <div class="dashboard-note"><strong>Member Workspace:</strong> Access live tools, roadmap accelerators, feedback capture, and future AI-assisted implementation support.</div>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat-card"><div class="stat-icon i-blue">▣</div><small>Active Tool Access</small><strong>2</strong><span>COA + Per Diem live</span></div>
+            <div class="stat-card"><div class="stat-icon i-purple">▦</div><small>COA Mappings</small><strong>1,248</strong><span>Demo metric</span></div>
+            <div class="stat-card"><div class="stat-icon i-green">🛡</div><small>BCEA Rules</small><strong>256</strong><span class="warning">18 pending validation</span></div>
+            <div class="stat-card"><div class="stat-icon i-red">⚠</div><small>Funds Check Risks</small><strong>73</strong><span class="warning">Sample insight</span></div>
+            <div class="stat-card"><div class="stat-icon i-blue">↻</div><small>Interface Status</small><strong>92%</strong><span>Success rate</span></div>
+            <div class="stat-card"><div class="stat-icon i-amber">🚀</div><small>Accelerators Planned</small><strong>14</strong><span>Across modules</span></div>
+          </div>
+
+          <div class="dash-grid" id="dashboard-health">
+            <div class="dash-card">
+              <div class="dash-card-head"><h3>Implementation Health Overview</h3><button class="dash-filter">This Month ▾</button></div>
+              <div class="health-wrap">
+                <div><div class="ring"><div class="ring-inner"><strong>78%</strong><span>Healthy</span></div></div></div>
+                <div class="risk-list-premium">
+                  <div class="risk-row"><span>Funds Check Failures</span><span class="risk-badge rb-red">73</span></div>
+                  <div class="risk-row"><span>COA Mapping Errors</span><span class="risk-badge rb-red">45</span></div>
+                  <div class="risk-row"><span>Budgetary Control Rules</span><span class="risk-badge rb-amber">18</span></div>
+                  <div class="risk-row"><span>Interface Failures</span><span class="risk-badge rb-amber">9</span></div>
+                  <div class="risk-row"><span>Reconciliation Issues</span><span class="risk-badge rb-green">6</span></div>
+                </div>
+              </div>
+              <a class="view-link" href="#member-tools">View Health Center →</a>
+            </div>
+
+            <div class="dash-card">
+              <div class="dash-card-head"><h3>Budgetary Control — Budget vs Actual</h3><button class="dash-filter">This Quarter ▾</button></div>
+              <div class="chart-card-body">
+                <div class="chart-legend"><span><i class="dot dot-blue"></i>Budget</span><span><i class="dot dot-gold"></i>Actual</span></div>
+                <div class="bars">
+                  <div class="bar-group"><div class="bar budget" style="height:45%"></div><div class="bar actual" style="height:35%"></div></div>
+                  <div class="bar-group"><div class="bar budget" style="height:58%"></div><div class="bar actual" style="height:46%"></div></div>
+                  <div class="bar-group"><div class="bar budget" style="height:70%"></div><div class="bar actual" style="height:56%"></div></div>
+                  <div class="bar-group"><div class="bar budget" style="height:78%"></div><div class="bar actual" style="height:62%"></div></div>
+                  <div class="bar-group"><div class="bar budget" style="height:88%"></div><div class="bar actual" style="height:74%"></div></div>
+                  <div class="bar-group"><div class="bar budget" style="height:98%"></div><div class="bar actual" style="height:82%"></div></div>
+                </div>
+                <div class="budget-summary"><div class="summary-box"><small>Total Budget</small><strong>$125.80M</strong></div><div class="summary-box"><small>Total Actual</small><strong>$98.45M</strong></div><div class="summary-box"><small>Variance</small><strong class="green">$27.35M</strong></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-bottom">
+            <div class="dash-card"><div class="dash-card-head"><h3>Implementation Health Center</h3></div><div class="health-table">
+              <div class="table-row table-head"><span>Area</span><span>Status</span><span>Issues</span><span>Trend</span></div>
+              <div class="table-row"><span>COA Mappings</span><span class="status s-risk">At Risk</span><span>45</span><span class="spark"></span></div>
+              <div class="table-row"><span>BCEA Rules</span><span class="status s-risk">At Risk</span><span>18</span><span class="spark"></span></div>
+              <div class="table-row"><span>Funds Check</span><span class="status s-critical">Critical</span><span>73</span><span class="spark red"></span></div>
+              <div class="table-row"><span>Interfaces</span><span class="status s-good">Healthy</span><span>9</span><span class="spark green"></span></div>
+              <div class="table-row"><span>Data Quality</span><span class="status s-good">Healthy</span><span>12</span><span class="spark green"></span></div>
+            </div><a class="view-link" href="#member-tools">Go to Health Center →</a></div>
+
+            <div class="dash-card"><div class="dash-card-head"><h3>Accelerator Usage</h3><button class="dash-filter">This Month ▾</button></div>
+              <div class="usage-row"><span>Per Diem Engine</span><div class="progress"><span style="width:85%"></span></div><strong>85%</strong></div>
+              <div class="usage-row"><span>COA Accelerator</span><div class="progress"><span style="width:78%"></span></div><strong>78%</strong></div>
+              <div class="usage-row"><span>Budgetary Control</span><div class="progress"><span style="width:65%"></span></div><strong>65%</strong></div>
+              <div class="usage-row"><span>Reconciliation</span><div class="progress"><span style="width:60%"></span></div><strong>60%</strong></div>
+              <a class="view-link" href="#member-tools">View All Accelerators →</a>
+            </div>
+
+            <div class="dash-card"><div class="dash-card-head"><h3>Recent Activity</h3></div><div class="activity-list">
+              <div class="activity-item"><div class="activity-icon">▦</div><div><strong>COA mapping validation completed</strong><small>Sample implementation activity</small></div><small>2h ago</small></div>
+              <div class="activity-item"><div class="activity-icon">🛡</div><div><strong>BCEA rule set imported</strong><small>Budgetary control design readiness</small></div><small>4h ago</small></div>
+              <div class="activity-item"><div class="activity-icon">⚠</div><div><strong>Funds check failures detected</strong><small>Review required before SIT</small></div><small>5h ago</small></div>
+              <div class="activity-item"><div class="activity-icon">✅</div><div><strong>Interface file loaded successfully</strong><small>Per diem engine available</small></div><small>6h ago</small></div>
+            </div><a class="view-link" href="#member-tools">View All Activity →</a></div>
+          </div>
+
+          <div class="member-tools" id="member-tools">
+            <div class="member-tool-card"><span class="status-pill status-live">Live</span><h3>Per Diem Transformation Engine</h3><p>Convert GSA per diem data into Oracle-ready review output for Expenses setup and validation.</p><div class="tool-actions"><a class="small-btn" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" onclick="gtag('event','member_dashboard_per_diem_launch')">Launch Tool</a><a class="small-btn secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Feedback</a></div></div>
+            <div class="member-tool-card"><span class="status-pill status-live">Live</span><h3>COA Transformation Accelerator</h3><p>Legacy-to-Oracle mapping, DOE/public sector readiness, validation dashboard, CVR intelligence, and export support.</p><div class="tool-actions"><a class="small-btn" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','member_dashboard_coa_launch')">Launch COA</a><a class="small-btn secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Feedback</a></div></div>
+            <div class="member-tool-card"><span class="status-pill">Coming Soon</span><h3>Budgetary Control Design Engine</h3><p>Control budget setup logic, advisory vs absolute controls, funds check readiness, and testing scenarios.</p><div class="tool-actions"><a class="small-btn secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Suggest Scenario</a></div></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="split"><div class="panel"><h3>Why OracleToolkit exists</h3><p>Oracle Cloud implementation teams lose time on repeated cleanup, validation, conversion checks, testing packs, and setup readiness reviews. Many of these activities are predictable, repeatable, and should not be rebuilt from scratch on every project.</p><p>OracleToolkit converts field-tested implementation knowledge into structured accelerators that help teams move faster with better control.</p></div><div class="panel"><h3>The risk it reduces</h3><ul class="risk-list"><li>Manual spreadsheet cleanup creating inconsistent results.</li><li>Incomplete validation before SIT, UAT, or conversion cycles.</li><li>Repeated effort across similar Oracle Cloud projects.</li><li>Late discovery of configuration and data readiness issues.</li><li>Dependency gaps between functional, technical, and business teams.</li></ul></div></div>
+  </section>
+
+  <section class="section" id="domains"><h2>Tool Domains</h2><p class="section-subtitle">The platform is structured by Oracle Cloud business domains. Finance is the first active domain, with additional tools planned across PPM, SCM, and HR.</p><div class="domain-grid"><div class="card active-domain"><h3>Finance</h3><p>GL, Budgetary Control, Payables, Receivables, Fixed Assets, Expenses, and Cash Management accelerators.</p></div><div class="card"><h3>PPM</h3><p>Future accelerators for project costing, billing, grants, capitalization, project controls, and project budget readiness.</p></div><div class="card"><h3>SCM</h3><p>Future toolkits for procurement, suppliers, receiving, inventory, purchasing controls, and operational readiness.</p></div><div class="card"><h3>HR</h3><p>Future tools for employee setup, approval dependencies, job and position mapping, and security readiness.</p></div></div></section>
+
+  <section class="section" id="finance"><h2>Finance Toolkit Categories</h2><p class="section-subtitle">Finance is the first active domain. Each module will gradually include validation engines, testing packs, mapping tools, conversion checkers, and implementation readiness accelerators.</p><div class="module-grid"><div class="module"><h3>GL & BCEA</h3><ul><li><a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','finance_coa_launch_click')">COA Transformation Accelerator <span class="live">Live</span></a></li><li><a href="#member-tools">Budget Control Design Engine <span>Coming Soon</span></a></li><li><a href="#member-tools">Encumbrance Testing Toolkit <span>Coming Soon</span></a></li></ul></div><div class="module"><h3>Payables</h3><ul><li><a href="#member-tools">Invoice Validation Toolkit <span>Coming Soon</span></a></li><li><a href="#member-tools">Payment Method Readiness <span>Coming Soon</span></a></li><li><a href="#member-tools">Supplier Setup Review <span>Coming Soon</span></a></li></ul></div><div class="module"><h3>Receivables</h3><ul><li><a href="#member-tools">AutoAccounting Review <span>Coming Soon</span></a></li><li><a href="#member-tools">Receipt Method Validation <span>Coming Soon</span></a></li><li><a href="#member-tools">Customer Site Readiness <span>Coming Soon</span></a></li></ul></div><div class="module"><h3>Fixed Assets</h3><ul><li><a href="#member-tools">Asset Conversion Readiness <span>Coming Soon</span></a></li><li><a href="#member-tools">Book Setup Validation <span>Coming Soon</span></a></li><li><a href="#member-tools">Mass Additions Review <span>Coming Soon</span></a></li></ul></div><div class="module active-tool"><h3>Expenses</h3><ul><li><a href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank">Per Diem Transformation Engine <span class="live">Live</span></a></li><li><a href="#member-tools">Expense Approval Readiness <span>Coming Soon</span></a></li><li><a href="#member-tools">Policy Setup Validation <span>Coming Soon</span></a></li></ul></div><div class="module"><h3>Cash Management</h3><ul><li><a href="#member-tools">Bank Account Setup Review <span>Coming Soon</span></a></li><li><a href="#member-tools">Pooled Cash Reconciliation Aid <span>Coming Soon</span></a></li><li><a href="#member-tools">Bank Statement Testing Pack <span>Coming Soon</span></a></li></ul></div></div></section>
+
+  <section class="section" id="live-products">
+    <h2>Live SaaS Accelerators</h2>
+    <p class="section-subtitle">OracleToolkit now has two early-access SaaS products. Each tool is intentionally separated with its own Streamlit app link, so the COA launch button will not conflict with the Per Diem launch button.</p>
+    <div class="product-suite-grid">
+      <div class="premium-product-card coa-card" id="coa-accelerator">
         <div>
-          <div class="dashboard-eyebrow">Member Workspace</div>
-          <h2>OracleToolkit Dashboard</h2>
-          <p class="user-welcome" id="dashboard-user-name">Welcome back.</p>
-          <p>
-            Access live Oracle Cloud implementation accelerators, monitor upcoming tools, and help prioritize the next releases.
-            This dashboard is designed to become your execution layer for repeatable Oracle project activities.
-          </p>
-          <div class="dashboard-actions">
-            <a class="cta" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" onclick="gtag('event','member_dashboard_per_diem_launch')">Launch Per Diem Engine</a>
-            <a class="secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtag('event','member_dashboard_feedback_click')">Suggest Next Tool</a>
-          </div>
+          <div class="product-label-row"><span class="product-badge-live">Live Early Access</span><span class="product-badge-premium">Flagship SaaS</span></div>
+          <h3>Oracle Cloud COA Transformation Accelerator</h3>
+          <p>Designed for Solution Architects and client finance teams to structure legacy-to-Oracle COA mapping, identify validation gaps, review DOE/public sector readiness, and prepare implementation-ready outputs.</p>
+          <ul class="product-feature-list">
+            <li>Legacy → Oracle mapping workspace</li>
+            <li>COA validation dashboard and readiness scoring</li>
+            <li>Public Sector / K-12 oriented controls</li>
+            <li>Cross-validation rule intelligence foundation</li>
+            <li>Designed for client review and consultant execution</li>
+          </ul>
         </div>
-        <div class="dashboard-stats">
-          <div class="dash-stat"><strong>1</strong>Live beta tool</div>
-          <div class="dash-stat"><strong>5+</strong>Planned accelerators</div>
-          <div class="dash-stat"><strong>Finance</strong>First active domain</div>
-          <div class="dash-stat"><strong>Free</strong>Member beta access</div>
+        <div class="product-actions">
+          <a class="product-primary-btn" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','coa_accelerator_launch_click')">Launch COA Accelerator</a>
+          <a class="product-secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtag('event','coa_feedback_click')">Share Feedback</a>
         </div>
       </div>
 
-      <div class="dashboard-welcome-strip">
-        <div class="welcome-card">
-          <h3>Your implementation accelerator workspace</h3>
-          <p>
-            Use this dashboard as the controlled entry point for OracleToolkit tools. The current beta is free, but the structure is already ready for future member tiers, usage tracking, and premium access control.
-          </p>
-          <div class="quick-actions">
-            <a class="quick-action" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" onclick="gtag('event','quick_action_per_diem')">
-              <strong>Launch live tool</strong>
-              <span>Open the Per Diem Engine.</span>
-            </a>
-            <a class="quick-action" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtag('event','quick_action_feedback')">
-              <strong>Give feedback</strong>
-              <span>Tell us what to improve.</span>
-            </a>
-            <a class="quick-action" href="mailto:oracletoolkit5@gmail.com">
-              <strong>Request access</strong>
-              <span>Discuss team or project use.</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="next-action-card">
-          <h3>Recommended next actions</h3>
-          <div class="priority-stack">
-            <div class="priority-item"><span class="priority-number">1</span><span>Use the live Per Diem tool and confirm if the output fits your Oracle Expenses setup process.</span></div>
-            <div class="priority-item"><span class="priority-number">2</span><span>Submit feedback on missing features, format expectations, or next tool priority.</span></div>
-            <div class="priority-item"><span class="priority-number">3</span><span>Join the beta list for COA, Budgetary Control, and PCard cutover accelerators.</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="dashboard-section-title">
+      <div class="premium-product-card" id="per-diem">
         <div>
-          <h2>Tool Library</h2>
-          <p>Start with the live tool and preview the next Oracle Cloud accelerators in the roadmap.</p>
+          <div class="product-label-row"><span class="product-badge-live">Live Beta</span><span class="product-badge-premium">Expenses Tool</span></div>
+          <h3>Per Diem Transformation Engine</h3>
+          <p>Upload the GSA Zip Code file and generate Oracle-ready review outputs for Expenses policy setup, including normalized geography, validation summary, and review flags.</p>
+          <ul class="product-feature-list">
+            <li>GSA source file transformation</li>
+            <li>Oracle-ready per diem helper output</li>
+            <li>Normalized geography review</li>
+            <li>Validation summary and exception flags</li>
+            <li>Repeatable fiscal-year refresh workflow</li>
+          </ul>
         </div>
-        <span class="status-pill live-pill">Beta Access Enabled</span>
-      </div>
-
-      <div class="dashboard-grid">
-        <div class="tool-card featured">
-          <div>
-            <span class="status-pill live-pill">Live</span>
-            <h3>Per Diem Transformation Engine</h3>
-            <p>Convert GSA per diem data into Oracle-ready review output for Expenses setup, testing, and validation.</p>
-            <div class="tool-meta"><span>Expenses</span><span>ADFdi-ready support</span><span>Live beta</span></div>
-          </div>
-          <div class="tool-card-footer">
-            <a class="cta" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" onclick="gtag('event','dashboard_card_per_diem_launch')">Launch Tool</a>
-          </div>
-        </div>
-
-        <div class="tool-card">
-          <div>
-            <span class="status-pill">Coming Soon</span>
-            <h3>COA Crosswalk Accelerator</h3>
-            <p>Legacy-to-Oracle mapping readiness, validation logic, issue tracking, and reconciliation support.</p>
-            <div class="tool-meta"><span>GL</span><span>COA mapping</span><span>High demand</span></div>
-          </div>
-          <div class="tool-card-footer"><span class="status-pill">Roadmap</span></div>
-        </div>
-
-        <div class="tool-card">
-          <div>
-            <span class="status-pill">Coming Soon</span>
-            <h3>Budgetary Control Design Engine</h3>
-            <p>Control budget design, advisory vs absolute control, funds check readiness, and testing guidance.</p>
-            <div class="tool-meta"><span>BCEA</span><span>Public sector</span><span>Design aid</span></div>
-          </div>
-          <div class="tool-card-footer"><span class="status-pill">Roadmap</span></div>
-        </div>
-
-        <div class="tool-card">
-          <div>
-            <span class="status-pill">Coming Soon</span>
-            <h3>PCard Go-Live Reconciliation Planner</h3>
-            <p>Handle card cycle timing, posting dates, fiscal year cutover, and missing or duplicate transaction risk.</p>
-            <div class="tool-meta"><span>Expenses</span><span>PCard</span><span>Cutover</span></div>
-          </div>
-          <div class="tool-card-footer"><span class="status-pill">Roadmap</span></div>
-        </div>
-
-        <div class="tool-card">
-          <div>
-            <span class="status-pill">Coming Soon</span>
-            <h3>Approval Workflow Readiness Checker</h3>
-            <p>Identify over-engineered approval logic and ERP/HCM dependency risks before configuration becomes messy.</p>
-            <div class="tool-meta"><span>AP/EXP</span><span>Approvals</span><span>Readiness</span></div>
-          </div>
-          <div class="tool-card-footer"><span class="status-pill">Roadmap</span></div>
-        </div>
-
-        <div class="tool-card">
-          <div>
-            <span class="status-pill">Feedback</span>
-            <h3>Suggest a New Tool</h3>
-            <p>Tell us which Oracle implementation accelerator would save your project the most time.</p>
-          </div>
-          <div class="tool-card-footer">
-            <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtag('event','dashboard_suggest_tool_click')">Submit Feedback</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="dashboard-insight-band">
-        <div class="insight-block">
-          <h3>Built for real implementation execution</h3>
-          <p>OracleToolkit is not a generic template library. Each accelerator is designed around repeatable project pain points: conversion cleanup, validation, testing readiness, cutover control, and configuration review.</p>
-        </div>
-        <div class="insight-block">
-          <h3>Current beta focus</h3>
-          <p>Finance accelerators first: Expenses, GL, BCEA, Payables, Receivables, Fixed Assets, Cash Management, and PCard cutover support.</p>
-        </div>
-        <div class="insight-block">
-          <h3>Why feedback matters</h3>
-          <p>Your feedback directly controls the roadmap. The strongest use cases will become the next premium tools inside the member workspace.</p>
+        <div class="product-actions">
+          <a class="product-primary-btn" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" onclick="gtag('event','per_diem_tool_click')">Launch Per Diem Engine</a>
+          <a class="product-secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtag('event','per_diem_feedback_click')">Share Feedback</a>
         </div>
       </div>
     </div>
-  </section>
-
-  <div class="locked-note" id="locked-dashboard-message">
-    Member Dashboard is available after login. Please sign in to access OracleToolkit tools and member-only accelerator previews.
-  </div>
-
-  <section class="section">
-    <div class="split">
-      <div class="panel">
-        <h3>Why OracleToolkit exists</h3>
-        <p>
-          Oracle Cloud implementation teams lose time on repeated cleanup, validation, conversion checks, testing packs, and setup readiness reviews.
-          Many of these activities are predictable, repeatable, and should not be rebuilt from scratch on every project.
-        </p>
-        <p>
-          OracleToolkit converts field-tested implementation knowledge into structured accelerators that help teams move faster with better control.
-        </p>
-      </div>
-
-      <div class="panel">
-        <h3>The risk it reduces</h3>
-        <ul class="risk-list">
-          <li>Manual spreadsheet cleanup creating inconsistent results.</li>
-          <li>Incomplete validation before SIT, UAT, or conversion cycles.</li>
-          <li>Repeated effort across similar Oracle Cloud projects.</li>
-          <li>Late discovery of configuration and data readiness issues.</li>
-          <li>Dependency gaps between functional, technical, and business teams.</li>
-        </ul>
-      </div>
+    <div class="early-access-strip">
+      <div><strong>Early Access Testing Program</strong><span>Ask users to test the tools and capture where they get confused, what output they value most, and whether it saves real implementation time.</span></div>
+      <a class="request-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Collect Feedback</a>
     </div>
   </section>
 
-  <section class="section" id="domains">
-    <h2>Tool Domains</h2>
-    <p class="section-subtitle">
-      The platform is structured by Oracle Cloud business domains. Finance is the first active domain, with additional tools planned across PPM, SCM, and HR.
-    </p>
+  <section class="section"><h2>How the live tools work</h2><p class="section-subtitle">Both live SaaS tools use a practical upload-to-output workflow designed for quick project use, client review, and early user feedback.</p><div class="workflow"><div class="step"><div class="step-number">1</div><h3>Upload</h3><p>Upload the source file into the relevant accelerator.</p></div><div class="step"><div class="step-number">2</div><h3>Normalize</h3><p>The engine cleans and structures the source data into usable review tables.</p></div><div class="step"><div class="step-number">3</div><h3>Validate</h3><p>Review flags highlight rows that need attention before Oracle setup usage.</p></div><div class="step"><div class="step-number">4</div><h3>Download</h3><p>Download Oracle-ready helper outputs for review, testing, mapping, or setup support.</p></div></div></section>
 
-    <div class="domain-grid">
-      <div class="card active-domain"><h3>Finance</h3><p>GL, Budgetary Control, Payables, Receivables, Fixed Assets, Expenses, and Cash Management accelerators.</p></div>
-      <div class="card"><h3>PPM</h3><p>Future accelerators for project costing, billing, grants, capitalization, project controls, and project budget readiness.</p></div>
-      <div class="card"><h3>SCM</h3><p>Future toolkits for procurement, suppliers, receiving, inventory, purchasing controls, and operational readiness.</p></div>
-      <div class="card"><h3>HR</h3><p>Future tools for employee setup, approval dependencies, job and position mapping, and security readiness.</p></div>
-    </div>
-  </section>
+  <section class="section"><h2>Built for implementation professionals</h2><p class="section-subtitle">OracleToolkit is designed for people who work inside real Oracle Cloud programs and need practical execution support.</p><div class="audience-grid"><div class="audience">Oracle Cloud Finance Consultants</div><div class="audience">Solution Architects</div><div class="audience">Implementation Teams</div><div class="audience">Public Sector / K-12 Projects</div></div></section>
 
-  <section class="section" id="finance">
-    <h2>Finance Toolkit Categories</h2>
-    <p class="section-subtitle">
-      Finance is the first active domain. Each module will gradually include validation engines, testing packs, mapping tools, conversion checkers, and implementation readiness accelerators.
-    </p>
+  <section class="section" id="coming-soon"><div class="coming"><h3>More OracleToolkit accelerators are coming soon</h3><p>This toolkit library is being built module by module. Current live tools: GL/BCEA → COA Transformation Accelerator and Expenses → Per Diem Transformation Engine. Upcoming tools will be released across GL & BCEA, Payables, Receivables, Fixed Assets, Cash Management, PPM, SCM, and HR.</p><a class="request-link" href="mailto:oracletoolkit5@gmail.com">Request Early Access / Suggest a Tool</a></div></section>
 
-    <div class="module-grid">
-      <div class="module"><h3>GL & BCEA</h3><ul><li><a href="#coming-soon">COA Crosswalk Toolkit <span>Coming Soon</span></a></li><li><a href="#coming-soon">Budget Control Design Engine <span>Coming Soon</span></a></li><li><a href="#coming-soon">Encumbrance Testing Toolkit <span>Coming Soon</span></a></li></ul></div>
-      <div class="module"><h3>Payables</h3><ul><li><a href="#coming-soon">Invoice Validation Toolkit <span>Coming Soon</span></a></li><li><a href="#coming-soon">Payment Method Readiness <span>Coming Soon</span></a></li><li><a href="#coming-soon">Supplier Setup Review <span>Coming Soon</span></a></li></ul></div>
-      <div class="module"><h3>Receivables</h3><ul><li><a href="#coming-soon">AutoAccounting Review <span>Coming Soon</span></a></li><li><a href="#coming-soon">Receipt Method Validation <span>Coming Soon</span></a></li><li><a href="#coming-soon">Customer Site Readiness <span>Coming Soon</span></a></li></ul></div>
-      <div class="module"><h3>Fixed Assets</h3><ul><li><a href="#coming-soon">Asset Conversion Readiness <span>Coming Soon</span></a></li><li><a href="#coming-soon">Book Setup Validation <span>Coming Soon</span></a></li><li><a href="#coming-soon">Mass Additions Review <span>Coming Soon</span></a></li></ul></div>
-      <div class="module active-tool"><h3>Expenses</h3><ul><li><a href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank">Per Diem Transformation Engine <span class="live">Live</span></a></li><li><a href="#coming-soon">Expense Approval Readiness <span>Coming Soon</span></a></li><li><a href="#coming-soon">Policy Setup Validation <span>Coming Soon</span></a></li></ul></div>
-      <div class="module"><h3>Cash Management</h3><ul><li><a href="#coming-soon">Bank Account Setup Review <span>Coming Soon</span></a></li><li><a href="#coming-soon">Pooled Cash Reconciliation Aid <span>Coming Soon</span></a></li><li><a href="#coming-soon">Bank Statement Testing Pack <span>Coming Soon</span></a></li></ul></div>
-    </div>
-  </section>
+  <section class="section final-cta"><h2>Start with the live COA Accelerator and Per Diem Engine. Help shape the next OracleToolkit products.</h2><p class="section-subtitle">Early feedback will guide the next Finance, Public Sector, K-12, PPM, SCM, and HR accelerators.</p><div class="cta-row" style="justify-content:center;"><a class="cta" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','final_coa_launch_click')">Launch COA Accelerator</a><a class="secondary" style="color:#111827;border-color:#111827;" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" onclick="gtag('event','final_per_diem_launch_click')">Launch Per Diem Engine</a><a class="secondary" style="color:#111827;border-color:#111827;" href="mailto:oracletoolkit5@gmail.com">Contact / Request Demo</a></div></section>
 
-  <section class="section" id="per-diem">
-    <div class="tool-box">
-      <div>
-        <div class="tool-tag">Active Beta Tool</div>
-        <h2>Expenses: Per Diem Transformation Engine</h2>
-        <p>
-          Upload the GSA Zip Code File and generate an Oracle-ready Per Diem workbook with normalized geography,
-          standard rate rows, lodging helper rows, validation summary, and review flags.
-        </p>
-        <p>Designed to reduce manual cleanup effort during Oracle Cloud Expenses policy setup, testing, and review cycles.</p>
-        <div class="mini-metrics">
-          <div class="mini-metric"><strong>1 input</strong>Upload Zip Code File</div>
-          <div class="mini-metric"><strong>Multiple sheets</strong>Review-ready workbook</div>
-          <div class="mini-metric"><strong>Beta</strong>Open for feedback</div>
-        </div>
-      </div>
-      <div><a class="cta" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank">Launch Per Diem Engine</a></div>
-    </div>
-  </section>
+  <footer class="footer">© OracleToolkit. Independent platform for Oracle Cloud implementation accelerators. Not affiliated with Oracle Corporation.</footer>
 
-  <section class="section">
-    <h2>How the live tool works</h2>
-    <p class="section-subtitle">The current beta tool uses a simple upload-to-output workflow designed for quick project use and early user feedback.</p>
-    <div class="workflow">
-      <div class="step"><div class="step-number">1</div><h3>Upload</h3><p>Upload the GSA Zip Code File into the Per Diem Engine.</p></div>
-      <div class="step"><div class="step-number">2</div><h3>Normalize</h3><p>The engine cleans and structures geography-related data into usable review tables.</p></div>
-      <div class="step"><div class="step-number">3</div><h3>Validate</h3><p>Review flags highlight rows that need attention before Oracle setup usage.</p></div>
-      <div class="step"><div class="step-number">4</div><h3>Download</h3><p>Download an Oracle-ready helper workbook for review, testing, or setup support.</p></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Built for implementation professionals</h2>
-    <p class="section-subtitle">OracleToolkit is designed for people who work inside real Oracle Cloud programs and need practical execution support.</p>
-    <div class="audience-grid">
-      <div class="audience">Oracle Cloud Finance Consultants</div>
-      <div class="audience">Solution Architects</div>
-      <div class="audience">Implementation Teams</div>
-      <div class="audience">Public Sector / K-12 Projects</div>
-    </div>
-  </section>
-
-  <section class="section" id="coming-soon">
-    <div class="coming">
-      <h3>More OracleToolkit accelerators are coming soon</h3>
-      <p>
-        This toolkit library is being built module by module. Current live tool: Expenses → Per Diem Transformation Engine.
-        Upcoming tools will be released across GL & BCEA, Payables, Receivables, Fixed Assets, Cash Management, PPM, SCM, and HR.
-      </p>
-      <a class="request-link" href="mailto:oracletoolkit5@gmail.com">Request Early Access / Suggest a Tool</a>
-    </div>
-  </section>
-
-  <section class="section final-cta">
-    <h2>Start with the live Per Diem Engine. Help shape the next OracleToolkit accelerators.</h2>
-    <p class="section-subtitle">Early feedback will guide which Finance, PPM, SCM, and HR tools are prioritized next.</p>
-    <div class="cta-row" style="justify-content:center;">
-      <button class="cta" id="final-dashboard-button" type="button">Open Member Dashboard</button>
-      <a class="secondary" style="color:#111827;border-color:#111827;" href="mailto:oracletoolkit5@gmail.com">Contact / Request Demo</a>
-    </div>
-  </section>
-
-  <footer class="footer">
-    © OracleToolkit. Independent platform for Oracle Cloud implementation accelerators. Not affiliated with Oracle Corporation.
-  </footer>
-
-  <div class="toast" id="login-toast">
-    <strong>Login Required</strong>
-    <p>Please sign in to access the Member Dashboard and OracleToolkit accelerator workspace.</p>
-  </div>
-
-  <script
-    async
-    crossorigin="anonymous"
-    data-clerk-publishable-key="pk_live_Y2xlcmsub3JhY2xldG9vbGtpdC5jb20k"
-    src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@5/dist/clerk.browser.js"
-    type="text/javascript">
-  </script>
-
+  <script async crossorigin="anonymous" data-clerk-publishable-key="pk_live_Y2xlcmsub3JhY2xldG9vbGtpdC5jb20k" src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@5/dist/clerk.browser.js" type="text/javascript"></script>
   <script>
-    window.addEventListener("load", function () {
-      const loginArea = document.getElementById("login-area");
-      const dashboardArea = document.getElementById("dashboard-area");
-      const dashboardNavLink = document.getElementById("dashboard-nav-link");
-      const heroDashboardButton = document.getElementById("hero-dashboard-button");
-      const finalDashboardButton = document.getElementById("final-dashboard-button");
-      const toast = document.getElementById("login-toast");
-      const dashboardUserName = document.getElementById("dashboard-user-name");
+    let clerkLoaded = false;
+    let clerkReady = false;
 
-      function showToast() {
-        if (!toast) return;
-        toast.style.display = "block";
-        setTimeout(function () {
-          toast.style.display = "none";
-        }, 4200);
+    function showLoggedOutUI() {
+      const loginArea = document.getElementById('login-area');
+      const dashboardArea = document.getElementById('dashboard-area');
+      if (loginArea) loginArea.innerHTML = '<button id="login-button">Login / Sign Up</button>';
+      if (dashboardArea) dashboardArea.style.display = 'none';
+      const loginButton = document.getElementById('login-button');
+      if (loginButton) loginButton.addEventListener('click', openLogin);
+    }
+
+    function showLoggedInUI() {
+      const loginArea = document.getElementById('login-area');
+      const dashboardArea = document.getElementById('dashboard-area');
+      if (loginArea) {
+        loginArea.innerHTML = '<div id="user-button"></div>';
+        window.Clerk.mountUserButton(document.getElementById('user-button'));
       }
+      if (dashboardArea) dashboardArea.style.display = 'block';
 
-      function scrollToDashboard() {
-        if (dashboardArea) {
-          dashboardArea.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
+      const user = window.Clerk.user;
+      const firstName = user && (user.firstName || user.fullName || (user.primaryEmailAddress && user.primaryEmailAddress.emailAddress.split('@')[0]));
+      const name = firstName || 'Consultant User';
+      const dashName = document.getElementById('dashboard-user-name');
+      const sideName = document.getElementById('sidebar-user-name');
+      if (dashName) dashName.textContent = name;
+      if (sideName) sideName.textContent = name;
+    }
+
+    async function initializeClerk() {
+      if (!window.Clerk) return false;
+      if (!clerkReady) {
+        await window.Clerk.load();
+        clerkReady = true;
       }
+      if (window.Clerk.user) showLoggedInUI(); else showLoggedOutUI();
+      return true;
+    }
 
-      async function loadClerkSafely() {
+    async function openLogin() {
+      try {
         if (!window.Clerk) {
-          alert("Authentication system is still loading. Please wait 2 seconds and try again.");
-          return false;
-        }
-        try {
-          await window.Clerk.load();
-          return true;
-        } catch (err) {
-          console.error("Clerk Load Error:", err);
-          alert("Login temporarily unavailable. Please refresh and try again.");
-          return false;
-        }
-      }
-
-      function renderLoggedOut() {
-        if (dashboardUserName) dashboardUserName.textContent = "Welcome back.";
-        if (dashboardArea) dashboardArea.style.display = "none";
-        if (loginArea) {
-          loginArea.innerHTML = '<button id="login-button" type="button">Login / Sign Up</button>';
-          const loginButton = document.getElementById("login-button");
-          loginButton.addEventListener("click", async function () {
-            const loaded = await loadClerkSafely();
-            if (!loaded) return;
-            window.Clerk.openSignIn();
-          });
-        }
-      }
-
-      function renderLoggedIn() {
-        if (dashboardUserName && window.Clerk && window.Clerk.user) {
-          const firstName = window.Clerk.user.firstName || window.Clerk.user.fullName || "member";
-          dashboardUserName.textContent = "Welcome back, " + firstName + ".";
-        }
-        if (loginArea) {
-          loginArea.innerHTML = '<div id="user-button"></div>';
-          window.Clerk.mountUserButton(document.getElementById("user-button"));
-        }
-        if (dashboardArea) dashboardArea.style.display = "block";
-      }
-
-      async function refreshAuthState() {
-        if (!window.Clerk) {
-          renderLoggedOut();
+          alert('Authentication is still loading. Please wait 2 seconds and retry.');
           return;
         }
-        try {
-          await window.Clerk.load();
-          if (window.Clerk.user) {
-            renderLoggedIn();
-          } else {
-            renderLoggedOut();
+        await initializeClerk();
+        if (window.Clerk.user) showLoggedInUI(); else window.Clerk.openSignIn();
+      } catch (err) {
+        console.error('Clerk Error:', err);
+        alert('Login temporarily unavailable. Please check the browser console error.');
+      }
+    }
+
+    window.addEventListener('load', async function () {
+      showLoggedOutUI();
+      setTimeout(async function(){
+        try { await initializeClerk(); } catch (err) { console.warn('Clerk background load warning:', err); }
+      }, 600);
+
+      const dashboardNav = document.getElementById('dashboard-nav-link');
+      if (dashboardNav) {
+        dashboardNav.addEventListener('click', async function(e) {
+          if (!window.Clerk || !window.Clerk.user) {
+            e.preventDefault();
+            await openLogin();
           }
-        } catch (err) {
-          console.error("Clerk Initial Load Error:", err);
-          renderLoggedOut();
-        }
+        });
       }
-
-      async function handleDashboardAccess() {
-        const loaded = await loadClerkSafely();
-        if (!loaded) return;
-
-        if (window.Clerk.user) {
-          renderLoggedIn();
-          scrollToDashboard();
-          gtag('event','dashboard_open_logged_in');
-        } else {
-          showToast();
-          gtag('event','dashboard_click_logged_out');
-          window.Clerk.openSignIn();
-        }
-      }
-
-      if (dashboardNavLink) dashboardNavLink.addEventListener("click", handleDashboardAccess);
-      if (heroDashboardButton) heroDashboardButton.addEventListener("click", handleDashboardAccess);
-      if (finalDashboardButton) finalDashboardButton.addEventListener("click", handleDashboardAccess);
-
-      refreshAuthState();
     });
   </script>
-
 </body>
 </html>
