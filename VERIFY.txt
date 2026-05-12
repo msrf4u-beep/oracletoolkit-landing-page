@@ -1,1 +1,1 @@
-{'live_tools_count_5': True, 'active_access_5': True, 'journal_product': True, 'ap_product': True, 'journal_finance_live': True, 'ap_payables_live': True, 'encumbrance_removed': True, 'old_request_demo_label': False}
+{'live_tools_count_5': True, 'active_access_5': False, 'sidebar_live_badges': 5, 'member_live_cards': 5, 'hero_has_5_tools': True, 'encumbrance_removed': True, 'request_demo_removed': True}
