@@ -1,1 +1,1 @@
-{'live_tools_count_5': True, 'active_access_5': False, 'sidebar_live_badges': 5, 'member_live_cards': 5, 'hero_has_5_tools': True, 'encumbrance_removed': True, 'request_demo_removed': True}
+{'credibility': True, 'use_cases': True, 'roadmap': True, 'release_notes': True, 'early_access': True, 'documentation': True, 'live_tools_count_5': True}
