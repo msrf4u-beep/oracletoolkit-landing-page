@@ -85,3 +85,29 @@ The focus is no longer only adding tools. The platform now supports:
 - workflow continuity
 - consultant trust
 - easier future monetization
+
+
+## OracleToolkit Workspace v1
+
+This release adds the first implementation operating system layer:
+
+- Create / update project workspace
+- Resume previous work
+- Project phase tracker
+- Current workspace dashboard
+- Contextual tool recommendations
+- Saved notes
+- Recent workspace activity
+- Saved accelerator run history
+
+Current storage:
+- Browser localStorage
+- No backend database yet
+- Ideal for MVP validation before Supabase/Firebase integration
+
+Future upgrade:
+- Clerk user ID based cloud storage
+- Multi-project workspace
+- Team collaboration
+- Saved output files
+- Subscription-based project history

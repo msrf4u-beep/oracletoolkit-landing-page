@@ -57,7 +57,8 @@
         <div class="dash-menu"><a class="active" href="#dashboard-area">⌂ Dashboard</a></div>
         <div class="dash-section-title">Implementation</div>
         <div class="dash-menu">
-          <a href="#workspace">▣ Project Workspace</a>
+          <a href="#workspace-os">▣ Workspace OS</a>
+          <a href="#workspace">▣ Saved Runs</a>
           <a href="#saved-runs">◷ Saved Runs</a>
           <a href="#member-tools">▣ Tool Library</a>
           <a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','sidebar_coa_launch_click')">▦ COA Accelerator <span class="beta live-mini">LIVE</span></a>
@@ -107,11 +108,11 @@
           </section>
 
           <div class="stat-grid">
-            <div class="stat-card"><div class="stat-icon i-blue">▣</div><small>Live Accelerators</small><strong>5</strong><span>Production links active</span></div>
+            <div class="stat-card"><div class="stat-icon i-blue">▣</div><small>Live Accelerators</small><strong>5</strong><span>Workspace-connected</span></div>
             <div class="stat-card"><div class="stat-icon i-purple">▦</div><small>Finance Coverage</small><strong>GL/AP/EXP</strong><span>3 finance areas</span></div>
             <div class="stat-card"><div class="stat-icon i-green">🛡</div><small>Public Sector Focus</small><strong>BCEA</strong><span>Fund + control design</span></div>
             <div class="stat-card"><div class="stat-icon i-red">⚠</div><small>Approval Engines</small><strong>2</strong><span>Journal + AP Invoice</span></div>
-            <div class="stat-card"><div class="stat-icon i-blue">↻</div><small>Feedback Loop</small><strong>Open</strong><span>Beta testing stage</span></div>
+            <div class="stat-card"><div class="stat-icon i-blue">↻</div><small>Workspace v1</small><strong>Live</strong><span>Saved project context</span></div>
             <div class="stat-card"><div class="stat-icon i-amber">🚀</div><small>Roadmap</small><strong>14+</strong><span>Across modules</span></div>
           </div>
 
@@ -128,6 +129,148 @@
               </div>
               <a class="view-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Submit Feedback →</a></div>
           </div>
+
+
+          <section class="workspace-os" id="workspace-os">
+            <div class="workspace-os-hero">
+              <div>
+                <span class="workspace-kicker">OracleToolkit Workspace v1</span>
+                <h3>Oracle Cloud implementation operating system for Finance & Public Sector delivery teams.</h3>
+                <p>
+                  Create a project workspace, track implementation phase, resume previous work,
+                  record tool decisions, and launch the right accelerator from one member control center.
+                </p>
+              </div>
+              <div class="resume-card">
+                <span>Resume Previous Work</span>
+                <strong id="resume-project-name">No project saved yet</strong>
+                <p id="resume-project-meta">Create your first project workspace below.</p>
+                <button class="small-btn" id="resume-work-btn" type="button">Resume Workspace</button>
+              </div>
+            </div>
+
+            <div class="workspace-os-grid">
+              <form class="project-form" id="project-form">
+                <div class="form-head">
+                  <h4>Create / Update Project Workspace</h4>
+                  <span>Stored locally in this browser for v1</span>
+                </div>
+
+                <label>
+                  Project Name
+                  <input id="os-project-name" type="text" placeholder="Example: District COA + BCEA Design" />
+                </label>
+
+                <label>
+                  Client / Organization
+                  <input id="os-client-name" type="text" placeholder="Example: K-12 District / City / County" />
+                </label>
+
+                <label>
+                  Sector
+                  <select id="os-sector">
+                    <option value="Public Sector">Public Sector</option>
+                    <option value="K-12 / Education">K-12 / Education</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="Nonprofit">Nonprofit</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </label>
+
+                <label>
+                  Project Phase
+                  <select id="os-phase">
+                    <option value="Discovery">Discovery</option>
+                    <option value="Design">Design</option>
+                    <option value="Build">Build</option>
+                    <option value="SIT">SIT</option>
+                    <option value="UAT">UAT</option>
+                    <option value="Mock Conversion">Mock Conversion</option>
+                    <option value="Go-Live Readiness">Go-Live Readiness</option>
+                    <option value="Post Go-Live">Post Go-Live</option>
+                  </select>
+                </label>
+
+                <label>
+                  Primary Module
+                  <select id="os-module">
+                    <option value="GL & BCEA">GL & BCEA</option>
+                    <option value="Payables">Payables</option>
+                    <option value="Expenses">Expenses</option>
+                    <option value="Receivables">Receivables</option>
+                    <option value="Fixed Assets">Fixed Assets</option>
+                    <option value="Cash Management">Cash Management</option>
+                    <option value="Cross-Module">Cross-Module</option>
+                  </select>
+                </label>
+
+                <label>
+                  Go-Live Date
+                  <input id="os-golive" type="date" />
+                </label>
+
+                <label class="wide">
+                  Project Notes / Key Decisions
+                  <textarea id="os-notes" rows="4" placeholder="Example: Fund-level control required. Absolute control for operating funds. Review journal approval routing in Sprint 2."></textarea>
+                </label>
+
+                <div class="workspace-actions">
+                  <button type="submit" class="small-btn">Save Project Workspace</button>
+                  <button type="button" class="small-btn secondary-btn" id="clear-project-form-btn">Clear</button>
+                </div>
+              </form>
+
+              <div class="project-summary-panel">
+                <h4>Current Workspace</h4>
+                <div class="project-summary-row"><span>Project</span><strong id="summary-project">Not created</strong></div>
+                <div class="project-summary-row"><span>Client</span><strong id="summary-client">—</strong></div>
+                <div class="project-summary-row"><span>Sector</span><strong id="summary-sector">—</strong></div>
+                <div class="project-summary-row"><span>Phase</span><strong id="summary-phase">—</strong></div>
+                <div class="project-summary-row"><span>Module</span><strong id="summary-module">—</strong></div>
+                <div class="project-summary-row"><span>Go-Live</span><strong id="summary-golive">—</strong></div>
+              </div>
+            </div>
+
+            <div class="phase-tracker" id="phase-tracker">
+              <div class="phase-step" data-phase="Discovery"><strong>1</strong><span>Discovery</span></div>
+              <div class="phase-step" data-phase="Design"><strong>2</strong><span>Design</span></div>
+              <div class="phase-step" data-phase="Build"><strong>3</strong><span>Build</span></div>
+              <div class="phase-step" data-phase="SIT"><strong>4</strong><span>SIT</span></div>
+              <div class="phase-step" data-phase="UAT"><strong>5</strong><span>UAT</span></div>
+              <div class="phase-step" data-phase="Mock Conversion"><strong>6</strong><span>Mock Conversion</span></div>
+              <div class="phase-step" data-phase="Go-Live Readiness"><strong>7</strong><span>Go-Live</span></div>
+            </div>
+
+            <div class="os-panels">
+              <div class="os-panel">
+                <div class="dash-card-head"><h3>Recommended Accelerators</h3><button class="dash-filter">Contextual</button></div>
+                <div class="recommendation-list" id="recommendation-list">
+                  <a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank"><strong>COA Transformation Accelerator</strong><span>Recommended for COA, public sector, and design phases.</span></a>
+                  <a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank"><strong>BCEA Design Accelerator</strong><span>Recommended for Budgetary Control, funds check, and public sector projects.</span></a>
+                  <a href="https://jounralapprovals-whvpagrk9m9ugkqxcfwxsl.streamlit.app/" target="_blank"><strong>Journal Approvals Accelerator</strong><span>Recommended for GL approval governance and routing design.</span></a>
+                  <a href="https://apinvoiceapprovals-prvs4kmw9bmfjnc5qm3rdw.streamlit.app/" target="_blank"><strong>AP Invoice Approvals Accelerator</strong><span>Recommended for Payables workflow design.</span></a>
+                  <a href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank"><strong>Per Diem Transformation Engine</strong><span>Recommended for Oracle Expenses per diem setup.</span></a>
+                </div>
+              </div>
+
+              <div class="os-panel">
+                <div class="dash-card-head"><h3>Recent Activity</h3><button class="dash-filter">Workspace</button></div>
+                <div class="os-activity-list" id="os-activity-list">
+                  <div class="empty-runs"><strong>No activity yet.</strong><span>Create or update a project workspace to begin.</span></div>
+                </div>
+              </div>
+
+              <div class="os-panel">
+                <div class="dash-card-head"><h3>Saved Notes</h3><button class="dash-filter">Project</button></div>
+                <div class="saved-notes-box" id="saved-notes-box">
+                  <strong>No saved notes yet.</strong>
+                  <span>Your project notes will appear here after saving the workspace.</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
 
           <section class="workspace-section" id="workspace">
             <div class="workspace-header">
