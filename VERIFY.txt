@@ -1,1 +1,1 @@
-{'supabase_config': True, 'cloud_workspace_js': True, 'supabase_cdn': True, 'cloud_section': True, 'save_cloud_btn': True, 'cloud_scripts': True}
+{'workspace_engine': True, 'project_switcher': True, 'accelerator_runs': True, 'supabase_config': True, 'cloud_workspace_js': True, 'journal_new_url': True}

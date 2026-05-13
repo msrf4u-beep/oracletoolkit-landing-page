@@ -145,3 +145,40 @@ The site uses:
 
 ### Security
 Never add Supabase secret key, service role key, or Clerk secret key to frontend/GitHub.
+
+
+## OracleToolkit Cloud Workspace Engine v2
+
+This release upgrades the workspace from a simple cloud save panel into a proper workspace engine:
+
+- Create multiple cloud projects
+- Update existing cloud projects
+- Project switcher
+- Resume selected project
+- Save accelerator runs under selected project
+- Load runs by project
+- Launch related tools from saved runs
+- Supabase cloud persistence
+- Clerk user-based authentication
+
+### Required Supabase Tables
+
+- `projects`
+- `accelerator_runs`
+
+### Required Clerk Setup
+
+JWT template name must be:
+
+`supabase`
+
+### Test Flow
+
+1. Login
+2. Create Project A and save
+3. Click New Project
+4. Create Project B and save
+5. Use Project Switcher to move between Project A and Project B
+6. Save accelerator runs under each project
+7. Refresh browser
+8. Confirm projects and runs reload from Supabase

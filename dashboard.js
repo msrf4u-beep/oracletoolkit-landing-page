@@ -3,7 +3,7 @@
 const TOOL_URLS = {
   "COA Transformation Accelerator": "https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/",
   "BCEA Design Accelerator": "https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/",
-  "Journal Approvals Accelerator": "https://jounralapprovals-whvpagrk9m9ugkqxcfwxsl.streamlit.app/",
+  "Journal Approvals Accelerator": "https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/",
   "AP Invoice Approvals Accelerator": "https://apinvoiceapprovals-prvs4kmw9bmfjnc5qm3rdw.streamlit.app/",
   "Per Diem Transformation Engine": "https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/",
   "Future / Roadmap Tool": "#member-tools"

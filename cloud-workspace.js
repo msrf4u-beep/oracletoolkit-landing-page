@@ -1,102 +1,168 @@
-// OracleToolkit Cloud Workspace v1
-// Uses Clerk JWT template named "supabase" so Supabase RLS can read auth.jwt()->>'sub'.
+// OracleToolkit Cloud Workspace Engine v2
+// Proper multi-project switching + saved accelerator runs.
+// Requires Clerk JWT template named "supabase" and Supabase RLS policies using auth.jwt()->>'sub'.
 
-async function getSupabaseClient() {
+const OT_TOOL_URLS = {
+  "COA Transformation Accelerator": "https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/",
+  "BCEA Design Accelerator": "https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/",
+  "Journal Approvals Accelerator": "https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/",
+  "AP Invoice Approvals Accelerator": "https://apinvoiceapprovals-prvs4kmw9bmfjnc5qm3rdw.streamlit.app/",
+  "Per Diem Transformation Engine": "https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/"
+};
+
+let otCloudProjects = [];
+let otSelectedProjectId = localStorage.getItem("oracletoolkit_selected_project_id") || "";
+
+async function otGetSupabaseClient() {
   if (!window.supabase) {
-    console.error("Supabase JS library not loaded.");
+    otStatus("Supabase library not loaded.", "error");
     return null;
   }
   if (!window.Clerk || !window.Clerk.session || !window.Clerk.user) {
-    console.warn("User is not signed in with Clerk.");
+    otStatus("Please login before using Cloud Workspace.", "error");
     return null;
   }
 
-  let token = null;
   try {
-    token = await window.Clerk.session.getToken({ template: "supabase" });
+    const token = await window.Clerk.session.getToken({ template: "supabase" });
+
+    if (!token) {
+      otStatus("Clerk Supabase token not found. Check JWT template name: supabase.", "error");
+      return null;
+    }
+
+    return window.supabase.createClient(
+      ORACLETK_SUPABASE_URL,
+      ORACLETK_SUPABASE_PUBLISHABLE_KEY,
+      {
+        global: {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      }
+    );
   } catch (error) {
-    console.error("Could not get Clerk Supabase JWT. Check Clerk JWT template name = supabase.", error);
+    console.error("Clerk/Supabase auth error:", error);
+    otStatus("Cloud auth failed. Check Clerk JWT template and Supabase RLS.", "error");
     return null;
   }
-
-  if (!token) {
-    console.error("No Clerk Supabase JWT returned.");
-    return null;
-  }
-
-  return window.supabase.createClient(
-    ORACLETK_SUPABASE_URL,
-    ORACLETK_SUPABASE_PUBLISHABLE_KEY,
-    { global: { headers: { Authorization: `Bearer ${token}` } } }
-  );
 }
 
-function cloudWorkspaceStatus(message, type = "info") {
-  const el = document.getElementById("cloud-workspace-status");
+function otStatus(message, type = "info") {
+  const el = document.getElementById("engine-cloud-status");
   if (!el) return;
   el.textContent = message;
-  el.className = `cloud-workspace-status ${type}`;
+  el.className = `engine-status ${type}`;
 }
 
-function getCloudProjectFromForm() {
+function otEscape(value) {
+  if (typeof escapeHtml === "function") return escapeHtml(value || "");
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function otGetProjectPayload() {
   return {
-    project_name: document.getElementById("os-project-name")?.value?.trim() || "",
-    client_name: document.getElementById("os-client-name")?.value?.trim() || "",
-    sector: document.getElementById("os-sector")?.value || "",
-    phase: document.getElementById("os-phase")?.value || "",
-    module: document.getElementById("os-module")?.value || "",
-    go_live_date: document.getElementById("os-golive")?.value || null,
-    notes: document.getElementById("os-notes")?.value?.trim() || ""
+    project_name: document.getElementById("cloud-project-name")?.value.trim() || "",
+    client_name: document.getElementById("cloud-client-name")?.value.trim() || "",
+    sector: document.getElementById("cloud-sector")?.value || "",
+    phase: document.getElementById("cloud-phase")?.value || "",
+    module: document.getElementById("cloud-module")?.value || "",
+    go_live_date: document.getElementById("cloud-golive")?.value || null,
+    notes: document.getElementById("cloud-notes")?.value.trim() || "",
+    updated_at: new Date().toISOString()
   };
 }
 
-async function saveProjectToCloud(projectData) {
-  const client = await getSupabaseClient();
-  if (!client) {
-    cloudWorkspaceStatus("Cloud save unavailable. Confirm login and Clerk Supabase JWT setup.", "error");
-    return null;
-  }
-  if (!projectData.project_name) {
-    cloudWorkspaceStatus("Please enter a project name before saving to cloud.", "error");
-    return null;
-  }
+function otFillProjectForm(project) {
+  const map = {
+    "cloud-project-id": project?.id || "",
+    "cloud-project-name": project?.project_name || "",
+    "cloud-client-name": project?.client_name || "",
+    "cloud-sector": project?.sector || "Public Sector",
+    "cloud-phase": project?.phase || "Discovery",
+    "cloud-module": project?.module || "GL & BCEA",
+    "cloud-golive": project?.go_live_date || "",
+    "cloud-notes": project?.notes || ""
+  };
 
-  cloudWorkspaceStatus("Saving project to cloud...", "info");
-
-  const { data, error } = await client
-    .from("projects")
-    .insert({
-      project_name: projectData.project_name,
-      client_name: projectData.client_name,
-      sector: projectData.sector,
-      phase: projectData.phase,
-      module: projectData.module,
-      go_live_date: projectData.go_live_date || null,
-      notes: projectData.notes,
-      updated_at: new Date().toISOString()
-    })
-    .select()
-    .single();
-
-  if (error) {
-    console.error("Cloud project save failed:", error);
-    cloudWorkspaceStatus(`Cloud save failed: ${error.message}`, "error");
-    return null;
-  }
-
-  cloudWorkspaceStatus("Project saved to cloud successfully.", "success");
-  await renderCloudProjects();
-
-  if (typeof gtagSafe === "function") {
-    gtagSafe("cloud_workspace_project_saved");
-  }
-
-  return data;
+  Object.entries(map).forEach(([id, value]) => {
+    const el = document.getElementById(id);
+    if (el) el.value = value;
+  });
 }
 
-async function loadProjectsFromCloud() {
-  const client = await getSupabaseClient();
-  if (!client) return [];
+function otSetSelectedProject(projectId) {
+  otSelectedProjectId = projectId || "";
+  localStorage.setItem("oracletoolkit_selected_project_id", otSelectedProjectId);
+  const project = otCloudProjects.find((p) => p.id === otSelectedProjectId);
+
+  if (project) {
+    otFillProjectForm(project);
+  }
+
+  otRenderCurrentProject();
+  otRenderProjectSwitcher();
+  otLoadRuns();
+}
+
+function otRenderCurrentProject() {
+  const project = otCloudProjects.find((p) => p.id === otSelectedProjectId);
+  const title = document.getElementById("engine-current-project");
+  const meta = document.getElementById("engine-current-meta");
+
+  if (title) title.textContent = project ? project.project_name : "No project selected";
+  if (meta) {
+    meta.textContent = project
+      ? `${project.client_name || "Oracle Client"} • ${project.phase || "Phase"} • ${project.module || "Module"}`
+      : "Create or select a project to begin.";
+  }
+}
+
+function otRenderProjectSwitcher() {
+  const count = document.getElementById("engine-project-count");
+  if (count) count.textContent = `${otCloudProjects.length} project${otCloudProjects.length === 1 ? "" : "s"}`;
+
+  const select = document.getElementById("cloud-project-switcher");
+  if (select) {
+    select.innerHTML = `<option value="">Select project...</option>` + otCloudProjects.map((p) =>
+      `<option value="${p.id}" ${p.id === otSelectedProjectId ? "selected" : ""}>${otEscape(p.project_name)} — ${otEscape(p.phase || "Phase")}</option>`
+    ).join("");
+  }
+
+  const list = document.getElementById("cloud-project-list");
+  if (!list) return;
+
+  if (!otCloudProjects.length) {
+    list.innerHTML = `<div class="empty-projects-state"><strong>No cloud projects yet.</strong><span>Create your first project workspace.</span></div>`;
+    return;
+  }
+
+  list.innerHTML = otCloudProjects.map((p) => `
+    <article class="project-switch-card ${p.id === otSelectedProjectId ? "active" : ""}">
+      <div>
+        <strong>${otEscape(p.project_name)}</strong>
+        <span>${otEscape(p.client_name || "Client")} • ${otEscape(p.module || "Module")}</span>
+      </div>
+      <button type="button" data-select-project="${p.id}">Open</button>
+    </article>
+  `).join("");
+
+  document.querySelectorAll("[data-select-project]").forEach((btn) => {
+    btn.addEventListener("click", () => otSetSelectedProject(btn.getAttribute("data-select-project")));
+  });
+}
+
+async function otLoadProjects() {
+  const client = await otGetSupabaseClient();
+  if (!client) return;
+
+  otStatus("Loading cloud projects...", "info");
 
   const { data, error } = await client
     .from("projects")
@@ -104,101 +170,209 @@ async function loadProjectsFromCloud() {
     .order("updated_at", { ascending: false });
 
   if (error) {
-    console.error("Cloud project load failed:", error);
-    cloudWorkspaceStatus(`Could not load cloud projects: ${error.message}`, "error");
-    return [];
-  }
-
-  return data || [];
-}
-
-function renderCloudProjectCards(projects) {
-  const container = document.getElementById("cloud-projects-list");
-  const countEl = document.getElementById("cloud-project-count");
-  const lastEl = document.getElementById("cloud-last-project");
-
-  if (countEl) countEl.textContent = projects.length;
-  if (lastEl) lastEl.textContent = projects[0]?.project_name || "—";
-  if (!container) return;
-
-  if (!projects.length) {
-    container.innerHTML = `<div class="empty-projects-state"><strong>No cloud projects yet.</strong><span>Save your first workspace to create cloud project history.</span></div>`;
+    console.error("Load projects error:", error);
+    otStatus(`Failed to load projects: ${error.message}`, "error");
     return;
   }
 
-  container.innerHTML = projects.map((project) => `
-    <article class="cloud-project-card">
-      <div class="cloud-project-top">
-        <div>
-          <h4>${escapeHtml(project.project_name)}</h4>
-          <span>${escapeHtml(project.client_name || "Oracle Client")}</span>
-        </div>
-        <em>${escapeHtml(project.phase || "Phase")}</em>
-      </div>
-      <div class="cloud-project-meta">
-        <span>${escapeHtml(project.sector || "Sector")}</span>
-        <span>${escapeHtml(project.module || "Module")}</span>
-        <span>Go-live: ${escapeHtml(project.go_live_date || "Not set")}</span>
-      </div>
-      <p>${escapeHtml(project.notes || "No notes added.")}</p>
-      <button class="small-btn secondary-btn" type="button" data-load-cloud-project="${project.id}">Resume This Project</button>
-    </article>
-  `).join("");
+  otCloudProjects = data || [];
 
-  document.querySelectorAll("[data-load-cloud-project]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const id = button.getAttribute("data-load-cloud-project");
-      const project = projects.find((item) => item.id === id);
-      if (!project) return;
-      fillWorkspaceFormFromCloud(project);
-      cloudWorkspaceStatus(`Loaded "${project.project_name}" into workspace form.`, "success");
-      document.getElementById("workspace-os")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  });
-}
-
-function fillWorkspaceFormFromCloud(project) {
-  const values = {
-    "os-project-name": project.project_name || "",
-    "os-client-name": project.client_name || "",
-    "os-sector": project.sector || "",
-    "os-phase": project.phase || "",
-    "os-module": project.module || "",
-    "os-golive": project.go_live_date || "",
-    "os-notes": project.notes || ""
-  };
-  Object.entries(values).forEach(([id, value]) => {
-    const el = document.getElementById(id);
-    if (el) el.value = value;
-  });
-}
-
-async function renderCloudProjects() {
-  const container = document.getElementById("cloud-projects-list");
-  if (container) {
-    container.innerHTML = `<div class="empty-projects-state"><strong>Loading cloud workspace...</strong><span>Please wait while OracleToolkit loads your saved projects.</span></div>`;
+  if (otSelectedProjectId && !otCloudProjects.some((p) => p.id === otSelectedProjectId)) {
+    otSelectedProjectId = "";
+    localStorage.removeItem("oracletoolkit_selected_project_id");
   }
-  const projects = await loadProjectsFromCloud();
-  renderCloudProjectCards(projects);
+
+  if (!otSelectedProjectId && otCloudProjects.length) {
+    otSelectedProjectId = otCloudProjects[0].id;
+    localStorage.setItem("oracletoolkit_selected_project_id", otSelectedProjectId);
+  }
+
+  const selected = otCloudProjects.find((p) => p.id === otSelectedProjectId);
+  if (selected) otFillProjectForm(selected);
+
+  otRenderProjectSwitcher();
+  otRenderCurrentProject();
+  await otLoadRuns();
+
+  otStatus("Cloud projects loaded.", "success");
 }
 
-async function saveCurrentWorkspaceToCloud() {
-  const project = getCloudProjectFromForm();
-  await saveProjectToCloud(project);
+async function otSaveProject(event) {
+  event.preventDefault();
+
+  const client = await otGetSupabaseClient();
+  if (!client) return;
+
+  const projectId = document.getElementById("cloud-project-id")?.value || "";
+  const payload = otGetProjectPayload();
+
+  if (!payload.project_name) {
+    otStatus("Project name is required.", "error");
+    return;
+  }
+
+  otStatus(projectId ? "Updating project..." : "Creating project...", "info");
+
+  let result;
+  if (projectId) {
+    result = await client
+      .from("projects")
+      .update(payload)
+      .eq("id", projectId)
+      .select()
+      .single();
+  } else {
+    result = await client
+      .from("projects")
+      .insert(payload)
+      .select()
+      .single();
+  }
+
+  if (result.error) {
+    console.error("Save project error:", result.error);
+    otStatus(`Save failed: ${result.error.message}`, "error");
+    return;
+  }
+
+  otSelectedProjectId = result.data.id;
+  localStorage.setItem("oracletoolkit_selected_project_id", otSelectedProjectId);
+
+  await otLoadProjects();
+  otStatus(projectId ? "Project updated successfully." : "Project created successfully.", "success");
+
+  if (typeof gtagSafe === "function") gtagSafe("cloud_workspace_project_saved");
 }
 
-function initializeCloudWorkspace() {
-  const saveBtn = document.getElementById("save-cloud-workspace-btn");
-  if (saveBtn) saveBtn.addEventListener("click", saveCurrentWorkspaceToCloud);
+function otNewProject() {
+  otSelectedProjectId = "";
+  localStorage.removeItem("oracletoolkit_selected_project_id");
+  otFillProjectForm(null);
+  otRenderCurrentProject();
+  otRenderProjectSwitcher();
+  otRenderRuns([]);
+  otStatus("Ready to create a new project.", "info");
+}
 
-  const refreshBtn = document.getElementById("refresh-cloud-projects-btn");
-  if (refreshBtn) refreshBtn.addEventListener("click", renderCloudProjects);
+function otGetRunPayload() {
+  return {
+    project_id: otSelectedProjectId,
+    accelerator_name: document.getElementById("run-accelerator")?.value || "",
+    module: document.getElementById("run-module")?.value || "",
+    status: document.getElementById("run-status")?.value || "",
+    notes: document.getElementById("run-notes")?.value?.trim() || ""
+  };
+}
+
+async function otSaveRun(event) {
+  event.preventDefault();
+
+  if (!otSelectedProjectId) {
+    otStatus("Select or create a project before saving an accelerator run.", "error");
+    return;
+  }
+
+  const client = await otGetSupabaseClient();
+  if (!client) return;
+
+  const payload = otGetRunPayload();
+
+  if (!payload.accelerator_name) {
+    otStatus("Select an accelerator before saving run.", "error");
+    return;
+  }
+
+  const { error } = await client
+    .from("accelerator_runs")
+    .insert(payload);
+
+  if (error) {
+    console.error("Save run error:", error);
+    otStatus(`Run save failed: ${error.message}`, "error");
+    return;
+  }
+
+  document.getElementById("run-notes").value = "";
+  await otLoadRuns();
+  otStatus("Accelerator run saved.", "success");
+
+  if (typeof gtagSafe === "function") gtagSafe("cloud_workspace_run_saved");
+}
+
+async function otLoadRuns() {
+  if (!otSelectedProjectId) {
+    otRenderRuns([]);
+    return;
+  }
+
+  const client = await otGetSupabaseClient();
+  if (!client) return;
+
+  const { data, error } = await client
+    .from("accelerator_runs")
+    .select("*")
+    .eq("project_id", otSelectedProjectId)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Load runs error:", error);
+    otStatus(`Could not load runs: ${error.message}`, "error");
+    return;
+  }
+
+  otRenderRuns(data || []);
+}
+
+function otRenderRuns(runs) {
+  const count = document.getElementById("run-count");
+  if (count) count.textContent = `${runs.length} run${runs.length === 1 ? "" : "s"}`;
+
+  const list = document.getElementById("accelerator-runs-list");
+  if (!list) return;
+
+  if (!runs.length) {
+    list.innerHTML = `<div class="empty-projects-state"><strong>No runs yet.</strong><span>Select a project and save your first accelerator run.</span></div>`;
+    return;
+  }
+
+  list.innerHTML = runs.map((run) => {
+    const url = OT_TOOL_URLS[run.accelerator_name] || "#member-tools";
+    return `
+      <article class="run-card-v2">
+        <div class="run-card-top">
+          <strong>${otEscape(run.accelerator_name)}</strong>
+          <em>${otEscape(run.status || "Status")}</em>
+        </div>
+        <div class="run-card-meta">
+          <span>${otEscape(run.module || "Module")}</span>
+          <span>${otEscape(new Date(run.created_at).toLocaleString())}</span>
+        </div>
+        <p>${otEscape(run.notes || "No notes added.")}</p>
+        <a href="${url}" target="_blank">Launch Related Tool</a>
+      </article>
+    `;
+  }).join("");
+}
+
+function otWireEngine() {
+  const projectForm = document.getElementById("cloud-project-form");
+  if (projectForm) projectForm.addEventListener("submit", otSaveProject);
+
+  const newBtn = document.getElementById("cloud-new-project-btn");
+  if (newBtn) newBtn.addEventListener("click", otNewProject);
+
+  const refreshBtn = document.getElementById("cloud-refresh-projects-btn");
+  if (refreshBtn) refreshBtn.addEventListener("click", otLoadProjects);
+
+  const switcher = document.getElementById("cloud-project-switcher");
+  if (switcher) switcher.addEventListener("change", () => otSetSelectedProject(switcher.value));
+
+  const runForm = document.getElementById("accelerator-run-form");
+  if (runForm) runForm.addEventListener("submit", otSaveRun);
 
   setTimeout(() => {
-    if (window.Clerk && window.Clerk.user) {
-      renderCloudProjects();
-    }
+    if (window.Clerk && window.Clerk.user) otLoadProjects();
   }, 1800);
 }
 
-window.addEventListener("load", initializeCloudWorkspace);
+window.addEventListener("load", otWireEngine);
