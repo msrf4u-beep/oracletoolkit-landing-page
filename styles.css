@@ -924,3 +924,115 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+
+/* OracleToolkit Cloud Workspace v1 — Supabase persistence */
+.cloud-workspace-panel {
+  margin-top: 24px;
+  background: radial-gradient(circle at 92% 10%, rgba(250,204,21,.12), transparent 28%), linear-gradient(135deg, #07111f, #0b1729);
+  color: white;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 26px;
+  padding: 28px;
+  box-shadow: 0 20px 52px rgba(7,17,31,.22);
+}
+.cloud-workspace-head {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 22px;
+  align-items: center;
+}
+.cloud-workspace-head h3 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  letter-spacing: -.6px;
+  color: white;
+}
+.cloud-workspace-head p {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.65;
+  max-width: 850px;
+}
+.cloud-workspace-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.cloud-workspace-metrics div {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 18px;
+  padding: 18px;
+}
+.cloud-workspace-metrics strong {
+  display: block;
+  color: #facc15;
+  font-size: 26px;
+  margin-bottom: 5px;
+}
+.cloud-workspace-metrics span {
+  color: #cbd5e1;
+  font-size: 12px;
+}
+.cloud-workspace-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.cloud-workspace-status {
+  font-size: 13px;
+  font-weight: 800;
+  padding: 9px 12px;
+  border-radius: 999px;
+}
+.cloud-workspace-status.info { color: #bfdbfe; background: rgba(59,130,246,.12); border: 1px solid rgba(147,197,253,.25); }
+.cloud-workspace-status.success { color: #bbf7d0; background: rgba(22,163,74,.14); border: 1px solid rgba(134,239,172,.30); }
+.cloud-workspace-status.error { color: #fecaca; background: rgba(220,38,38,.14); border: 1px solid rgba(252,165,165,.30); }
+.cloud-projects-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+.cloud-project-card, .empty-projects-state {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 18px;
+  padding: 18px;
+}
+.empty-projects-state { display: grid; gap: 6px; color: #cbd5e1; }
+.empty-projects-state strong { color: white; }
+.cloud-project-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.cloud-project-top h4 { margin: 0 0 5px; color: white; font-size: 16px; }
+.cloud-project-top span { color: #cbd5e1; font-size: 12px; }
+.cloud-project-top em {
+  font-style: normal;
+  background: #16a34a;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+.cloud-project-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+.cloud-project-meta span {
+  background: rgba(255,255,255,.08);
+  color: #e2e8f0;
+  border-radius: 999px;
+  padding: 5px 8px;
+  font-size: 11px;
+  font-weight: 800;
+}
+.cloud-project-card p { color: #cbd5e1; line-height: 1.55; font-size: 13px; }
+@media (max-width: 1050px) { .cloud-workspace-head { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .cloud-workspace-metrics { grid-template-columns: 1fr; } }

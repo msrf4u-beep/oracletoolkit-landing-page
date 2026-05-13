@@ -1,1 +1,1 @@
-{'workspace_os': True, 'project_form': True, 'resume_previous_work': True, 'phase_tracker': True, 'recommendations': True, 'workspace_js': True}
+{'supabase_config': True, 'cloud_workspace_js': True, 'supabase_cdn': True, 'cloud_section': True, 'save_cloud_btn': True, 'cloud_scripts': True}

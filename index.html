@@ -272,6 +272,38 @@
           </section>
 
 
+
+          <section class="cloud-workspace-panel" id="cloud-workspace">
+            <div class="cloud-workspace-head">
+              <div>
+                <span class="workspace-kicker">Cloud Workspace v1</span>
+                <h3>Save and resume Oracle implementation projects across devices.</h3>
+                <p>
+                  Your project workspace can now be saved in Supabase cloud storage using your Clerk login.
+                  This is the foundation for paid project history, saved accelerator runs, and future AI context.
+                </p>
+              </div>
+              <div class="cloud-workspace-metrics">
+                <div><strong id="cloud-project-count">0</strong><span>Cloud Projects</span></div>
+                <div><strong id="cloud-last-project">—</strong><span>Last Project</span></div>
+              </div>
+            </div>
+
+            <div class="cloud-workspace-actions">
+              <button class="small-btn" id="save-cloud-workspace-btn" type="button">Save Current Workspace to Cloud</button>
+              <button class="small-btn secondary-btn" id="refresh-cloud-projects-btn" type="button">Refresh Cloud Projects</button>
+              <span id="cloud-workspace-status" class="cloud-workspace-status info">Cloud workspace ready after login.</span>
+            </div>
+
+            <div id="cloud-projects-list" class="cloud-projects-list">
+              <div class="empty-projects-state">
+                <strong>No cloud projects loaded yet.</strong>
+                <span>Login and click Refresh Cloud Projects.</span>
+              </div>
+            </div>
+          </section>
+
+
           <section class="workspace-section" id="workspace">
             <div class="workspace-header">
               <div>
@@ -676,7 +708,10 @@
 
   <footer class="footer">© OracleToolkit. Independent platform for Oracle Cloud implementation accelerators. Not affiliated with Oracle Corporation.</footer>
   <script async crossorigin="anonymous" data-clerk-publishable-key="pk_live_Y2xlcmsub3JhY2xldG9vbGtpdC5jb20k" src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@5/dist/clerk.browser.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="auth.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="cloud-workspace.js"></script>
   <script src="dashboard.js"></script>
 </body>
 </html>

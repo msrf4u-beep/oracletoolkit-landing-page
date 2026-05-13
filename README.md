@@ -111,3 +111,37 @@ Future upgrade:
 - Team collaboration
 - Saved output files
 - Subscription-based project history
+
+
+## OracleToolkit Cloud Workspace v1 — GitHub Ready
+
+This package adds Supabase cloud persistence.
+
+### New Files
+- `supabase-config.js`
+- `cloud-workspace.js`
+
+### Supabase Project URL
+`https://qhptsxmsebhsfqzjuqrd.supabase.co`
+
+### Supabase Publishable Key
+`sb_publishable_reZtzPTOQCGTnIzIRva4ww_3T6u5Vbs`
+
+### Important Clerk Requirement
+Clerk must have a JWT template named `supabase`.
+
+The site uses:
+`window.Clerk.session.getToken({ template: "supabase" })`
+
+### Test Flow
+1. Login to OracleToolkit
+2. Open Dashboard
+3. Create Project Workspace
+4. Click `Save Current Workspace to Cloud`
+5. Confirm project appears under Cloud Workspace
+6. Refresh browser
+7. Click `Refresh Cloud Projects`
+8. Confirm saved project loads from Supabase
+
+### Security
+Never add Supabase secret key, service role key, or Clerk secret key to frontend/GitHub.
