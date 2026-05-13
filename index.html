@@ -57,7 +57,7 @@
         <div class="dash-menu"><a class="active" href="#dashboard-area">⌂ Dashboard</a></div>
         <div class="dash-section-title">Implementation</div>
         <div class="dash-menu">
-          <a href="#workspace-os">▣ Workspace OS</a>
+          <a href="#workspace-engine">▣ Workspace OS</a>
           <a href="#workspace">▣ Saved Runs</a>
           <a href="#saved-runs">◷ Saved Runs</a>
           <a href="#member-tools">▣ Tool Library</a>
@@ -82,7 +82,8 @@
       <main class="dash-main">
         <div class="dash-topbar">
           <div class="dash-search">⌕ <input id="dashboard-search" type="text" placeholder="Search tools, modules, accelerators..." /></div>
-          <div class="top-actions"><button class="project-select">All Tools ▾</button><button class="icon-btn">📅</button><button class="icon-btn notification-dot">🔔</button><button class="customize-btn">⚙ Member Workspace</button></div>
+          <div class="top-actions"><select class="top-project-switcher" id="top-project-switcher"><option value="">Select Project...</option></select>
+            <button class="project-select" id="all-tools-btn" type="button">All Tools ▾</button><button class="icon-btn" id="timeline-btn" type="button" title="Go to phase tracker">📅</button><button class="icon-btn notification-dot" id="activity-btn" type="button" title="Go to recent activity">🔔</button><button class="customize-btn" id="member-workspace-btn" type="button">⚙ Member Workspace</button></div>
         </div>
         <div class="dash-content">
           <div class="welcome-row">
@@ -287,6 +288,8 @@
                 <p id="engine-current-meta">Create or select a project to begin.</p>
               </div>
             </div>
+
+            <div class="engine-tip"><strong>Use the Project Switcher:</strong> create multiple cloud projects, select one from the dropdown, then save accelerator runs under that selected project.</div>
 
             <div class="engine-grid">
               <div class="engine-panel create-project-panel">

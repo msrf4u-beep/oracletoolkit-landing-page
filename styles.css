@@ -1290,3 +1290,69 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* v3 Navigation + Workspace Consistency Fix */
+#workspace-os,
+#workspace,
+.saved-runs-section {
+  display: none !important;
+}
+
+.top-project-switcher {
+  border: 1px solid #dbe3ef;
+  background: white;
+  border-radius: 12px;
+  padding: 11px 13px;
+  font-weight: 800;
+  color: #0f172a;
+  box-shadow: 0 6px 18px rgba(15,23,42,.04);
+  max-width: 220px;
+}
+
+.project-select,
+.icon-btn,
+.customize-btn,
+.dash-menu a,
+.suite-launch-grid a,
+.member-tool-card a,
+.product-primary-btn,
+.product-secondary-btn {
+  cursor: pointer;
+}
+
+.workspace-engine-v2 {
+  scroll-margin-top: 95px;
+}
+
+#member-tools {
+  scroll-margin-top: 95px;
+}
+
+#phase-tracker {
+  scroll-margin-top: 95px;
+}
+
+#os-activity-list,
+#accelerator-runs-list {
+  scroll-margin-top: 95px;
+}
+
+@media (max-width: 900px) {
+  .top-project-switcher {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+
+.engine-tip {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e3a8a;
+  padding: 13px 15px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}

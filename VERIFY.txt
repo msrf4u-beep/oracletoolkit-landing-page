@@ -1,1 +1,1 @@
-{'workspace_engine': True, 'project_switcher': True, 'accelerator_runs': True, 'supabase_config': True, 'cloud_workspace_js': True, 'journal_new_url': True}
+{'workspace_link_points_engine': True, 'member_button_id': True, 'top_project_switcher': True, 'old_workspace_hidden_css': True, 'top_controls_js': True, 'project_sync_js': True}

@@ -125,6 +125,7 @@ function otRenderCurrentProject() {
 }
 
 function otRenderProjectSwitcher() {
+  otSyncTopProjectSwitcher();
   const count = document.getElementById("engine-project-count");
   if (count) count.textContent = `${otCloudProjects.length} project${otCloudProjects.length === 1 ? "" : "s"}`;
 
@@ -375,4 +376,57 @@ function otWireEngine() {
   }, 1800);
 }
 
-window.addEventListener("load", otWireEngine);
+window.addEventListener("load", function () {
+  otWireTopControls();
+  otWireEngine();
+});
+
+
+// v3 navigation fixes: top controls and project switcher sync
+function otWireTopControls() {
+  const memberBtn = document.getElementById("member-workspace-btn");
+  if (memberBtn) {
+    memberBtn.addEventListener("click", function () {
+      document.getElementById("workspace-engine")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
+  const allToolsBtn = document.getElementById("all-tools-btn");
+  if (allToolsBtn) {
+    allToolsBtn.addEventListener("click", function () {
+      document.getElementById("member-tools")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
+  const timelineBtn = document.getElementById("timeline-btn");
+  if (timelineBtn) {
+    timelineBtn.addEventListener("click", function () {
+      document.getElementById("phase-tracker")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
+  const activityBtn = document.getElementById("activity-btn");
+  if (activityBtn) {
+    activityBtn.addEventListener("click", function () {
+      const target = document.getElementById("accelerator-runs-list") || document.getElementById("os-activity-list");
+      target?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
+  const topSwitcher = document.getElementById("top-project-switcher");
+  if (topSwitcher) {
+    topSwitcher.addEventListener("change", function () {
+      otSetSelectedProject(topSwitcher.value);
+      document.getElementById("workspace-engine")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+}
+
+function otSyncTopProjectSwitcher() {
+  const topSwitcher = document.getElementById("top-project-switcher");
+  if (!topSwitcher) return;
+
+  topSwitcher.innerHTML = `<option value="">Select Project...</option>` + otCloudProjects.map((p) =>
+    `<option value="${p.id}" ${p.id === otSelectedProjectId ? "selected" : ""}>${otEscape(p.project_name)}</option>`
+  ).join("");
+}

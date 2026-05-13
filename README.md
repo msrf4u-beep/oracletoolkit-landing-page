@@ -182,3 +182,17 @@ JWT template name must be:
 6. Save accelerator runs under each project
 7. Refresh browser
 8. Confirm projects and runs reload from Supabase
+
+
+## Cloud Workspace Engine v3 Navigation Fix
+
+This release fixes the confusing inactive dashboard controls:
+
+- Member Workspace button now scrolls to the Cloud Workspace Engine
+- All Tools button now scrolls to Tool Library
+- Calendar button scrolls to phase tracker
+- Notification button scrolls to saved runs/activity
+- Added top project switcher
+- Sidebar Workspace OS now points to the Cloud Workspace Engine
+- Old browser-only local workspace is hidden to avoid confusion
+- Multi-project switching is clearer and visible
