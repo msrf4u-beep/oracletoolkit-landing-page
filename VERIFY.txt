@@ -1,1 +1,1 @@
-{'headline': True, 'early_access_form': True, 'audiences': True, 'ga4': True, 'category': True}
+{'hero_os_positioning': True, 'jira_statement': True, 'implementation_memory': True, 'methodology_engine': True, 'platform_layers': True, 'playbook_cta': True}

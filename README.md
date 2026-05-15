@@ -206,3 +206,17 @@ Added:
 - Early Access lead capture form
 - GA4 custom events for early access and audience CTAs
 - Audience sections: Consultants, Solution Architects, PMO / Delivery Leaders
+
+
+## Billion-Dollar Vision v2
+
+This version upgrades OracleToolkit from a tools/platform positioning into a category-defining implementation operating system narrative.
+
+Major positioning upgrades:
+- Oracle Cloud Implementation Operating System for Finance & Public Sector Delivery Teams
+- Jira manages tasks. OracleToolkit manages implementation intelligence.
+- Implementation memory layer
+- Methodology engine concept
+- Platform layer architecture
+- Operating system capabilities: discovery, design decisions, testing, cutover, accelerators, audit evidence
+- Stronger narrative around lost implementation intelligence and institutional memory
