@@ -1,1 +1,1 @@
-{'bcea_playbook_section': True, 'bcea_lifecycle': True, 'risk_library': True, 'standalone_page': True, 'nav_playbook': True}
+{'coa_playbook_section': True, 'coa_lifecycle': True, 'coa_risk_library': True, 'coa_standalone': True, 'coa_nav': True, 'bcea_still_present': True}

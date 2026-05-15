@@ -237,3 +237,20 @@ Added:
 
 Strategic goal:
 Turn OracleToolkit from a tool platform into an Oracle implementation methodology operating system.
+
+
+## COA Playbook v1 Website Integration
+
+This release adds the COA Playbook as the second major methodology asset.
+
+Added:
+- COA Playbook section
+- COA lifecycle: Discovery, Design, Crosswalk, Validation, Build, SIT/UAT, Go-Live
+- COA Decision Framework
+- COA Risk Library
+- COA Deliverables
+- Connected accelerators
+- Standalone `coa-playbook.html`
+
+Strategic goal:
+Position OracleToolkit as the implementation intelligence platform for Oracle COA and BCEA architecture, not just a collection of tools.

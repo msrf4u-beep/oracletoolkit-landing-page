@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>COA Playbook v1 | OracleToolkit</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a class="logo" href="index.html">Oracle<span>Toolkit</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#bcea-playbook">BCEA Playbook</a>
+      <a href="index.html#live-products">Live Tools</a>
+      <a class="nav-cta" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank">Launch COA</a>
+    </div>
+  </nav>
+
+  
+  <section class="section coa-playbook-section" id="coa-playbook">
+    <div class="coa-playbook-hero">
+      <div>
+        <span class="workspace-kicker">Priority 2 Build</span>
+        <h2>COA Playbook v1</h2>
+        <p>
+          Oracle Chart of Accounts implementation methodology for Public Sector, K-12, higher education,
+          government, multi-fund, grant-driven, and complex finance transformation projects.
+        </p>
+        <p>
+          This playbook standardizes COA discovery, segment design, legacy mapping, governance,
+          validation, migration readiness, reporting alignment, and downstream dependency management.
+        </p>
+        <div class="coa-playbook-actions">
+          <a class="cta" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtagSafe && gtagSafe('coa_playbook_launch_accelerator')">Launch COA Accelerator</a>
+          <a class="secondary" href="#coa-lifecycle" onclick="gtagSafe && gtagSafe('coa_playbook_view_lifecycle')">View Lifecycle</a>
+          <a class="secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtagSafe && gtagSafe('coa_playbook_feedback')">Suggest Improvement</a>
+        </div>
+      </div>
+      <div class="coa-playbook-card">
+        <strong>OracleToolkit Philosophy</strong>
+        <span>COA is not a numbering exercise.</span>
+        <p>
+          It is the financial information architecture that drives reporting, budgetary control,
+          approvals, integrations, security, analytics, and long-term governance.
+        </p>
+      </div>
+    </div>
+
+    <div class="coa-risk-strip">
+      <div><strong>Why COA projects fail</strong><span>Teams jump into mapping too early, legacy values are poorly governed, future reporting is unclear, and downstream BCEA/integration dependencies are missed.</span></div>
+      <div><strong>OracleToolkit response</strong><span>Standardize COA discovery, segment decisions, crosswalk governance, validation rules, and implementation evidence.</span></div>
+    </div>
+
+    <div class="coa-lifecycle-grid" id="coa-lifecycle">
+      <div class="coa-phase-card discovery"><em>01</em><h3>Discovery</h3><p>Understand legacy COA, reporting needs, fund structure, departments, programs, grants, projects, and stakeholder decision authority.</p><ul><li>Legacy COA inventory</li><li>Reporting requirements</li><li>Fund governance</li><li>Decision ownership</li></ul></div>
+      <div class="coa-phase-card design"><em>02</em><h3>Design</h3><p>Define Oracle segment structure, value sets, balancing strategy, natural account logic, public sector reporting, and future scalability.</p><ul><li>Segment architecture</li><li>Balancing strategy</li><li>Value set design</li><li>Reporting hierarchy</li></ul></div>
+      <div class="coa-phase-card mapping"><em>03</em><h3>Crosswalk</h3><p>Translate legacy values into Oracle values with clear rules, ownership, exception handling, and review governance.</p><ul><li>Legacy-to-Oracle mapping</li><li>One-to-many logic</li><li>Exception tracker</li><li>Client signoff</li></ul></div>
+      <div class="coa-phase-card validation"><em>04</em><h3>Validation</h3><p>Validate duplicates, missing mappings, invalid combinations, hierarchy gaps, natural account issues, and BCEA dependencies.</p><ul><li>Mapping completeness</li><li>Hierarchy validation</li><li>CVR readiness</li><li>BCEA impact review</li></ul></div>
+      <div class="coa-phase-card build"><em>05</em><h3>Build</h3><p>Prepare Oracle setup artifacts including value sets, segment values, hierarchies, cross-validation rules, and rapid implementation files.</p><ul><li>Value loads</li><li>Hierarchy loads</li><li>CVR setup</li><li>Rapid files</li></ul></div>
+      <div class="coa-phase-card testing"><em>06</em><h3>SIT / UAT</h3><p>Test end-to-end transactions across GL, AP, AR, FA, Expenses, Projects, Budgetary Control, and reporting outputs.</p><ul><li>Transaction testing</li><li>Funds check testing</li><li>Reporting validation</li><li>User signoff</li></ul></div>
+      <div class="coa-phase-card golive"><em>07</em><h3>Go-Live</h3><p>Validate converted balances, open transactions, reporting alignment, security access, and post-go-live governance ownership.</p><ul><li>Balance validation</li><li>Open transaction review</li><li>Reporting signoff</li><li>Governance model</li></ul></div>
+    </div>
+  </section>
+
+  <section class="section coa-decision-section" id="coa-decisions">
+    <h2>COA Decision Framework</h2>
+    <p class="section-subtitle">
+      COA design becomes valuable only when design decisions are documented, tested, governed, and connected to downstream Oracle behavior.
+    </p>
+    <div class="coa-decision-grid">
+      <div><strong>Design for reporting and control</strong><span>Do not design segments only to copy legacy. Oracle COA must support future reporting, controls, integrations, and governance.</span></div>
+      <div><strong>Separate reporting-only vs control segments</strong><span>Not every segment should drive BCEA, approvals, or security. Over-control creates complexity.</span></div>
+      <div><strong>Stabilize fund and balancing strategy</strong><span>Public sector and K-12 projects must clearly define fund, balancing segment, and interfund behavior early.</span></div>
+      <div><strong>Protect natural account governance</strong><span>Natural accounts drive accounting treatment, reporting, funds check behavior, and downstream integrations.</span></div>
+      <div><strong>Govern one-to-many mapping</strong><span>Legacy-to-Oracle mappings often require business decisions, not just spreadsheet transformation.</span></div>
+      <div><strong>Validate before build</strong><span>Missing mappings, duplicate values, hierarchy errors, and invalid combinations should be resolved before SIT.</span></div>
+    </div>
+  </section>
+
+  <section class="section coa-risk-library-section" id="coa-risk-library">
+    <div class="coa-risk-library-card">
+      <div>
+        <span class="workspace-kicker">COA Risk Library</span>
+        <h2>Common failure patterns OracleToolkit should prevent.</h2>
+        <p>
+          These risks create reporting defects, conversion errors, BCEA issues, integration failures,
+          approval routing problems, and late-stage rework.
+        </p>
+      </div>
+      <div class="coa-risk-list-grid">
+        <div><strong>01</strong><span>Copying legacy COA without redesign</span></div>
+        <div><strong>02</strong><span>Finalizing BCEA before COA stabilization</span></div>
+        <div><strong>03</strong><span>Unclear fund and balancing strategy</span></div>
+        <div><strong>04</strong><span>Over-segmentation and reporting confusion</span></div>
+        <div><strong>05</strong><span>Missing one-to-many mapping decisions</span></div>
+        <div><strong>06</strong><span>Weak hierarchy governance</span></div>
+        <div><strong>07</strong><span>Cross-validation rules designed too late</span></div>
+        <div><strong>08</strong><span>Downstream integrations ignored</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section coa-deliverables-section" id="coa-deliverables">
+    <h2>COA Playbook Deliverables</h2>
+    <p class="section-subtitle">
+      A mature COA implementation should produce decision evidence, not just setup files.
+    </p>
+    <div class="coa-deliverables-grid">
+      <div><strong>COA Design Decision Log</strong><span>Why each segment exists, who owns it, and what business purpose it supports.</span></div>
+      <div><strong>Legacy-to-Oracle Crosswalk</strong><span>Mapping from legacy values to Oracle values with exception handling and approval status.</span></div>
+      <div><strong>Segment Value Governance</strong><span>Ownership, naming conventions, future value creation process, and inactive value strategy.</span></div>
+      <div><strong>Hierarchy Workbook</strong><span>Reporting hierarchy structure with parent-child validation and ownership.</span></div>
+      <div><strong>CVR / Combination Logic</strong><span>Rules preventing invalid segment combinations before transactions reach downstream modules.</span></div>
+      <div><strong>BCEA Dependency Review</strong><span>Which COA segments impact control budgets, funds check, grants, projects, and encumbrance.</span></div>
+      <div><strong>Testing Evidence Pack</strong><span>Transactions proving COA behavior across GL, AP, AR, FA, Expenses, Projects, and BCEA.</span></div>
+      <div><strong>Go-Live Readiness Summary</strong><span>Final mapping, hierarchy, reporting, conversion, and governance signoff status.</span></div>
+    </div>
+  </section>
+
+  <section class="section coa-accelerator-link-section">
+    <div class="coa-accelerator-card">
+      <div>
+        <span class="workspace-kicker">Connected Accelerators</span>
+        <h2>The COA Playbook connects architecture to execution.</h2>
+        <p>
+          The playbook should guide consultants from discovery and design into the COA Accelerator,
+          Workspace Engine, BCEA Playbook, and downstream testing evidence.
+        </p>
+      </div>
+      <div class="connected-tools-grid">
+        <a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank">COA Transformation Accelerator</a>
+        <a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank">BCEA Design Accelerator</a>
+        <a href="#bcea-playbook">BCEA Playbook</a>
+        <a href="#workspace-engine">Cloud Workspace Engine</a>
+      </div>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    © OracleToolkit. Independent platform for Oracle Cloud implementation accelerators. Not affiliated with Oracle Corporation.
+  </footer>
+</body>
+</html>
