@@ -21,6 +21,7 @@
       <a href="#domains">Domains</a>
       <a href="#finance">Finance</a>
       <a href="#live-products">Live Tools</a>
+      <a href="#early-access-form">Early Access</a>
       <a href="#use-cases">Use Cases</a>
       <a href="#roadmap">Roadmap</a>
       <a id="dashboard-nav-link" href="#dashboard-area">Dashboard</a>
@@ -33,10 +34,11 @@
 
   <section class="hero">
     <div class="badge">Beta Platform for Oracle Cloud Consultants</div>
-    <h1>Premium Oracle Cloud accelerators for real implementation delivery teams.</h1>
-    <p>OracleToolkit helps Finance, Public Sector, and K-12 implementation teams accelerate COA transformation, budgetary control design, journal approvals, AP invoice approvals, per diem setup, validation reviews, and delivery execution through reusable SaaS accelerators.</p>
+    <h1>Oracle Cloud Implementation Accelerators Built from Real Project Pain</h1>
+    <p>Standardize Oracle Cloud discovery, COA design, budgetary control, approvals, testing, migration, and delivery governance using practical accelerators built from real implementation experience.</p>
     <div class="cta-row hero-cta-grid">
-      <a class="cta" href="#live-products">View 5 Live Accelerators</a>
+      <a class="cta" href="#early-access-form" onclick="gtagSafe && gtagSafe('early_access_cta_click')">Get Early Access</a>
+      <a class="secondary" href="#live-products" onclick="gtagSafe && gtagSafe('explore_live_accelerators_click')">Explore Live Accelerators</a>
       <a class="secondary" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','hero_coa_launch_click')">COA</a>
       <a class="secondary" href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank" onclick="gtag('event','hero_bcea_launch_click')">BCEA</a>
       <a class="secondary" href="https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/" target="_blank" onclick="gtag('event','hero_journal_launch_click')">Journal Approvals</a>
@@ -689,6 +691,23 @@
   </section>
 
   
+  
+  <section class="section category-positioning" id="platform-positioning">
+    <div class="category-card">
+      <div>
+        <span class="workspace-kicker">Category Vision</span>
+        <h2>Jira manages tasks. OracleToolkit manages implementation intelligence.</h2>
+        <p>Oracle implementation teams do not only need task tracking. They need a repeatable system for discovery decisions, COA/BCEA architecture, approval logic, testing scenarios, cutover planning, migration validation, audit evidence, and reusable client knowledge.</p>
+      </div>
+      <div class="category-proof-grid">
+        <div><strong>Discovery</strong><span>Capture client decisions before they disappear.</span></div>
+        <div><strong>Design</strong><span>Standardize COA, BCEA, approval, and migration decisions.</span></div>
+        <div><strong>Testing</strong><span>Connect scenarios, risks, evidence, and readiness.</span></div>
+        <div><strong>Knowledge</strong><span>Build reusable implementation intelligence across projects.</span></div>
+      </div>
+    </div>
+  </section>
+
   <section class="section trust-layer" id="credibility">
     <div class="credibility-hero">
       <span class="workspace-kicker">Implementation Credibility Layer</span>
@@ -706,6 +725,33 @@
       <div class="pain-card"><strong>Conversion and validation gaps</strong><span>Late discovery of configuration gaps before SIT, UAT, mock conversion, or go-live.</span></div>
       <div class="pain-card"><strong>Public Sector / K-12 realities</strong><span>Fund accounting, grants, DOE reporting, budget controls, and cross-functional governance dependencies.</span></div>
       <div class="pain-card"><strong>Repeated spreadsheet effort</strong><span>Consultants rebuild the same accelerators manually project after project.</span></div>
+    </div>
+  </section>
+
+  
+  <section class="section early-access-form-section" id="early-access-form">
+    <div class="early-access-form-card">
+      <div class="early-access-copy">
+        <span class="workspace-kicker">Phase 1 Early Access</span>
+        <h2>Help shape the Oracle Cloud implementation intelligence platform.</h2>
+        <p>Join controlled early access and tell us where Oracle implementations hurt most: COA, BCEA, approvals, testing, migration validation, cutover, or delivery governance.</p>
+        <ul>
+          <li>Get access to live accelerators.</li>
+          <li>Influence the next implementation playbooks.</li>
+          <li>Help prioritize Oracle Finance and Public Sector workflows.</li>
+        </ul>
+      </div>
+      <form class="lead-form" id="early-access-lead-form">
+        <label>Name<input id="lead-name" type="text" placeholder="Your name" required /></label>
+        <label>Email<input id="lead-email" type="email" placeholder="you@company.com" required /></label>
+        <label>Company<input id="lead-company" type="text" placeholder="Company / consulting firm" /></label>
+        <label>Role<select id="lead-role"><option>Oracle Cloud Consultant</option><option>Solution Architect</option><option>PMO / Delivery Leader</option><option>Client Finance Leader</option><option>Implementation Partner</option><option>Other</option></select></label>
+        <label>Module Interest<select id="lead-module"><option>COA / GL</option><option>BCEA / Budgetary Control</option><option>Approvals</option><option>Payables</option><option>Expenses</option><option>Testing / UAT</option><option>Migration / Conversion</option><option>Public Sector / K-12</option></select></label>
+        <label>Implementation Type<select id="lead-type"><option>Public Sector</option><option>K-12 / Education</option><option>Commercial</option><option>Healthcare</option><option>Higher Education</option><option>Federal</option><option>Consulting Partner</option></select></label>
+        <label class="wide">Biggest Oracle implementation pain<textarea id="lead-pain" rows="4" placeholder="Example: COA mapping decisions keep changing before SIT."></textarea></label>
+        <button type="submit" class="cta wide">Get Early Access</button>
+        <p class="lead-form-note">This opens the OracleToolkit early-access form and records a GA4 event.</p>
+      </form>
     </div>
   </section>
 
@@ -742,6 +788,35 @@
         <div><strong>Reuse</strong><span>Accelerators standardized across projects</span></div>
         <div><strong>Trust</strong><span>Client review output becomes clearer</span></div>
       </div>
+    </div>
+  </section>
+
+  
+  <section class="section audience-pages" id="audiences">
+    <h2>Built for the people who carry Oracle implementations.</h2>
+    <p class="section-subtitle">OracleToolkit is designed for the three groups that feel implementation pain most directly: consultants, solution architects, and PMO / delivery leaders.</p>
+    <div class="audience-grid">
+      <article class="audience-card" id="for-consultants">
+        <span>For Consultants</span>
+        <h3>Reduce repetitive manual work and delivery rework.</h3>
+        <p>Consultants face spreadsheet chaos, unclear client inputs, validation gaps, and SIT/UAT pressure. OracleToolkit gives reusable accelerators and workspace history so project work does not restart from zero.</p>
+        <ul><li>COA mapping and validation support</li><li>BCEA and approval design guidance</li><li>Saved accelerator runs by project</li><li>Reusable implementation notes</li></ul>
+        <a href="#early-access-form" onclick="gtagSafe && gtagSafe('audience_consultant_cta')">Get Early Access</a>
+      </article>
+      <article class="audience-card" id="for-solution-architects">
+        <span>For Solution Architects</span>
+        <h3>Standardize design decisions and reduce governance risk.</h3>
+        <p>Architects need consistent decision frameworks for COA, BCEA, approvals, integrations, testing, and public sector controls. OracleToolkit helps preserve the reasoning behind design decisions.</p>
+        <ul><li>COA/BCEA architecture decision support</li><li>Approval governance accelerators</li><li>Implementation playbook foundation</li><li>Cross-project reusable knowledge</li></ul>
+        <a href="#early-access-form" onclick="gtagSafe && gtagSafe('audience_architect_cta')">Get Early Access</a>
+      </article>
+      <article class="audience-card" id="for-pmo">
+        <span>For PMO / Delivery Leaders</span>
+        <h3>Improve delivery consistency across Oracle programs.</h3>
+        <p>Delivery leaders need visibility into readiness, decisions, risks, reusable assets, and client signoff. OracleToolkit helps turn implementation knowledge into structured operating intelligence.</p>
+        <ul><li>Project workspace and history</li><li>Readiness and workflow structure</li><li>Reusable implementation evidence</li><li>Future team and subscription foundation</li></ul>
+        <a href="#early-access-form" onclick="gtagSafe && gtagSafe('audience_pmo_cta')">Get Early Access</a>
+      </article>
     </div>
   </section>
 
@@ -867,5 +942,36 @@
   <script src="supabase-config.js"></script>
   <script src="cloud-workspace.js"></script>
   <script src="dashboard.js"></script>
+
+<script>
+  window.addEventListener("load", function () {
+    const form = document.getElementById("early-access-lead-form");
+    if (form) {
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const payload = {
+          name: document.getElementById("lead-name")?.value || "",
+          email: document.getElementById("lead-email")?.value || "",
+          company: document.getElementById("lead-company")?.value || "",
+          role: document.getElementById("lead-role")?.value || "",
+          module: document.getElementById("lead-module")?.value || "",
+          type: document.getElementById("lead-type")?.value || "",
+          pain: document.getElementById("lead-pain")?.value || ""
+        };
+        localStorage.setItem("oracletoolkit_early_access_lead", JSON.stringify(payload));
+        if (typeof gtag === "function") {
+          gtag("event", "early_access_submit", {
+            role: payload.role,
+            module_interest: payload.module,
+            implementation_type: payload.type
+          });
+        }
+        if (typeof gtagSafe === "function") gtagSafe("early_access_form_submit");
+        window.open("https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor", "_blank");
+      });
+    }
+  });
+</script>
+
 </body>
 </html>

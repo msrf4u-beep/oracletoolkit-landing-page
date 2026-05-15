@@ -1,1 +1,1 @@
-{'workspace_link_points_engine': True, 'member_button_id': True, 'top_project_switcher': True, 'old_workspace_hidden_css': True, 'top_controls_js': True, 'project_sync_js': True}
+{'headline': True, 'early_access_form': True, 'audiences': True, 'ga4': True, 'category': True}
