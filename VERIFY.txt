@@ -1,1 +1,1 @@
-{'hero_os_positioning': True, 'jira_statement': True, 'implementation_memory': True, 'methodology_engine': True, 'platform_layers': True, 'playbook_cta': True}
+{'bcea_playbook_section': True, 'bcea_lifecycle': True, 'risk_library': True, 'standalone_page': True, 'nav_playbook': True}

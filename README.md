@@ -220,3 +220,20 @@ Major positioning upgrades:
 - Platform layer architecture
 - Operating system capabilities: discovery, design decisions, testing, cutover, accelerators, audit evidence
 - Stronger narrative around lost implementation intelligence and institutional memory
+
+
+## BCEA Playbook v1 Website Integration
+
+This release adds the BCEA Playbook into OracleToolkit as a website experience.
+
+Added:
+- Main BCEA Playbook section
+- BCEA lifecycle: Discovery, Design, Build, SIT, UAT, Go-Live, Hypercare
+- Decision framework
+- Risk library
+- Connected accelerators
+- Standalone `bcea-playbook.html`
+- Navigation link to Playbooks
+
+Strategic goal:
+Turn OracleToolkit from a tool platform into an Oracle implementation methodology operating system.
