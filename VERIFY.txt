@@ -1,1 +1,1 @@
-{'dropdown_nav': True, 'all_5_tools': True, 'quick_index': True, 'sticky_subnav': False, 'dropdown_js': True, 'css': True}
+{'nav_replace_count': 1, 'single_platform_nav': True, 'clean_nav': True, 'old_duplicate_sequence_removed': True, 'live_tools_dropdown': True, 'playbooks_dropdown': True, 'discovery_dropdown': True}

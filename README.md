@@ -290,3 +290,14 @@ Added:
 - Quick index section after hero
 - Click/touch-friendly dropdown JS
 - Scroll-margin optimization for long pages
+
+
+## Clean Header Navigation Fix
+
+This release removes duplicate navigation headings by replacing the entire header nav with one controlled dropdown structure.
+
+Fixed:
+- Removed duplicated flat menu
+- Kept one dropdown nav only
+- Preserved Login/Profile, Launch COA, and Feedback buttons
+- Added responsive behavior for smaller screens
