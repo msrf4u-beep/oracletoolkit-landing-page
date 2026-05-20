@@ -301,3 +301,24 @@ Fixed:
 - Kept one dropdown nav only
 - Preserved Login/Profile, Launch COA, and Feedback buttons
 - Added responsive behavior for smaller screens
+
+
+## Auth + Navigation Consistency Fix
+
+This release repairs issues caused by the navigation redesign.
+
+Fixed:
+- Dashboard button restored
+- Login button preserved
+- Logout button restored
+- Auth state updates when user signs in/out
+- Member Workspace requires login
+- Dropdown navigation retained
+- Duplicate headings remain removed
+
+Important:
+This file intentionally keeps auth placeholders in the header:
+- `login-button`
+- `logout-button`
+- `dashboard-button`
+- `user-pill`

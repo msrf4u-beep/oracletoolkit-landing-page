@@ -61,9 +61,9 @@
       <div class="nav-dropdown">
         <button type="button">Platform ▾</button>
         <div class="dropdown-menu wide-menu">
-          <a href="#workspace-engine"><strong>Member Workspace</strong><span>Projects, switching, saved accelerator runs</span></a>
+          <a href="#workspace-engine" data-requires-auth="true"><strong>Member Workspace</strong><span>Projects, switching, saved accelerator runs</span></a>
           <a href="#operating-system"><strong>Operating System Vision</strong><span>Implementation intelligence platform</span></a>
-          <a href="#early-access-form"><strong>Early Access</strong><span>Share implementation pain</span></a>
+          <a href="#early-access-form"><strong>Early Access</strong><span>Join and share implementation pain</span></a>
           <a href="#roadmap"><strong>Roadmap</strong><span>Product direction and future layers</span></a>
         </div>
       </div>
@@ -71,8 +71,11 @@
       <a href="#audiences">Use Cases</a>
     </div>
 
-    <div class="nav-actions">
-      <button id="login-button" class="profile-avatar" type="button" title="Login / Account">👤</button>
+    <div class="nav-actions auth-nav-actions">
+      <button id="dashboard-button" class="dashboard-nav-btn hidden" type="button">Dashboard</button>
+      <button id="login-button" class="login-nav-btn" type="button">Login / Sign Up</button>
+      <button id="logout-button" class="logout-nav-btn hidden" type="button">Logout</button>
+      <span id="user-pill" class="user-pill hidden" title="Signed in"></span>
       <a class="nav-cta launch-coa-nav" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank">Launch COA</a>
       <a class="nav-cta feedback-nav" href="#early-access-form">Feedback</a>
     </div>
@@ -1520,6 +1523,142 @@
         });
       });
     });
+  });
+</script>
+
+
+<script>
+  // OracleToolkit Auth Consistency Repair
+  // Keeps Login, Logout, Dashboard and Member Workspace working after navigation redesign.
+
+  function otIsSignedIn() {
+    return !!(window.Clerk && window.Clerk.user);
+  }
+
+  function otSafeScrollTo(selector) {
+    const target = document.querySelector(selector);
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function otUpdateAuthNav() {
+    const signedIn = otIsSignedIn();
+
+    const loginBtn = document.getElementById("login-button");
+    const logoutBtn = document.getElementById("logout-button");
+    const dashboardBtn = document.getElementById("dashboard-button");
+    const userPill = document.getElementById("user-pill");
+
+    if (loginBtn) loginBtn.classList.toggle("hidden", signedIn);
+    if (logoutBtn) logoutBtn.classList.toggle("hidden", !signedIn);
+    if (dashboardBtn) dashboardBtn.classList.toggle("hidden", !signedIn);
+
+    if (userPill) {
+      userPill.classList.toggle("hidden", !signedIn);
+      if (signedIn) {
+        const user = window.Clerk.user;
+        const firstName = user.firstName || user.username || "User";
+        const imageUrl = user.imageUrl;
+        userPill.innerHTML = imageUrl
+          ? `<img src="${imageUrl}" alt="User" />`
+          : `<span>${firstName.slice(0, 1).toUpperCase()}</span>`;
+      } else {
+        userPill.innerHTML = "";
+      }
+    }
+  }
+
+  async function otOpenSignIn() {
+    if (!window.Clerk) {
+      alert("Login temporarily unavailable. Please refresh and try again.");
+      return;
+    }
+    try {
+      await window.Clerk.openSignIn();
+    } catch (error) {
+      console.error("Clerk sign in failed:", error);
+      alert("Login temporarily unavailable. Please check console.");
+    }
+  }
+
+  async function otSignOut() {
+    if (!window.Clerk) {
+      alert("Logout temporarily unavailable. Please refresh and try again.");
+      return;
+    }
+    try {
+      await window.Clerk.signOut();
+      otUpdateAuthNav();
+      window.location.hash = "";
+      window.location.reload();
+    } catch (error) {
+      console.error("Clerk sign out failed:", error);
+      alert("Logout failed. Please refresh and try again.");
+    }
+  }
+
+  function otOpenDashboard() {
+    if (!otIsSignedIn()) {
+      otOpenSignIn();
+      return;
+    }
+    const dashboard = document.getElementById("member-dashboard") || document.getElementById("workspace-engine") || document.getElementById("dashboard");
+    if (dashboard) {
+      dashboard.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      window.location.hash = "#workspace-engine";
+    }
+  }
+
+  function otWireAuthNav() {
+    const loginBtn = document.getElementById("login-button");
+    const logoutBtn = document.getElementById("logout-button");
+    const dashboardBtn = document.getElementById("dashboard-button");
+
+    if (loginBtn) loginBtn.onclick = otOpenSignIn;
+    if (logoutBtn) logoutBtn.onclick = otSignOut;
+    if (dashboardBtn) dashboardBtn.onclick = otOpenDashboard;
+
+    document.querySelectorAll("[data-requires-auth='true']").forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        if (!otIsSignedIn()) {
+          event.preventDefault();
+          otOpenSignIn();
+        }
+      });
+    });
+
+    otUpdateAuthNav();
+  }
+
+  window.addEventListener("load", async function () {
+    let tries = 0;
+    const timer = setInterval(function () {
+      tries += 1;
+      if (window.Clerk) {
+        clearInterval(timer);
+        try {
+          if (window.Clerk.load) {
+            window.Clerk.load().then(function () {
+              otWireAuthNav();
+              if (window.Clerk.addListener) {
+                window.Clerk.addListener(function () {
+                  otUpdateAuthNav();
+                });
+              }
+            });
+          } else {
+            otWireAuthNav();
+          }
+        } catch (e) {
+          console.warn("Clerk already initialized or unavailable:", e);
+          otWireAuthNav();
+        }
+      }
+      if (tries > 40) {
+        clearInterval(timer);
+        otWireAuthNav();
+      }
+    }, 250);
   });
 </script>
 

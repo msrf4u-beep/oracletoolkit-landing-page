@@ -2385,3 +2385,105 @@
     width: 100%;
   }
 }
+
+
+/* Auth + Navigation Consistency Fix */
+.hidden {
+  display: none !important;
+}
+.auth-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.login-nav-btn,
+.logout-nav-btn,
+.dashboard-nav-btn {
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.08);
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 11px 14px;
+  font-weight: 900;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.login-nav-btn {
+  background: #facc15;
+  color: #07111f;
+  border-color: #facc15;
+}
+.dashboard-nav-btn {
+  background: #0f5fb8;
+  color: white;
+  border-color: #0f5fb8;
+}
+.logout-nav-btn:hover,
+.dashboard-nav-btn:hover,
+.login-nav-btn:hover {
+  transform: translateY(-1px);
+}
+.user-pill {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #facc15;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 0 0 5px rgba(250,204,21,.14);
+  flex-shrink: 0;
+}
+.user-pill img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.user-pill span {
+  color: #07111f;
+  font-weight: 900;
+  font-size: 18px;
+}
+.clean-platform-nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.clean-platform-nav .logo {
+  flex-shrink: 0;
+}
+.clean-platform-nav .platform-nav {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+.clean-platform-nav .nav-actions {
+  flex-shrink: 0;
+}
+@media (max-width: 1180px) {
+  .clean-platform-nav {
+    flex-wrap: wrap;
+  }
+  .clean-platform-nav .platform-nav {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+  .clean-platform-nav .nav-actions {
+    margin-left: auto;
+  }
+}
+@media (max-width: 720px) {
+  .auth-nav-actions {
+    flex-wrap: wrap;
+  }
+  .login-nav-btn,
+  .logout-nav-btn,
+  .dashboard-nav-btn,
+  .launch-coa-nav,
+  .feedback-nav {
+    font-size: 12px;
+    padding: 9px 11px;
+  }
+}

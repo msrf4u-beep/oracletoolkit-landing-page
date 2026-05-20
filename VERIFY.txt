@@ -1,1 +1,11 @@
-{'nav_replace_count': 1, 'single_platform_nav': True, 'clean_nav': True, 'old_duplicate_sequence_removed': True, 'live_tools_dropdown': True, 'playbooks_dropdown': True, 'discovery_dropdown': True}
+{
+  "nav_replace_count": 1,
+  "single_platform_nav": true,
+  "login_button": true,
+  "logout_button": true,
+  "dashboard_button": true,
+  "user_pill": true,
+  "auth_repair": true,
+  "dropdowns_present": true,
+  "clerk_script_present": true
+}
