@@ -277,3 +277,16 @@ Added:
 
 Strategic goal:
 Move OracleToolkit from tool/playbook platform into Oracle implementation operating system behavior.
+
+
+## Navigation Dropdown Optimization
+
+Added:
+- Live Tools dropdown with all 5 active tools
+- Playbooks dropdown
+- Discovery dropdown
+- Platform dropdown
+- Sticky quick navigation bar
+- Quick index section after hero
+- Click/touch-friendly dropdown JS
+- Scroll-margin optimization for long pages

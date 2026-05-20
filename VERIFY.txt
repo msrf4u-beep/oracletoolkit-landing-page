@@ -1,1 +1,1 @@
-{'discovery_section': True, 'workstreams': True, 'decision_framework': True, 'standalone': True, 'nav': True}
+{'dropdown_nav': True, 'all_5_tools': True, 'quick_index': True, 'sticky_subnav': False, 'dropdown_js': True, 'css': True}
