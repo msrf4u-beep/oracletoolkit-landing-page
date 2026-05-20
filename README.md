@@ -254,3 +254,26 @@ Added:
 
 Strategic goal:
 Position OracleToolkit as the implementation intelligence platform for Oracle COA and BCEA architecture, not just a collection of tools.
+
+
+## Discovery Command Center v1
+
+This release adds Priority 3: Discovery Command Center.
+
+Added:
+- Discovery Command Center section
+- Standalone `discovery-command-center.html`
+- Discovery workstreams:
+  - COA Discovery
+  - BCEA Discovery
+  - Approval Discovery
+  - Migration Discovery
+  - Testing Discovery
+  - Cutover Discovery
+- Decision capture framework
+- Required client inputs
+- Discovery risk radar
+- Links to COA Playbook, BCEA Playbook, Workspace Engine, and accelerators
+
+Strategic goal:
+Move OracleToolkit from tool/playbook platform into Oracle implementation operating system behavior.

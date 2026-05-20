@@ -22,6 +22,7 @@
       <a href="#finance">Finance</a>
       <a href="#live-products">Live Tools</a>
       <a href="#coa-playbook">Playbooks</a>
+      <a href="#discovery-command-center">Discovery</a>
       <a href="#early-access-form">Early Access</a>
       <a href="#use-cases">Use Cases</a>
       <a href="#roadmap">Roadmap</a>
@@ -635,6 +636,150 @@
 
   
   
+  
+  <section class="section discovery-command-section" id="discovery-command-center">
+    <div class="discovery-hero">
+      <div>
+        <span class="workspace-kicker">Priority 3 Build</span>
+        <h2>Discovery Command Center</h2>
+        <p>
+          A structured Oracle Cloud discovery workspace for capturing client inputs, open decisions,
+          implementation risks, module dependencies, required documents, and recommended accelerators before design begins.
+        </p>
+        <p>
+          Discovery is where implementation intelligence is either created or lost. OracleToolkit turns discovery from scattered notes
+          into an operating layer for COA, BCEA, approvals, testing, migration, and cutover readiness.
+        </p>
+        <div class="discovery-actions">
+          <a class="cta" href="#discovery-workstreams" onclick="gtagSafe && gtagSafe('discovery_view_workstreams')">View Workstreams</a>
+          <a class="secondary" href="#workspace-engine">Open Workspace</a>
+          <a class="secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtagSafe && gtagSafe('discovery_feedback')">Suggest Discovery Topic</a>
+        </div>
+      </div>
+      <div class="discovery-command-card">
+        <strong>Discovery Principle</strong>
+        <span>Do not start design before discovery decisions are controlled.</span>
+        <p>Bad discovery creates downstream rework in COA, BCEA, approvals, conversion, SIT, UAT, and go-live readiness.</p>
+      </div>
+    </div>
+
+    <div class="discovery-score-strip">
+      <div><strong>Discovery Output</strong><span>Inputs, decisions, risks, ownership, dependencies, and evidence requirements.</span></div>
+      <div><strong>Platform Purpose</strong><span>Convert discovery into reusable implementation intelligence instead of scattered meeting notes.</span></div>
+      <div><strong>Next Action</strong><span>Save project context in Workspace Engine and link decisions to playbooks and accelerators.</span></div>
+    </div>
+
+    <div class="discovery-workstreams" id="discovery-workstreams">
+      <div class="discovery-workstream-card coa">
+        <em>01</em><h3>COA Discovery</h3>
+        <p>Capture legacy COA structure, reporting needs, segment ownership, fund logic, natural account governance, and mapping readiness.</p>
+        <ul><li>Legacy COA files</li><li>Reporting requirements</li><li>Segment design assumptions</li><li>Crosswalk ownership</li></ul>
+        <a href="#coa-playbook">Open COA Playbook</a>
+      </div>
+      <div class="discovery-workstream-card bcea">
+        <em>02</em><h3>BCEA Discovery</h3>
+        <p>Understand budget governance, control levels, encumbrance policy, funds-check scope, grants, POETA, and public sector constraints.</p>
+        <ul><li>Budget structure</li><li>Control authority</li><li>Encumbrance lifecycle</li><li>Funds-check exclusions</li></ul>
+        <a href="#bcea-playbook">Open BCEA Playbook</a>
+      </div>
+      <div class="discovery-workstream-card approvals">
+        <em>03</em><h3>Approval Discovery</h3>
+        <p>Capture approval ownership, routing rules, thresholds, position/job dependencies, exception handling, and audit expectations.</p>
+        <ul><li>Journal approvals</li><li>AP invoice approvals</li><li>Escalation logic</li><li>Delegation rules</li></ul>
+        <a href="https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/" target="_blank">Open Journal Accelerator</a>
+      </div>
+      <div class="discovery-workstream-card migration">
+        <em>04</em><h3>Migration Discovery</h3>
+        <p>Identify conversion objects, legacy data quality, reconciliation ownership, cutover dependencies, and validation evidence needs.</p>
+        <ul><li>Opening balances</li><li>Open POs</li><li>Supplier/customer data</li><li>Historical reporting</li></ul>
+        <a href="#workspace-engine">Save Migration Notes</a>
+      </div>
+      <div class="discovery-workstream-card testing">
+        <em>05</em><h3>Testing Discovery</h3>
+        <p>Define SIT/UAT scenarios, edge cases, success criteria, evidence requirements, and business-signoff responsibilities.</p>
+        <ul><li>Funds check testing</li><li>Approval routing</li><li>Conversion validation</li><li>Reporting tests</li></ul>
+        <a href="#playbooks-next">Plan Playbook</a>
+      </div>
+      <div class="discovery-workstream-card cutover">
+        <em>06</em><h3>Cutover Discovery</h3>
+        <p>Capture go-live windows, freeze periods, legacy overlap, reconciliation plan, hypercare ownership, and escalation matrix.</p>
+        <ul><li>Cutover calendar</li><li>Fiscal period strategy</li><li>Validation checkpoints</li><li>War-room ownership</li></ul>
+        <a href="#early-access-form">Request Cutover Toolkit</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section discovery-decision-capture" id="discovery-decisions">
+    <h2>Discovery Decision Capture Framework</h2>
+    <p class="section-subtitle">
+      Every discovery item should produce either a decision, an open question, a dependency, a risk, or a required evidence item.
+    </p>
+    <div class="decision-capture-grid">
+      <div><strong>Decision</strong><span>What was decided, who approved it, and why it matters.</span></div>
+      <div><strong>Open Question</strong><span>What is unresolved and who owns closure before design/build.</span></div>
+      <div><strong>Dependency</strong><span>Which module, configuration, file, integration, or stakeholder is impacted.</span></div>
+      <div><strong>Risk</strong><span>What can fail later if the discovery item is ignored or delayed.</span></div>
+      <div><strong>Evidence</strong><span>What document, test, signoff, or output will prove readiness.</span></div>
+      <div><strong>Accelerator</strong><span>Which OracleToolkit accelerator or playbook should be used next.</span></div>
+    </div>
+  </section>
+
+  <section class="section discovery-inputs-section" id="discovery-inputs">
+    <div class="discovery-input-card">
+      <div>
+        <span class="workspace-kicker">Required Client Inputs</span>
+        <h2>Discovery should not depend on memory.</h2>
+        <p>
+          OracleToolkit should guide teams to request the right inputs early, track missing items,
+          and avoid design decisions based on incomplete client information.
+        </p>
+      </div>
+      <div class="input-checklist-grid">
+        <div><strong>COA</strong><span>Legacy COA, segment descriptions, values, hierarchies, reporting examples.</span></div>
+        <div><strong>BCEA</strong><span>Budget reports, control policies, encumbrance rules, fund hierarchy, grants.</span></div>
+        <div><strong>Approvals</strong><span>Approval matrix, thresholds, roles, delegation, escalation requirements.</span></div>
+        <div><strong>Migration</strong><span>Open balances, open transactions, open POs, historical data requirements.</span></div>
+        <div><strong>Testing</strong><span>Business scenarios, edge cases, signoff owners, expected evidence.</span></div>
+        <div><strong>Cutover</strong><span>Freeze windows, fiscal calendar, reconciliation ownership, hypercare process.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section discovery-risk-section" id="discovery-risk-radar">
+    <h2>Discovery Risk Radar</h2>
+    <p class="section-subtitle">
+      These are early warning signs that discovery is weak and implementation risk is increasing.
+    </p>
+    <div class="risk-radar-grid">
+      <div><em>High</em><strong>COA decisions keep changing</strong><span>Design is not stable enough for BCEA, conversion, or reporting build.</span></div>
+      <div><em>High</em><strong>BCEA ownership is unclear</strong><span>No one owns budget authority, exception handling, or funds-check decisions.</span></div>
+      <div><em>High</em><strong>Approval rules are political</strong><span>Workflow may become over-engineered and difficult to maintain.</span></div>
+      <div><em>Medium</em><strong>Legacy data quality is unknown</strong><span>Conversion validation and reconciliation effort may be underestimated.</span></div>
+      <div><em>Medium</em><strong>Testing scenarios are generic</strong><span>SIT/UAT may miss public sector, K-12, grant, and encumbrance edge cases.</span></div>
+      <div><em>Medium</em><strong>Cutover assumptions are late</strong><span>Fiscal-year close, open POs, budget loads, and reconciliations may collide.</span></div>
+    </div>
+  </section>
+
+  <section class="section discovery-command-link-section">
+    <div class="discovery-link-card">
+      <div>
+        <span class="workspace-kicker">How this becomes operating system behavior</span>
+        <h2>Discovery Command Center connects playbooks, tools, and workspace memory.</h2>
+        <p>
+          The long-term goal is not a static checklist. Discovery decisions should be saved to projects,
+          linked to playbooks, connected to accelerators, and reused during design, testing, migration, and cutover.
+        </p>
+      </div>
+      <div class="connected-tools-grid">
+        <a href="#workspace-engine">Open Workspace Engine</a>
+        <a href="#coa-playbook">COA Playbook</a>
+        <a href="#bcea-playbook">BCEA Playbook</a>
+        <a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank">COA Accelerator</a>
+        <a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank">BCEA Accelerator</a>
+      </div>
+    </div>
+  </section>
+
   <section class="section coa-playbook-section" id="coa-playbook">
     <div class="coa-playbook-hero">
       <div>

@@ -1,1 +1,1 @@
-{'coa_playbook_section': True, 'coa_lifecycle': True, 'coa_risk_library': True, 'coa_standalone': True, 'coa_nav': True, 'bcea_still_present': True}
+{'discovery_section': True, 'workstreams': True, 'decision_framework': True, 'standalone': True, 'nav': True}
