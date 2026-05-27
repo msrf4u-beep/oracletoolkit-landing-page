@@ -322,3 +322,23 @@ This file intentionally keeps auth placeholders in the header:
 - `logout-button`
 - `dashboard-button`
 - `user-pill`
+
+
+## v16 Common Design Path Update
+
+Added the Enterprise Structure Intelligence Engine live link:
+
+https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/
+
+Recommended Common Design flow:
+1. Enterprise Structure Intelligence
+2. COA Transformation Accelerator
+3. BCEA Design Accelerator
+
+This release adds a new Common Design navigation dropdown and updates live accelerator count from 5 to 6.
+
+
+## Added Live Tool
+
+- Discovery Command Center Pro: https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/
+- Enterprise Structure Intelligence: https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/

@@ -1,11 +1,21 @@
-{
-  "nav_replace_count": 1,
-  "single_platform_nav": true,
-  "login_button": true,
-  "logout_button": true,
-  "dashboard_button": true,
-  "user_pill": true,
-  "auth_repair": true,
-  "dropdowns_present": true,
-  "clerk_script_present": true
-}
+OracleToolkit Website Rescan - 2026-05-26
+
+Checks completed:
+- App syntax: passed (dashboard.js, cloud-workspace.js, auth.js)
+- ZIP integrity: passed
+- Internal anchor links: passed
+- Local file references: passed
+- Enterprise Structure link added under Common Design: passed
+- Discovery Command Center Pro link included: passed
+- Live tool count: 7
+
+Live tools included:
+1. Enterprise Structure Intelligence
+2. Discovery Command Center Pro
+3. COA Transformation Accelerator
+4. BCEA Design Accelerator
+5. Journal Approvals Accelerator
+6. AP Invoice Approvals Accelerator
+7. Per Diem Transformation Engine
+
+Expected link presence: passed

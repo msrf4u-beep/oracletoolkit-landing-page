@@ -1,6 +1,8 @@
 // OracleToolkit v12 dashboard.js — workspace, saved runs, and lightweight interactions
 
 const TOOL_URLS = {
+  "Enterprise Structure Intelligence": "https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/",
+  "Discovery Command Center Pro": "https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/",
   "COA Transformation Accelerator": "https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/",
   "BCEA Design Accelerator": "https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/",
   "Journal Approvals Accelerator": "https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/",
