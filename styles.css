@@ -2487,3 +2487,19 @@
     padding: 9px 11px;
   }
 }
+
+
+/* OracleToolkit Phase 1 Compliance + Phase 2 Navigation Update */
+.compliance-banner{padding-top:32px;padding-bottom:32px;}
+.compliance-card,.trust-phase-section,.policy-section,.legal-section{background:linear-gradient(135deg,#0f172a,#1e293b);color:#f8fafc;border:1px solid rgba(148,163,184,.28);border-radius:28px;padding:34px;box-shadow:0 24px 80px rgba(15,23,42,.22);}
+.compliance-card h2,.trust-phase-section h2,.policy-section h2,.legal-section h2{color:#fff;}
+.compliance-card p,.trust-phase-section .section-subtitle,.policy-section .section-subtitle,.legal-section .section-subtitle{color:#cbd5e1;}
+.compliance-grid,.trust-grid,.policy-grid,.legal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:24px;}
+.compliance-grid div,.trust-grid div,.legal-grid div,.policy-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:20px;}
+.compliance-grid strong,.trust-grid strong,.legal-grid strong,.policy-card h3{display:block;color:#facc15;margin-bottom:8px;}
+.compliance-grid span,.trust-grid span,.legal-grid span,.policy-card li{color:#e2e8f0;line-height:1.6;}
+.policy-card ul{margin:12px 0 0 18px;padding:0;}
+.policy-card.restrict{border-color:rgba(248,113,113,.45);}
+.policy-card.allow{border-color:rgba(74,222,128,.38);}
+.footer a{color:#facc15;text-decoration:none;margin:0 4px;}
+@media(max-width:760px){.compliance-card,.trust-phase-section,.policy-section,.legal-section{padding:22px;border-radius:22px;}.compliance-grid,.trust-grid,.policy-grid,.legal-grid{grid-template-columns:1fr;}}

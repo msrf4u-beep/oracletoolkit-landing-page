@@ -342,3 +342,15 @@ This release adds a new Common Design navigation dropdown and updates live accel
 
 - Discovery Command Center Pro: https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/
 - Enterprise Structure Intelligence: https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/
+
+
+## Phase 1 Trust + SOW/RICE Update
+
+This package adds:
+- SOW to RICE Intelligence under Common Design
+- Configuration Readiness Engine under Build & Configure
+- Scenario Intelligence Engine under Testing / Build execution flow
+- Phase 1 PHI/PII/SPI safe-use guidance
+- Upload restriction section
+- Terms and privacy notice foundation
+- Live tool count updated to 10
