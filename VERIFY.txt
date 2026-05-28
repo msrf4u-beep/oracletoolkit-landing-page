@@ -1,18 +1,20 @@
-OracleToolkit Phase 1 Compliance + SOW/RICE Navigation Update
+OracleToolkit Guided Workflow Homepage Update
 
-Fresh validation completed:
+Validation checklist:
 - ZIP rebuilt from clean package
-- New artifact generated
-- Internal navigation verified
-- Enterprise Structure link verified
-- Discovery Pro link verified
+- SOW link added
 - Configuration Readiness link verified
 - Scenario Intelligence link verified
-- SOW link verified
-- Compliance banner verified
-- Upload restrictions verified
-- Terms/privacy section verified
-- Live tool count: 10
+- Enterprise Structure link verified
+- Discovery Pro link verified
+- Phase 1 PHI/PII/SPI warning banner preserved
+- Upload restrictions preserved
+- Terms/privacy foundation preserved
+- Guided Workflow Onboarding added
+- Recommended starting sequence added
+- Problem-based launcher added
+- Implementation lifecycle strip added
 - Existing auth/dashboard preserved
 - No duplicate navigation detected
 - No broken local references detected
+- Live tool count: 10

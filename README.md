@@ -354,3 +354,8 @@ This package adds:
 - Upload restriction section
 - Terms and privacy notice foundation
 - Live tool count updated to 10
+
+
+## Latest Update — Guided Workflow Onboarding
+
+This package adds a homepage guided workflow launcher: “What are you trying to solve?” It routes first-time users by Oracle Cloud implementation problem and lifecycle phase, while preserving Phase 1 PHI/PII/SPI safe-use guidance, SOW to RICE Intelligence, and all existing auth/dashboard behavior.
