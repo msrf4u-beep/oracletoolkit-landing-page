@@ -7,1939 +7,906 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-19DTGQ5Z83');
+    function gtagSafe(eventName) {
+      try { if (typeof gtag === 'function') gtag('event', eventName); } catch(e) {}
+    }
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OracleToolkit | Oracle Cloud Implementation Intelligence Platform</title>
-  <meta name="description" content="OracleToolkit is a premium suite of Oracle Cloud implementation accelerators for Finance, Public Sector, K-12, PPM, SCM, and HR teams." />
-  <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#0A2040">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "OracleToolkit",
-      "url": "https://oracletoolkit.com",
-      "logo": "https://oracletoolkit.com/logo.png",
-      "description": "Oracle Cloud implementation intelligence platform and accelerators for discovery, design, configuration, testing, and deployment governance."
+  <meta name="description" content="OracleToolkit is an Oracle Cloud implementation intelligence platform that guides discovery, enterprise design, COA, BCEA, SOW to RICE planning, configuration readiness, SIT/UAT scenarios, and delivery governance." />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0A2040">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "OracleToolkit",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://oracletoolkit.com",
+    "logo": "https://oracletoolkit.com/logo.png",
+    "description": "Oracle Cloud implementation intelligence platform for discovery, design, configuration readiness, testing, and delivery governance."
+  }
+  </script>
+  <style>
+    :root {
+      --navy:#0A2040;
+      --deep:#07172F;
+      --blue:#2563eb;
+      --sky:#60a5fa;
+      --ink:#0f172a;
+      --muted:#64748b;
+      --line:#dbe3ef;
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --soft:#eef6ff;
+      --green:#16a34a;
+      --amber:#d97706;
+      --red:#dc2626;
+      --shadow:0 18px 45px rgba(15,23,42,.08);
     }
-    </script>
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      line-height:1.6;
+    }
+    a { color:inherit; text-decoration:none; }
+    .top-strip {
+      background:#07172F;
+      color:#cbd5e1;
+      font-size:13px;
+      padding:8px 20px;
+      text-align:center;
+    }
+    .top-strip strong { color:#bfdbfe; }
+    .nav {
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(255,255,255,.94);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner {
+      max-width:1200px;
+      margin:0 auto;
+      padding:14px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:900;
+      letter-spacing:-.03em;
+      color:var(--navy);
+      white-space:nowrap;
+    }
+    .brand img { width:36px; height:36px; border-radius:10px; }
+    .nav-links {
+      display:flex;
+      align-items:center;
+      gap:16px;
+      color:#334155;
+      font-size:14px;
+      flex-wrap:wrap;
+    }
+    .nav-links a:hover { color:var(--blue); }
+    .nav-actions {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .login-nav-btn,.logout-nav-btn,.dashboard-nav-btn,.nav-cta {
+      border:0;
+      padding:10px 14px;
+      border-radius:12px;
+      font-weight:800;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .login-nav-btn,.dashboard-nav-btn {
+      background:#0A2040;
+      color:white;
+    }
+    .logout-nav-btn {
+      background:#e2e8f0;
+      color:#0f172a;
+    }
+    .nav-cta {
+      background:#2563eb;
+      color:white;
+      display:inline-flex;
+    }
+    .hidden { display:none !important; }
+    .user-pill {
+      max-width:150px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      font-size:12px;
+      color:#475569;
+      background:#f1f5f9;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:7px 10px;
+    }
+    .hero {
+      color:white;
+      background:
+        radial-gradient(circle at 10% 5%,rgba(96,165,250,.32),transparent 34%),
+        radial-gradient(circle at 90% 10%,rgba(37,99,235,.26),transparent 30%),
+        linear-gradient(135deg,#07172F,#0A2040 55%,#102b5f);
+      padding:76px 22px 52px;
+    }
+    .hero-inner {
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:34px;
+      align-items:center;
+    }
+    .eyebrow {
+      display:inline-flex;
+      padding:7px 12px;
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      color:#dbeafe;
+      font-size:13px;
+      font-weight:900;
+      margin-bottom:18px;
+    }
+    h1 {
+      margin:0 0 18px;
+      font-size:clamp(36px,5vw,64px);
+      line-height:1.02;
+      letter-spacing:-.055em;
+    }
+    .hero-copy {
+      color:#dbeafe;
+      font-size:18px;
+      max-width:760px;
+      margin:0 0 22px;
+    }
+    .category-line {
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:9px;
+      padding:14px 16px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.08);
+      border-radius:16px;
+      margin:20px 0 24px;
+      color:#e0f2fe;
+      max-width:850px;
+    }
+    .category-line strong {
+      color:white;
+      font-size:17px;
+    }
+    .hero-actions {
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 18px;
+      border-radius:13px;
+      font-weight:900;
+      border:1px solid transparent;
+      transition:.2s ease;
+    }
+    .btn:hover { transform:translateY(-1px); }
+    .btn-primary {
+      background:white;
+      color:#0A2040;
+      box-shadow:0 14px 34px rgba(0,0,0,.18);
+    }
+    .btn-secondary {
+      border-color:rgba(255,255,255,.28);
+      color:white;
+      background:rgba(255,255,255,.08);
+    }
+    .hero-panel {
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:26px;
+      padding:24px;
+      box-shadow:0 24px 70px rgba(0,0,0,.24);
+    }
+    .hero-panel h3 { margin:0 0 12px; font-size:22px; }
+    .mini-flow { display:grid; gap:10px; }
+    .mini-flow div {
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      padding:11px;
+      border-radius:14px;
+      color:#e2e8f0;
+    }
+    .mini-flow b {
+      min-width:26px;
+      height:26px;
+      display:grid;
+      place-items:center;
+      border-radius:9px;
+      background:rgba(255,255,255,.16);
+      color:white;
+    }
+    .section {
+      max-width:1200px;
+      margin:0 auto;
+      padding:58px 22px;
+    }
+    .section-title {
+      max-width:860px;
+      margin-bottom:28px;
+    }
+    .section-title.center {
+      text-align:center;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .section-title h2 {
+      margin:0 0 12px;
+      color:var(--navy);
+      font-size:clamp(28px,3.5vw,44px);
+      line-height:1.12;
+      letter-spacing:-.04em;
+    }
+    .section-title p {
+      margin:0;
+      color:var(--muted);
+      font-size:17px;
+    }
+    .start-card {
+      background:white;
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:26px;
+    }
+    .start-header {
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      align-items:flex-end;
+      margin-bottom:20px;
+      flex-wrap:wrap;
+    }
+    .kicker {
+      display:inline-flex;
+      padding:6px 11px;
+      border-radius:999px;
+      background:#dbeafe;
+      color:#1d4ed8;
+      font-size:13px;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+    .start-header h2 {
+      margin:0;
+      font-size:clamp(28px,3vw,42px);
+      color:var(--navy);
+      letter-spacing:-.04em;
+    }
+    .start-header p {
+      margin:8px 0 0;
+      color:var(--muted);
+      max-width:740px;
+    }
+    .pain-grid {
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:16px;
+    }
+    .pain-card {
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,#ffffff,#f8fbff);
+      border-radius:20px;
+      padding:20px;
+      min-height:172px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      transition:.2s ease;
+    }
+    .pain-card:hover {
+      transform:translateY(-3px);
+      box-shadow:0 16px 38px rgba(37,99,235,.12);
+      border-color:#bfdbfe;
+    }
+    .pain-card span {
+      color:#2563eb;
+      font-size:13px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+    .pain-card strong {
+      display:block;
+      margin:8px 0;
+      font-size:20px;
+      color:#0f172a;
+      letter-spacing:-.02em;
+    }
+    .pain-card p {
+      margin:0 0 14px;
+      color:#64748b;
+      font-size:14px;
+    }
+    .pain-card em {
+      color:#0A2040;
+      font-style:normal;
+      font-weight:900;
+      font-size:14px;
+    }
+    .signature {
+      background:#07172F;
+      color:white;
+      margin-top:20px;
+    }
+    .signature .section-title h2 { color:white; }
+    .signature .section-title p { color:#cbd5e1; }
+    .lifecycle {
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:14px;
+    }
+    .life-step {
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:20px;
+      padding:18px;
+      min-height:190px;
+      position:relative;
+    }
+    .life-step .num {
+      width:32px;
+      height:32px;
+      border-radius:10px;
+      background:#dbeafe;
+      color:#1d4ed8;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      margin-bottom:12px;
+    }
+    .life-step h3 {
+      margin:0 0 8px;
+      font-size:18px;
+      color:white;
+    }
+    .life-step p {
+      margin:0 0 12px;
+      color:#cbd5e1;
+      font-size:14px;
+    }
+    .life-step a {
+      color:#bfdbfe;
+      font-weight:900;
+      font-size:14px;
+    }
+    .journey-grid,.proof-grid,.tool-grid,.role-grid {
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+    }
+    .card {
+      background:white;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:24px;
+      box-shadow:var(--shadow);
+    }
+    .card h3 {
+      margin:0 0 10px;
+      color:var(--navy);
+      font-size:22px;
+      letter-spacing:-.02em;
+    }
+    .card p {
+      margin:0 0 14px;
+      color:#64748b;
+    }
+    .card ul {
+      margin:0;
+      padding-left:18px;
+      color:#334155;
+    }
+    .workflow-strip {
+      background:linear-gradient(135deg,#eef6ff,#ffffff);
+      border:1px solid var(--line);
+      border-radius:26px;
+      padding:26px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:22px;
+      align-items:center;
+    }
+    .workflow-strip h3 {
+      margin:0 0 10px;
+      color:var(--navy);
+      font-size:28px;
+      letter-spacing:-.03em;
+    }
+    .workflow-strip p { color:#475569; margin:0; }
+    .dependency-list {
+      display:grid;
+      gap:10px;
+    }
+    .dependency-list div {
+      background:white;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px 14px;
+      color:#334155;
+      font-weight:800;
+    }
+    .tool-grid {
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .tool-card {
+      background:white;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:20px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:16px;
+      align-items:center;
+      box-shadow:0 10px 24px rgba(15,23,42,.04);
+    }
+    .tool-card span {
+      display:inline-flex;
+      font-size:12px;
+      font-weight:900;
+      color:#1d4ed8;
+      background:#eff6ff;
+      border-radius:999px;
+      padding:5px 9px;
+      margin-bottom:8px;
+    }
+    .tool-card h3 { margin:0 0 6px; font-size:19px; color:var(--navy); }
+    .tool-card p { margin:0; color:#64748b; font-size:14px; }
+    .tool-card a {
+      background:#0A2040;
+      color:white;
+      border-radius:12px;
+      padding:10px 14px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .proof-card {
+      background:white;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:24px;
+      box-shadow:var(--shadow);
+    }
+    .proof-card .label {
+      color:#2563eb;
+      font-size:12px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+    .proof-card h3 {
+      margin:8px 0 10px;
+      color:var(--navy);
+      font-size:21px;
+    }
+    .proof-card p { color:#64748b; margin:0 0 12px; }
+    .proof-card b { color:#0f172a; }
+    .compliance {
+      background:linear-gradient(135deg,#fff7ed,#ffffff);
+      border-top:1px solid #fed7aa;
+      border-bottom:1px solid #fed7aa;
+    }
+    .compliance-grid {
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:14px;
+      margin-top:20px;
+    }
+    .compliance-grid div {
+      background:white;
+      border:1px solid #fed7aa;
+      border-radius:16px;
+      padding:16px;
+    }
+    .compliance-grid strong {
+      color:#9a3412;
+      display:block;
+      margin-bottom:6px;
+    }
+    .compliance-grid span {
+      color:#475569;
+      font-size:14px;
+    }
+    .workspace {
+      background:linear-gradient(135deg,#eef6ff,#ffffff);
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:28px;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:24px;
+      align-items:center;
+    }
+    .workspace h2 {
+      margin:0 0 12px;
+      color:var(--navy);
+      font-size:clamp(28px,3vw,42px);
+      letter-spacing:-.04em;
+    }
+    .workspace p { color:#475569; }
+    .memory-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+    .memory-grid div {
+      background:white;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+      font-weight:800;
+      color:#334155;
+    }
+    .footer {
+      background:#07172F;
+      color:#cbd5e1;
+      padding:34px 22px;
+      text-align:center;
+      font-size:14px;
+    }
+    .footer a { color:#bfdbfe; }
+    @media (max-width: 980px) {
+      .hero-inner,.workflow-strip,.workspace { grid-template-columns:1fr; }
+      .pain-grid,.lifecycle,.journey-grid,.proof-grid,.role-grid,.compliance-grid { grid-template-columns:1fr; }
+      .tool-grid { grid-template-columns:1fr; }
+      .nav-inner { align-items:flex-start; flex-direction:column; }
+      .nav-links { gap:11px; }
+      .hero { padding-top:48px; }
+    }
+    @media (max-width: 560px) {
+      .tool-card { grid-template-columns:1fr; }
+      .hero-actions .btn { width:100%; }
+      .memory-grid { grid-template-columns:1fr; }
+    }
+  </style>
 </head>
 <body id="top">
-
-<section id="methodology-launcher" style="padding:28px 20px;background:linear-gradient(135deg,#eef6ff,#ffffff);border-bottom:1px solid #dbe3ef;">
-  <div style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:center;">
-    <div>
-      <div style="display:inline-flex;padding:6px 12px;border-radius:999px;background:#dbeafe;color:#1d4ed8;font-weight:800;font-size:13px;margin-bottom:10px;">New: OracleToolkit Methodology™</div>
-      <h2 style="margin:0 0 8px;color:#0A2040;font-size:clamp(26px,3vw,38px);letter-spacing:-.03em;">Start with the delivery framework, not just tools.</h2>
-      <p style="margin:0;color:#475569;font-size:16px;">See how Discovery, Enterprise Design, COA, BCEA, SOW-to-RICE, Configuration Readiness, SIT/UAT, and Deployment connect into one Oracle Cloud implementation journey.</p>
-    </div>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="/oracletoolkit-methodology.html" style="display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:12px;background:#0A2040;color:white;font-weight:800;text-decoration:none;">Open Methodology Page</a>
-      <a href="#guided-workflow" style="display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:12px;background:white;color:#0A2040;border:1px solid #dbe3ef;font-weight:800;text-decoration:none;">Start Guided Workflow</a>
-    </div>
+  <div class="top-strip">
+    <strong>Enterprise-safe guidance:</strong> use sanitized implementation design inputs. Do not upload production PHI, PII, SPI, payroll, patient, or supplier banking data.
   </div>
-</section>
 
-  <nav class="nav clean-platform-nav">
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="OracleToolkit home">
+        <img src="/logo.png" alt="OracleToolkit logo">
+        <span>OracleToolkit</span>
+      </a>
 
-    <a class="logo" href="#top">Oracle<span>Toolkit</span></a>
-
-    <div class="nav-links platform-nav" id="platform-nav">
-      <div class="nav-dropdown">
-        <button type="button">Domains ▾</button>
-        <div class="dropdown-menu">
-          <a href="#finance">Finance</a>
-          <a href="#platform-positioning">Public Sector</a>
-          <a href="#audiences">K-12 / Education</a>
-        </div>
+      <div class="nav-links">
+        <a href="#start-here">Start Here</a>
+        <a href="/oracletoolkit-methodology.html">Methodology</a>
+        <a href="#lifecycle">Workflow</a>
+        <a href="#accelerators">Accelerators</a>
+        <a href="#proof">Proof</a>
+        <a href="#workspace">Workspace</a>
       </div>
 
-      <div class="nav-dropdown">
-        <button type="button">Common Design ▾</button>
-        <div class="dropdown-menu wide-menu">
-          <a href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank"><strong>SOW to RICE Intelligence</strong><span>Convert SOW scope into RICE objects, ownership, complexity, and risks</span></a>
-          <a href="https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/" target="_blank"><strong>Enterprise Structure Intelligence</strong><span>GL, HCM, PPM, SCM design alignment</span></a>
-          <a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank"><strong>COA Transformation Accelerator</strong><span>Chart of Accounts strategy and mapping</span></a>
-          <a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank"><strong>BCEA Design Accelerator</strong><span>Budgetary Control and funds-check design</span></a>
-        </div>
+      <div class="nav-actions">
+        <button id="dashboard-button" class="dashboard-nav-btn hidden" type="button">Dashboard</button>
+        <button id="login-button" class="login-nav-btn" type="button">Login</button>
+        <button id="logout-button" class="logout-nav-btn hidden" type="button">Logout</button>
+        <span id="user-pill" class="user-pill hidden" title="Signed in"></span>
+        <a class="nav-cta" href="#start-here">Start Workflow</a>
       </div>
-
-      <div class="nav-dropdown">
-        <button type="button">Live Tools ▾</button>
-        <div class="dropdown-menu wide-menu">
-          <a href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank"><strong>SOW to RICE Intelligence</strong><span>Scope-to-RICE classification and delivery risk generator</span></a>
-          <a href="https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/" target="_blank"><strong>Enterprise Structure Intelligence</strong><span>Common Design strategy for GL, HCM, PPM, SCM</span></a>
-          <a href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank"><strong>Discovery Command Center Pro</strong><span>Dynamic discovery questions, risks, and workshop outputs</span></a>
-          <a href="https://configurationreadinessengine-witvv25ai2u2hb3lvw9qgt.streamlit.app/" target="_blank"><strong>Configuration Readiness Engine</strong><span>Build dependency, blocker, and setup readiness tracking</span></a>
-          <a href="https://scenariointelligenceengine-fpjfpn7dhpfe36dtylrbc3.streamlit.app/" target="_blank"><strong>Scenario Intelligence Engine</strong><span>SIT/UAT scenario, negative test, and validation generator</span></a>
-          <a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank"><strong>COA Transformation Accelerator</strong><span>Legacy-to-Oracle mapping and validation</span></a>
-          <a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank"><strong>BCEA Design Accelerator</strong><span>Budgetary Control and funds-check design</span></a>
-          <a href="https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/" target="_blank"><strong>Journal Approvals Accelerator</strong><span>GL approval-routing design support</span></a>
-          <a href="https://apinvoiceapprovals-prvs4kmw9bmfjnc5qm3rdw.streamlit.app/" target="_blank"><strong>AP Invoice Approvals Accelerator</strong><span>Payables approval workflow readiness</span></a>
-          <a href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank"><strong>Per Diem Transformation Engine</strong><span>Oracle Expenses per diem setup support</span></a>
-        </div>
-      </div>
-
-      <div class="nav-dropdown">
-        <button type="button">Playbooks ▾</button>
-        <div class="dropdown-menu wide-menu">
-          <a href="#coa-playbook"><strong>COA Playbook</strong><span>COA methodology and governance</span></a>
-          <a href="#bcea-playbook"><strong>BCEA Playbook</strong><span>Budgetary Control and Encumbrance methodology</span></a>
-          <a href="#playbooks-next"><strong>Playbook Engine Roadmap</strong><span>Next methodology layer</span></a>
-        </div>
-      </div>
-
-      <div class="nav-dropdown">
-        <button type="button">Discovery ▾</button>
-        <div class="dropdown-menu wide-menu">
-          <a href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank"><strong>Discovery Command Center Pro</strong><span>Dynamic requirement intelligence system</span></a>
-          <a href="#discovery-workstreams"><strong>Discovery Workstreams</strong><span>COA, BCEA, approvals, migration, testing, cutover</span></a>
-          <a href="#discovery-risk-radar"><strong>Discovery Risk Radar</strong><span>Early warning signs before design/build</span></a>
-        </div>
-      </div>
-
-      <div class="nav-dropdown">
-        <button type="button">Build & Configure ▾</button>
-        <div class="dropdown-menu wide-menu">
-          <a href="https://configurationreadinessengine-witvv25ai2u2hb3lvw9qgt.streamlit.app/" target="_blank"><strong>Configuration Readiness Engine</strong><span>Track setup dependencies, blockers, ownership, and build readiness</span></a>
-          <a href="https://scenariointelligenceengine-fpjfpn7dhpfe36dtylrbc3.streamlit.app/" target="_blank"><strong>Scenario Intelligence Engine</strong><span>Generate SIT/UAT scenarios, edge cases, validations, and evidence</span></a>
-        </div>
-      </div>
-
-      <div class="nav-dropdown">
-        <button type="button">Platform ▾</button>
-        <div class="dropdown-menu wide-menu">
-          <a href="#workspace-engine" data-requires-auth="true"><strong>Member Workspace</strong><span>Projects, switching, saved accelerator runs</span></a>
-          <a href="#operating-system"><strong>Operating System Vision</strong><span>Implementation intelligence platform</span></a>
-          <a href="#early-access-form"><strong>Early Access</strong><span>Join and share implementation pain</span></a>
-          <a href="#roadmap"><strong>Roadmap</strong><span>Product direction and future layers</span></a>
-          <a href="#safe-use-guidance"><strong>Safe Use & Upload Guidance</strong><span>PII, PHI, SPI restrictions and acceptable-use rules</span></a>
-          <a href="#terms"><strong>Terms & Privacy</strong><span>Phase 1 trust and compliance foundation</span></a>
-        </div>
-      </div>
-
-      <a href="#audiences">Use Cases</a>
     </div>
-
-    <div class="nav-actions auth-nav-actions">
-      <button id="dashboard-button" class="dashboard-nav-btn hidden" type="button">Dashboard</button>
-      <button id="login-button" class="login-nav-btn" type="button">Login / Sign Up</button>
-      <button id="logout-button" class="logout-nav-btn hidden" type="button">Logout</button>
-      <span id="user-pill" class="user-pill hidden" title="Signed in"></span>
-      <a class="nav-cta launch-coa-nav" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank">Launch COA</a>
-      <a class="nav-cta feedback-nav" href="#early-access-form">Feedback</a>
-    </div>
-
   </nav>
 
-  
-  <section class="hero billion-hero">
-    <div class="badge">Oracle Implementation Intelligence Platform</div>
-    <h1>Oracle Cloud Implementation Operating System for Finance & Public Sector Delivery Teams</h1>
-    <p>
-      Standardize discovery, design decisions, COA/BCEA architecture, approval configuration, testing scenarios,
-      cutover planning, migration validation, audit evidence, and reusable client knowledge — all in one implementation intelligence workspace.
-    </p>
-    <div class="hero-positioning-line">
-      <strong>Jira manages tasks.</strong>
-      <span>OracleToolkit manages implementation intelligence.</span>
-    </div>
-    <div class="cta-row hero-cta-grid">
-      <a class="cta" href="#early-access-form" onclick="gtagSafe && gtagSafe('early_access_cta_click')">Get Early Access</a>
-      <a class="secondary" href="#operating-system">See the Operating System</a>
-      <a class="secondary" href="#bcea-playbook">Explore BCEA Playbook</a>
-      <a class="secondary" href="#live-products">Explore Live Accelerators</a>
-    </div>
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">Oracle Cloud Implementation Intelligence Platform</span>
+        <h1>Stop running Oracle Cloud implementations as disconnected tools.</h1>
+        <p class="hero-copy">
+          OracleToolkit guides consultants, solution architects, PMO teams, and client SMEs through discovery,
+          enterprise design, SOW-to-RICE planning, configuration readiness, SIT/UAT scenarios, and delivery governance.
+        </p>
+        <div class="category-line">
+          <strong>Jira manages tasks.</strong>
+          <span>OracleToolkit manages implementation intelligence.</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#start-here" onclick="gtagSafe('hero_start_workflow_click')">What are you trying to solve?</a>
+          <a class="btn btn-secondary" href="/oracletoolkit-methodology.html" onclick="gtagSafe('hero_methodology_click')">See Methodology</a>
+        </div>
+      </div>
 
-    <div class="os-capability-grid">
-      <div><strong>Discovery</strong><span>Capture client inputs, decisions, assumptions, and unresolved design risks.</span></div>
-      <div><strong>Design Decisions</strong><span>Preserve COA, BCEA, approvals, workflow, and migration logic.</span></div>
-      <div><strong>Testing</strong><span>Connect SIT/UAT scenarios to implementation risks and readiness evidence.</span></div>
-      <div><strong>Cutover</strong><span>Structure go-live planning, validation, reconciliations, and escalation knowledge.</span></div>
-      <div><strong>Accelerators</strong><span>Launch reusable tools from the project workspace, not isolated links.</span></div>
-      <div><strong>Audit Evidence</strong><span>Retain decision history and reusable client knowledge for future phases.</span></div>
+      <div class="hero-panel">
+        <h3>Recommended first workflow</h3>
+        <div class="mini-flow">
+          <div><b>1</b><span><strong>Discovery</strong><br>Capture requirements and design risks.</span></div>
+          <div><b>2</b><span><strong>SOW to RICE</strong><br>Convert scope into delivery objects.</span></div>
+          <div><b>3</b><span><strong>Enterprise Design</strong><br>Align GL, HCM, PPM, SCM, reporting, and security.</span></div>
+          <div><b>4</b><span><strong>Readiness + Testing</strong><br>Validate build readiness and generate SIT/UAT coverage.</span></div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="section compliance-banner" id="safe-use-guidance">
-    <div class="compliance-card">
+  <section class="section" id="start-here">
+    <div class="start-card">
+      <div class="start-header">
+        <div>
+          <span class="kicker">Guided Workflow Onboarding</span>
+          <h2>What are you trying to solve?</h2>
+          <p>Start from the project pain. OracleToolkit routes you to the right accelerator and the right implementation phase.</p>
+        </div>
+        <a class="btn" style="background:#0A2040;color:white;" href="/oracletoolkit-methodology.html">View Full Framework</a>
+      </div>
+
+      <div class="pain-grid">
+        <a class="pain-card" href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank" rel="noopener" onclick="gtagSafe('solve_discovery_click')">
+          <span>Discovery</span>
+          <strong>I need better workshop questions.</strong>
+          <p>Generate discovery prompts, dependencies, risks, and workshop outputs.</p>
+          <em>Open Discovery Command Center Pro →</em>
+        </a>
+
+        <a class="pain-card" href="https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/" target="_blank" rel="noopener" onclick="gtagSafe('solve_enterprise_click')">
+          <span>Common Design</span>
+          <strong>I need enterprise structure alignment.</strong>
+          <p>Connect Ledger, BU, Legal Entity, departments, locations, ownership, security, and reporting.</p>
+          <em>Open Enterprise Structure Intelligence →</em>
+        </a>
+
+        <a class="pain-card" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" rel="noopener" onclick="gtagSafe('solve_coa_click')">
+          <span>COA</span>
+          <strong>I need Chart of Accounts design support.</strong>
+          <p>Support legacy-to-Oracle COA mapping, structure decisions, and validation logic.</p>
+          <em>Start COA Accelerator →</em>
+        </a>
+
+        <a class="pain-card" href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank" rel="noopener" onclick="gtagSafe('solve_bcea_click')">
+          <span>Budgetary Control</span>
+          <strong>I need BCEA design clarity.</strong>
+          <p>Design control budgets, funds-check logic, advisory/absolute controls, and governance risks.</p>
+          <em>Open BCEA Architect →</em>
+        </a>
+
+        <a class="pain-card" href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank" rel="noopener" onclick="gtagSafe('solve_sow_click')">
+          <span>Scope Planning</span>
+          <strong>I need SOW converted into RICE.</strong>
+          <p>Translate scope language into reports, integrations, conversions, extensions, workflows, ownership, and risk.</p>
+          <em>Open SOW to RICE Intelligence →</em>
+        </a>
+
+        <a class="pain-card" href="https://scenariointelligenceengine-fpjfpn7dhpfe36dtylrbc3.streamlit.app/" target="_blank" rel="noopener" onclick="gtagSafe('solve_testing_click')">
+          <span>Testing</span>
+          <strong>I need SIT/UAT scenario coverage.</strong>
+          <p>Generate positive, negative, accounting, integration, security, audit, and edge-case testing scenarios.</p>
+          <em>Open Scenario Intelligence Engine →</em>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="signature" id="lifecycle">
+    <div class="section">
+      <div class="section-title center">
+        <span class="kicker">Signature Workflow</span>
+        <h2>OracleToolkit Delivery Operating Workflow</h2>
+        <p>Instead of presenting isolated tools, OracleToolkit connects each accelerator to the real implementation lifecycle.</p>
+      </div>
+
+      <div class="lifecycle">
+        <div class="life-step"><div class="num">1</div><h3>Discovery</h3><p>Requirements, gaps, risks, assumptions, and open decisions.</p><a href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank" rel="noopener">Launch →</a></div>
+        <div class="life-step"><div class="num">2</div><h3>Common Design</h3><p>Enterprise structure, COA, BCEA, ownership, and cross-module design.</p><a href="https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/" target="_blank" rel="noopener">Launch →</a></div>
+        <div class="life-step"><div class="num">3</div><h3>SOW → RICE</h3><p>Scope interpretation, RICE inventory, ownership, complexity, and delivery risk.</p><a href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank" rel="noopener">Launch →</a></div>
+        <div class="life-step"><div class="num">4</div><h3>Build Readiness</h3><p>Configuration blockers, dependencies, ownership, and sprint readiness.</p><a href="https://configurationreadinessengine-witvv25ai2u2hb3lvw9qgt.streamlit.app/" target="_blank" rel="noopener">Launch →</a></div>
+        <div class="life-step"><div class="num">5</div><h3>SIT / UAT</h3><p>Scenario coverage, negative tests, validations, evidence, and sign-off readiness.</p><a href="https://scenariointelligenceengine-fpjfpn7dhpfe36dtylrbc3.streamlit.app/" target="_blank" rel="noopener">Launch →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="dependency">
+    <div class="workflow-strip">
       <div>
-        <span class="workspace-kicker">Enterprise Safe-Use Guidance</span>
-        <h2>Designed for implementation intelligence — not production-sensitive data storage.</h2>
-        <p>OracleToolkit supports discovery, design, configuration readiness, testing, and governance. Do not upload production payroll, patient records, supplier banking files, SSNs, PHI, SPI, or other highly sensitive personal data.</p>
+        <span class="kicker">Workflow Dependency Score Upgrade</span>
+        <h3>Every accelerator should create the next project action.</h3>
+        <p>
+          OracleToolkit is being positioned as a delivery operating system: discovery should feed design,
+          design should feed configuration, configuration should feed testing, and testing should feed deployment readiness.
+        </p>
+      </div>
+      <div class="dependency-list">
+        <div>Discovery output → Design questions</div>
+        <div>Enterprise design → COA/BCEA decisions</div>
+        <div>SOW interpretation → RICE delivery tracker</div>
+        <div>Configuration readiness → SIT entry criteria</div>
+        <div>Scenario intelligence → UAT evidence and sign-off</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="journeys">
+    <div class="section-title">
+      <span class="kicker">Role-Based Journeys</span>
+      <h2>Different users need different entry points.</h2>
+      <p>The homepage now guides consultants, architects, and PMOs by the outcomes they care about.</p>
+    </div>
+
+    <div class="role-grid">
+      <div class="card">
+        <h3>For Consultants</h3>
+        <p>Save time producing workshop outputs, configuration checks, and testing packs.</p>
+        <ul>
+          <li>Use guided accelerators</li>
+          <li>Generate structured outputs</li>
+          <li>Reduce manual documentation</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>For Solution Architects</h3>
+        <p>Strengthen governance, cross-module consistency, decision traceability, and risk visibility.</p>
+        <ul>
+          <li>Design decision register</li>
+          <li>Dependency mapping</li>
+          <li>Readiness scoring</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>For PMO Teams</h3>
+        <p>Improve accountability, delivery confidence, status visibility, and go-live readiness.</p>
+        <ul>
+          <li>SIT/UAT coverage</li>
+          <li>RICE ownership</li>
+          <li>Risk heat maps</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="accelerators">
+    <div class="section-title">
+      <span class="kicker">Live Accelerators</span>
+      <h2>10 tools, organized by implementation pain.</h2>
+      <p>Each accelerator should solve a specific problem and create a downstream project artifact.</p>
+    </div>
+
+    <div class="tool-grid">
+      <div class="tool-card"><div><span>Scope Planning</span><h3>SOW to RICE Intelligence</h3><p>Convert SOW scope into RICE objects, ownership, complexity, and risks.</p></div><a href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank" rel="noopener">Launch</a></div>
+      <div class="tool-card"><div><span>Discovery</span><h3>Discovery Command Center Pro</h3><p>Dynamic discovery questions, risks, dependencies, and workshop outputs.</p></div><a href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank" rel="noopener">Launch</a></div>
+      <div class="tool-card"><div><span>Common Design</span><h3>Enterprise Structure Intelligence</h3><p>GL, HCM, PPM, SCM, security, reporting, and ownership alignment.</p></div><a href="https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/" target="_blank" rel="noopener">Launch</a></div>
+      <div class="tool-card"><div><span>COA</span><h3>COA Transformation Accelerator</h3><p>Legacy-to-Oracle COA strategy, mapping, and validation support.</p></div><a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" rel="noopener">Launch</a></div>
+      <div class="tool-card"><div><span>Budgetary Control</span><h3>BCEA Design Accelerator</h3><p>Control budgets, funds-check strategy, advisory/absolute controls, and risks.</p></div><a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank" rel="noopener">Launch</a></div>
+      <div class="tool-card"><div><span>Build</span><h3>Configuration Readiness Engine</h3><p>Track setup dependencies, blockers, ownership, and sprint readiness.</p></div><a href="https://configurationreadinessengine-witvv25ai2u2hb3lvw9qgt.streamlit.app/" target="_blank" rel="noopener">Launch</a></div>
+      <div class="tool-card"><div><span>Testing</span><h3>Scenario Intelligence Engine</h3><p>Generate SIT/UAT scenarios, validations, negative tests, and evidence.</p></div><a href="https://scenariointelligenceengine-fpjfpn7dhpfe36dtylrbc3.streamlit.app/" target="_blank" rel="noopener">Launch</a></div>
+      <div class="tool-card"><div><span>Approvals</span><h3>Journal Approvals Accelerator</h3><p>Support GL approval-routing and workflow design readiness.</p></div><a href="https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/" target="_blank" rel="noopener">Launch</a></div>
+      <div class="tool-card"><div><span>Approvals</span><h3>AP Invoice Approvals Accelerator</h3><p>Support Payables approval workflow readiness and design clarity.</p></div><a href="https://apinvoiceapprovals-prvs4kmw9bmfjnc5qm3rdw.streamlit.app/" target="_blank" rel="noopener">Launch</a></div>
+      <div class="tool-card"><div><span>Expenses</span><h3>Per Diem Transformation Engine</h3><p>Support Oracle Expenses per diem configuration and transformation.</p></div><a href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" rel="noopener">Launch</a></div>
+    </div>
+  </section>
+
+  <section class="section" id="proof">
+    <div class="section-title">
+      <span class="kicker">Trust Assets</span>
+      <h2>Built from real Oracle Cloud implementation scenarios.</h2>
+      <p>These anonymized implementation patterns help visitors understand the practical value behind the platform.</p>
+    </div>
+
+    <div class="proof-grid">
+      <div class="proof-card">
+        <span class="label">K-12 / Public Sector</span>
+        <h3>COA Transformation</h3>
+        <p><b>Problem:</b> Legacy chart structures often create reporting, grants, and budget control confusion.</p>
+        <p><b>OracleToolkit response:</b> guide COA mapping, validation, and design decision capture.</p>
+      </div>
+
+      <div class="proof-card">
+        <span class="label">Budget Governance</span>
+        <h3>BCEA Design Clarity</h3>
+        <p><b>Problem:</b> Teams struggle with advisory vs absolute controls, funds-check behavior, and control budget scope.</p>
+        <p><b>OracleToolkit response:</b> standardize BCEA design reasoning and risk identification.</p>
+      </div>
+
+      <div class="proof-card">
+        <span class="label">Delivery Planning</span>
+        <h3>SOW to RICE Conversion</h3>
+        <p><b>Problem:</b> RICE objects are hidden inside ambiguous scope language until late in the project.</p>
+        <p><b>OracleToolkit response:</b> classify RICE objects early with ownership, complexity, and delivery risks.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="workspace">
+    <div class="workspace">
+      <div>
+        <span class="kicker">Next Platform Layer</span>
+        <h2>Project Memory will turn tools into a platform.</h2>
+        <p>
+          The next maturity step is saved projects: decisions, COA mappings, BCEA assumptions, RICE inventory,
+          configuration readiness, testing scenarios, and deployment evidence should stay connected across the project lifecycle.
+        </p>
+        <a class="btn" style="background:#0A2040;color:white;" href="#start-here">Start with a workflow</a>
+      </div>
+      <div class="memory-grid">
+        <div>Saved Discovery Outputs</div>
+        <div>Saved Design Decisions</div>
+        <div>Saved COA / BCEA Logic</div>
+        <div>Saved RICE Inventory</div>
+        <div>Saved Readiness Scores</div>
+        <div>Saved SIT/UAT Packs</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="compliance" id="safe-use-guidance">
+    <div class="section">
+      <div class="section-title">
+        <span class="kicker">PHI / PII / SPI Safe Use</span>
+        <h2>Enterprise-safe implementation guidance.</h2>
+        <p>OracleToolkit is intended for implementation design, governance, configuration readiness, testing, and delivery acceleration — not production-sensitive data storage.</p>
       </div>
       <div class="compliance-grid">
-        <div><strong>PII</strong><span>Names, emails, employee IDs, addresses, SSNs, and contact details should be removed or masked before upload.</span></div>
-        <div><strong>PHI</strong><span>Health, insurance, disability, medical, or patient-related information should not be uploaded.</span></div>
-        <div><strong>SPI</strong><span>Salary, tax IDs, bank data, credentials, citizenship, biometrics, or sensitive HR/payroll data should not be uploaded.</span></div>
-        <div><strong>Safe Inputs</strong><span>Use sanitized SOWs, design notes, COA structures, requirement summaries, decisions, and testing metadata.</span></div>
+        <div><strong>PII</strong><span>Mask names, emails, employee IDs, SSNs, addresses, and contact details before upload.</span></div>
+        <div><strong>PHI</strong><span>Do not upload health, insurance, disability, medical, or patient-related information.</span></div>
+        <div><strong>SPI</strong><span>Do not upload payroll, salary, tax IDs, bank data, credentials, or sensitive HR data.</span></div>
+        <div><strong>Safe Inputs</strong><span>Use sanitized SOWs, design notes, COA structures, decisions, and testing metadata.</span></div>
       </div>
     </div>
   </section>
 
-
-
-  
-
-  <section class="section guided-workflow-section" id="guided-workflow">
-    <div class="guided-workflow-card">
-      <div class="guided-workflow-head">
-        <span class="workspace-kicker">Guided Workflow Onboarding</span>
-        <h2>What are you trying to solve?</h2>
-        <p>Start with the problem you are facing in an Oracle Cloud implementation. OracleToolkit will route you to the right accelerator by project phase, not just by tool name.</p>
-      </div>
-
-      <div class="recommended-start-card">
-        <div>
-          <span class="recommended-label">Recommended starting point</span>
-          <h3>New Oracle Cloud implementation?</h3>
-          <p>Use this sequence to move from scope understanding to design, configuration readiness, and testing intelligence.</p>
-        </div>
-        <div class="recommended-flow">
-          <a href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank" onclick="gtag('event','guided_start_discovery_click')">1. Discovery</a>
-          <a href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank" onclick="gtag('event','guided_start_sow_rice_click')">2. SOW to RICE</a>
-          <a href="https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/" target="_blank" onclick="gtag('event','guided_start_enterprise_structure_click')">3. Enterprise Structure</a>
-          <a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','guided_start_coa_click')">4. COA</a>
-          <a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank" onclick="gtag('event','guided_start_bcea_click')">5. BCEA</a>
-        </div>
-      </div>
-
-      <div class="guided-solve-grid">
-        <a class="guided-solve-card" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','guided_coa_launch_click')">
-          <span>Common Design</span><strong>Chart of Accounts Design</strong><em>Start COA Accelerator →</em>
-        </a>
-        <a class="guided-solve-card" href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank" onclick="gtag('event','guided_bcea_launch_click')">
-          <span>Common Design</span><strong>Budgetary Control Strategy</strong><em>Open BCEA Architect →</em>
-        </a>
-        <a class="guided-solve-card" href="https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/" target="_blank" onclick="gtag('event','guided_enterprise_launch_click')">
-          <span>Common Design</span><strong>Enterprise Structure & Ownership</strong><em>Launch Enterprise Structure →</em>
-        </a>
-        <a class="guided-solve-card" href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank" onclick="gtag('event','guided_sow_launch_click')">
-          <span>Scope Intelligence</span><strong>SOW to RICE Planning</strong><em>Launch SOW to RICE →</em>
-        </a>
-        <a class="guided-solve-card" href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank" onclick="gtag('event','guided_discovery_launch_click')">
-          <span>Discovery</span><strong>Discovery Workshops</strong><em>Open Discovery Command Center →</em>
-        </a>
-        <a class="guided-solve-card" href="https://configurationreadinessengine-witvv25ai2u2hb3lvw9qgt.streamlit.app/" target="_blank" onclick="gtag('event','guided_config_launch_click')">
-          <span>Build & Configure</span><strong>Configuration Readiness</strong><em>Open Readiness Engine →</em>
-        </a>
-        <a class="guided-solve-card" href="https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/" target="_blank" onclick="gtag('event','guided_approval_launch_click')">
-          <span>Approvals</span><strong>Approval Workflow Design</strong><em>Launch Approval Designer →</em>
-        </a>
-        <a class="guided-solve-card" href="https://scenariointelligenceengine-fpjfpn7dhpfe36dtylrbc3.streamlit.app/" target="_blank" onclick="gtag('event','guided_scenario_launch_click')">
-          <span>Testing</span><strong>SIT / UAT Scenario Generation</strong><em>Launch Scenario Intelligence →</em>
-        </a>
-      </div>
-
-      <div class="lifecycle-strip" aria-label="Oracle Cloud implementation lifecycle">
-        <a href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank">Discovery</a>
-        <span>→</span>
-        <a href="https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/" target="_blank">Enterprise Design</a>
-        <span>→</span>
-        <a href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank">RICE Planning</a>
-        <span>→</span>
-        <a href="https://configurationreadinessengine-witvv25ai2u2hb3lvw9qgt.streamlit.app/" target="_blank">Configuration</a>
-        <span>→</span>
-        <a href="https://scenariointelligenceengine-fpjfpn7dhpfe36dtylrbc3.streamlit.app/" target="_blank">Testing</a>
-        <span>→</span>
-        <a href="#coming-soon">Deployment</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section quick-index-section" id="quick-index">
-    <div class="quick-index-card">
-      <div>
-        <span class="workspace-kicker">Platform Navigation</span>
-        <h2>Choose the implementation layer you need.</h2>
-        <p>OracleToolkit is now organized as a platform: accelerators, playbooks, discovery, workspace, and delivery intelligence.</p>
-      </div>
-      <div class="quick-index-grid">
-        <a href="#live-products"><strong>Live Accelerators</strong><span>10 active tools</span></a>
-        <a href="#coa-playbook"><strong>COA Playbook</strong><span>COA methodology</span></a>
-        <a href="#bcea-playbook"><strong>BCEA Playbook</strong><span>Budgetary control methodology</span></a>
-        <a href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank"><strong>Discovery Command Center Pro</strong><span>Control discovery decisions</span></a>
-        <a href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank"><strong>SOW to RICE Intelligence</strong><span>Convert scope into delivery objects</span></a>
-        <a href="#workspace-engine"><strong>Member Workspace</strong><span>Save projects and runs</span></a>
-        <a href="#early-access-form"><strong>Early Access</strong><span>Share implementation pain</span></a>
-      </div>
-    </div>
-  </section>
-
-<section id="dashboard-area">
-    <div class="dashboard-shell">
-      <aside class="dash-sidebar">
-        <div class="dash-brand"><div class="cube-logo">◇</div><div><strong>ORACLE<span style="color:#facc15;">TOOLKIT</span></strong><small>Implementation Accelerators</small></div></div>
-        <div class="dash-menu"><a class="active" href="#dashboard-area">⌂ Dashboard</a></div>
-        <div class="dash-section-title">Implementation</div>
-        <div class="dash-menu">
-          <a href="#workspace-engine">▣ Workspace OS</a>
-          <a href="#workspace">▣ Saved Runs</a>
-          <a href="#saved-runs">◷ Saved Runs</a>
-          <a href="#member-tools">▣ Tool Library</a>
-          <a href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank" onclick="gtag('event','sidebar_sow_rice_launch_click')">◆ SOW to RICE Intelligence <span class="beta live-mini">LIVE</span></a>
-          <a href="https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/" target="_blank" onclick="gtag('event','sidebar_enterprise_structure_launch_click')">◇ Enterprise Structure Intelligence <span class="beta live-mini">LIVE</span></a>
-          <a href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank" onclick="gtag('event','sidebar_discovery_pro_launch_click')">◆ Discovery Command Center Pro <span class="beta live-mini">LIVE</span></a>
-          <a href="https://configurationreadinessengine-witvv25ai2u2hb3lvw9qgt.streamlit.app/" target="_blank" onclick="gtag('event','sidebar_config_readiness_launch_click')">◆ Configuration Readiness <span class="beta live-mini">LIVE</span></a>
-          <a href="https://scenariointelligenceengine-fpjfpn7dhpfe36dtylrbc3.streamlit.app/" target="_blank" onclick="gtag('event','sidebar_scenario_intelligence_launch_click')">◆ Scenario Intelligence <span class="beta live-mini">LIVE</span></a>
-          <a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','sidebar_coa_launch_click')">▦ COA Accelerator <span class="beta live-mini">LIVE</span></a>
-          <a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank" onclick="gtag('event','sidebar_bcea_launch_click')">▧ BCEA Design <span class="beta live-mini">LIVE</span></a>
-          <a href="https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/" target="_blank" onclick="gtag('event','sidebar_journal_launch_click')">▤ Journal Approvals <span class="beta live-mini">LIVE</span></a>
-          <a href="https://apinvoiceapprovals-prvs4kmw9bmfjnc5qm3rdw.streamlit.app/" target="_blank" onclick="gtag('event','sidebar_ap_invoice_launch_click')">▥ AP Invoice Approvals <span class="beta live-mini">LIVE</span></a>
-          <a href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" onclick="gtag('event','sidebar_per_diem_launch_click')">◉ Per Diem Engine <span class="beta live-mini">LIVE</span></a>
-          <a href="#dashboard-health">▤ Reports</a>
-        </div>
-        <div class="dash-section-title">Public Sector</div>
-        <div class="dash-menu">
-          <a href="#member-tools">◎ Fund Accounting</a><a href="#member-tools">✦ Grants Management</a><a href="#member-tools">⌁ K-12 DOE Advisor</a><a href="#dashboard-health">☑ Compliance Center</a>
-        </div>
-        <div class="dash-section-title">Platform</div>
-        <div class="dash-menu">
-          <a href="#ai-assistant">✧ AI Assistant <span class="beta">SOON</span></a><a href="#member-tools">▥ Templates</a><a href="#trust">ⓘ Knowledge Center</a>
-        </div>
-        <div class="dash-user"><div class="avatar">CU</div><div><strong id="sidebar-user-name">Consultant User</strong><small>Solution Architect</small></div></div>
-      </aside>
-
-      <main class="dash-main">
-        <div class="dash-topbar">
-          <div class="dash-search">⌕ <input id="dashboard-search" type="text" placeholder="Search tools, modules, accelerators..." /></div>
-          <div class="top-actions"><select class="top-project-switcher" id="top-project-switcher"><option value="">Select Project...</option></select>
-            <button class="project-select" id="all-tools-btn" type="button">All Tools ▾</button><button class="icon-btn" id="timeline-btn" type="button" title="Go to phase tracker">📅</button><button class="icon-btn notification-dot" id="activity-btn" type="button" title="Go to recent activity">🔔</button><button class="customize-btn" id="member-workspace-btn" type="button">⚙ Member Workspace</button></div>
-        </div>
-        <div class="dash-content">
-          <div class="welcome-row">
-            <div><h2>Welcome back, <span id="dashboard-user-name">Consultant User</span></h2><p>Access live accelerators, roadmap tools, and implementation intelligence from one workspace.</p></div>
-            <div class="dashboard-note"><strong>Member Workspace:</strong> Live tools are open for early access. Future premium features will include saved runs, AI guidance, and advanced outputs.</div>
-          </div>
-
-          <section class="suite-overview" id="suite-overview">
-            <div class="suite-overview-head">
-              <div>
-                <span class="workspace-kicker">Live Accelerator Suite</span>
-                <h3>Ten live Oracle implementation accelerators available now.</h3>
-                <p>Use this member workspace as the central launchpad for active tools, saved runs, feedback, and future AI-driven implementation guidance.</p>
-              </div>
-            </div>
-            <div class="suite-launch-grid">
-              <a href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank" onclick="gtag('event','suite_sow_rice_launch_click')"><strong>SOW to RICE Intelligence</strong><span>Common Design</span><em>LIVE</em></a>
-              <a href="https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/" target="_blank" onclick="gtag('event','suite_enterprise_structure_launch_click')"><strong>Enterprise Structure Intelligence</strong><span>Common Design</span><em>LIVE</em></a>
-              <a href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank" onclick="gtag('event','suite_discovery_pro_launch_click')"><strong>Discovery Command Center Pro</strong><span>Discovery</span><em>LIVE</em></a>
-              <a href="https://configurationreadinessengine-witvv25ai2u2hb3lvw9qgt.streamlit.app/" target="_blank" onclick="gtag('event','suite_config_readiness_launch_click')"><strong>Configuration Readiness Engine</strong><span>Build & Configure</span><em>LIVE</em></a>
-              <a href="https://scenariointelligenceengine-fpjfpn7dhpfe36dtylrbc3.streamlit.app/" target="_blank" onclick="gtag('event','suite_scenario_intelligence_launch_click')"><strong>Scenario Intelligence Engine</strong><span>Testing</span><em>LIVE</em></a>
-              <a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','suite_coa_launch_click')"><strong>COA Transformation</strong><span>GL & BCEA</span><em>LIVE</em></a>
-              <a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank" onclick="gtag('event','suite_bcea_launch_click')"><strong>BCEA Design</strong><span>Budgetary Control</span><em>LIVE</em></a>
-              <a href="https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/" target="_blank" onclick="gtag('event','suite_journal_launch_click')"><strong>Journal Approvals</strong><span>GL Approvals</span><em>LIVE</em></a>
-              <a href="https://apinvoiceapprovals-prvs4kmw9bmfjnc5qm3rdw.streamlit.app/" target="_blank" onclick="gtag('event','suite_ap_invoice_launch_click')"><strong>AP Invoice Approvals</strong><span>Payables</span><em>LIVE</em></a>
-              <a href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" onclick="gtag('event','suite_per_diem_launch_click')"><strong>Per Diem Engine</strong><span>Expenses</span><em>LIVE</em></a>
-            </div>
-          </section>
-
-          <div class="stat-grid">
-            <div class="stat-card"><div class="stat-icon i-blue">▣</div><small>Live Accelerators</small><strong>7</strong><span>Workspace-connected</span></div>
-            <div class="stat-card"><div class="stat-icon i-purple">▦</div><small>Finance Coverage</small><strong>GL/AP/EXP</strong><span>3 finance areas</span></div>
-            <div class="stat-card"><div class="stat-icon i-green">🛡</div><small>Public Sector Focus</small><strong>BCEA</strong><span>Fund + control design</span></div>
-            <div class="stat-card"><div class="stat-icon i-red">⚠</div><small>Approval Engines</small><strong>2</strong><span>Journal + AP Invoice</span></div>
-            <div class="stat-card"><div class="stat-icon i-blue">↻</div><small>Workspace v1</small><strong>Live</strong><span>Saved project context</span></div>
-            <div class="stat-card"><div class="stat-icon i-amber">🚀</div><small>Roadmap</small><strong>14+</strong><span>Across modules</span></div>
-          </div>
-
-          <div class="dash-grid" id="dashboard-health">
-            <div class="dash-card"><div class="dash-card-head"><h3>Implementation Health Overview</h3><button class="dash-filter">Demo View ▾</button></div><div class="health-wrap"><div><div class="ring"><div class="ring-inner"><strong>78%</strong><span>Healthy</span></div></div></div><div class="risk-list-premium"><div class="risk-row"><span>COA Mapping Errors</span><span class="risk-badge rb-red">45</span></div><div class="risk-row"><span>Funds Check Failures</span><span class="risk-badge rb-red">73</span></div><div class="risk-row"><span>Budgetary Control Rules</span><span class="risk-badge rb-amber">18</span></div><div class="risk-row"><span>Interface Readiness Issues</span><span class="risk-badge rb-amber">9</span></div><div class="risk-row"><span>Reconciliation Issues</span><span class="risk-badge rb-green">6</span></div></div></div><a class="view-link" href="#member-tools">View Tool Library →</a></div>
-            <div class="dash-card">
-              <div class="dash-card-head"><h3>Recommended Next Actions</h3><button class="dash-filter">Live Suite ▾</button></div>
-              <div class="health-table">
-                <div class="table-row"><span>Test COA Transformation Accelerator</span><span class="status s-good">Live</span><span>Now</span><span>High</span></div>
-                <div class="table-row"><span>Test BCEA Design Accelerator</span><span class="status s-good">Live</span><span>Now</span><span>High</span></div>
-                <div class="table-row"><span>Test Journal Approvals Accelerator</span><span class="status s-good">Live</span><span>Now</span><span>High</span></div>
-                <div class="table-row"><span>Test AP Invoice Approvals Accelerator</span><span class="status s-good">Live</span><span>Now</span><span>High</span></div>
-                <div class="table-row"><span>Test Per Diem Transformation Engine</span><span class="status s-good">Live</span><span>Now</span><span>Medium</span></div>
-              </div>
-              <a class="view-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Submit Feedback →</a></div>
-          </div>
-
-
-          <section class="workspace-os" id="workspace-os">
-            <div class="workspace-os-hero">
-              <div>
-                <span class="workspace-kicker">OracleToolkit Workspace v1</span>
-                <h3>Oracle Cloud implementation operating system for Finance & Public Sector delivery teams.</h3>
-                <p>
-                  Create a project workspace, track implementation phase, resume previous work,
-                  record tool decisions, and launch the right accelerator from one member control center.
-                </p>
-              </div>
-              <div class="resume-card">
-                <span>Resume Previous Work</span>
-                <strong id="resume-project-name">No project saved yet</strong>
-                <p id="resume-project-meta">Create your first project workspace below.</p>
-                <button class="small-btn" id="resume-work-btn" type="button">Resume Workspace</button>
-              </div>
-            </div>
-
-            <div class="workspace-os-grid">
-              <form class="project-form" id="project-form">
-                <div class="form-head">
-                  <h4>Create / Update Project Workspace</h4>
-                  <span>Stored locally in this browser for v1</span>
-                </div>
-
-                <label>
-                  Project Name
-                  <input id="os-project-name" type="text" placeholder="Example: District COA + BCEA Design" />
-                </label>
-
-                <label>
-                  Client / Organization
-                  <input id="os-client-name" type="text" placeholder="Example: K-12 District / City / County" />
-                </label>
-
-                <label>
-                  Sector
-                  <select id="os-sector">
-                    <option value="Public Sector">Public Sector</option>
-                    <option value="K-12 / Education">K-12 / Education</option>
-                    <option value="Commercial">Commercial</option>
-                    <option value="Nonprofit">Nonprofit</option>
-                    <option value="Healthcare">Healthcare</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </label>
-
-                <label>
-                  Project Phase
-                  <select id="os-phase">
-                    <option value="Discovery">Discovery</option>
-                    <option value="Design">Design</option>
-                    <option value="Build">Build</option>
-                    <option value="SIT">SIT</option>
-                    <option value="UAT">UAT</option>
-                    <option value="Mock Conversion">Mock Conversion</option>
-                    <option value="Go-Live Readiness">Go-Live Readiness</option>
-                    <option value="Post Go-Live">Post Go-Live</option>
-                  </select>
-                </label>
-
-                <label>
-                  Primary Module
-                  <select id="os-module">
-                    <option value="GL & BCEA">GL & BCEA</option>
-                    <option value="Payables">Payables</option>
-                    <option value="Expenses">Expenses</option>
-                    <option value="Receivables">Receivables</option>
-                    <option value="Fixed Assets">Fixed Assets</option>
-                    <option value="Cash Management">Cash Management</option>
-                    <option value="Cross-Module">Cross-Module</option>
-                  </select>
-                </label>
-
-                <label>
-                  Go-Live Date
-                  <input id="os-golive" type="date" />
-                </label>
-
-                <label class="wide">
-                  Project Notes / Key Decisions
-                  <textarea id="os-notes" rows="4" placeholder="Example: Fund-level control required. Absolute control for operating funds. Review journal approval routing in Sprint 2."></textarea>
-                </label>
-
-                <div class="workspace-actions">
-                  <button type="submit" class="small-btn">Save Project Workspace</button>
-                  <button type="button" class="small-btn secondary-btn" id="clear-project-form-btn">Clear</button>
-                </div>
-              </form>
-
-              <div class="project-summary-panel">
-                <h4>Current Workspace</h4>
-                <div class="project-summary-row"><span>Project</span><strong id="summary-project">Not created</strong></div>
-                <div class="project-summary-row"><span>Client</span><strong id="summary-client">—</strong></div>
-                <div class="project-summary-row"><span>Sector</span><strong id="summary-sector">—</strong></div>
-                <div class="project-summary-row"><span>Phase</span><strong id="summary-phase">—</strong></div>
-                <div class="project-summary-row"><span>Module</span><strong id="summary-module">—</strong></div>
-                <div class="project-summary-row"><span>Go-Live</span><strong id="summary-golive">—</strong></div>
-              </div>
-            </div>
-
-            <div class="phase-tracker" id="phase-tracker">
-              <div class="phase-step" data-phase="Discovery"><strong>1</strong><span>Discovery</span></div>
-              <div class="phase-step" data-phase="Design"><strong>2</strong><span>Design</span></div>
-              <div class="phase-step" data-phase="Build"><strong>3</strong><span>Build</span></div>
-              <div class="phase-step" data-phase="SIT"><strong>4</strong><span>SIT</span></div>
-              <div class="phase-step" data-phase="UAT"><strong>5</strong><span>UAT</span></div>
-              <div class="phase-step" data-phase="Mock Conversion"><strong>6</strong><span>Mock Conversion</span></div>
-              <div class="phase-step" data-phase="Go-Live Readiness"><strong>7</strong><span>Go-Live</span></div>
-            </div>
-
-            <div class="os-panels">
-              <div class="os-panel">
-                <div class="dash-card-head"><h3>Recommended Accelerators</h3><button class="dash-filter">Contextual</button></div>
-                <div class="recommendation-list" id="recommendation-list">
-                  <a href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank"><strong>Discovery Command Center Pro</strong><span>Recommended for dynamic requirement gathering, workshop outputs, and risk discovery.</span></a>
-                  <a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank"><strong>COA Transformation Accelerator</strong><span>Recommended for COA, public sector, and design phases.</span></a>
-                  <a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank"><strong>BCEA Design Accelerator</strong><span>Recommended for Budgetary Control, funds check, and public sector projects.</span></a>
-                  <a href="https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/" target="_blank"><strong>Journal Approvals Accelerator</strong><span>Recommended for GL approval governance and routing design.</span></a>
-                  <a href="https://apinvoiceapprovals-prvs4kmw9bmfjnc5qm3rdw.streamlit.app/" target="_blank"><strong>AP Invoice Approvals Accelerator</strong><span>Recommended for Payables workflow design.</span></a>
-                  <a href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank"><strong>Per Diem Transformation Engine</strong><span>Recommended for Oracle Expenses per diem setup.</span></a>
-                </div>
-              </div>
-
-              <div class="os-panel">
-                <div class="dash-card-head"><h3>Recent Activity</h3><button class="dash-filter">Workspace</button></div>
-                <div class="os-activity-list" id="os-activity-list">
-                  <div class="empty-runs"><strong>No activity yet.</strong><span>Create or update a project workspace to begin.</span></div>
-                </div>
-              </div>
-
-              <div class="os-panel">
-                <div class="dash-card-head"><h3>Saved Notes</h3><button class="dash-filter">Project</button></div>
-                <div class="saved-notes-box" id="saved-notes-box">
-                  <strong>No saved notes yet.</strong>
-                  <span>Your project notes will appear here after saving the workspace.</span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section class="workspace-engine-v2" id="workspace-engine">
-            <div class="engine-hero">
-              <div>
-                <span class="workspace-kicker">Cloud Workspace Engine v2</span>
-                <h3>Multi-project Oracle implementation workspace.</h3>
-                <p>
-                  Create multiple client/project workspaces, switch between them, save accelerator runs,
-                  and resume implementation context from Supabase cloud storage.
-                </p>
-              </div>
-              <div class="engine-status-card">
-                <span>Current Project</span>
-                <strong id="engine-current-project">No project selected</strong>
-                <p id="engine-current-meta">Create or select a project to begin.</p>
-              </div>
-            </div>
-
-            <div class="engine-tip"><strong>Use the Project Switcher:</strong> create multiple cloud projects, select one from the dropdown, then save accelerator runs under that selected project.</div>
-
-            <div class="engine-grid">
-              <div class="engine-panel create-project-panel">
-                <div class="engine-panel-head">
-                  <h4>Create / Update Cloud Project</h4>
-                  <span>Saved to Supabase</span>
-                </div>
-
-                <form id="cloud-project-form" class="engine-form">
-                  <input type="hidden" id="cloud-project-id" />
-
-                  <label>Project Name
-                    <input id="cloud-project-name" type="text" placeholder="Example: K12 BCEA Design" />
-                  </label>
-
-                  <label>Client / Organization
-                    <input id="cloud-client-name" type="text" placeholder="Example: City / County / District" />
-                  </label>
-
-                  <label>Sector
-                    <select id="cloud-sector">
-                      <option value="Public Sector">Public Sector</option>
-                      <option value="K-12 / Education">K-12 / Education</option>
-                      <option value="Commercial">Commercial</option>
-                      <option value="Healthcare">Healthcare</option>
-                      <option value="Nonprofit">Nonprofit</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </label>
-
-                  <label>Phase
-                    <select id="cloud-phase">
-                      <option value="Discovery">Discovery</option>
-                      <option value="Design">Design</option>
-                      <option value="Build">Build</option>
-                      <option value="SIT">SIT</option>
-                      <option value="UAT">UAT</option>
-                      <option value="Mock Conversion">Mock Conversion</option>
-                      <option value="Go-Live Readiness">Go-Live Readiness</option>
-                      <option value="Post Go-Live">Post Go-Live</option>
-                    </select>
-                  </label>
-
-                  <label>Primary Module
-                    <select id="cloud-module">
-                      <option value="GL & BCEA">GL & BCEA</option>
-                      <option value="Payables">Payables</option>
-                      <option value="Expenses">Expenses</option>
-                      <option value="Receivables">Receivables</option>
-                      <option value="Fixed Assets">Fixed Assets</option>
-                      <option value="Cash Management">Cash Management</option>
-                      <option value="Cross-Module">Cross-Module</option>
-                    </select>
-                  </label>
-
-                  <label>Go-Live Date
-                    <input id="cloud-golive" type="date" />
-                  </label>
-
-                  <label class="wide">Notes / Key Decisions
-                    <textarea id="cloud-notes" rows="4" placeholder="Example: Absolute control for operating funds. Validate journal approval routing in Sprint 2."></textarea>
-                  </label>
-
-                  <div class="engine-actions wide">
-                    <button type="submit" class="small-btn">Save Cloud Project</button>
-                    <button type="button" id="cloud-new-project-btn" class="small-btn secondary-btn">New Project</button>
-                    <button type="button" id="cloud-refresh-projects-btn" class="small-btn secondary-btn">Refresh</button>
-                  </div>
-                </form>
-
-                <div id="engine-cloud-status" class="engine-status info">Cloud workspace ready after login.</div>
-              </div>
-
-              <div class="engine-panel project-switcher-panel">
-                <div class="engine-panel-head">
-                  <h4>Project Switcher</h4>
-                  <span id="engine-project-count">0 projects</span>
-                </div>
-
-                <select id="cloud-project-switcher" class="project-switcher-select">
-                  <option value="">No project selected</option>
-                </select>
-
-                <div id="cloud-project-list" class="cloud-project-list-v2">
-                  <div class="empty-projects-state">
-                    <strong>No cloud projects loaded.</strong>
-                    <span>Login and click Refresh.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="runs-engine-grid">
-              <div class="engine-panel">
-                <div class="engine-panel-head">
-                  <h4>Save Accelerator Run</h4>
-                  <span>Linked to selected project</span>
-                </div>
-
-                <form id="accelerator-run-form" class="engine-form single">
-                  <label>Accelerator
-                    <select id="run-accelerator">
-                      <option value="Enterprise Structure Intelligence">Enterprise Structure Intelligence</option>
-                      <option value="Discovery Command Center Pro">Discovery Command Center Pro</option>
-                      <option value="SOW to RICE Intelligence">SOW to RICE Intelligence</option>
-                      <option value="Configuration Readiness Engine">Configuration Readiness Engine</option>
-                      <option value="Scenario Intelligence Engine">Scenario Intelligence Engine</option>
-                      <option value="Enterprise Structure Intelligence">Enterprise Structure Intelligence</option>
-                    <option value="Discovery Command Center Pro">Discovery Command Center Pro</option>
-                    <option value="COA Transformation Accelerator">COA Transformation Accelerator</option>
-                      <option value="BCEA Design Accelerator">BCEA Design Accelerator</option>
-                      <option value="Journal Approvals Accelerator">Journal Approvals Accelerator</option>
-                      <option value="AP Invoice Approvals Accelerator">AP Invoice Approvals Accelerator</option>
-                      <option value="Per Diem Transformation Engine">Per Diem Transformation Engine</option>
-                    </select>
-                  </label>
-
-                  <label>Status
-                    <select id="run-status">
-                      <option value="In Review">In Review</option>
-                      <option value="Completed">Completed</option>
-                      <option value="Needs Client Input">Needs Client Input</option>
-                      <option value="Ready for SIT/UAT">Ready for SIT/UAT</option>
-                      <option value="Blocked">Blocked</option>
-                    </select>
-                  </label>
-
-                  <label>Module
-                    <select id="run-module">
-                      <option value="GL & BCEA">GL & BCEA</option>
-                      <option value="Payables">Payables</option>
-                      <option value="Expenses">Expenses</option>
-                      <option value="Cross-Module">Cross-Module</option>
-                    </select>
-                  </label>
-
-                  <label>Run Notes
-                    <textarea id="run-notes" rows="4" placeholder="Example: Control budget design reviewed. Need client decision on advisory vs absolute control."></textarea>
-                  </label>
-
-                  <button type="submit" class="small-btn">Save Accelerator Run</button>
-                </form>
-              </div>
-
-              <div class="engine-panel">
-                <div class="engine-panel-head">
-                  <h4>Saved Accelerator Runs</h4>
-                  <span id="run-count">0 runs</span>
-                </div>
-                <div id="accelerator-runs-list" class="accelerator-runs-list">
-                  <div class="empty-projects-state">
-                    <strong>No runs yet.</strong>
-                    <span>Select a project and save your first accelerator run.</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="engine-panel">
-                <div class="engine-panel-head">
-                  <h4>Launch Selected Tool</h4>
-                  <span>Context-aware</span>
-                </div>
-                <div class="tool-launch-grid-v2">
-                  <a href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank">Discovery Pro</a>
-                  <a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank">COA</a>
-                  <a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank">BCEA</a>
-                  <a href="https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/" target="_blank">Journal</a>
-                  <a href="https://apinvoiceapprovals-prvs4kmw9bmfjnc5qm3rdw.streamlit.app/" target="_blank">AP Invoice</a>
-                  <a href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank">Per Diem</a>
-                </div>
-              </div>
-            </div>
-          </section>
-
-
-
-          <section class="workspace-section" id="workspace">
-            <div class="workspace-header">
-              <div>
-                <span class="workspace-kicker">Member Project Workspace</span>
-                <h3>Save implementation context before launching tools.</h3>
-                <p>
-                  Create a lightweight project workspace, capture which accelerator you are using,
-                  and keep a local saved-run history for follow-up, feedback, and future premium project tracking.
-                </p>
-              </div>
-              <div class="workspace-note">
-                <strong>v12 Foundation</strong>
-                <span>Saved locally in browser now. Future version can connect to Supabase/Firebase for user-level cloud history.</span>
-              </div>
-            </div>
-
-            <div class="workspace-grid">
-              <form class="workspace-form" id="workspace-form">
-                <label>
-                  Project / Client Name
-                  <input id="project-name" type="text" placeholder="Example: Adams12 COA Design" />
-                </label>
-
-                <label>
-                  Module / Area
-                  <select id="project-module">
-                    <option value="COA Transformation">COA Transformation</option>
-                    <option value="BCEA Design">BCEA Design</option>
-                    <option value="Per Diem / Expenses">Per Diem / Expenses</option>
-                    <option value="Payables">Payables</option>
-                    <option value="Receivables">Receivables</option>
-                    <option value="Fixed Assets">Fixed Assets</option>
-                    <option value="Cash Management">Cash Management</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </label>
-
-                <label>
-                  Accelerator Used
-                  <select id="project-tool">
-                    <option value="Enterprise Structure Intelligence">Enterprise Structure Intelligence</option>
-                    <option value="Discovery Command Center Pro">Discovery Command Center Pro</option>
-                    <option value="COA Transformation Accelerator">COA Transformation Accelerator</option>
-                    <option value="BCEA Design Accelerator">BCEA Design Accelerator</option>
-                    <option value="Journal Approvals Accelerator">Journal Approvals Accelerator</option>
-                    <option value="AP Invoice Approvals Accelerator">AP Invoice Approvals Accelerator</option>
-                    <option value="Per Diem Transformation Engine">Per Diem Transformation Engine</option>
-                    <option value="Future / Roadmap Tool">Future / Roadmap Tool</option>
-                  </select>
-                </label>
-
-                <label>
-                  Status
-                  <select id="project-status">
-                    <option value="In Review">In Review</option>
-                    <option value="Testing">Testing</option>
-                    <option value="Client Review">Client Review</option>
-                    <option value="Ready for SIT/UAT">Ready for SIT/UAT</option>
-                    <option value="Needs Follow-up">Needs Follow-up</option>
-                  </select>
-                </label>
-
-                <label class="wide">
-                  Notes / Next Action
-                  <textarea id="project-notes" rows="4" placeholder="Example: Validate control level by fund and cost center before Sprint 2 decision."></textarea>
-                </label>
-
-                <div class="workspace-actions">
-                  <button type="submit" class="small-btn">Save Run</button>
-                  <button type="button" class="small-btn secondary-btn" id="clear-form-btn">Clear Form</button>
-                </div>
-              </form>
-
-              <div class="workspace-panel">
-                <h4>Workspace Benefits</h4>
-                <div class="benefit-row"><span>✓</span><p>Track which project used which accelerator.</p></div>
-                <div class="benefit-row"><span>✓</span><p>Capture notes before launching COA, BCEA, or Per Diem tools.</p></div>
-                <div class="benefit-row"><span>✓</span><p>Create saved-run history for returning users.</p></div>
-                <div class="benefit-row"><span>✓</span><p>Foundation for future paid project workspace and cloud history.</p></div>
-
-                <div class="workspace-metric-box">
-                  <div><strong id="saved-run-count">0</strong><span>Saved Runs</span></div>
-                  <div><strong id="last-run-tool">—</strong><span>Last Tool</span></div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section class="saved-runs-section" id="saved-runs">
-            <div class="dash-card">
-              <div class="dash-card-head">
-                <h3>Saved Runs / Project History</h3>
-                <div class="saved-run-actions">
-                  <button class="dash-filter" id="export-runs-btn">Export JSON</button>
-                  <button class="dash-filter danger-lite" id="clear-runs-btn">Clear History</button>
-                </div>
-              </div>
-              <div class="saved-runs-list" id="saved-runs-list">
-                <div class="empty-runs">
-                  <strong>No saved runs yet.</strong>
-                  <span>Create your first project workspace entry above.</span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <div class="member-tools" id="member-tools">
-            <div class="member-tool-card" data-tool-card>
-              <span class="status-pill status-live">Live</span>
-              <h3>Enterprise Structure Intelligence</h3>
-              <p>Common Design engine for GL, HCM, PPM, SCM, ownership mapping, dependency risks, and enterprise structure decisions.</p>
-              <div class="tool-actions">
-                <a class="small-btn" href="https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/" target="_blank" onclick="gtag('event','member_dashboard_enterprise_structure_launch')">Launch Enterprise</a>
-                <a class="small-btn secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Feedback</a>
-              </div>
-            </div>
-
-            <div class="member-tool-card" data-tool-card>
-              <span class="status-pill status-live">Live</span>
-              <h3>Discovery Command Center Pro</h3>
-              <p>Dynamic discovery intelligence for requirement gathering, workshop agendas, dependency mapping, risk radar, and decision outputs.</p>
-              <div class="tool-actions">
-                <a class="small-btn" href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank" onclick="gtag('event','member_dashboard_discovery_pro_launch')">Launch Discovery Pro</a>
-                <a class="small-btn secondary-btn" href="#discovery-command-center">View Discovery Framework</a>
-                <a class="small-btn secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Feedback</a>
-              </div>
-            </div>
-
-            <div class="member-tool-card" data-tool-card>
-              <span class="status-pill status-live">Live</span>
-              <h3>SOW to RICE Intelligence</h3>
-              <p>Convert SOW scope language into Oracle Cloud RICE objects, complexity, ownership, assumptions, and delivery risks.</p>
-              <div class="tool-actions">
-                <a class="small-btn" href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank" onclick="gtag('event','member_dashboard_sow_rice_launch')">Launch SOW to RICE</a>
-                <a class="small-btn secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Feedback</a>
-              </div>
-            </div>
-
-            <div class="member-tool-card" data-tool-card>
-              <span class="status-pill status-live">Live</span>
-              <h3>Configuration Readiness Engine</h3>
-              <p>Track build readiness, required configuration inputs, blockers, upstream dependencies, ownership, and readiness risk.</p>
-              <div class="tool-actions">
-                <a class="small-btn" href="https://configurationreadinessengine-witvv25ai2u2hb3lvw9qgt.streamlit.app/" target="_blank" onclick="gtag('event','member_dashboard_config_readiness_launch')">Launch Configuration</a>
-                <a class="small-btn secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Feedback</a>
-              </div>
-            </div>
-
-            <div class="member-tool-card" data-tool-card>
-              <span class="status-pill status-live">Live</span>
-              <h3>Scenario Intelligence Engine</h3>
-              <p>Generate SIT/UAT scenarios, negative testing, accounting validation, security validation, and audit evidence prompts.</p>
-              <div class="tool-actions">
-                <a class="small-btn" href="https://scenariointelligenceengine-fpjfpn7dhpfe36dtylrbc3.streamlit.app/" target="_blank" onclick="gtag('event','member_dashboard_scenario_intelligence_launch')">Launch Scenarios</a>
-                <a class="small-btn secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Feedback</a>
-              </div>
-            </div>
-            <div class="member-tool-card" data-tool-card>
-              <span class="status-pill status-live">Live</span>
-              <h3>COA Transformation Accelerator</h3>
-              <p>Legacy-to-Oracle mapping, DOE/public sector readiness, validation dashboard, CVR intelligence, and export support.</p>
-              <div class="tool-actions">
-                <a class="small-btn" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','member_dashboard_coa_launch')">Launch COA</a>
-                <a class="small-btn secondary-btn" href="#coa-playbook">View COA Playbook</a>
-                <a class="small-btn secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Feedback</a>
-              </div>
-            </div>
-
-            <div class="member-tool-card" data-tool-card>
-              <span class="status-pill status-live">Live</span>
-              <h3>BCEA Design Accelerator</h3>
-              <p>Budgetary Control and Encumbrance design support for control budgets, advisory vs absolute controls, funds check readiness, hierarchy logic, and Public Sector/K-12 scenarios.</p>
-              <div class="tool-actions">
-                <a class="small-btn" href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank" onclick="gtag('event','member_dashboard_bcea_launch')">Launch BCEA</a>
-                <a class="small-btn secondary-btn" href="#bcea-playbook">View BCEA Playbook</a>
-                <a class="small-btn secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Feedback</a>
-              </div>
-            </div>
-
-            <div class="member-tool-card" data-tool-card>
-              <span class="status-pill status-live">Live</span>
-              <h3>Journal Approvals Accelerator</h3>
-              <p>Configure and analyze Oracle Cloud journal approval routing scenarios with reusable design logic for GL approval governance.</p>
-              <div class="tool-actions">
-                <a class="small-btn" href="https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/" target="_blank" onclick="gtag('event','member_dashboard_journal_launch')">Launch Journal</a>
-                <a class="small-btn secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Feedback</a>
-              </div>
-            </div>
-
-            <div class="member-tool-card" data-tool-card>
-              <span class="status-pill status-live">Live</span>
-              <h3>AP Invoice Approvals Accelerator</h3>
-              <p>Design and validate Oracle Cloud AP invoice approval routing combinations for Payables implementation teams.</p>
-              <div class="tool-actions">
-                <a class="small-btn" href="https://apinvoiceapprovals-prvs4kmw9bmfjnc5qm3rdw.streamlit.app/" target="_blank" onclick="gtag('event','member_dashboard_ap_invoice_launch')">Launch AP Invoice</a>
-                <a class="small-btn secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Feedback</a>
-              </div>
-            </div>
-
-            <div class="member-tool-card" data-tool-card>
-              <span class="status-pill status-live">Live</span>
-              <h3>Per Diem Transformation Engine</h3>
-              <p>Convert GSA per diem data into Oracle-ready review output for Expenses setup and validation.</p>
-              <div class="tool-actions">
-                <a class="small-btn" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" onclick="gtag('event','member_dashboard_per_diem_launch')">Launch Per Diem</a>
-                <a class="small-btn secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Feedback</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
-  </section>
-
-  
-  
-  
-  <section class="section discovery-command-section" id="discovery-command-center">
-    <div class="discovery-hero">
-      <div>
-        <span class="workspace-kicker">Priority 3 Build</span>
-        <h2>Discovery Command Center</h2>
-        <p>
-          A structured Oracle Cloud discovery workspace for capturing client inputs, open decisions,
-          implementation risks, module dependencies, required documents, and recommended accelerators before design begins.
-        </p>
-        <p>
-          Discovery is where implementation intelligence is either created or lost. OracleToolkit turns discovery from scattered notes
-          into an operating layer for COA, BCEA, approvals, testing, migration, and cutover readiness.
-        </p>
-        <div class="discovery-actions">
-          <a class="cta" href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank" onclick="gtagSafe && gtagSafe('discovery_pro_launch')">Launch Discovery Pro</a>
-          <a class="secondary" href="#discovery-workstreams" onclick="gtagSafe && gtagSafe('discovery_view_workstreams')">View Workstreams</a>
-          <a class="secondary" href="#workspace-engine">Open Workspace</a>
-          <a class="secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtagSafe && gtagSafe('discovery_feedback')">Suggest Discovery Topic</a>
-        </div>
-      </div>
-      <div class="discovery-command-card">
-        <strong>Discovery Principle</strong>
-        <span>Do not start design before discovery decisions are controlled.</span>
-        <p>Bad discovery creates downstream rework in COA, BCEA, approvals, conversion, SIT, UAT, and go-live readiness.</p>
-      </div>
-    </div>
-
-    <div class="discovery-score-strip">
-      <div><strong>Discovery Output</strong><span>Inputs, decisions, risks, ownership, dependencies, and evidence requirements.</span></div>
-      <div><strong>Platform Purpose</strong><span>Convert discovery into reusable implementation intelligence instead of scattered meeting notes.</span></div>
-      <div><strong>Next Action</strong><span>Save project context in Workspace Engine and link decisions to playbooks and accelerators.</span></div>
-    </div>
-
-    <div class="discovery-workstreams" id="discovery-workstreams">
-      <div class="discovery-workstream-card coa">
-        <em>01</em><h3>COA Discovery</h3>
-        <p>Capture legacy COA structure, reporting needs, segment ownership, fund logic, natural account governance, and mapping readiness.</p>
-        <ul><li>Legacy COA files</li><li>Reporting requirements</li><li>Segment design assumptions</li><li>Crosswalk ownership</li></ul>
-        <a href="#coa-playbook">Open COA Playbook</a>
-      </div>
-      <div class="discovery-workstream-card bcea">
-        <em>02</em><h3>BCEA Discovery</h3>
-        <p>Understand budget governance, control levels, encumbrance policy, funds-check scope, grants, POETA, and public sector constraints.</p>
-        <ul><li>Budget structure</li><li>Control authority</li><li>Encumbrance lifecycle</li><li>Funds-check exclusions</li></ul>
-        <a href="#bcea-playbook">Open BCEA Playbook</a>
-      </div>
-      <div class="discovery-workstream-card approvals">
-        <em>03</em><h3>Approval Discovery</h3>
-        <p>Capture approval ownership, routing rules, thresholds, position/job dependencies, exception handling, and audit expectations.</p>
-        <ul><li>Journal approvals</li><li>AP invoice approvals</li><li>Escalation logic</li><li>Delegation rules</li></ul>
-        <a href="https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/" target="_blank">Open Journal Accelerator</a>
-      </div>
-      <div class="discovery-workstream-card migration">
-        <em>04</em><h3>Migration Discovery</h3>
-        <p>Identify conversion objects, legacy data quality, reconciliation ownership, cutover dependencies, and validation evidence needs.</p>
-        <ul><li>Opening balances</li><li>Open POs</li><li>Supplier/customer data</li><li>Historical reporting</li></ul>
-        <a href="#workspace-engine">Save Migration Notes</a>
-      </div>
-      <div class="discovery-workstream-card testing">
-        <em>05</em><h3>Testing Discovery</h3>
-        <p>Define SIT/UAT scenarios, edge cases, success criteria, evidence requirements, and business-signoff responsibilities.</p>
-        <ul><li>Funds check testing</li><li>Approval routing</li><li>Conversion validation</li><li>Reporting tests</li></ul>
-        <a href="#playbooks-next">Plan Playbook</a>
-      </div>
-      <div class="discovery-workstream-card cutover">
-        <em>06</em><h3>Cutover Discovery</h3>
-        <p>Capture go-live windows, freeze periods, legacy overlap, reconciliation plan, hypercare ownership, and escalation matrix.</p>
-        <ul><li>Cutover calendar</li><li>Fiscal period strategy</li><li>Validation checkpoints</li><li>War-room ownership</li></ul>
-        <a href="#early-access-form">Request Cutover Toolkit</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section discovery-decision-capture" id="discovery-decisions">
-    <h2>Discovery Decision Capture Framework</h2>
-    <p class="section-subtitle">
-      Every discovery item should produce either a decision, an open question, a dependency, a risk, or a required evidence item.
-    </p>
-    <div class="decision-capture-grid">
-      <div><strong>Decision</strong><span>What was decided, who approved it, and why it matters.</span></div>
-      <div><strong>Open Question</strong><span>What is unresolved and who owns closure before design/build.</span></div>
-      <div><strong>Dependency</strong><span>Which module, configuration, file, integration, or stakeholder is impacted.</span></div>
-      <div><strong>Risk</strong><span>What can fail later if the discovery item is ignored or delayed.</span></div>
-      <div><strong>Evidence</strong><span>What document, test, signoff, or output will prove readiness.</span></div>
-      <div><strong>Accelerator</strong><span>Which OracleToolkit accelerator or playbook should be used next.</span></div>
-    </div>
-  </section>
-
-  <section class="section discovery-inputs-section" id="discovery-inputs">
-    <div class="discovery-input-card">
-      <div>
-        <span class="workspace-kicker">Required Client Inputs</span>
-        <h2>Discovery should not depend on memory.</h2>
-        <p>
-          OracleToolkit should guide teams to request the right inputs early, track missing items,
-          and avoid design decisions based on incomplete client information.
-        </p>
-      </div>
-      <div class="input-checklist-grid">
-        <div><strong>COA</strong><span>Legacy COA, segment descriptions, values, hierarchies, reporting examples.</span></div>
-        <div><strong>BCEA</strong><span>Budget reports, control policies, encumbrance rules, fund hierarchy, grants.</span></div>
-        <div><strong>Approvals</strong><span>Approval matrix, thresholds, roles, delegation, escalation requirements.</span></div>
-        <div><strong>Migration</strong><span>Open balances, open transactions, open POs, historical data requirements.</span></div>
-        <div><strong>Testing</strong><span>Business scenarios, edge cases, signoff owners, expected evidence.</span></div>
-        <div><strong>Cutover</strong><span>Freeze windows, fiscal calendar, reconciliation ownership, hypercare process.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section discovery-risk-section" id="discovery-risk-radar">
-    <h2>Discovery Risk Radar</h2>
-    <p class="section-subtitle">
-      These are early warning signs that discovery is weak and implementation risk is increasing.
-    </p>
-    <div class="risk-radar-grid">
-      <div><em>High</em><strong>COA decisions keep changing</strong><span>Design is not stable enough for BCEA, conversion, or reporting build.</span></div>
-      <div><em>High</em><strong>BCEA ownership is unclear</strong><span>No one owns budget authority, exception handling, or funds-check decisions.</span></div>
-      <div><em>High</em><strong>Approval rules are political</strong><span>Workflow may become over-engineered and difficult to maintain.</span></div>
-      <div><em>Medium</em><strong>Legacy data quality is unknown</strong><span>Conversion validation and reconciliation effort may be underestimated.</span></div>
-      <div><em>Medium</em><strong>Testing scenarios are generic</strong><span>SIT/UAT may miss public sector, K-12, grant, and encumbrance edge cases.</span></div>
-      <div><em>Medium</em><strong>Cutover assumptions are late</strong><span>Fiscal-year close, open POs, budget loads, and reconciliations may collide.</span></div>
-    </div>
-  </section>
-
-  <section class="section discovery-command-link-section">
-    <div class="discovery-link-card">
-      <div>
-        <span class="workspace-kicker">How this becomes operating system behavior</span>
-        <h2>Discovery Command Center connects playbooks, tools, and workspace memory.</h2>
-        <p>
-          The long-term goal is not a static checklist. Discovery decisions should be saved to projects,
-          linked to playbooks, connected to accelerators, and reused during design, testing, migration, and cutover.
-        </p>
-      </div>
-      <div class="connected-tools-grid">
-        <a href="#workspace-engine">Open Workspace Engine</a>
-        <a href="#coa-playbook">COA Playbook</a>
-        <a href="#bcea-playbook">BCEA Playbook</a>
-        <a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank">COA Accelerator</a>
-        <a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank">BCEA Accelerator</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section coa-playbook-section" id="coa-playbook">
-    <div class="coa-playbook-hero">
-      <div>
-        <span class="workspace-kicker">Priority 2 Build</span>
-        <h2>COA Playbook v1</h2>
-        <p>
-          Oracle Chart of Accounts implementation methodology for Public Sector, K-12, higher education,
-          government, multi-fund, grant-driven, and complex finance transformation projects.
-        </p>
-        <p>
-          This playbook standardizes COA discovery, segment design, legacy mapping, governance,
-          validation, migration readiness, reporting alignment, and downstream dependency management.
-        </p>
-        <div class="coa-playbook-actions">
-          <a class="cta" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtagSafe && gtagSafe('coa_playbook_launch_accelerator')">Launch COA Accelerator</a>
-          <a class="secondary" href="#coa-lifecycle" onclick="gtagSafe && gtagSafe('coa_playbook_view_lifecycle')">View Lifecycle</a>
-          <a class="secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtagSafe && gtagSafe('coa_playbook_feedback')">Suggest Improvement</a>
-        </div>
-      </div>
-      <div class="coa-playbook-card">
-        <strong>OracleToolkit Philosophy</strong>
-        <span>COA is not a numbering exercise.</span>
-        <p>
-          It is the financial information architecture that drives reporting, budgetary control,
-          approvals, integrations, security, analytics, and long-term governance.
-        </p>
-      </div>
-    </div>
-
-    <div class="coa-risk-strip">
-      <div><strong>Why COA projects fail</strong><span>Teams jump into mapping too early, legacy values are poorly governed, future reporting is unclear, and downstream BCEA/integration dependencies are missed.</span></div>
-      <div><strong>OracleToolkit response</strong><span>Standardize COA discovery, segment decisions, crosswalk governance, validation rules, and implementation evidence.</span></div>
-    </div>
-
-    <div class="coa-lifecycle-grid" id="coa-lifecycle">
-      <div class="coa-phase-card discovery"><em>01</em><h3>Discovery</h3><p>Understand legacy COA, reporting needs, fund structure, departments, programs, grants, projects, and stakeholder decision authority.</p><ul><li>Legacy COA inventory</li><li>Reporting requirements</li><li>Fund governance</li><li>Decision ownership</li></ul></div>
-      <div class="coa-phase-card design"><em>02</em><h3>Design</h3><p>Define Oracle segment structure, value sets, balancing strategy, natural account logic, public sector reporting, and future scalability.</p><ul><li>Segment architecture</li><li>Balancing strategy</li><li>Value set design</li><li>Reporting hierarchy</li></ul></div>
-      <div class="coa-phase-card mapping"><em>03</em><h3>Crosswalk</h3><p>Translate legacy values into Oracle values with clear rules, ownership, exception handling, and review governance.</p><ul><li>Legacy-to-Oracle mapping</li><li>One-to-many logic</li><li>Exception tracker</li><li>Client signoff</li></ul></div>
-      <div class="coa-phase-card validation"><em>04</em><h3>Validation</h3><p>Validate duplicates, missing mappings, invalid combinations, hierarchy gaps, natural account issues, and BCEA dependencies.</p><ul><li>Mapping completeness</li><li>Hierarchy validation</li><li>CVR readiness</li><li>BCEA impact review</li></ul></div>
-      <div class="coa-phase-card build"><em>05</em><h3>Build</h3><p>Prepare Oracle setup artifacts including value sets, segment values, hierarchies, cross-validation rules, and rapid implementation files.</p><ul><li>Value loads</li><li>Hierarchy loads</li><li>CVR setup</li><li>Rapid files</li></ul></div>
-      <div class="coa-phase-card testing"><em>06</em><h3>SIT / UAT</h3><p>Test end-to-end transactions across GL, AP, AR, FA, Expenses, Projects, Budgetary Control, and reporting outputs.</p><ul><li>Transaction testing</li><li>Funds check testing</li><li>Reporting validation</li><li>User signoff</li></ul></div>
-      <div class="coa-phase-card golive"><em>07</em><h3>Go-Live</h3><p>Validate converted balances, open transactions, reporting alignment, security access, and post-go-live governance ownership.</p><ul><li>Balance validation</li><li>Open transaction review</li><li>Reporting signoff</li><li>Governance model</li></ul></div>
-    </div>
-  </section>
-
-  <section class="section coa-decision-section" id="coa-decisions">
-    <h2>COA Decision Framework</h2>
-    <p class="section-subtitle">
-      COA design becomes valuable only when design decisions are documented, tested, governed, and connected to downstream Oracle behavior.
-    </p>
-    <div class="coa-decision-grid">
-      <div><strong>Design for reporting and control</strong><span>Do not design segments only to copy legacy. Oracle COA must support future reporting, controls, integrations, and governance.</span></div>
-      <div><strong>Separate reporting-only vs control segments</strong><span>Not every segment should drive BCEA, approvals, or security. Over-control creates complexity.</span></div>
-      <div><strong>Stabilize fund and balancing strategy</strong><span>Public sector and K-12 projects must clearly define fund, balancing segment, and interfund behavior early.</span></div>
-      <div><strong>Protect natural account governance</strong><span>Natural accounts drive accounting treatment, reporting, funds check behavior, and downstream integrations.</span></div>
-      <div><strong>Govern one-to-many mapping</strong><span>Legacy-to-Oracle mappings often require business decisions, not just spreadsheet transformation.</span></div>
-      <div><strong>Validate before build</strong><span>Missing mappings, duplicate values, hierarchy errors, and invalid combinations should be resolved before SIT.</span></div>
-    </div>
-  </section>
-
-  <section class="section coa-risk-library-section" id="coa-risk-library">
-    <div class="coa-risk-library-card">
-      <div>
-        <span class="workspace-kicker">COA Risk Library</span>
-        <h2>Common failure patterns OracleToolkit should prevent.</h2>
-        <p>
-          These risks create reporting defects, conversion errors, BCEA issues, integration failures,
-          approval routing problems, and late-stage rework.
-        </p>
-      </div>
-      <div class="coa-risk-list-grid">
-        <div><strong>01</strong><span>Copying legacy COA without redesign</span></div>
-        <div><strong>02</strong><span>Finalizing BCEA before COA stabilization</span></div>
-        <div><strong>03</strong><span>Unclear fund and balancing strategy</span></div>
-        <div><strong>04</strong><span>Over-segmentation and reporting confusion</span></div>
-        <div><strong>05</strong><span>Missing one-to-many mapping decisions</span></div>
-        <div><strong>06</strong><span>Weak hierarchy governance</span></div>
-        <div><strong>07</strong><span>Cross-validation rules designed too late</span></div>
-        <div><strong>08</strong><span>Downstream integrations ignored</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section coa-deliverables-section" id="coa-deliverables">
-    <h2>COA Playbook Deliverables</h2>
-    <p class="section-subtitle">
-      A mature COA implementation should produce decision evidence, not just setup files.
-    </p>
-    <div class="coa-deliverables-grid">
-      <div><strong>COA Design Decision Log</strong><span>Why each segment exists, who owns it, and what business purpose it supports.</span></div>
-      <div><strong>Legacy-to-Oracle Crosswalk</strong><span>Mapping from legacy values to Oracle values with exception handling and approval status.</span></div>
-      <div><strong>Segment Value Governance</strong><span>Ownership, naming conventions, future value creation process, and inactive value strategy.</span></div>
-      <div><strong>Hierarchy Workbook</strong><span>Reporting hierarchy structure with parent-child validation and ownership.</span></div>
-      <div><strong>CVR / Combination Logic</strong><span>Rules preventing invalid segment combinations before transactions reach downstream modules.</span></div>
-      <div><strong>BCEA Dependency Review</strong><span>Which COA segments impact control budgets, funds check, grants, projects, and encumbrance.</span></div>
-      <div><strong>Testing Evidence Pack</strong><span>Transactions proving COA behavior across GL, AP, AR, FA, Expenses, Projects, and BCEA.</span></div>
-      <div><strong>Go-Live Readiness Summary</strong><span>Final mapping, hierarchy, reporting, conversion, and governance signoff status.</span></div>
-    </div>
-  </section>
-
-  <section class="section coa-accelerator-link-section">
-    <div class="coa-accelerator-card">
-      <div>
-        <span class="workspace-kicker">Connected Accelerators</span>
-        <h2>The COA Playbook connects architecture to execution.</h2>
-        <p>
-          The playbook should guide consultants from discovery and design into the COA Accelerator,
-          Workspace Engine, BCEA Playbook, and downstream testing evidence.
-        </p>
-      </div>
-      <div class="connected-tools-grid">
-        <a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank">COA Transformation Accelerator</a>
-        <a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank">BCEA Design Accelerator</a>
-        <a href="#bcea-playbook">BCEA Playbook</a>
-        <a href="#workspace-engine">Cloud Workspace Engine</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section bcea-playbook-section" id="bcea-playbook">
-    <div class="bcea-playbook-hero">
-      <div>
-        <span class="workspace-kicker">Priority 1 Build</span>
-        <h2>BCEA Playbook v1</h2>
-        <p>
-          Oracle Budgetary Control & Encumbrance Accounting implementation methodology for Public Sector,
-          K-12, higher education, government, multi-fund, and grant-driven organizations.
-        </p>
-        <p>
-          This playbook turns real Oracle implementation pain into a repeatable delivery framework across
-          discovery, design, build, SIT, UAT, go-live, and hypercare.
-        </p>
-        <div class="bcea-playbook-actions">
-          <a class="cta" href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank" onclick="gtagSafe && gtagSafe('bcea_playbook_launch_accelerator')">Launch BCEA Accelerator</a>
-          <a class="secondary" href="#bcea-lifecycle" onclick="gtagSafe && gtagSafe('bcea_playbook_view_lifecycle')">View Lifecycle</a>
-          <a class="secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtagSafe && gtagSafe('bcea_playbook_feedback')">Suggest Improvement</a>
-        </div>
-      </div>
-      <div class="bcea-playbook-card">
-        <strong>OracleToolkit Philosophy</strong>
-        <span>BCEA is not just a setup exercise.</span>
-        <p>It is a financial governance operating model that controls spending, encumbrance behavior, public sector compliance, and implementation readiness.</p>
-      </div>
-    </div>
-
-    <div class="bcea-risk-strip">
-      <div><strong>Why BCEA projects fail</strong><span>Control budgets are designed too early, COA governance is incomplete, funds-check logic is misunderstood, and SIT scenarios are weak.</span></div>
-      <div><strong>OracleToolkit response</strong><span>Standardize discovery, design decisions, risk checks, testing evidence, and implementation memory.</span></div>
-    </div>
-
-    <div class="bcea-lifecycle-grid" id="bcea-lifecycle">
-      <div class="phase-card discovery"><em>01</em><h3>Discovery</h3><p>Understand budget governance, budget ownership, encumbrance behavior, fund control, and how Oracle should enforce spending discipline.</p><ul><li>Budget governance questions</li><li>COA dependency discovery</li><li>Encumbrance discovery</li><li>Funds-check discovery</li></ul></div>
-      <div class="phase-card design"><em>02</em><h3>Design</h3><p>Convert discovery intelligence into scalable control budget structures, manageable hierarchies, predictable funds-check behavior, and sustainable governance.</p><ul><li>Advisory vs absolute control</li><li>Hierarchy strategy</li><li>Control budget architecture</li><li>Encumbrance design</li></ul></div>
-      <div class="phase-card build"><em>03</em><h3>Build</h3><p>Configure BCEA structures, funds-check rules, budget calendars, exclusions, tolerances, ledger assignments, and workflow dependencies.</p><ul><li>Control budgets</li><li>Budget calendars</li><li>Account hierarchies</li><li>Source exclusions</li></ul></div>
-      <div class="phase-card sit"><em>04</em><h3>SIT</h3><p>Validate funds-check accuracy, encumbrance lifecycle, approvals, journal behavior, fiscal-year behavior, and edge cases before business UAT.</p><ul><li>Budget availability</li><li>PO encumbrance</li><li>Invoice liquidation</li><li>Journal funds check</li></ul></div>
-      <div class="phase-card uat"><em>05</em><h3>UAT</h3><p>Validate business readiness, override process, budget revisions, exception handling, reporting alignment, audit evidence, and user communication.</p><ul><li>Business signoff</li><li>Exception handling</li><li>Readiness scoring</li><li>Audit evidence</li></ul></div>
-      <div class="phase-card golive"><em>06</em><h3>Go-Live</h3><p>Validate budget migration, encumbrance migration, legacy PO strategy, security roles, fiscal-year alignment, and hypercare ownership.</p><ul><li>Opening budgets</li><li>Legacy POs</li><li>Security validation</li><li>Hypercare ownership</li></ul></div>
-      <div class="phase-card hypercare"><em>07</em><h3>Hypercare</h3><p>Monitor funds-check failures, override patterns, budget bypass requests, carryforward confusion, reporting complaints, and user adoption.</p><ul><li>Failure trend analysis</li><li>Override monitoring</li><li>Process stabilization</li><li>Governance improvement</li></ul></div>
-    </div>
-  </section>
-
-  <section class="section bcea-decision-section" id="bcea-decisions">
-    <h2>BCEA Decision Framework</h2>
-    <p class="section-subtitle">
-      The playbook converts BCEA into a series of implementation decisions that can be captured, reviewed, tested, and reused across projects.
-    </p>
-    <div class="decision-grid">
-      <div><strong>Control what matters</strong><span>Avoid controlling every possible combination. Excessive granularity creates hierarchy explosion and operational frustration.</span></div>
-      <div><strong>Do not finalize BCEA before COA</strong><span>BCEA depends on COA segment structure, balancing strategy, fund hierarchy, project/grant relationships, and reporting governance.</span></div>
-      <div><strong>Separate operating funds and grants</strong><span>Operating funds, grants, capital projects, and internal services may require different advisory/absolute control strategies.</span></div>
-      <div><strong>Design exclusions carefully</strong><span>Balance sheet accounts, statistical accounts, selected sources, and certain journals may need exclusion from funds check.</span></div>
-      <div><strong>Test fiscal-year behavior early</strong><span>PO rollover, carryforward, encumbrance liquidation, and year-end timing can create serious go-live risk.</span></div>
-      <div><strong>Preserve evidence</strong><span>Every design decision should produce test evidence, signoff support, and reusable implementation knowledge.</span></div>
-    </div>
-  </section>
-
-  <section class="section bcea-risk-library-section" id="bcea-risk-library">
-    <div class="risk-library-card">
-      <div>
-        <span class="workspace-kicker">BCEA Risk Library</span>
-        <h2>Common failure patterns OracleToolkit should prevent.</h2>
-        <p>
-          These are the project risks the BCEA Playbook is designed to surface before they become SIT defects,
-          go-live blockers, or post-go-live escalations.
-        </p>
-      </div>
-      <div class="risk-list-grid">
-        <div><strong>01</strong><span>BCEA designed before COA finalization</span></div>
-        <div><strong>02</strong><span>Excessive control granularity</span></div>
-        <div><strong>03</strong><span>Incorrect account exclusions</span></div>
-        <div><strong>04</strong><span>Weak hierarchy governance</span></div>
-        <div><strong>05</strong><span>Public sector reporting ignored</span></div>
-        <div><strong>06</strong><span>Fiscal-year rollover strategy missing</span></div>
-        <div><strong>07</strong><span>Poor SIT edge-case testing</span></div>
-        <div><strong>08</strong><span>Grant / POETA dependency missed</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section bcea-accelerator-link-section">
-    <div class="accelerator-link-card">
-      <div>
-        <span class="workspace-kicker">Connected Accelerators</span>
-        <h2>The BCEA Playbook connects methodology to tools.</h2>
-        <p>
-          The playbook is not a PDF sitting outside the platform. It should guide users toward the correct accelerator,
-          save decisions in the workspace, and preserve project intelligence for future phases.
-        </p>
-      </div>
-      <div class="connected-tools-grid">
-        <a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank">BCEA Design Accelerator</a>
-        <a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank">COA Transformation Accelerator</a>
-        <a href="#workspace-engine">Cloud Workspace Engine</a>
-        <a href="#live-products">All Live Accelerators</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="live-products">
-    <h2>Live SaaS Accelerators</h2>
-    <p class="section-subtitle">OracleToolkit currently includes ten live SaaS accelerators. Each tool has its own launch path, analytics event, feedback loop, and member workspace context.</p>
-    <div class="product-suite-grid">
-      <div class="premium-product-card sow-card" id="sow-rice-intelligence"><div><div class="product-label-row"><span class="product-badge-live">Live Early Access</span><span class="product-badge-premium">Scope Intelligence</span></div><h3>SOW to RICE Intelligence</h3><p>Convert SOW scope language into Oracle Cloud RICE objects, delivery ownership, complexity, assumptions, and risk flags before build starts.</p><ul class="product-feature-list"><li>Scope-to-RICE classification</li><li>Report, Interface, Conversion, Extension, Workflow identification</li><li>Ownership and complexity analysis</li><li>Delivery risk and dependency prompts</li><li>Common Design and Build handoff support</li></ul></div><div class="product-actions"><a class="product-primary-btn" href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank" onclick="gtag('event','sow_rice_launch_click')">Launch SOW to RICE</a><a class="product-secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Share Feedback</a></div></div>
-
-      <div class="premium-product-card config-card" id="configuration-readiness"><div><div class="product-label-row"><span class="product-badge-live">Live Early Access</span><span class="product-badge-premium">Build & Configure</span></div><h3>Configuration Readiness Engine</h3><p>Track configuration prerequisites, blockers, missing decisions, module dependencies, and readiness evidence across Sprint execution.</p><ul class="product-feature-list"><li>Configuration dependency tracker</li><li>Blocker and ownership register</li><li>Upstream/downstream impact warnings</li><li>Build readiness scoring foundation</li><li>PMO and module lead visibility</li></ul></div><div class="product-actions"><a class="product-primary-btn" href="https://configurationreadinessengine-witvv25ai2u2hb3lvw9qgt.streamlit.app/" target="_blank" onclick="gtag('event','configuration_readiness_launch_click')">Launch Configuration Readiness</a><a class="product-secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Share Feedback</a></div></div>
-
-      <div class="premium-product-card scenario-card" id="scenario-intelligence"><div><div class="product-label-row"><span class="product-badge-live">Live Early Access</span><span class="product-badge-premium">Testing Intelligence</span></div><h3>Scenario Intelligence Engine</h3><p>Generate practical SIT/UAT scenarios, negative tests, reconciliation steps, accounting validation, security checks, and audit evidence prompts.</p><ul class="product-feature-list"><li>SIT and UAT scenario generator</li><li>Negative and edge-case testing</li><li>Accounting and reconciliation validation</li><li>Security and approval validation prompts</li><li>Design-to-testing traceability foundation</li></ul></div><div class="product-actions"><a class="product-primary-btn" href="https://scenariointelligenceengine-fpjfpn7dhpfe36dtylrbc3.streamlit.app/" target="_blank" onclick="gtag('event','scenario_intelligence_launch_click')">Launch Scenario Intelligence</a><a class="product-secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Share Feedback</a></div></div>
-      <div class="premium-product-card coa-card" id="coa-accelerator"><div><div class="product-label-row"><span class="product-badge-live">Live Early Access</span><span class="product-badge-premium">Flagship SaaS</span></div><h3>Oracle Cloud COA Transformation Accelerator</h3><p>Structure legacy-to-Oracle COA mapping, identify validation gaps, review DOE/public sector readiness, and prepare implementation-ready outputs.</p><ul class="product-feature-list"><li>Legacy → Oracle mapping workspace</li><li>COA validation dashboard and readiness scoring</li><li>Public Sector / K-12 oriented controls</li><li>Cross-validation rule intelligence foundation</li><li>Designed for client review and consultant execution</li></ul></div><div class="product-actions"><a class="product-primary-btn" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','coa_accelerator_launch_click')">Launch COA Accelerator</a><a class="product-secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtag('event','coa_feedback_click')">Share Feedback</a></div></div>
-      
-      <div class="premium-product-card bcea-card" id="bcea-design">
-        <div>
-          <div class="product-label-row"><span class="product-badge-live">Live Early Access</span><span class="product-badge-premium">BCEA / Public Sector</span></div>
-          <h3>BCEA Design Accelerator</h3>
-          <p>Guide Budgetary Control and Encumbrance design decisions for Oracle Cloud implementations, especially Public Sector and K-12 projects.</p>
-          <ul class="product-feature-list">
-            <li>Control budget structure recommendation</li>
-            <li>Advisory vs absolute control guidance</li>
-            <li>Funds check and encumbrance design support</li>
-            <li>Hierarchy and segment-level control thinking</li>
-            <li>Public Sector / K-12 budget readiness scenarios</li>
-          </ul>
-        </div>
-        <div class="product-actions">
-          <a class="product-primary-btn" href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank" onclick="gtag('event','bcea_design_launch_click')">Launch BCEA Design</a>
-          <a class="product-secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtag('event','bcea_feedback_click')">Share Feedback</a>
-        </div>
-      </div>
-
-      
-      <div class="premium-product-card journal-card" id="journal-approvals">
-        <div>
-          <div class="product-label-row"><span class="product-badge-live">Live Early Access</span><span class="product-badge-premium">GL Approvals</span></div>
-          <h3>Journal Approvals Accelerator</h3>
-          <p>Build, review, and validate Oracle Cloud journal approval routing scenarios using consultant-friendly design logic.</p>
-          <ul class="product-feature-list">
-            <li>Journal approval scenario design</li>
-            <li>Approval rule routing structure</li>
-            <li>Consultant/client selection workflow</li>
-            <li>Template-ready output thinking</li>
-            <li>Designed for GL governance and audit readiness</li>
-          </ul>
-        </div>
-        <div class="product-actions">
-          <a class="product-primary-btn" href="https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/" target="_blank" onclick="gtag('event','journal_approvals_launch_click')">Launch Journal Approvals</a>
-          <a class="product-secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtag('event','journal_feedback_click')">Share Feedback</a>
-        </div>
-      </div>
-
-
-      <div class="premium-product-card ap-card" id="ap-invoice-approvals">
-        <div>
-          <div class="product-label-row"><span class="product-badge-live">Live Early Access</span><span class="product-badge-premium">Payables Approvals</span></div>
-          <h3>AP Invoice Approvals Accelerator</h3>
-          <p>Support Oracle Cloud AP invoice approval design with structured routing options, approval combinations, and implementation-ready logic.</p>
-          <ul class="product-feature-list">
-            <li>Invoice approval routing scenarios</li>
-            <li>Supplier, invoice, amount, and business rule thinking</li>
-            <li>Consultant/client selection workflow</li>
-            <li>Template-ready output foundation</li>
-            <li>Designed for Payables implementation readiness</li>
-          </ul>
-        </div>
-        <div class="product-actions">
-          <a class="product-primary-btn" href="https://apinvoiceapprovals-prvs4kmw9bmfjnc5qm3rdw.streamlit.app/" target="_blank" onclick="gtag('event','ap_invoice_approvals_launch_click')">Launch AP Invoice Approvals</a>
-          <a class="product-secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtag('event','ap_invoice_feedback_click')">Share Feedback</a>
-        </div>
-      </div>
-
-      <div class="premium-product-card expenses-card" id="per-diem"><div><div class="product-label-row"><span class="product-badge-live">Live Beta</span><span class="product-badge-premium">Expenses Tool</span></div><h3>Per Diem Transformation Engine</h3><p>Upload the GSA Zip Code file and generate Oracle-ready review outputs for Expenses policy setup.</p><ul class="product-feature-list"><li>GSA source file transformation</li><li>Oracle-ready per diem helper output</li><li>Normalized geography review</li><li>Validation summary and exception flags</li><li>Repeatable fiscal-year refresh workflow</li></ul></div><div class="product-actions"><a class="product-primary-btn" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" onclick="gtag('event','per_diem_tool_click')">Launch Per Diem Engine</a><a class="product-secondary-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" onclick="gtag('event','per_diem_feedback_click')">Share Feedback</a></div></div>
-    </div>
-    <div class="early-access-strip"><div><strong>Early Access Testing Program</strong><span>Ask users to test the tools and capture where they get confused, what output they value most, and whether it saves real implementation time.</span></div><a class="request-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Collect Feedback</a></div>
-  </section>
-
-  
-  <div id="platform-positioning"></div>
-  <section class="section os-vision-section" id="operating-system">
-    <div class="os-vision-shell">
-      <div class="os-vision-copy">
-        <span class="workspace-kicker">Billion-Dollar Platform Thesis</span>
-        <h2>Oracle implementations do not fail because teams lack tasks. They fail because implementation intelligence gets lost.</h2>
-        <p>
-          Discovery notes sit in decks. COA decisions stay in spreadsheets. BCEA assumptions live in meeting notes.
-          Approval logic disappears into emails. Testing evidence gets scattered. Cutover knowledge is recreated every project.
-        </p>
-        <p>
-          OracleToolkit is being built as the system of record for Oracle implementation intelligence — a workspace where delivery teams
-          preserve decisions, reuse accelerators, track methodology, and convert project pain into repeatable execution.
-        </p>
-      </div>
-      <div class="os-stack-card">
-        <h3>OracleToolkit manages</h3>
-        <ul>
-          <li>Discovery decisions</li>
-          <li>COA/BCEA architecture</li>
-          <li>Approval configuration logic</li>
-          <li>Testing scenarios and evidence</li>
-          <li>Migration validation</li>
-          <li>Cutover planning</li>
-          <li>Project accelerator runs</li>
-          <li>Reusable client knowledge</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="section methodology-engine" id="methodology-engine">
-    <h2>From tools to methodology engine</h2>
-    <p class="section-subtitle">
-      The next evolution of OracleToolkit is a guided methodology layer that tells teams what to do in each implementation phase,
-      which accelerators to use, what evidence to produce, and what risks to watch.
-    </p>
-    <div class="methodology-timeline">
-      <div><span>01</span><strong>Discovery</strong><p>Capture pain, assumptions, client inputs, legacy structure, reporting needs, and open decisions.</p></div>
-      <div><span>02</span><strong>Design</strong><p>Standardize COA, BCEA, approval, integration, and migration decisions with reusable playbooks.</p></div>
-      <div><span>03</span><strong>Build</strong><p>Track setup dependencies, upload readiness, validation rules, and configuration handoffs.</p></div>
-      <div><span>04</span><strong>SIT</strong><p>Connect test scenarios to known Oracle failure patterns, funds check risks, and approval logic.</p></div>
-      <div><span>05</span><strong>UAT</strong><p>Support business signoff, readiness scoring, evidence capture, and defect prioritization.</p></div>
-      <div><span>06</span><strong>Go-Live</strong><p>Organize cutover tasks, migration validation, reconciliations, issue triage, and hypercare knowledge.</p></div>
-    </div>
-  </section>
-
-  <section class="section intelligence-layer" id="implementation-intelligence">
-    <div class="intelligence-grid">
-      <div class="intelligence-card primary">
-        <span class="workspace-kicker">Implementation Memory</span>
-        <h2>Every project should make the next project smarter.</h2>
-        <p>
-          OracleToolkit should become the place where implementation decisions, risks, workarounds, validation checks,
-          and project learnings are preserved instead of forgotten after go-live.
-        </p>
-      </div>
-      <div class="intelligence-card"><strong>Decision Memory</strong><span>Why was this COA structure selected? Why absolute control? Why this approval route?</span></div>
-      <div class="intelligence-card"><strong>Risk Memory</strong><span>Which funds check failures, conversion errors, and approval issues appeared before?</span></div>
-      <div class="intelligence-card"><strong>Evidence Memory</strong><span>Which test cases, outputs, signoffs, and validations support readiness?</span></div>
-      <div class="intelligence-card"><strong>Client Knowledge</strong><span>What did this client decide in discovery, design, UAT, and cutover?</span></div>
-    </div>
-  </section>
-
-  <section class="section platform-layers" id="platform-layers">
-    <h2>The platform architecture that supports the vision</h2>
-    <p class="section-subtitle">
-      A billion-dollar implementation platform needs layers. OracleToolkit already has the first foundation; the next steps deepen workflow, memory, and intelligence.
-    </p>
-    <div class="platform-layer-grid">
-      <div><em>Layer 1</em><strong>Live Accelerators</strong><span>Enterprise Structure, Discovery Pro, COA, BCEA, approvals, AP invoice approvals, and per diem tools.</span></div>
-      <div><em>Layer 2</em><strong>Cloud Workspace</strong><span>Projects, project switching, saved accelerator runs, and implementation context.</span></div>
-      <div><em>Layer 3</em><strong>Methodology Engine</strong><span>Guided playbooks by phase, module, role, and implementation risk.</span></div>
-      <div><em>Layer 4</em><strong>Implementation Intelligence</strong><span>Reusable decisions, risks, evidence, assumptions, and client knowledge.</span></div>
-      <div><em>Layer 5</em><strong>AI Advisor</strong><span>Contextual guidance after project history, playbooks, and saved runs exist.</span></div>
-      <div><em>Layer 6</em><strong>Enterprise Collaboration</strong><span>Teams, reviewers, PMO visibility, audit evidence, and subscription access.</span></div>
-    </div>
-  </section>
-
-  <section class="section trust-layer" id="credibility">
-    <div class="credibility-hero">
-      <span class="workspace-kicker">Implementation Credibility Layer</span>
-      <h2>Built from real Oracle Cloud delivery pain — not generic productivity ideas.</h2>
+  <section class="section" id="terms">
+    <div class="card">
+      <h3>Terms & Privacy Foundation</h3>
       <p>
-        OracleToolkit is designed around repeatable implementation problems that consultants, solution architects,
-        PMO teams, and client finance teams face during discovery, design, testing, conversion, and go-live.
+        OracleToolkit is an implementation accelerator and methodology platform. Users are responsible for ensuring that uploaded
+        materials are sanitized and approved for use under their client, employer, and project data governance policies.
       </p>
     </div>
-
-    <div class="pain-grid">
-      <div class="pain-card"><strong>COA mapping complexity</strong><span>Legacy chart values, inconsistent mapping rules, reporting constraints, and public sector segment logic.</span></div>
-      <div class="pain-card"><strong>BCEA design risk</strong><span>Advisory vs absolute controls, funds check failures, hierarchy gaps, and encumbrance readiness issues.</span></div>
-      <div class="pain-card"><strong>Approval workflow confusion</strong><span>Journal and AP invoice routing rules become over-engineered without a structured design framework.</span></div>
-      <div class="pain-card"><strong>Conversion and validation gaps</strong><span>Late discovery of configuration gaps before SIT, UAT, mock conversion, or go-live.</span></div>
-      <div class="pain-card"><strong>Public Sector / K-12 realities</strong><span>Fund accounting, grants, DOE reporting, budget controls, and cross-functional governance dependencies.</span></div>
-      <div class="pain-card"><strong>Repeated spreadsheet effort</strong><span>Consultants rebuild the same accelerators manually project after project.</span></div>
-    </div>
   </section>
 
-  
-  <section class="section early-access-form-section" id="early-access-form">
-    <div class="early-access-form-card">
-      <div class="early-access-copy">
-        <span class="workspace-kicker">Phase 1 Early Access</span>
-        <h2>Join the early access program for the Oracle implementation intelligence platform.</h2>
-        <p>Help shape the operating system where Oracle teams manage discovery, design decisions, COA/BCEA architecture, approval logic, testing evidence, migration validation, and reusable project knowledge.</p>
-        <ul>
-          <li>Get access to live accelerators.</li>
-          <li>Influence the next implementation playbooks.</li>
-          <li>Help prioritize Oracle Finance and Public Sector workflows.</li>
-        </ul>
-      </div>
-      <form class="lead-form" id="early-access-lead-form">
-        <label>Name<input id="lead-name" type="text" placeholder="Your name" required /></label>
-        <label>Email<input id="lead-email" type="email" placeholder="you@company.com" required /></label>
-        <label>Company<input id="lead-company" type="text" placeholder="Company / consulting firm" /></label>
-        <label>Role<select id="lead-role"><option>Oracle Cloud Consultant</option><option>Solution Architect</option><option>PMO / Delivery Leader</option><option>Client Finance Leader</option><option>Implementation Partner</option><option>Other</option></select></label>
-        <label>Module Interest<select id="lead-module"><option>COA / GL</option><option>BCEA / Budgetary Control</option><option>Approvals</option><option>Payables</option><option>Expenses</option><option>Testing / UAT</option><option>Migration / Conversion</option><option>Public Sector / K-12</option></select></label>
-        <label>Implementation Type<select id="lead-type"><option>Public Sector</option><option>K-12 / Education</option><option>Commercial</option><option>Healthcare</option><option>Higher Education</option><option>Federal</option><option>Consulting Partner</option></select></label>
-        <label class="wide">Biggest Oracle implementation pain<textarea id="lead-pain" rows="4" placeholder="Example: COA mapping decisions keep changing before SIT."></textarea></label>
-        <button type="submit" class="cta wide">Get Early Access</button>
-        <p class="lead-form-note">This opens the OracleToolkit early-access form and records a GA4 event.</p>
-      </form>
+  <footer class="footer">
+    <div><strong>OracleToolkit</strong> · Oracle Cloud Implementation Intelligence Platform</div>
+    <div style="margin-top:8px;">
+      <a href="/oracletoolkit-methodology.html">Methodology</a> ·
+      <a href="#start-here">Start Here</a> ·
+      <a href="#safe-use-guidance">Safe Use Guidance</a>
     </div>
-  </section>
+  </footer>
 
-  <section class="section" id="use-cases">
-    <h2>Implementation Intelligence Use Cases</h2>
-    <p class="section-subtitle">
-      Each accelerator should become part of an implementation knowledge loop, not just a standalone utility.
-      This helps consultants explain value during workshops, design sessions, testing cycles, and client reviews.
-    </p>
-
-    <div class="use-case-table">
-      <div class="use-case-row use-case-head"><span>Accelerator</span><span>Best Used During</span><span>Implementation Value</span></div>
-      <div class="use-case-row"><span>COA Transformation Accelerator</span><span>COA design, mapping workshops, conversion planning</span><span>Improves mapping readiness, validation quality, and client review discipline.</span></div>
-      <div class="use-case-row"><span>BCEA Design Accelerator</span><span>Budgetary Control design, fund control decisions, SIT readiness</span><span>Clarifies advisory vs absolute controls, hierarchy thinking, and funds check risk.</span></div>
-      <div class="use-case-row"><span>Journal Approvals Accelerator</span><span>GL approval design and governance reviews</span><span>Reduces workflow confusion and creates structured approval-routing logic.</span></div>
-      <div class="use-case-row"><span>AP Invoice Approvals Accelerator</span><span>Payables design workshops and approval validation</span><span>Supports invoice approval combinations, routing logic, and client sign-off readiness.</span></div>
-      <div class="use-case-row"><span>Per Diem Transformation Engine</span><span>Oracle Expenses setup, per diem policy preparation, fiscal-year refresh</span><span>Reduces manual restructuring effort and improves Oracle-ready review output.</span></div>
-    </div>
-  </section>
-
-  <section class="section metrics-section" id="productivity">
-    <div class="metrics-panel">
-      <div>
-        <span class="workspace-kicker">Consultant Productivity Metrics</span>
-        <h2>Designed to make implementation effort measurable.</h2>
-        <p>
-          Monetization becomes easier when users can see what OracleToolkit helps reduce:
-          manual effort, validation gaps, repeated spreadsheet work, and avoidable design confusion.
-        </p>
-      </div>
-      <div class="metrics-grid">
-        <div><strong>Hours</strong><span>Manual cleanup reduced</span></div>
-        <div><strong>Risk</strong><span>Validation gaps highlighted earlier</span></div>
-        <div><strong>Reuse</strong><span>Accelerators standardized across projects</span></div>
-        <div><strong>Trust</strong><span>Client review output becomes clearer</span></div>
-      </div>
-    </div>
-  </section>
-
-  
-  <section class="section audience-pages" id="audiences">
-    <h2>Built for the roles that carry Oracle implementation risk.</h2>
-    <p class="section-subtitle">Each role experiences implementation intelligence differently. OracleToolkit must serve all three without becoming generic.</p>
-    <div class="audience-grid">
-      <article class="audience-card" id="for-consultants">
-        <span>For Consultants</span>
-        <h3>Turn project pain into reusable delivery assets.</h3>
-        <p>Consultants face spreadsheet chaos, unclear client inputs, validation gaps, and SIT/UAT pressure. OracleToolkit gives reusable accelerators and workspace history so project work does not restart from zero.</p>
-        <ul><li>COA mapping and validation support</li><li>BCEA and approval design guidance</li><li>Saved accelerator runs by project</li><li>Reusable implementation notes</li></ul>
-        <a href="#early-access-form" onclick="gtagSafe && gtagSafe('audience_consultant_cta')">Get Early Access</a>
-      </article>
-      <article class="audience-card" id="for-solution-architects">
-        <span>For Solution Architects</span>
-        <h3>Preserve design rationale before it disappears.</h3>
-        <p>Architects need consistent decision frameworks for COA, BCEA, approvals, integrations, testing, and public sector controls. OracleToolkit helps preserve the reasoning behind design decisions.</p>
-        <ul><li>COA/BCEA architecture decision support</li><li>Approval governance accelerators</li><li>Implementation playbook foundation</li><li>Cross-project reusable knowledge</li></ul>
-        <a href="#early-access-form" onclick="gtagSafe && gtagSafe('audience_architect_cta')">Get Early Access</a>
-      </article>
-      <article class="audience-card" id="for-pmo">
-        <span>For PMO / Delivery Leaders</span>
-        <h3>Create implementation governance beyond task tracking.</h3>
-        <p>Delivery leaders need visibility into readiness, decisions, risks, reusable assets, and client signoff. OracleToolkit helps turn implementation knowledge into structured operating intelligence.</p>
-        <ul><li>Project workspace and history</li><li>Readiness and workflow structure</li><li>Reusable implementation evidence</li><li>Future team and subscription foundation</li></ul>
-        <a href="#early-access-form" onclick="gtagSafe && gtagSafe('audience_pmo_cta')">Get Early Access</a>
-      </article>
-    </div>
-  </section>
-
-  <section class="section roadmap-section" id="roadmap">
-    <h2>Product Roadmap</h2>
-    <p class="section-subtitle">
-      OracleToolkit is moving from a tool collection into a focused Oracle Cloud implementation workspace.
-      The roadmap is intentionally organized by delivery maturity.
-    </p>
-
-    <div class="roadmap-grid">
-      <div class="roadmap-column live-column">
-        <h3>Live Now</h3>
-        <ul>
-          <li>COA Transformation Accelerator</li>
-          <li>BCEA Design Accelerator</li>
-          <li>Journal Approvals Accelerator</li>
-          <li>AP Invoice Approvals Accelerator</li>
-          <li>Per Diem Transformation Engine</li>
-          <li>Member Workspace + Saved Runs</li>
-        </ul>
-      </div>
-      <div class="roadmap-column build-column">
-        <h3>In Development</h3>
-        <ul>
-          <li>Saved project history by logged-in user</li>
-          <li>Tool usage analytics</li>
-          <li>AI implementation assistant knowledge base</li>
-          <li>Premium user guides and sample outputs</li>
-          <li>Implementation readiness scoring</li>
-        </ul>
-      </div>
-      <div class="roadmap-column planned-column">
-        <h3>Planned</h3>
-        <ul>
-          <li>Stripe subscription access</li>
-          <li>Cloud workspace storage</li>
-          <li>Advanced exports and templates</li>
-          <li>Public Sector / K-12 advisor prompts</li>
-          <li>Team and project collaboration</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="section release-section" id="release-notes">
-    <div class="release-card">
-      <div>
-        <span class="workspace-kicker">Release Notes</span>
-        <h2>OracleToolkit v15 — Trust & Monetization Foundation</h2>
-        <p>
-          This release improves platform consistency, premium positioning, implementation credibility,
-          use-case clarity, roadmap visibility, and member-workspace trust.
-        </p>
-      </div>
-      <ul>
-        <li>Standardized platform around 10 live accelerators, including Enterprise Structure Intelligence for Common Design and Discovery Command Center Pro for dynamic discovery intelligence.</li>
-        <li>Added implementation use-case matrix.</li>
-        <li>Added trust and credibility layer.</li>
-        <li>Added productivity value metrics.</li>
-        <li>Added roadmap and early monetization positioning.</li>
-        <li>Prepared foundation for AI assistant and paid access model.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="section early-access-program" id="early-access">
-    <div class="early-access-premium">
-      <div>
-        <span class="workspace-kicker">Controlled Early Access Program</span>
-        <h2>Help shape the Oracle Cloud implementation accelerator platform.</h2>
-        <p>
-          OracleToolkit is currently in a controlled early-access phase. The goal is to collect feedback from
-          consultants, architects, PMO teams, and public sector implementation professionals before paid access is introduced.
-        </p>
-      </div>
-      <div class="early-access-actions">
-        <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank">Submit Feedback</a>
-        <a class="secondary" style="color:white;border-color:rgba(255,255,255,.35);" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" title="Contact email: oracletoolkit5@gmail.com">Suggest Accelerator</a>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="section" id="trust"><div class="trust-grid"><div class="panel"><h2>Built from real Oracle implementation delivery experience.</h2><p class="section-subtitle">OracleToolkit is positioned for consultants, solution architects, and implementation teams who deal with practical configuration, conversion, validation, UAT, and public sector complexity.</p><div class="trust-list"><div class="trust-item"><div class="trust-icon">COA</div><div><strong>COA Transformation</strong><span>Designed for legacy-to-Oracle mapping, validation gaps, public sector reporting, and review-ready outputs.</span></div></div><div class="trust-item"><div class="trust-icon">BCEA</div><div><strong>Budgetary Control & Encumbrance</strong><span>Roadmap focus includes funds check, advisory vs absolute controls, test scenarios, and rule readiness.</span></div></div><div class="trust-item"><div class="trust-icon">K12</div><div><strong>Public Sector & K-12</strong><span>Built with practical awareness of DOE reporting, funds, grants, chart of accounts, and implementation governance.</span></div></div></div></div><div class="authority-card"><h3>Not a generic productivity tool.</h3><p>OracleToolkit is being built as a focused Oracle Cloud delivery accelerator platform — not a broad spreadsheet utility. The goal is to reduce repeatable implementation effort and improve readiness before SIT, UAT, conversion, and go-live.</p><div class="authority-kpis"><div class="authority-kpi"><strong>7</strong><span>Live SaaS tools</span></div><div class="authority-kpi"><strong>14+</strong><span>Roadmap accelerators</span></div><div class="authority-kpi"><strong>Finance</strong><span>First active domain</span></div><div class="authority-kpi"><strong>AI</strong><span>Advisor roadmap</span></div></div></div></div></section>
-
-  <section class="section" id="ai-assistant"><div class="ai-section"><h2>AI-Powered Oracle Implementation Assistant — Coming Soon</h2><p class="section-subtitle">The next layer of OracleToolkit will guide users through tool selection, setup questions, validation errors, COA mapping decisions, approval routing logic, BCEA design scenarios, and public sector implementation risks.</p><div class="ai-grid"><div class="ai-card"><strong>Tool Guidance</strong><span>Recommend the right accelerator based on the user’s implementation scenario.</span></div><div class="ai-card"><strong>Validation Intelligence</strong><span>Explain mapping errors, funds check issues, and readiness gaps in plain implementation language.</span></div><div class="ai-card"><strong>Public Sector Advisor</strong><span>Support COA, funds, grants, DOE/K-12 reporting, and governance-oriented design discussions.</span></div></div></div></section>
-
-  <section class="section"><div class="split"><div class="panel"><h3>Why OracleToolkit exists</h3><p>Oracle Cloud implementation teams lose time on repeated cleanup, validation, conversion checks, testing packs, and setup readiness reviews.</p><p>OracleToolkit converts field-tested implementation knowledge into structured SaaS accelerators that help teams move faster with better control.</p></div><div class="panel"><h3>The risk it reduces</h3><ul class="risk-list"><li>Manual spreadsheet cleanup creating inconsistent results.</li><li>Incomplete validation before SIT, UAT, or conversion cycles.</li><li>Repeated effort across similar Oracle Cloud projects.</li><li>Late discovery of configuration and data readiness issues.</li><li>Dependency gaps between functional, technical, and business teams.</li></ul></div></div></section>
-
-  <section class="section" id="domains"><h2>Tool Domains</h2><p class="section-subtitle">The platform is structured by Oracle Cloud business domains. Finance is the first active domain, with additional tools planned across PPM, SCM, and HR.</p><div class="domain-grid"><div class="card active-domain"><h3>Finance</h3><p>GL, Budgetary Control, Payables, Receivables, Fixed Assets, Expenses, and Cash Management accelerators.</p></div><div class="card"><h3>PPM</h3><p>Future accelerators for project costing, billing, grants, capitalization, project controls, and project budget readiness.</p></div><div class="card"><h3>SCM</h3><p>Future toolkits for procurement, suppliers, receiving, inventory, purchasing controls, and operational readiness.</p></div><div class="card"><h3>HR</h3><p>Future tools for employee setup, approval dependencies, job and position mapping, and security readiness.</p></div></div></section>
-
-  
-
-  <section class="section" id="common-design-path">
-    <span class="workspace-kicker">Common Design Layer</span>
-    <h2>Start implementation design with Enterprise Structure Intelligence.</h2>
-    <p class="section-subtitle">
-      OracleToolkit now supports the correct Common Design flow: Enterprise Structure Intelligence → COA Transformation → BCEA Design.
-      This connects GL, HCM, PPM, SCM, Security, Reporting, and Budgetary Control before module teams move into detailed design.
-    </p>
-    <div class="module-grid">
-      <div class="module active-tool">
-        <h3>Enterprise Structure Intelligence</h3>
-        <p>Align legal entities, ledgers, business units, departments, locations, jobs, positions, ownership, and budget strategy.</p>
-        <ul><li><a href="https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/" target="_blank">Launch Enterprise Structure Intelligence <span class="live">Live</span></a></li></ul>
-      </div>
-      <div class="module active-tool">
-        <h3>COA Transformation Accelerator</h3>
-        <p>Translate legacy COA thinking into Oracle Cloud-ready segment strategy and mapping governance.</p>
-        <ul><li><a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank">Launch COA Accelerator <span class="live">Live</span></a></li></ul>
-      </div>
-      <div class="module active-tool">
-        <h3>BCEA Design Accelerator</h3>
-        <p>Convert budgetary control strategy into control levels, risk warnings, dependencies, and test scenarios.</p>
-        <ul><li><a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank">Launch BCEA Accelerator <span class="live">Live</span></a></li></ul>
-      </div>
-    </div>
-  </section>
-
-<section class="section" id="finance"><h2>Finance Toolkit Categories</h2><p class="section-subtitle">Finance is the first active domain. Each module will gradually include validation engines, testing packs, mapping tools, conversion checkers, and implementation readiness accelerators.</p><div class="module-grid"><div class="module"><h3>GL & BCEA</h3><ul><li><a href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','finance_coa_launch_click')">COA Transformation Accelerator <span class="live">Live</span></a></li><li><a href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank" onclick="gtag('event','finance_bcea_launch_click')">BCEA Design Accelerator <span class="live">Live</span></a></li><li><a href="https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/" target="_blank" onclick="gtag('event','finance_journal_approvals_launch_click')">Journal Approvals Accelerator <span class="live">Live</span></a></li></ul></div><div class="module"><h3>Payables</h3><ul><li><a href="https://apinvoiceapprovals-prvs4kmw9bmfjnc5qm3rdw.streamlit.app/" target="_blank" onclick="gtag('event','finance_ap_invoice_approvals_launch_click')">AP Invoice Approvals Accelerator <span class="live">Live</span></a></li><li><a href="#member-tools">Payment Method Readiness <span>Coming Soon</span></a></li><li><a href="#member-tools">Supplier Setup Review <span>Coming Soon</span></a></li></ul></div><div class="module"><h3>Receivables</h3><ul><li><a href="#member-tools">AutoAccounting Review <span>Coming Soon</span></a></li><li><a href="#member-tools">Receipt Method Validation <span>Coming Soon</span></a></li><li><a href="#member-tools">Customer Site Readiness <span>Coming Soon</span></a></li></ul></div><div class="module"><h3>Fixed Assets</h3><ul><li><a href="#member-tools">Asset Conversion Readiness <span>Coming Soon</span></a></li><li><a href="#member-tools">Book Setup Validation <span>Coming Soon</span></a></li><li><a href="#member-tools">Mass Additions Review <span>Coming Soon</span></a></li></ul></div><div class="module active-tool"><h3>Expenses</h3><ul><li><a href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank">Per Diem Transformation Engine <span class="live">Live</span></a></li><li><a href="#member-tools">Expense Approval Readiness <span>Coming Soon</span></a></li><li><a href="#member-tools">Policy Setup Validation <span>Coming Soon</span></a></li></ul></div><div class="module"><h3>Cash Management</h3><ul><li><a href="#member-tools">Bank Account Setup Review <span>Coming Soon</span></a></li><li><a href="#member-tools">Pooled Cash Reconciliation Aid <span>Coming Soon</span></a></li><li><a href="#member-tools">Bank Statement Testing Pack <span>Coming Soon</span></a></li></ul></div></div></section>
-
-  <section class="section"><h2>How the live tools work</h2><p class="section-subtitle">The live SaaS tools use a practical upload-to-output workflow designed for quick project use, client review, and early user feedback.</p><div class="workflow"><div class="step"><div class="step-number">1</div><h3>Upload</h3><p>Upload the source file into the relevant accelerator.</p></div><div class="step"><div class="step-number">2</div><h3>Normalize</h3><p>The engine cleans and structures the source data into usable review tables.</p></div><div class="step"><div class="step-number">3</div><h3>Validate</h3><p>Review flags highlight rows that need attention before Oracle setup usage.</p></div><div class="step"><div class="step-number">4</div><h3>Download</h3><p>Download Oracle-ready helper outputs for review, testing, mapping, or setup support.</p></div></div></section>
-
-  <section class="section"><h2>Built for implementation professionals</h2><p class="section-subtitle">OracleToolkit is designed for people who work inside real Oracle Cloud programs and need practical execution support.</p><div class="audience-grid"><div class="audience">Oracle Cloud Finance Consultants</div><div class="audience">Solution Architects</div><div class="audience">Implementation Teams</div><div class="audience">Public Sector / K-12 Projects</div></div></section>
-
-  <section class="section" id="coming-soon"><div class="coming"><h3>More OracleToolkit accelerators are coming soon</h3><p>Current live tools: Common Design → SOW to RICE Intelligence, Enterprise Structure Intelligence; Discovery → Discovery Command Center Pro; Build & Configure → Configuration Readiness Engine; Testing → Scenario Intelligence Engine; GL/BCEA → COA Transformation Accelerator, BCEA Design Accelerator, Journal Approvals Accelerator; Payables → AP Invoice Approvals Accelerator; Expenses → Per Diem Transformation Engine. Upcoming tools will be released across GL & BCEA, Payables, Receivables, Fixed Assets, Cash Management, PPM, SCM, and HR.</p><a class="request-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" title="Contact email: oracletoolkit5@gmail.com">Request Early Access / Suggest a Tool</a></div></section>
-
-
-
-  <section class="section trust-phase-section" id="trust-compliance-phase1">
-    <span class="workspace-kicker">Phase 1 Trust Layer</span>
-    <h2>Phase 1 compliance foundation for PHI, PII, and SPI awareness.</h2>
-    <p class="section-subtitle">This early-access release introduces enterprise-aware guardrails: warning banners, upload restrictions, terms/privacy guidance, and safe-use instructions for implementation teams.</p>
-    <div class="trust-grid">
-      <div><strong>Warning Banners</strong><span>Every upload-heavy workflow should remind users to remove or mask sensitive production data.</span></div>
-      <div><strong>Upload Restrictions</strong><span>OracleToolkit should be used with sanitized implementation documents, metadata, and design artifacts only.</span></div>
-      <div><strong>Safe-Use Guidance</strong><span>Prefer summaries, sample data, configuration metadata, SOW scope, COA structures, and test scenarios.</span></div>
-      <div><strong>Terms / Privacy</strong><span>Clear boundaries explain that OracleToolkit is independent, early-access, and not intended for regulated production data processing.</span></div>
-    </div>
-  </section>
-
-  <section class="section policy-section" id="upload-restrictions">
-    <h2>Upload restrictions</h2>
-    <div class="policy-grid">
-      <div class="policy-card allow"><h3>Allowed / safer inputs</h3><ul><li>Sanitized SOW sections</li><li>COA segment structures</li><li>Configuration decisions</li><li>Requirement summaries</li><li>Testing scenario metadata</li><li>Design assumptions and open decisions</li></ul></div>
-      <div class="policy-card restrict"><h3>Do not upload</h3><ul><li>Payroll extracts or salary files</li><li>SSNs, tax IDs, bank account data</li><li>Patient, medical, insurance, or PHI records</li><li>Supplier banking files</li><li>Passwords, secrets, API keys, or credentials</li><li>Unmasked employee or student personal data</li></ul></div>
-    </div>
-  </section>
-
-  <section class="section legal-section" id="terms">
-    <h2>Terms of Use and Privacy Notice — Phase 1</h2>
-    <p class="section-subtitle">OracleToolkit is an independent Oracle Cloud implementation accelerator platform. It is not affiliated with Oracle Corporation. Early-access tools are provided for implementation planning, design support, governance, and productivity assistance.</p>
-    <div class="legal-grid">
-      <div><strong>Use boundary</strong><span>Use OracleToolkit for implementation intelligence, not as a system of record for regulated production-sensitive data.</span></div>
-      <div><strong>User responsibility</strong><span>Users are responsible for masking, redacting, and obtaining permission before uploading any client or project content.</span></div>
-      <div><strong>No legal/compliance certification</strong><span>This Phase 1 release is enterprise-aware but should not be represented as SOC 2, HIPAA, FedRAMP, or ISO certified.</span></div>
-      <div><strong>Future roadmap</strong><span>Planned controls include masking, retention controls, client workspace isolation, audit logging, and role-based access.</span></div>
-    </div>
-  </section>
-
-  <section class="section documentation-section" id="documentation">
-    <h2>Premium Documentation Coming Next</h2>
-    <p class="section-subtitle">
-      Each accelerator will gradually include a professional user guide, sample input, sample output,
-      implementation use cases, known limitations, and recommended project usage patterns.
-    </p>
-    <div class="doc-grid">
-      <div><strong>User Guides</strong><span>Step-by-step usage instructions for each accelerator.</span></div>
-      <div><strong>Sample Outputs</strong><span>Preview what consultants and clients should expect before launching.</span></div>
-      <div><strong>Implementation Notes</strong><span>Explain how to use each tool in discovery, design, SIT, UAT, and go-live cycles.</span></div>
-      <div><strong>Monetization Ready</strong><span>Documentation increases trust and supports future paid access.</span></div>
-    </div>
-  </section>
-
-
-  <section class="section playbook-cta-section" id="playbooks-next">
-    <div class="playbook-cta-card">
-      <div>
-        <span class="workspace-kicker">Next Platform Milestone</span>
-        <h2>OracleToolkit Playbook Engine</h2>
-        <p>
-          The next build should guide users through COA, BCEA, approvals, testing, migration, and cutover playbooks by phase.
-          Each playbook should include objectives, required inputs, common Oracle risks, recommended accelerators, deliverables,
-          and readiness evidence.
-        </p>
-      </div>
-      <a class="cta" href="#early-access-form">Join Early Access</a>
-    </div>
-  </section>
-
-  <section class="section final-cta"><h2>Start with SOW to RICE Intelligence, Enterprise Structure Intelligence, Discovery Command Center Pro, Configuration Readiness Engine, Scenario Intelligence Engine, COA Accelerator, BCEA Design Accelerator, Journal Approvals Accelerator, AP Invoice Approvals Accelerator, and Per Diem Engine. Help shape the next OracleToolkit products.</h2><p class="section-subtitle">Early feedback will guide the next Finance, Public Sector, K-12, PPM, SCM, and HR accelerators.</p><div class="cta-row" style="justify-content:center;"><a class="cta" href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank" onclick="gtag('event','final_sow_rice_launch_click')">Launch SOW to RICE</a><a class="cta" href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank" onclick="gtag('event','final_discovery_pro_launch_click')">Launch Discovery Pro</a><a class="secondary" style="color:#111827;border-color:#111827;" href="https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/" target="_blank" onclick="gtag('event','final_enterprise_structure_launch_click')">Launch Enterprise Structure</a><a class="secondary" style="color:#111827;border-color:#111827;" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" onclick="gtag('event','final_coa_launch_click')">Launch COA Accelerator</a><a class="secondary" style="color:#111827;border-color:#111827;" href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank" onclick="gtag('event','final_bcea_launch_click')">Launch BCEA Design</a>
-      <a class="secondary" style="color:#111827;border-color:#111827;" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" onclick="gtag('event','final_per_diem_launch_click')">Launch Per Diem Engine</a><a class="secondary" style="color:#111827;border-color:#111827;" href="https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor" target="_blank" title="Contact email: oracletoolkit5@gmail.com">Contact / Feedback</a></div></section>
-
-  <footer class="footer">© OracleToolkit. Independent platform for Oracle Cloud implementation accelerators. Not affiliated with Oracle Corporation. <a href="#safe-use-guidance">Safe Use</a> · <a href="#upload-restrictions">Upload Restrictions</a> · <a href="#terms">Terms & Privacy</a></footer>
-  <script async crossorigin="anonymous" data-clerk-publishable-key="pk_live_Y2xlcmsub3JhY2xldG9vbGtpdC5jb20k" src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@5/dist/clerk.browser.js" type="text/javascript"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="auth.js"></script>
   <script src="supabase-config.js"></script>
-  <script src="cloud-workspace.js"></script>
+  <script src="auth.js"></script>
   <script src="dashboard.js"></script>
-
-<script>
-  window.addEventListener("load", function () {
-    const form = document.getElementById("early-access-lead-form");
-    if (form) {
-      form.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const payload = {
-          name: document.getElementById("lead-name")?.value || "",
-          email: document.getElementById("lead-email")?.value || "",
-          company: document.getElementById("lead-company")?.value || "",
-          role: document.getElementById("lead-role")?.value || "",
-          module: document.getElementById("lead-module")?.value || "",
-          type: document.getElementById("lead-type")?.value || "",
-          pain: document.getElementById("lead-pain")?.value || ""
-        };
-        localStorage.setItem("oracletoolkit_early_access_lead", JSON.stringify(payload));
-        if (typeof gtag === "function") {
-          gtag("event", "early_access_submit", {
-            role: payload.role,
-            module_interest: payload.module,
-            implementation_type: payload.type
-          });
-        }
-        if (typeof gtagSafe === "function") gtagSafe("early_access_form_submit");
-        window.open("https://docs.google.com/forms/d/e/1FAIpQLSdnP7gMTPaaToSrBuXrYFc5y6gb6JuLxql52jHEpTTbO3tSUQ/viewform?usp=publish-editor", "_blank");
-      });
-    }
-  });
-</script>
-
-
-<script>
-  window.addEventListener("load", function () {
-    document.querySelectorAll(".nav-dropdown > button").forEach(function (button) {
-      button.addEventListener("click", function (event) {
-        event.stopPropagation();
-        const parent = button.closest(".nav-dropdown");
-        document.querySelectorAll(".nav-dropdown.open").forEach(function (item) {
-          if (item !== parent) item.classList.remove("open");
-        });
-        parent.classList.toggle("open");
-      });
-    });
-    document.addEventListener("click", function () {
-      document.querySelectorAll(".nav-dropdown.open").forEach(function (item) {
-        item.classList.remove("open");
-      });
-    });
-    document.querySelectorAll(".dropdown-menu a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        if (typeof gtagSafe === "function") {
-          gtagSafe("nav_dropdown_click");
-        }
-        document.querySelectorAll(".nav-dropdown.open").forEach(function (item) {
-          item.classList.remove("open");
-        });
-      });
-    });
-  });
-</script>
-
-
-<script>
-  // OracleToolkit Auth Consistency Repair
-  // Keeps Login, Logout, Dashboard and Member Workspace working after navigation redesign.
-
-  function otIsSignedIn() {
-    return !!(window.Clerk && window.Clerk.user);
-  }
-
-  function otSafeScrollTo(selector) {
-    const target = document.querySelector(selector);
-    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  function otUpdateAuthNav() {
-    const signedIn = otIsSignedIn();
-
-    const loginBtn = document.getElementById("login-button");
-    const logoutBtn = document.getElementById("logout-button");
-    const dashboardBtn = document.getElementById("dashboard-button");
-    const userPill = document.getElementById("user-pill");
-
-    if (loginBtn) loginBtn.classList.toggle("hidden", signedIn);
-    if (logoutBtn) logoutBtn.classList.toggle("hidden", !signedIn);
-    if (dashboardBtn) dashboardBtn.classList.toggle("hidden", !signedIn);
-
-    if (userPill) {
-      userPill.classList.toggle("hidden", !signedIn);
-      if (signedIn) {
-        const user = window.Clerk.user;
-        const firstName = user.firstName || user.username || "User";
-        const imageUrl = user.imageUrl;
-        userPill.innerHTML = imageUrl
-          ? `<img src="${imageUrl}" alt="User" />`
-          : `<span>${firstName.slice(0, 1).toUpperCase()}</span>`;
-      } else {
-        userPill.innerHTML = "";
-      }
-    }
-  }
-
-  async function otOpenSignIn() {
-    if (!window.Clerk) {
-      alert("Login temporarily unavailable. Please refresh and try again.");
-      return;
-    }
-    try {
-      await window.Clerk.openSignIn();
-    } catch (error) {
-      console.error("Clerk sign in failed:", error);
-      alert("Login temporarily unavailable. Please check console.");
-    }
-  }
-
-  async function otSignOut() {
-    if (!window.Clerk) {
-      alert("Logout temporarily unavailable. Please refresh and try again.");
-      return;
-    }
-    try {
-      await window.Clerk.signOut();
-      otUpdateAuthNav();
-      window.location.hash = "";
-      window.location.reload();
-    } catch (error) {
-      console.error("Clerk sign out failed:", error);
-      alert("Logout failed. Please refresh and try again.");
-    }
-  }
-
-  function otOpenDashboard() {
-    if (!otIsSignedIn()) {
-      otOpenSignIn();
-      return;
-    }
-    const dashboard = document.getElementById("member-dashboard") || document.getElementById("workspace-engine") || document.getElementById("dashboard");
-    if (dashboard) {
-      dashboard.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      window.location.hash = "#workspace-engine";
-    }
-  }
-
-  function otWireAuthNav() {
-    const loginBtn = document.getElementById("login-button");
-    const logoutBtn = document.getElementById("logout-button");
-    const dashboardBtn = document.getElementById("dashboard-button");
-
-    if (loginBtn) loginBtn.onclick = otOpenSignIn;
-    if (logoutBtn) logoutBtn.onclick = otSignOut;
-    if (dashboardBtn) dashboardBtn.onclick = otOpenDashboard;
-
-    document.querySelectorAll("[data-requires-auth='true']").forEach(function (link) {
-      link.addEventListener("click", function (event) {
-        if (!otIsSignedIn()) {
-          event.preventDefault();
-          otOpenSignIn();
-        }
-      });
-    });
-
-    otUpdateAuthNav();
-  }
-
-  window.addEventListener("load", async function () {
-    let tries = 0;
-    const timer = setInterval(function () {
-      tries += 1;
-      if (window.Clerk) {
-        clearInterval(timer);
-        try {
-          if (window.Clerk.load) {
-            window.Clerk.load().then(function () {
-              otWireAuthNav();
-              if (window.Clerk.addListener) {
-                window.Clerk.addListener(function () {
-                  otUpdateAuthNav();
-                });
-              }
-            });
-          } else {
-            otWireAuthNav();
-          }
-        } catch (e) {
-          console.warn("Clerk already initialized or unavailable:", e);
-          otWireAuthNav();
-        }
-      }
-      if (tries > 40) {
-        clearInterval(timer);
-        otWireAuthNav();
-      }
-    }, 250);
-  });
-</script>
-
+  <script src="cloud-workspace.js"></script>
 </body>
 </html>
