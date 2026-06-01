@@ -1,74 +1,76 @@
-(function () {
-  const LOGIN_URL = "login.html";
-  const WORKSPACE_URL = "workspace.html";
-
-  function byId(id) { return document.getElementById(id); }
-  function show(el) { if (el) el.classList.remove("hidden"); }
-  function hide(el) { if (el) el.classList.add("hidden"); }
-  function text(el, value) { if (el) el.textContent = value || ""; }
-
-  function setLoggedOutUi() {
-    show(byId("login-button"));
-    hide(byId("logout-button"));
-    hide(byId("dashboard-button"));
-    hide(byId("user-pill"));
-    text(byId("user-pill"), "");
-  }
-
-  function setLoggedInUi(user) {
-    hide(byId("login-button"));
-    show(byId("logout-button"));
-    show(byId("dashboard-button"));
-    show(byId("user-pill"));
-    text(byId("user-pill"), (user && (user.email || user.user_metadata?.full_name)) || "Signed in");
-  }
-
-  async function getClient() {
-    if (window.initOracleToolkitSupabase) window.initOracleToolkitSupabase();
-    return window.supabaseClient || null;
-  }
-
-  async function refreshAuthUi() {
-    const client = await getClient();
-    if (!client) {
-      setLoggedOutUi();
-      return;
-    }
-
-    try {
-      const { data } = await client.auth.getSession();
-      const session = data && data.session;
-      if (session && session.user) setLoggedInUi(session.user);
-      else setLoggedOutUi();
-    } catch (e) {
-      setLoggedOutUi();
-    }
-  }
-
-  function attachHandlers() {
-    const login = byId("login-button");
-    const dashboard = byId("dashboard-button");
-    const logout = byId("logout-button");
-
-    if (login) login.onclick = function () { window.location.href = LOGIN_URL; };
-    if (dashboard) dashboard.onclick = function () { window.location.href = WORKSPACE_URL; };
-
-    if (logout) {
-      logout.onclick = async function () {
-        const client = await getClient();
-        if (client) {
-          try { await client.auth.signOut(); } catch(e) {}
-        }
-        setLoggedOutUi();
-      };
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    attachHandlers();
-    refreshAuthUi();
-    setTimeout(refreshAuthUi, 1200);
-  });
-
-  window.OracleToolkitAuth = { refresh: refreshAuthUi, setLoggedOutUi, setLoggedInUi };
-})();
+// OracleToolkit Clerk Authentication Layer
+let oracleToolkitClerkReady = false;
+function gtagSafe(eventName){ try{ if(typeof gtag === 'function') gtag('event', eventName); }catch(e){} }
+function otById(id){ return document.getElementById(id); }
+function otShow(el){ if(el) el.classList.remove('hidden'); }
+function otHide(el){ if(el) el.classList.add('hidden'); }
+function otText(el, value){ if(el) el.textContent = value || ''; }
+function otDisplayName(user){
+  if(!user) return 'Signed in';
+  return user.firstName || user.fullName || (user.primaryEmailAddress && user.primaryEmailAddress.emailAddress) || 'Signed in';
+}
+function showLoggedOutUI(){
+  otShow(otById('login-button'));
+  otHide(otById('logout-button'));
+  otHide(otById('dashboard-button'));
+  otHide(otById('user-pill'));
+  otText(otById('user-pill'), '');
+}
+function showLoggedInUI(){
+  otHide(otById('login-button'));
+  otShow(otById('logout-button'));
+  otShow(otById('dashboard-button'));
+  otShow(otById('user-pill'));
+  otText(otById('user-pill'), otDisplayName(window.Clerk && window.Clerk.user));
+}
+async function initializeClerk(){
+  if(!window.Clerk) return false;
+  if(!oracleToolkitClerkReady){ await window.Clerk.load(); oracleToolkitClerkReady = true; }
+  if(window.Clerk.user) showLoggedInUI(); else showLoggedOutUI();
+  return true;
+}
+async function openLogin(){
+  try{
+    sessionStorage.setItem('ot_login_intent','workspace');
+    if(!window.Clerk){ window.location.href = 'login.html'; return; }
+    await initializeClerk();
+    if(window.Clerk.user){ window.location.href='workspace.html'; return; }
+    gtagSafe('login_modal_opened');
+    window.Clerk.openSignIn({ afterSignInUrl: window.location.origin + '/workspace.html', afterSignUpUrl: window.location.origin + '/workspace.html' });
+  }catch(err){ console.error('Clerk Error:', err); window.location.href='login.html'; }
+}
+async function logoutClerk(){
+  try{
+    if(window.Clerk){ await initializeClerk(); await window.Clerk.signOut(); }
+  }catch(err){ console.warn('Logout warning:', err); }
+  sessionStorage.removeItem('ot_login_intent');
+  showLoggedOutUI();
+}
+function wireAuthButtons(){
+  const loginButton = otById('login-button');
+  const dashboardButton = otById('dashboard-button');
+  const logoutButton = otById('logout-button');
+  if(loginButton) loginButton.onclick = openLogin;
+  if(dashboardButton) dashboardButton.onclick = function(){ window.location.href='workspace.html'; };
+  if(logoutButton) logoutButton.onclick = logoutClerk;
+}
+window.addEventListener('load', async function(){
+  wireAuthButtons();
+  showLoggedOutUI();
+  setTimeout(async function(){
+    try{
+      await initializeClerk();
+      if(window.Clerk && window.Clerk.addListener){
+        window.Clerk.addListener(function(){
+          if(window.Clerk.user){
+            showLoggedInUI();
+            if(sessionStorage.getItem('ot_login_intent') === 'workspace'){
+              sessionStorage.removeItem('ot_login_intent');
+              window.location.href='workspace.html';
+            }
+          } else showLoggedOutUI();
+        });
+      }
+    }catch(err){ console.warn('Clerk background load warning:', err); showLoggedOutUI(); }
+  }, 350);
+});
