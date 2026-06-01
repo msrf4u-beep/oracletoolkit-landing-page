@@ -1,18 +1,11 @@
 (function () {
-  const LOGIN_URL = "dashboard.html";
-  const DASHBOARD_URL = "dashboard.html";
+  const LOGIN_URL = "workspace.html";
+  const DASHBOARD_URL = "workspace.html";
 
   function byId(id) { return document.getElementById(id); }
   function show(el) { if (el) el.classList.remove("hidden"); }
   function hide(el) { if (el) el.classList.add("hidden"); }
   function safeSetText(el, value) { if (el) el.textContent = value || ""; }
-
-  function getLocalUser() {
-    try {
-      const raw = localStorage.getItem("oracletoolkit_user") || localStorage.getItem("ot_user") || localStorage.getItem("user");
-      return raw ? JSON.parse(raw) : null;
-    } catch (e) { return null; }
-  }
 
   function setLoggedOutUi() {
     show(byId("login-button"));
@@ -27,8 +20,7 @@
     show(byId("logout-button"));
     show(byId("dashboard-button"));
     show(byId("user-pill"));
-    const label = (user && (user.email || user.name || user.fullName || user.username)) || "Signed in";
-    safeSetText(byId("user-pill"), label);
+    safeSetText(byId("user-pill"), (user && (user.email || user.name)) || "Signed in");
   }
 
   async function detectSession() {
@@ -42,50 +34,38 @@
         }
       }
     } catch (e) {}
-    const localUser = getLocalUser();
-    if (localUser) setLoggedInUi(localUser);
-    else setLoggedOutUi();
+    setLoggedOutUi();
   }
+
+  function goWorkspace() { window.location.href = LOGIN_URL; }
 
   function attachHandlers() {
     const loginButton = byId("login-button");
-    const logoutButton = byId("logout-button");
     const dashboardButton = byId("dashboard-button");
+    const logoutButton = byId("logout-button");
 
-    if (loginButton) {
-      loginButton.addEventListener("click", function () {
-        window.location.href = LOGIN_URL;
-      });
-    }
-
-    if (dashboardButton) {
-      dashboardButton.addEventListener("click", function () {
-        window.location.href = DASHBOARD_URL;
-      });
-    }
+    if (loginButton) loginButton.onclick = goWorkspace;
+    if (dashboardButton) dashboardButton.onclick = goWorkspace;
 
     if (logoutButton) {
-      logoutButton.addEventListener("click", async function () {
+      logoutButton.onclick = async function () {
         try {
           if (window.supabaseClient && window.supabaseClient.auth) {
             await window.supabaseClient.auth.signOut();
           }
         } catch (e) {}
-        try {
-          localStorage.removeItem("oracletoolkit_user");
-          localStorage.removeItem("ot_user");
-          localStorage.removeItem("user");
-        } catch (e) {}
         setLoggedOutUi();
-      });
+      };
     }
   }
 
   document.addEventListener("DOMContentLoaded", function () {
     attachHandlers();
     detectSession();
-    setTimeout(detectSession, 800);
-    setTimeout(detectSession, 2000);
+    setTimeout(function () {
+      attachHandlers();
+      detectSession();
+    }, 800);
   });
 
   window.OracleToolkitAuth = { refresh: detectSession, setLoggedOutUi, setLoggedInUi };
