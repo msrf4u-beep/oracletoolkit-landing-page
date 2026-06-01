@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | OracleToolkit</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <meta name="robots" content="noindex, follow">
+  <style>
+    :root{--navy:#0A2040;--line:#dbe3ef;--muted:#64748b;--bg:#f8fafc}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(135deg,#f8fafc,#eef6ff);color:#0f172a}
+    .wrap{min-height:100vh;display:grid;place-items:center;padding:28px}
+    .card{width:100%;max-width:480px;background:white;border:1px solid var(--line);border-radius:26px;padding:30px;box-shadow:0 24px 70px rgba(15,23,42,.10)}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;color:var(--navy);margin-bottom:22px}
+    .brand svg{width:40px;height:40px}
+    h1{margin:0 0 8px;color:var(--navy);font-size:32px;letter-spacing:-.04em}
+    p{margin:0 0 22px;color:var(--muted);line-height:1.55}
+    button,input{width:100%;border-radius:14px;font-size:15px}
+    input{border:1px solid var(--line);padding:13px 14px;margin:10px 0 12px}
+    button{border:0;padding:13px 14px;font-weight:900;cursor:pointer}
+    .primary{background:var(--navy);color:white}
+    .secondary{background:#2563eb;color:white;margin-bottom:14px}
+    .ghost{background:white;color:var(--navy);border:1px solid var(--line);margin-top:10px}
+    .divider{display:flex;align-items:center;gap:12px;color:#94a3b8;font-size:13px;margin:18px 0}
+    .divider:before,.divider:after{content:"";height:1px;background:var(--line);flex:1}
+    .status{margin-top:14px;font-size:14px;color:#334155;min-height:22px}
+    .safe{font-size:12px;color:#64748b;background:#f8fafc;border:1px solid var(--line);padding:12px;border-radius:14px;margin-top:18px}
+    a{color:#1d4ed8;text-decoration:none;font-weight:800}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <div class="brand">
+        <svg viewBox="0 0 96 96" aria-hidden="true">
+          <rect x="6" y="6" width="84" height="84" rx="22" fill="#0A2040"></rect>
+          <rect x="13" y="13" width="70" height="70" rx="17" fill="none" stroke="#CBD5E1" stroke-width="5"></rect>
+          <text x="48" y="58" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="800" fill="#F8FAFC">OT</text>
+        </svg>
+        <span>OracleToolkit</span>
+      </div>
+
+      <h1>Sign in to OracleToolkit</h1>
+      <p>Use Google or email magic link to access the member workspace and future project-memory features.</p>
+
+      <button id="google-login" class="secondary" type="button">Continue with Google</button>
+
+      <div class="divider">or</div>
+
+      <form id="email-form">
+        <input id="email" type="email" placeholder="Enter your email" required>
+        <button class="primary" type="submit">Send email login link</button>
+      </form>
+
+      <button class="ghost" type="button" onclick="window.location.href='index.html'">Back to homepage</button>
+      <div id="status" class="status"></div>
+
+      <div class="safe">
+        Enterprise-safe guidance: do not upload production PHI, PII, SPI, payroll, patient, or supplier banking data.
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script>
+    const statusEl = document.getElementById("status");
+
+    function status(message) {
+      statusEl.textContent = message;
+    }
+
+    async function getClient() {
+      if (window.initOracleToolkitSupabase) window.initOracleToolkitSupabase();
+      if (!window.supabaseClient) {
+        status("Authentication is still loading. Please try again in a moment.");
+        return null;
+      }
+      return window.supabaseClient;
+    }
+
+    document.getElementById("google-login").addEventListener("click", async function () {
+      const client = await getClient();
+      if (!client) return;
+
+      status("Opening Google sign-in...");
+      const redirectTo = window.location.origin + "/workspace.html";
+
+      const { error } = await client.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo }
+      });
+
+      if (error) status("Google login failed: " + error.message);
+    });
+
+    document.getElementById("email-form").addEventListener("submit", async function (event) {
+      event.preventDefault();
+      const client = await getClient();
+      if (!client) return;
+
+      const email = document.getElementById("email").value.trim();
+      const redirectTo = window.location.origin + "/workspace.html";
+
+      status("Sending login link...");
+      const { error } = await client.auth.signInWithOtp({
+        email,
+        options: { emailRedirectTo: redirectTo }
+      });
+
+      if (error) status("Email login failed: " + error.message);
+      else status("Login link sent. Check your email.");
+    });
+  </script>
+</body>
+</html>

@@ -1,18 +1,18 @@
 (function () {
-  const LOGIN_URL = "workspace.html";
-  const DASHBOARD_URL = "workspace.html";
+  const LOGIN_URL = "login.html";
+  const WORKSPACE_URL = "workspace.html";
 
   function byId(id) { return document.getElementById(id); }
   function show(el) { if (el) el.classList.remove("hidden"); }
   function hide(el) { if (el) el.classList.add("hidden"); }
-  function safeSetText(el, value) { if (el) el.textContent = value || ""; }
+  function text(el, value) { if (el) el.textContent = value || ""; }
 
   function setLoggedOutUi() {
     show(byId("login-button"));
     hide(byId("logout-button"));
     hide(byId("dashboard-button"));
     hide(byId("user-pill"));
-    safeSetText(byId("user-pill"), "");
+    text(byId("user-pill"), "");
   }
 
   function setLoggedInUi(user) {
@@ -20,40 +20,45 @@
     show(byId("logout-button"));
     show(byId("dashboard-button"));
     show(byId("user-pill"));
-    safeSetText(byId("user-pill"), (user && (user.email || user.name)) || "Signed in");
+    text(byId("user-pill"), (user && (user.email || user.user_metadata?.full_name)) || "Signed in");
   }
 
-  async function detectSession() {
+  async function getClient() {
+    if (window.initOracleToolkitSupabase) window.initOracleToolkitSupabase();
+    return window.supabaseClient || null;
+  }
+
+  async function refreshAuthUi() {
+    const client = await getClient();
+    if (!client) {
+      setLoggedOutUi();
+      return;
+    }
+
     try {
-      if (window.supabaseClient && window.supabaseClient.auth) {
-        const result = await window.supabaseClient.auth.getSession();
-        const session = result && result.data ? result.data.session : null;
-        if (session && session.user) {
-          setLoggedInUi(session.user);
-          return;
-        }
-      }
-    } catch (e) {}
-    setLoggedOutUi();
+      const { data } = await client.auth.getSession();
+      const session = data && data.session;
+      if (session && session.user) setLoggedInUi(session.user);
+      else setLoggedOutUi();
+    } catch (e) {
+      setLoggedOutUi();
+    }
   }
-
-  function goWorkspace() { window.location.href = LOGIN_URL; }
 
   function attachHandlers() {
-    const loginButton = byId("login-button");
-    const dashboardButton = byId("dashboard-button");
-    const logoutButton = byId("logout-button");
+    const login = byId("login-button");
+    const dashboard = byId("dashboard-button");
+    const logout = byId("logout-button");
 
-    if (loginButton) loginButton.onclick = goWorkspace;
-    if (dashboardButton) dashboardButton.onclick = goWorkspace;
+    if (login) login.onclick = function () { window.location.href = LOGIN_URL; };
+    if (dashboard) dashboard.onclick = function () { window.location.href = WORKSPACE_URL; };
 
-    if (logoutButton) {
-      logoutButton.onclick = async function () {
-        try {
-          if (window.supabaseClient && window.supabaseClient.auth) {
-            await window.supabaseClient.auth.signOut();
-          }
-        } catch (e) {}
+    if (logout) {
+      logout.onclick = async function () {
+        const client = await getClient();
+        if (client) {
+          try { await client.auth.signOut(); } catch(e) {}
+        }
         setLoggedOutUi();
       };
     }
@@ -61,12 +66,9 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     attachHandlers();
-    detectSession();
-    setTimeout(function () {
-      attachHandlers();
-      detectSession();
-    }, 800);
+    refreshAuthUi();
+    setTimeout(refreshAuthUi, 1200);
   });
 
-  window.OracleToolkitAuth = { refresh: detectSession, setLoggedOutUi, setLoggedInUi };
+  window.OracleToolkitAuth = { refresh: refreshAuthUi, setLoggedOutUi, setLoggedInUi };
 })();

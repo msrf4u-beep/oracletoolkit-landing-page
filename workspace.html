@@ -7,32 +7,103 @@
   <link rel="icon" href="favicon.ico" sizes="any">
   <meta name="robots" content="noindex, follow">
   <style>
+    :root{--navy:#0A2040;--line:#dbe3ef;--muted:#64748b;--bg:#f8fafc}
+    *{box-sizing:border-box}
     body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f8fafc;color:#0f172a}
-    .wrap{max-width:980px;margin:0 auto;padding:48px 22px}
-    .card{background:white;border:1px solid #dbe3ef;border-radius:24px;padding:28px;box-shadow:0 18px 45px rgba(15,23,42,.08)}
-    .logo{width:44px;height:44px;margin-bottom:14px}
-    h1{color:#0A2040;margin:0 0 10px;font-size:38px;letter-spacing:-.04em}
-    p{color:#64748b;font-size:17px;max-width:760px}
+    .top{background:#07172F;color:white;padding:12px 22px}
+    .top-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;align-items:center}
+    .brand{font-weight:900;display:flex;align-items:center;gap:10px}
+    .wrap{max-width:1100px;margin:0 auto;padding:38px 22px}
+    .card{background:white;border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:0 18px 45px rgba(15,23,42,.08);margin-bottom:18px}
+    h1{color:var(--navy);margin:0 0 10px;font-size:38px;letter-spacing:-.04em}
+    h2{color:var(--navy);margin:0 0 10px}
+    p{color:var(--muted);font-size:17px;max-width:820px}
     .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    a{display:inline-flex;padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:800}
-    .primary{background:#0A2040;color:white}.secondary{background:white;color:#0A2040;border:1px solid #dbe3ef}
+    a,button{display:inline-flex;padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:800;border:0;cursor:pointer}
+    .primary{background:var(--navy);color:white}.secondary{background:white;color:var(--navy);border:1px solid var(--line)}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .mini{background:#f8fafc;border:1px solid var(--line);border-radius:18px;padding:18px}
+    .mini strong{display:block;color:#0A2040;margin-bottom:6px}
+    .hidden{display:none!important}
+    @media(max-width:850px){.grid{grid-template-columns:1fr}.top-inner{align-items:flex-start;flex-direction:column}}
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <div class="card">
-      <svg class="logo" width="44" height="44" viewBox="0 0 96 96" aria-hidden="true">
-        <rect x="6" y="6" width="84" height="84" rx="22" fill="#0A2040"></rect>
-        <rect x="13" y="13" width="70" height="70" rx="17" fill="none" stroke="#CBD5E1" stroke-width="5"></rect>
-        <text x="48" y="58" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="800" fill="#F8FAFC">OT</text>
-      </svg>
-      <h1>OracleToolkit Member Workspace</h1>
-      <p>The authenticated project-memory layer is being upgraded. For now, use the public accelerators and methodology workflow from the homepage. Cloud-saved workspace will be the next platform layer after user behavior validation.</p>
-      <div class="actions">
-        <a class="primary" href="index.html">Back to OracleToolkit</a>
-        <a class="secondary" href="oracletoolkit-methodology.html">View Methodology</a>
-      </div>
+  <header class="top">
+    <div class="top-inner">
+      <div class="brand">OracleToolkit Workspace</div>
+      <button id="logout" class="secondary" type="button">Logout</button>
     </div>
+  </header>
+
+  <main class="wrap">
+    <section id="loading" class="card">
+      <h1>Checking authentication...</h1>
+      <p>Please wait while OracleToolkit verifies your login.</p>
+    </section>
+
+    <section id="not-authenticated" class="card hidden">
+      <h1>Login required</h1>
+      <p>Please sign in with Google or email to access the OracleToolkit member workspace.</p>
+      <div class="actions">
+        <a class="primary" href="login.html">Login</a>
+        <a class="secondary" href="index.html">Back to homepage</a>
+      </div>
+    </section>
+
+    <section id="workspace" class="hidden">
+      <div class="card">
+        <h1>OracleToolkit Member Workspace</h1>
+        <p id="user-line">Signed in.</p>
+        <p>The cloud project-memory layer is being upgraded. This workspace will become the central place for saved projects, design decisions, RICE inventory, readiness scores, and SIT/UAT packs.</p>
+        <div class="actions">
+          <a class="primary" href="index.html#start-here">Start Guided Workflow</a>
+          <a class="secondary" href="oracletoolkit-methodology.html">View Methodology</a>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="mini"><strong>Saved Projects</strong><span>Coming next: authenticated project memory.</span></div>
+        <div class="mini"><strong>Design Decisions</strong><span>Track architecture decisions across phases.</span></div>
+        <div class="mini"><strong>Testing Packs</strong><span>Save SIT/UAT scenarios and evidence.</span></div>
+      </div>
+    </section>
   </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script>
+    function show(id) { document.getElementById(id).classList.remove("hidden"); }
+    function hide(id) { document.getElementById(id).classList.add("hidden"); }
+
+    async function init() {
+      if (window.initOracleToolkitSupabase) window.initOracleToolkitSupabase();
+
+      if (!window.supabaseClient) {
+        hide("loading"); show("not-authenticated"); return;
+      }
+
+      const { data, error } = await window.supabaseClient.auth.getSession();
+      const session = data && data.session;
+
+      hide("loading");
+
+      if (!session || !session.user) {
+        show("not-authenticated");
+        return;
+      }
+
+      const email = session.user.email || "Signed in user";
+      document.getElementById("user-line").textContent = "Signed in as " + email;
+      show("workspace");
+    }
+
+    document.getElementById("logout").addEventListener("click", async function () {
+      if (window.supabaseClient) await window.supabaseClient.auth.signOut();
+      window.location.href = "index.html";
+    });
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
 </body>
 </html>
