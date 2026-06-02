@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OracleToolkit Methodology Command Center | Oracle Cloud Implementation Lifecycle</title>
+  <meta name="description" content="OracleToolkit Methodology Command Center guides Oracle Cloud implementations from Common Design through Discovery, Sprint 1, Sprint 2, SIT, UAT, Cutover, and Hypercare." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://oracletoolkit.com/methodology-command-center.html" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#0A2040">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "OracleToolkit Methodology Command Center",
+    "description": "Oracle Cloud implementation lifecycle command center for common design, discovery, sprint build, testing, UAT, cutover, and hypercare governance.",
+    "author": {"@type": "Organization", "name": "OracleToolkit"},
+    "publisher": {"@type": "Organization", "name": "OracleToolkit", "logo": {"@type": "ImageObject", "url": "https://oracletoolkit.com/logo.png"}},
+    "url": "https://oracletoolkit.com/methodology-command-center.html"
+  }
+  </script>
+  <style>
+    :root{--navy:#0A2040;--deep:#07172F;--blue:#2563eb;--sky:#60a5fa;--ink:#0f172a;--muted:#64748b;--line:#dbe3ef;--bg:#f8fafc;--card:#ffffff;--soft:#eef6ff;--shadow:0 18px 45px rgba(15,23,42,.08)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}a{color:inherit;text-decoration:none}
+    .safe-strip{background:#07172F;color:#cbd5e1;font-size:13px;padding:8px 20px;text-align:center}.safe-strip strong{color:#bfdbfe}
+    .nav{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.nav-inner{max-width:1200px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:10px;font-weight:900;color:var(--navy);letter-spacing:-.03em}.brand svg{width:36px;height:36px;display:block}.nav-links{display:flex;align-items:center;gap:16px;flex-wrap:wrap;color:#334155;font-size:14px}.nav-links a:hover{color:var(--blue)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:13px;font-weight:900;border:1px solid transparent;padding:12px 18px;cursor:pointer}.btn-primary{background:#0A2040;color:white}.btn-secondary{background:white;color:#0A2040;border-color:var(--line)}
+    .hero{background:radial-gradient(circle at 10% 5%,rgba(96,165,250,.32),transparent 34%),linear-gradient(135deg,#07172F,#0A2040 55%,#102b5f);color:white;padding:70px 22px 54px}.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}.eyebrow{display:inline-flex;padding:7px 12px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.08);color:#dbeafe;font-size:13px;font-weight:900;margin-bottom:18px}h1{margin:0 0 16px;font-size:clamp(36px,5vw,62px);line-height:1.03;letter-spacing:-.055em}.hero p{color:#dbeafe;font-size:18px;max-width:760px;margin:0 0 24px}.hero-panel{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:26px;padding:24px;box-shadow:0 24px 70px rgba(0,0,0,.24)}.score-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.score{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px}.score span{display:block;color:#cbd5e1;font-size:13px}.score strong{display:block;color:white;font-size:24px;letter-spacing:-.03em}
+    .section{max-width:1200px;margin:0 auto;padding:58px 22px}.section-title{max-width:880px;margin-bottom:28px}.section-title.center{text-align:center;margin-left:auto;margin-right:auto}.section-title h2{margin:0 0 12px;color:var(--navy);font-size:clamp(28px,3.5vw,44px);line-height:1.12;letter-spacing:-.04em}.section-title p{margin:0;color:var(--muted);font-size:17px}
+    .phase-map{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.phase-pill{background:white;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 10px 24px rgba(15,23,42,.04);transition:.2s ease}.phase-pill:hover{transform:translateY(-2px);border-color:#bfdbfe;box-shadow:0 16px 34px rgba(37,99,235,.10)}.phase-pill .num{width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:#eff6ff;color:#1d4ed8;font-weight:900;margin-bottom:10px}.phase-pill h3{margin:0 0 6px;color:var(--navy);font-size:18px}.phase-pill p{margin:0;color:#64748b;font-size:14px}
+    .phase-detail{display:grid;grid-template-columns:.85fr 1.15fr;gap:22px;align-items:start;margin-bottom:22px}.phase-card,.phase-content,.gov,.directory-card{background:white;border:1px solid var(--line);border-radius:26px;padding:26px;box-shadow:var(--shadow)}.phase-card h3{margin:0 0 8px;color:var(--navy);font-size:28px;letter-spacing:-.03em}.phase-card p{color:#64748b;margin:0 0 16px}.tag{display:inline-flex;padding:6px 10px;border-radius:999px;background:#eff6ff;color:#1d4ed8;font-size:12px;font-weight:900;margin:3px 4px 3px 0}.content-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.mini{background:#f8fafc;border:1px solid var(--line);border-radius:18px;padding:18px}.mini h4{margin:0 0 8px;color:var(--navy)}.mini ul{margin:0;padding-left:18px;color:#334155;font-size:14px}.tool-list{display:grid;gap:10px}.tool-link{display:flex;align-items:center;justify-content:space-between;gap:12px;background:white;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-weight:900;color:var(--navy)}.tool-link span{color:#2563eb;white-space:nowrap}
+    .readiness{background:linear-gradient(135deg,#eef6ff,#ffffff);border:1px solid var(--line);border-radius:28px;padding:28px;display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}.readiness h2{margin:0 0 12px;color:var(--navy);font-size:clamp(28px,3vw,42px);letter-spacing:-.04em}.readiness p{color:#475569;margin:0 0 16px}.bars{display:grid;gap:12px}.bar{background:white;border:1px solid var(--line);border-radius:14px;padding:12px}.bar-top{display:flex;justify-content:space-between;gap:12px;color:#334155;font-weight:900;margin-bottom:8px;font-size:14px}.bar-fill{height:8px;border-radius:999px;background:#e2e8f0;overflow:hidden}.bar-fill span{display:block;height:100%;background:linear-gradient(90deg,#2563eb,#60a5fa);border-radius:999px}
+    .governance-grid,.directory-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.gov h3,.directory-card h3{margin:0 0 10px;color:var(--navy);font-size:22px}.gov p,.directory-card p{margin:0 0 14px;color:#64748b}.footer{background:#07172F;color:#cbd5e1;padding:34px 22px;text-align:center;font-size:14px}.footer a{color:#bfdbfe}
+    @media(max-width:980px){.hero-inner,.phase-detail,.readiness{grid-template-columns:1fr}.phase-map,.content-grid,.governance-grid,.directory-grid{grid-template-columns:1fr}.nav-inner{align-items:flex-start;flex-direction:column}}
+  </style>
+</head>
+<body id="top">
+  <div class="safe-strip"><strong>Enterprise-safe guidance:</strong> use sanitized implementation design inputs. Do not upload production PHI, PII, SPI, payroll, patient, or supplier banking data.</div>
+  <nav class="nav"><div class="nav-inner"><a class="brand" href="/"><svg viewBox="0 0 96 96" aria-hidden="true">
+  <rect x="6" y="6" width="84" height="84" rx="22" fill="#0A2040"></rect>
+  <rect x="13" y="13" width="70" height="70" rx="17" fill="none" stroke="#CBD5E1" stroke-width="5"></rect>
+  <text x="48" y="58" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="800" fill="#F8FAFC">OT</text>
+</svg><span>OracleToolkit</span></a><div class="nav-links"><a href="/">Home</a><a href="/methodology-command-center.html">Command Center</a><a href="/oracletoolkit-methodology.html">Methodology</a><a href="/#start-here">Start Here</a><a href="/#accelerators">Accelerators</a><a href="/#workspace">Workspace</a></div></div></nav>
+
+  <section class="hero"><div class="hero-inner"><div><span class="eyebrow">OracleToolkit Methodology Command Center V1</span><h1>Run Oracle Cloud delivery by phase, not by scattered tools.</h1><p>Manage the implementation lifecycle from Common Design through Discovery, Sprint build, SIT, UAT, Cutover, and Hypercare using a structured operating workflow.</p><div style="display:flex;gap:12px;flex-wrap:wrap;"><a class="btn btn-primary" href="#phase-lifecycle">Explore Lifecycle</a><a class="btn btn-secondary" href="/#start-here">Start Guided Workflow</a></div></div><div class="hero-panel"><h3 style="margin:0 0 16px;color:white;font-size:24px;">Implementation Control Tower</h3><div class="score-grid"><div class="score"><span>Lifecycle Phases</span><strong>8</strong></div><div class="score"><span>Live Accelerators</span><strong>10</strong></div><div class="score"><span>Focus</span><strong>Governance</strong></div><div class="score"><span>Target Users</span><strong>SA / PMO</strong></div></div></div></div></section>
+
+  <section class="section" id="phase-lifecycle"><div class="section-title center"><h2>Implementation Lifecycle</h2><p>OracleToolkit organizes every accelerator around the real delivery path used by consultants, solution architects, project managers, and client teams.</p></div><div class="phase-map">
+<a class="phase-pill" href="#common-design"><div class="num">0</div><h3>Common Design</h3><p>Define the enterprise foundation before module-specific build begins.</p></a>
+<a class="phase-pill" href="#discovery"><div class="num">1</div><h3>Discovery</h3><p>Run module-wise demos, confirm client-specific requirements, and collect data needed for Sprint 1.</p></a>
+<a class="phase-pill" href="#sprint1"><div class="num">2</div><h3>Sprint 1</h3><p>Configure baseline client-specific setup using Common Design and Discovery outputs.</p></a>
+<a class="phase-pill" href="#sprint2"><div class="num">3</div><h3>Sprint 2</h3><p>Refine configuration and incorporate approvals, reports, integrations, security, and edge cases.</p></a>
+<a class="phase-pill" href="#sit"><div class="num">4</div><h3>SIT</h3><p>Validate integrated system behavior across modules, approvals, accounting, integrations, and exceptions.</p></a>
+<a class="phase-pill" href="#uat"><div class="num">5</div><h3>UAT</h3><p>Support client-owned validation using realistic data, end-to-end flows, integrations, conversions, and sign-offs.</p></a>
+<a class="phase-pill" href="#cutover"><div class="num">6</div><h3>Cutover / PROD</h3><p>Control production migration, dependencies, conversion loads, integrations, security, and go-live sign-off.</p></a>
+<a class="phase-pill" href="#hypercare"><div class="num">7</div><h3>Hypercare</h3><p>Stabilize operations after go-live, triage issues, resolve root causes, and strengthen adoption.</p></a>
+</div></section>
+
+  <section class="section"><div class="readiness"><div><span class="tag">Readiness Governance</span><h2>One framework. Multiple project lenses.</h2><p>Consultants need session guidance. Solution architects need decisions and dependencies. PMO teams need readiness, ownership, risks, and sign-offs. This Command Center brings those lenses together without changing your existing tools.</p><a class="btn btn-primary" href="#governance">View Governance Model</a></div><div class="bars"><div class="bar"><div class="bar-top"><span>Common Design</span><span>Foundation</span></div><div class="bar-fill"><span style="width:100%"></span></div></div><div class="bar"><div class="bar-top"><span>Discovery</span><span>Requirements</span></div><div class="bar-fill"><span style="width:85%"></span></div></div><div class="bar"><div class="bar-top"><span>Sprint Build</span><span>Configuration</span></div><div class="bar-fill"><span style="width:70%"></span></div></div><div class="bar"><div class="bar-top"><span>SIT / UAT</span><span>Validation</span></div><div class="bar-fill"><span style="width:55%"></span></div></div><div class="bar"><div class="bar-top"><span>Cutover</span><span>Production</span></div><div class="bar-fill"><span style="width:35%"></span></div></div></div></div></section>
+
+  <section class="section" id="common-design">
+    <div class="phase-detail">
+      <div class="phase-card">
+        <span class="tag">Phase 0</span>
+        <h3>Common Design</h3>
+        <p>Define the enterprise foundation before module-specific build begins.</p>
+        <div class="tool-list"><a class="tool-link" href="https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/" target="_blank" rel="noopener">Enterprise Structure Intelligence<span>Launch →</span></a><a class="tool-link" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" rel="noopener">COA Accelerator<span>Launch →</span></a><a class="tool-link" href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank" rel="noopener">BCEA Architect<span>Launch →</span></a></div>
+      </div>
+      <div class="phase-content">
+        <div class="content-grid">
+          <div class="mini"><h4>Inputs</h4><ul><li>Legal entities, ledgers, business units</li><li>HCM departments, jobs, positions, locations</li><li>COA design principles and reporting needs</li><li>Budgetary control strategy</li></ul></div>
+          <div class="mini"><h4>Required Outputs</h4><ul><li>Enterprise structure model</li><li>COA design baseline</li><li>BCEA control approach</li><li>Cross-module dependency map</li></ul></div>
+          <div class="mini"><h4>Risk Radar</h4><ul><li>Module teams design in isolation</li><li>BCEA discovered too late</li><li>Reporting/security structure misaligned</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="discovery">
+    <div class="phase-detail">
+      <div class="phase-card">
+        <span class="tag">Phase 1</span>
+        <h3>Discovery</h3>
+        <p>Run module-wise demos, confirm client-specific requirements, and collect data needed for Sprint 1.</p>
+        <div class="tool-list"><a class="tool-link" href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank" rel="noopener">Discovery Command Center Pro<span>Launch →</span></a><a class="tool-link" href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank" rel="noopener">SOW to RICE Intelligence<span>Launch →</span></a></div>
+      </div>
+      <div class="phase-content">
+        <div class="content-grid">
+          <div class="mini"><h4>Inputs</h4><ul><li>Module demo agenda</li><li>Client current-state process</li><li>Initial configuration data</li><li>Known integrations and reporting needs</li></ul></div>
+          <div class="mini"><h4>Required Outputs</h4><ul><li>Discovery log</li><li>Open decision register</li><li>Configuration input tracker</li><li>RICE candidate list</li></ul></div>
+          <div class="mini"><h4>Risk Radar</h4><ul><li>Requirements stay generic</li><li>Sprint 1 starts without data</li><li>RICE scope missed in early planning</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sprint1">
+    <div class="phase-detail">
+      <div class="phase-card">
+        <span class="tag">Phase 2</span>
+        <h3>Sprint 1</h3>
+        <p>Configure baseline client-specific setup using Common Design and Discovery outputs.</p>
+        <div class="tool-list"><a class="tool-link" href="https://configurationreadinessengine-witvv25ai2u2hb3lvw9qgt.streamlit.app/" target="_blank" rel="noopener">Configuration Readiness Engine<span>Launch →</span></a><a class="tool-link" href="https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/" target="_blank" rel="noopener">Enterprise Structure Intelligence<span>Launch →</span></a></div>
+      </div>
+      <div class="phase-content">
+        <div class="content-grid">
+          <div class="mini"><h4>Inputs</h4><ul><li>Approved design decisions</li><li>Configuration data</li><li>Module ownership</li><li>Sprint 1 scenarios</li></ul></div>
+          <div class="mini"><h4>Required Outputs</h4><ul><li>Baseline configuration</li><li>Unit test checklist</li><li>Open blockers</li><li>Sprint 2 backlog</li></ul></div>
+          <div class="mini"><h4>Risk Radar</h4><ul><li>Configuration begins with incomplete decisions</li><li>Dependencies not visible</li><li>Ownership unclear</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sprint2">
+    <div class="phase-detail">
+      <div class="phase-card">
+        <span class="tag">Phase 3</span>
+        <h3>Sprint 2</h3>
+        <p>Refine configuration and incorporate approvals, reports, integrations, security, and edge cases.</p>
+        <div class="tool-list"><a class="tool-link" href="https://configurationreadinessengine-witvv25ai2u2hb3lvw9qgt.streamlit.app/" target="_blank" rel="noopener">Configuration Readiness Engine<span>Launch →</span></a><a class="tool-link" href="https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/" target="_blank" rel="noopener">Journal Approvals Accelerator<span>Launch →</span></a><a class="tool-link" href="https://apinvoiceapprovals-prvs4kmw9bmfjnc5qm3rdw.streamlit.app/" target="_blank" rel="noopener">AP Invoice Approvals Accelerator<span>Launch →</span></a></div>
+      </div>
+      <div class="phase-content">
+        <div class="content-grid">
+          <div class="mini"><h4>Inputs</h4><ul><li>Sprint 1 gaps</li><li>Approval requirements</li><li>Integration requirements</li><li>Security refinements</li></ul></div>
+          <div class="mini"><h4>Required Outputs</h4><ul><li>SIT entry checklist</li><li>Approval readiness</li><li>Integration readiness</li><li>RICE execution tracker</li></ul></div>
+          <div class="mini"><h4>Risk Radar</h4><ul><li>Approvals added too late</li><li>Integrations not ready for SIT</li><li>Security role gaps appear in testing</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sit">
+    <div class="phase-detail">
+      <div class="phase-card">
+        <span class="tag">Phase 4</span>
+        <h3>SIT</h3>
+        <p>Validate integrated system behavior across modules, approvals, accounting, integrations, and exceptions.</p>
+        <div class="tool-list"><a class="tool-link" href="https://scenariointelligenceengine-fpjfpn7dhpfe36dtylrbc3.streamlit.app/" target="_blank" rel="noopener">Scenario Intelligence Engine<span>Launch →</span></a><a class="tool-link" href="https://configurationreadinessengine-witvv25ai2u2hb3lvw9qgt.streamlit.app/" target="_blank" rel="noopener">Configuration Readiness Engine<span>Launch →</span></a></div>
+      </div>
+      <div class="phase-content">
+        <div class="content-grid">
+          <div class="mini"><h4>Inputs</h4><ul><li>SIT scenarios</li><li>Integrated configuration</li><li>Conversion data samples</li><li>Approval and security setup</li></ul></div>
+          <div class="mini"><h4>Required Outputs</h4><ul><li>SIT coverage tracker</li><li>Defect log</li><li>Integration evidence</li><li>Accounting validation</li></ul></div>
+          <div class="mini"><h4>Risk Radar</h4><ul><li>Scenarios test happy path only</li><li>Integration failures block modules</li><li>Accounting/funds-check issues discovered late</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="uat">
+    <div class="phase-detail">
+      <div class="phase-card">
+        <span class="tag">Phase 5</span>
+        <h3>UAT</h3>
+        <p>Support client-owned validation using realistic data, end-to-end flows, integrations, conversions, and sign-offs.</p>
+        <div class="tool-list"><a class="tool-link" href="https://scenariointelligenceengine-fpjfpn7dhpfe36dtylrbc3.streamlit.app/" target="_blank" rel="noopener">Scenario Intelligence Engine<span>Launch →</span></a><a class="tool-link" href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank" rel="noopener">Discovery Command Center Pro<span>Launch →</span></a></div>
+      </div>
+      <div class="phase-content">
+        <div class="content-grid">
+          <div class="mini"><h4>Inputs</h4><ul><li>Client UAT schedule</li><li>Business scenarios</li><li>Converted data</li><li>Integration readiness</li></ul></div>
+          <div class="mini"><h4>Required Outputs</h4><ul><li>UAT agenda</li><li>Evidence tracker</li><li>Module sign-off</li><li>Integration and conversion sign-off</li></ul></div>
+          <div class="mini"><h4>Risk Radar</h4><ul><li>Client SMEs unclear on test ownership</li><li>UAT schedule too generic</li><li>Conversion/integration validation incomplete</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="cutover">
+    <div class="phase-detail">
+      <div class="phase-card">
+        <span class="tag">Phase 6</span>
+        <h3>Cutover / PROD</h3>
+        <p>Control production migration, dependencies, conversion loads, integrations, security, and go-live sign-off.</p>
+        <div class="tool-list"><a class="tool-link" href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank" rel="noopener">SOW to RICE Intelligence<span>Launch →</span></a><a class="tool-link" href="https://configurationreadinessengine-witvv25ai2u2hb3lvw9qgt.streamlit.app/" target="_blank" rel="noopener">Configuration Readiness Engine<span>Launch →</span></a></div>
+      </div>
+      <div class="phase-content">
+        <div class="content-grid">
+          <div class="mini"><h4>Inputs</h4><ul><li>Cutover plan</li><li>Task dependencies</li><li>Final configurations</li><li>Conversion and integration checklist</li></ul></div>
+          <div class="mini"><h4>Required Outputs</h4><ul><li>Go-live readiness dashboard</li><li>Cutover owner tracker</li><li>Dependency tracker</li><li>Go/no-go evidence</li></ul></div>
+          <div class="mini"><h4>Risk Radar</h4><ul><li>Predecessor tasks not visible</li><li>Conversion sequence missed</li><li>Integration activation not coordinated</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="hypercare">
+    <div class="phase-detail">
+      <div class="phase-card">
+        <span class="tag">Phase 7</span>
+        <h3>Hypercare</h3>
+        <p>Stabilize operations after go-live, triage issues, resolve root causes, and strengthen adoption.</p>
+        <div class="tool-list"><a class="tool-link" href="https://scenariointelligenceengine-fpjfpn7dhpfe36dtylrbc3.streamlit.app/" target="_blank" rel="noopener">Scenario Intelligence Engine<span>Launch →</span></a><a class="tool-link" href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank" rel="noopener">Discovery Command Center Pro<span>Launch →</span></a></div>
+      </div>
+      <div class="phase-content">
+        <div class="content-grid">
+          <div class="mini"><h4>Inputs</h4><ul><li>Production issues</li><li>UAT carry-forward items</li><li>User adoption feedback</li><li>Daily stabilization reports</li></ul></div>
+          <div class="mini"><h4>Required Outputs</h4><ul><li>Hypercare issue tracker</li><li>Root cause analysis</li><li>Stabilization status</li><li>Lessons learned</li></ul></div>
+          <div class="mini"><h4>Risk Radar</h4><ul><li>Issues tracked outside governance</li><li>Root cause not captured</li><li>Knowledge lost after project close</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="accelerator-directory">
+    <div class="section-title">
+      <h2>Complete Live Accelerator Directory</h2>
+      <p>All live OracleToolkit accelerators are preserved here for visibility, governance, and direct access.</p>
+    </div>
+    <div class="directory-grid"><div class="directory-card"><h3>Discovery Command Center Pro</h3><p>Live OracleToolkit accelerator connected to the implementation lifecycle.</p><a class="tool-link" href="https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/" target="_blank" rel="noopener">Open Accelerator <span>Launch →</span></a></div>
+<div class="directory-card"><h3>Enterprise Structure Intelligence</h3><p>Live OracleToolkit accelerator connected to the implementation lifecycle.</p><a class="tool-link" href="https://enterprise-structure-intelligence-fgps56livskgqsfixq7psw.streamlit.app/" target="_blank" rel="noopener">Open Accelerator <span>Launch →</span></a></div>
+<div class="directory-card"><h3>COA Accelerator</h3><p>Live OracleToolkit accelerator connected to the implementation lifecycle.</p><a class="tool-link" href="https://coaacceleratormvp-immxr6kprgxex4wkhomcby.streamlit.app/" target="_blank" rel="noopener">Open Accelerator <span>Launch →</span></a></div>
+<div class="directory-card"><h3>BCEA Architect</h3><p>Live OracleToolkit accelerator connected to the implementation lifecycle.</p><a class="tool-link" href="https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/" target="_blank" rel="noopener">Open Accelerator <span>Launch →</span></a></div>
+<div class="directory-card"><h3>SOW to RICE Intelligence</h3><p>Live OracleToolkit accelerator connected to the implementation lifecycle.</p><a class="tool-link" href="https://oracletoolkitsowintelligenceengine-fpwsz5tbecde2frxxcr9m9.streamlit.app/" target="_blank" rel="noopener">Open Accelerator <span>Launch →</span></a></div>
+<div class="directory-card"><h3>Configuration Readiness Engine</h3><p>Live OracleToolkit accelerator connected to the implementation lifecycle.</p><a class="tool-link" href="https://configurationreadinessengine-witvv25ai2u2hb3lvw9qgt.streamlit.app/" target="_blank" rel="noopener">Open Accelerator <span>Launch →</span></a></div>
+<div class="directory-card"><h3>Scenario Intelligence Engine</h3><p>Live OracleToolkit accelerator connected to the implementation lifecycle.</p><a class="tool-link" href="https://scenariointelligenceengine-fpjfpn7dhpfe36dtylrbc3.streamlit.app/" target="_blank" rel="noopener">Open Accelerator <span>Launch →</span></a></div>
+<div class="directory-card"><h3>Journal Approvals Accelerator</h3><p>Live OracleToolkit accelerator connected to the implementation lifecycle.</p><a class="tool-link" href="https://jounralapprovals-eejttydzbfzelpu5d5azvx.streamlit.app/" target="_blank" rel="noopener">Open Accelerator <span>Launch →</span></a></div>
+<div class="directory-card"><h3>AP Invoice Approvals Accelerator</h3><p>Live OracleToolkit accelerator connected to the implementation lifecycle.</p><a class="tool-link" href="https://apinvoiceapprovals-prvs4kmw9bmfjnc5qm3rdw.streamlit.app/" target="_blank" rel="noopener">Open Accelerator <span>Launch →</span></a></div>
+<div class="directory-card"><h3>Per Diem Transformation Engine</h3><p>Live OracleToolkit accelerator connected to the implementation lifecycle.</p><a class="tool-link" href="https://perdiem-toolkit-2j5pceprutup553f6c5mvm.streamlit.app/" target="_blank" rel="noopener">Open Accelerator <span>Launch →</span></a></div>
+</div>
+  </section>
+
+  <section class="section" id="governance">
+    <div class="section-title"><h2>Governance Model</h2><p>The Command Center is designed for three audiences: consultants who execute, solution architects who govern, and PMO teams who track readiness.</p></div>
+    <div class="governance-grid">
+      <div class="gov"><h3>Consultant Lens</h3><p>Session agenda, required data, module outputs, scenario guidance, and accelerator launch path.</p></div>
+      <div class="gov"><h3>Solution Architect Lens</h3><p>Design decisions, cross-module impacts, dependencies, open risks, readiness, and architecture traceability.</p></div>
+      <div class="gov"><h3>PMO Lens</h3><p>Phase status, ownership, blockers, sign-offs, cutover readiness, and go-live risk visibility.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="readiness">
+      <div><span class="tag">Next Platform Layer</span><h2>Project Memory will make this operational.</h2><p>V1 is a safe methodology command center. The next version should allow authenticated users to create projects, save phase decisions, store module outputs, track readiness, and carry outputs from one phase into the next.</p></div>
+      <div class="content-grid" style="grid-template-columns:1fr;"><div class="mini"><h4>Future Project Memory Objects</h4><ul><li>Project profile</li><li>Phase readiness</li><li>Design decisions</li><li>RICE inventory</li><li>SIT/UAT packs</li><li>Cutover tasks</li></ul></div></div>
+    </div>
+  </section>
+
+  <footer class="footer"><div><strong>OracleToolkit</strong> · Methodology Command Center V1</div><div style="margin-top:8px;"><a href="/">Home</a> · <a href="/oracletoolkit-methodology.html">Methodology</a> · <a href="/#start-here">Start Here</a></div></footer>
+</body>
+</html>
