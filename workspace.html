@@ -14,7 +14,7 @@
 <section id="loading" class="card"><h1>Checking authentication...</h1><p>Please wait while OracleToolkit verifies your login.</p></section>
 <section id="not-authenticated" class="card hidden"><h1>Login required</h1><p>Please sign in to access OracleToolkit Cloud Project Memory.</p><div class="actions"><button id="login-now" class="btn primary" type="button">Login</button><a class="btn secondary" href="index.html">Back to homepage</a></div></section>
 <section id="workspace" class="hidden">
-<div class="card"><span class="pill">Supabase Cloud Project Memory V1</span><h1>Preserve implementation knowledge beyond the project team.</h1><p id="user-line">Signed in.</p><p>When senior architects retire or roll off, design decisions, lessons learned, templates, and project memory should not disappear. OracleToolkit Cloud Project Memory saves what consultants do so it can be reused later in the same project and future projects.</p><div class="note"><strong>Cloud saved:</strong> project profiles and project memory items are stored in Supabase using Clerk-authenticated user identity.</div><div class="actions"><a class="btn primary" href="index.html#start-here">Start Guided Workflow</a><a class="btn secondary" href="methodology-command-center.html">View Command Center</a><button id="export-json" class="btn blue" type="button">Export Cloud Memory JSON</button></div><div id="engine-cloud-status" class="engine-status">Initializing cloud workspace...</div></div>
+<div class="card"><span class="pill">Supabase Cloud Project Memory V1</span><h1>Preserve implementation knowledge beyond the project team.</h1><p id="user-line">Signed in.</p><p>When senior architects retire or roll off, design decisions, lessons learned, templates, and project memory should not disappear. OracleToolkit Cloud Project Memory saves project knowledge to Supabase so consultants can return, reuse, and continue the same implementation history.</p><div class="note"><strong>Cloud saved:</strong> project profiles and project memory items are stored in Supabase using Clerk-authenticated user identity.</div><div class="actions"><a class="btn primary" href="index.html#start-here">Start Guided Workflow</a><a class="btn secondary" href="methodology-command-center.html">View Command Center</a><button id="export-json" class="btn blue" type="button">Export Cloud Memory JSON</button></div><div id="engine-cloud-status" class="engine-status">Initializing cloud workspace...</div></div>
 
 <div class="grid-3"><div class="mini"><strong>Cloud Projects</strong><span id="project-count">0</span></div><div class="mini"><strong>Saved Memory Items</strong><span id="run-count">0</span></div><div class="mini"><strong>Current Project</strong><span id="engine-current-project">No cloud project selected</span><br><span id="engine-current-meta" style="color:#64748b;font-size:13px;">Create or select a project.</span></div></div>
 
@@ -35,29 +35,76 @@
 <script src="supabase-config.js"></script>
 <script src="cloud-project-memory.js"></script>
 <script>
+function otDelay(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
+
+async function waitForClerk(maxWaitMs = 10000){
+  const start = Date.now();
+  while(Date.now() - start < maxWaitMs){
+    if(window.Clerk && typeof window.Clerk.load === "function"){
+      try{
+        await window.Clerk.load();
+        return window.Clerk;
+      }catch(e){
+        console.warn("Clerk load retry:", e);
+      }
+    }
+    await otDelay(250);
+  }
+  throw new Error("Clerk did not load in time.");
+}
+
+function setWorkspaceUnauthenticated(message){
+  document.getElementById("loading").classList.add("hidden");
+  document.getElementById("workspace").classList.add("hidden");
+  document.getElementById("not-authenticated").classList.remove("hidden");
+  const p = document.querySelector("#not-authenticated p");
+  if(p && message) p.textContent = message;
+}
+
+function setWorkspaceAuthenticated(user){
+  document.getElementById("loading").classList.add("hidden");
+  document.getElementById("not-authenticated").classList.add("hidden");
+  document.getElementById("workspace").classList.remove("hidden");
+  document.getElementById("user-line").textContent =
+    "Signed in as " + (user.fullName || user.firstName || user.primaryEmailAddress?.emailAddress || "authenticated user");
+}
+
 async function initWorkspace(){
   try{
-    await window.Clerk.load();
-    const user = window.Clerk.user;
-    document.getElementById("loading").classList.add("hidden");
-    if(!user){
-      document.getElementById("not-authenticated").classList.remove("hidden");
+    const clerk = await waitForClerk();
+
+    if(!clerk.user || !clerk.session){
+      setWorkspaceUnauthenticated("Please sign in to access OracleToolkit Cloud Project Memory.");
       return;
     }
-    document.getElementById("workspace").classList.remove("hidden");
-    document.getElementById("user-line").textContent = "Signed in as " + (user.fullName || user.firstName || user.primaryEmailAddress?.emailAddress || "authenticated user");
-    document.getElementById("logout").onclick = async function(){ await window.Clerk.signOut(); window.location.href = "index.html"; };
+
+    setWorkspaceAuthenticated(clerk.user);
+
+    document.getElementById("logout").onclick = async function(){
+      await clerk.signOut();
+      window.location.href = "index.html";
+    };
+
     otWireProjectMemory();
     await otLoadProjects();
   }catch(e){
-    document.getElementById("loading").classList.add("hidden");
-    document.getElementById("not-authenticated").classList.remove("hidden");
+    console.error("Workspace authentication check failed:", e);
+    setWorkspaceUnauthenticated("Authentication is still loading or unavailable. Please refresh once, or sign in again.");
   }
 }
-document.getElementById("login-now").onclick = function(){
-  if(window.Clerk) window.Clerk.openSignIn({ afterSignInUrl: window.location.origin + "/workspace.html", afterSignUpUrl: window.location.origin + "/workspace.html" });
-  else window.location.href = "index.html";
+
+document.getElementById("login-now").onclick = async function(){
+  try{
+    const clerk = await waitForClerk();
+    clerk.openSignIn({
+      afterSignInUrl: window.location.origin + "/workspace.html",
+      afterSignUpUrl: window.location.origin + "/workspace.html"
+    });
+  }catch(e){
+    window.location.href = "index.html";
+  }
 };
-document.addEventListener("DOMContentLoaded", function(){ setTimeout(initWorkspace, 600); });
+
+document.addEventListener("DOMContentLoaded", initWorkspace);
 </script>
 </body></html>
