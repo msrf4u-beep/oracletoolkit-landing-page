@@ -12,7 +12,7 @@
 <header class="top"><div class="top-inner"><div class="brand"><svg viewBox="0 0 96 96"><rect x="6" y="6" width="84" height="84" rx="22" fill="#0A2040"></rect><rect x="13" y="13" width="70" height="70" rx="17" fill="none" stroke="#CBD5E1" stroke-width="5"></rect><text x="48" y="58" text-anchor="middle" font-family="Arial" font-size="31" font-weight="800" fill="#F8FAFC">OT</text></svg><span>OracleToolkit Workspace</span></div><div class="nav-actions"><a class="btn secondary" href="index.html">Home</a><a class="btn secondary" href="methodology-command-center.html">Command Center</a><button id="logout" class="btn secondary" type="button">Logout</button></div></div></header>
 <main class="wrap">
 <section id="loading" class="card"><h1>Checking authentication...</h1><p>Please wait while OracleToolkit verifies your login.</p></section>
-<section id="not-authenticated" class="card hidden"><h1>Login required</h1><p>Please sign in to access OracleToolkit Cloud Project Memory.</p><div class="actions"><button id="login-now" class="btn primary" type="button">Login</button><a class="btn secondary" href="index.html">Back to homepage</a></div></section>
+<section id="not-authenticated" class="card hidden"><h1>Sign in to Project Memory</h1><p>Please sign in to access OracleToolkit Cloud Project Memory.</p><div class="actions"><button id="login-now" class="btn primary" type="button">Login</button><a class="btn secondary" href="index.html">Back to homepage</a></div></section>
 <section id="workspace" class="hidden">
 <div class="card"><span class="pill">Supabase Cloud Project Memory V1</span><h1>Preserve implementation knowledge beyond the project team.</h1><p id="user-line">Signed in.</p><p>When senior architects retire or roll off, design decisions, lessons learned, templates, and project memory should not disappear. OracleToolkit Cloud Project Memory saves project knowledge to Supabase so consultants can return, reuse, and continue the same implementation history.</p><div class="note"><strong>Cloud saved:</strong> project profiles and project memory items are stored in Supabase using Clerk-authenticated user identity.</div><div class="actions"><a class="btn primary" href="index.html#start-here">Start Guided Workflow</a><a class="btn secondary" href="methodology-command-center.html">View Command Center</a><button id="export-json" class="btn blue" type="button">Export Cloud Memory JSON</button></div><div id="engine-cloud-status" class="engine-status">Initializing cloud workspace...</div></div>
 
@@ -30,81 +30,15 @@
 <section class="card"><h2>Saved Cloud Project Memory</h2><p>These items reload from Supabase when the authenticated consultant returns.</p><div id="accelerator-runs-list"></div></section>
 </div>
 </section></main>
-<script async crossorigin="anonymous" data-clerk-publishable-key="pk_test_Y2xhcmtucy5ibGFjay1zd2FuLTI1LmNsZXJrLmFjY291bnRzLmRldiQ" src="https://clerk.black-swan-25.clerk.accounts.dev/npm/@clerk/clerk-js@5/dist/clerk.browser.js"></script>
+<script async crossorigin="anonymous" data-clerk-publishable-key="pk_live_Y2xlcmsub3JhY2xldG9vbGtpdC5jb20k" src="https://clerk.black-swan-25.clerk.accounts.dev/npm/@clerk/clerk-js@5/dist/clerk.browser.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script src="cloud-project-memory.js"></script>
 <script>
-function otDelay(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
-
-async function waitForClerk(maxWaitMs = 10000){
-  const start = Date.now();
-  while(Date.now() - start < maxWaitMs){
-    if(window.Clerk && typeof window.Clerk.load === "function"){
-      try{
-        await window.Clerk.load();
-        return window.Clerk;
-      }catch(e){
-        console.warn("Clerk load retry:", e);
-      }
-    }
-    await otDelay(250);
-  }
-  throw new Error("Clerk did not load in time.");
-}
-
-function setWorkspaceUnauthenticated(message){
-  document.getElementById("loading").classList.add("hidden");
-  document.getElementById("workspace").classList.add("hidden");
-  document.getElementById("not-authenticated").classList.remove("hidden");
-  const p = document.querySelector("#not-authenticated p");
-  if(p && message) p.textContent = message;
-}
-
-function setWorkspaceAuthenticated(user){
-  document.getElementById("loading").classList.add("hidden");
-  document.getElementById("not-authenticated").classList.add("hidden");
-  document.getElementById("workspace").classList.remove("hidden");
-  document.getElementById("user-line").textContent =
-    "Signed in as " + (user.fullName || user.firstName || user.primaryEmailAddress?.emailAddress || "authenticated user");
-}
-
-async function initWorkspace(){
-  try{
-    const clerk = await waitForClerk();
-
-    if(!clerk.user || !clerk.session){
-      setWorkspaceUnauthenticated("Please sign in to access OracleToolkit Cloud Project Memory.");
-      return;
-    }
-
-    setWorkspaceAuthenticated(clerk.user);
-
-    document.getElementById("logout").onclick = async function(){
-      await clerk.signOut();
-      window.location.href = "index.html";
-    };
-
-    otWireProjectMemory();
-    await otLoadProjects();
-  }catch(e){
-    console.error("Workspace authentication check failed:", e);
-    setWorkspaceUnauthenticated("Authentication is still loading or unavailable. Please refresh once, or sign in again.");
-  }
-}
-
-document.getElementById("login-now").onclick = async function(){
-  try{
-    const clerk = await waitForClerk();
-    clerk.openSignIn({
-      afterSignInUrl: window.location.origin + "/workspace.html",
-      afterSignUpUrl: window.location.origin + "/workspace.html"
-    });
-  }catch(e){
-    window.location.href = "index.html";
-  }
-};
-
-document.addEventListener("DOMContentLoaded", initWorkspace);
-</script>
-</body></html>
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function getClerk(){for(let i=0;i<60;i++){if(window.Clerk?.load){await window.Clerk.load();return window.Clerk}await wait(250)}throw new Error("Clerk did not load")}
+function show(id){document.getElementById(id)?.classList.remove("hidden")}function hide(id){document.getElementById(id)?.classList.add("hidden")}
+async function renderAuth(){try{const c=await getClerk();hide("loading");if(!c.user||!c.session){show("not-authenticated");hide("workspace");document.getElementById("logout")?.classList.add("hidden");return}hide("not-authenticated");show("workspace");document.getElementById("logout")?.classList.remove("hidden");document.getElementById("user-line").textContent="Signed in as "+(c.user.fullName||c.user.firstName||c.user.primaryEmailAddress?.emailAddress||"authenticated user");document.getElementById("logout").onclick=async()=>{await c.signOut();location.href="index.html"};otWireProjectMemory();await otLoadProjects();}catch(e){console.error(e);hide("loading");show("not-authenticated")}}
+document.getElementById("login-now").onclick=async()=>{const c=await getClerk();c.openSignIn({afterSignInUrl:location.origin+"/workspace.html",afterSignUpUrl:location.origin+"/workspace.html",redirectUrl:location.origin+"/workspace.html"})};
+document.addEventListener("DOMContentLoaded",renderAuth);
+</script></body></html>
