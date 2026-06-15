@@ -32,12 +32,12 @@ async function initializeClerk(){
 async function openLogin(){
   try{
     sessionStorage.setItem('ot_login_intent','workspace');
-    if(!window.Clerk){ window.location.href = 'login.html'; return; }
+    if(!window.Clerk){ window.location.href = "login.html"; return; }
     await initializeClerk();
-    if(window.Clerk.user){ window.location.href='workspace.html'; return; }
+    if(window.Clerk.user){ window.location.href = "workspace.html"; return; }
     gtagSafe('login_modal_opened');
     window.Clerk.openSignIn({ afterSignInUrl: window.location.origin + '/workspace.html', afterSignUpUrl: window.location.origin + '/workspace.html' });
-  }catch(err){ console.error('Clerk Error:', err); window.location.href='login.html'; }
+  }catch(err){ console.error('Clerk Error:', err); window.location.href = "login.html"; }
 }
 async function logoutClerk(){
   try{
@@ -51,7 +51,7 @@ function wireAuthButtons(){
   const dashboardButton = otById('dashboard-button');
   const logoutButton = otById('logout-button');
   if(loginButton) loginButton.onclick = openLogin;
-  if(dashboardButton) dashboardButton.onclick = function(){ window.location.href='workspace.html'; };
+  if(dashboardButton) dashboardButton.onclick = function(){ window.location.href = "workspace.html"; };
   if(logoutButton) logoutButton.onclick = logoutClerk;
 }
 window.addEventListener('load', async function(){
@@ -66,7 +66,7 @@ window.addEventListener('load', async function(){
             showLoggedInUI();
             if(sessionStorage.getItem('ot_login_intent') === 'workspace'){
               sessionStorage.removeItem('ot_login_intent');
-              window.location.href='workspace.html';
+              window.location.href = "workspace.html";
             }
           } else showLoggedOutUI();
         });

@@ -9,7 +9,7 @@
 </style>
 </head>
 <body>
-<header class="top"><div class="top-inner"><div class="brand"><svg viewBox="0 0 96 96"><rect x="6" y="6" width="84" height="84" rx="22" fill="#0A2040"></rect><rect x="13" y="13" width="70" height="70" rx="17" fill="none" stroke="#CBD5E1" stroke-width="5"></rect><text x="48" y="58" text-anchor="middle" font-family="Arial" font-size="31" font-weight="800" fill="#F8FAFC">OT</text></svg><span>OracleToolkit Workspace</span></div><div class="nav-actions"><a class="btn secondary" href="index.html">Home</a><a class="btn secondary" href="methodology-command-center.html">Command Center</a><button id="logout" class="btn secondary" type="button">Logout</button></div></div></header>
+<header class="top"><div class="top-inner"><div class="brand"><svg viewBox="0 0 96 96"><rect x="6" y="6" width="84" height="84" rx="22" fill="#0A2040"></rect><rect x="13" y="13" width="70" height="70" rx="17" fill="none" stroke="#CBD5E1" stroke-width="5"></rect><text x="48" y="58" text-anchor="middle" font-family="Arial" font-size="31" font-weight="800" fill="#F8FAFC">OT</text></svg><span>OracleToolkit Workspace</span></div><div class="nav-actions"><a class="btn secondary" href="index.html">Home</a><a class="btn secondary" href="methodology-command-center.html">Command Center</a><button id="logout" class="btn secondary hidden" type="button">Logout</button></div></div></header>
 <main class="wrap">
 <section id="loading" class="card"><h1>Checking authentication...</h1><p>Please wait while OracleToolkit verifies your login.</p></section>
 <section id="not-authenticated" class="card hidden"><h1>Sign in to Project Memory</h1><p>Please sign in to access OracleToolkit Cloud Project Memory.</p><div class="actions"><button id="login-now" class="btn primary" type="button">Login</button><a class="btn secondary" href="index.html">Back to homepage</a></div></section>
@@ -30,15 +30,80 @@
 <section class="card"><h2>Saved Cloud Project Memory</h2><p>These items reload from Supabase when the authenticated consultant returns.</p><div id="accelerator-runs-list"></div></section>
 </div>
 </section></main>
-<script async crossorigin="anonymous" data-clerk-publishable-key="pk_live_Y2xlcmsub3JhY2xldG9vbGtpdC5jb20k" src="https://clerk.black-swan-25.clerk.accounts.dev/npm/@clerk/clerk-js@5/dist/clerk.browser.js"></script>
+
+<script async crossorigin="anonymous" data-clerk-publishable-key="pk_live_Y2xlcmsub3JhY2xldG9vbGtpdC5jb20k" src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@5/dist/clerk.browser.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script src="cloud-project-memory.js"></script>
 <script>
-const wait=ms=>new Promise(r=>setTimeout(r,ms));
-async function getClerk(){for(let i=0;i<60;i++){if(window.Clerk?.load){await window.Clerk.load();return window.Clerk}await wait(250)}throw new Error("Clerk did not load")}
-function show(id){document.getElementById(id)?.classList.remove("hidden")}function hide(id){document.getElementById(id)?.classList.add("hidden")}
-async function renderAuth(){try{const c=await getClerk();hide("loading");if(!c.user||!c.session){show("not-authenticated");hide("workspace");document.getElementById("logout")?.classList.add("hidden");return}hide("not-authenticated");show("workspace");document.getElementById("logout")?.classList.remove("hidden");document.getElementById("user-line").textContent="Signed in as "+(c.user.fullName||c.user.firstName||c.user.primaryEmailAddress?.emailAddress||"authenticated user");document.getElementById("logout").onclick=async()=>{await c.signOut();location.href="index.html"};otWireProjectMemory();await otLoadProjects();}catch(e){console.error(e);hide("loading");show("not-authenticated")}}
-document.getElementById("login-now").onclick=async()=>{const c=await getClerk();c.openSignIn({afterSignInUrl:location.origin+"/workspace.html",afterSignUpUrl:location.origin+"/workspace.html",redirectUrl:location.origin+"/workspace.html"})};
-document.addEventListener("DOMContentLoaded",renderAuth);
-</script></body></html>
+function delay(ms){return new Promise(resolve=>setTimeout(resolve,ms));}
+async function waitForClerk(){
+  for(let i=0;i<80;i++){
+    if(window.Clerk && typeof window.Clerk.load === "function"){
+      await window.Clerk.load();
+      return window.Clerk;
+    }
+    await delay(250);
+  }
+  throw new Error("Clerk did not load.");
+}
+function show(id){const el=document.getElementById(id); if(el) el.classList.remove("hidden");}
+function hide(id){const el=document.getElementById(id); if(el) el.classList.add("hidden");}
+
+async function openWorkspaceLogin(){
+  try{
+    const clerk = await waitForClerk();
+    clerk.openSignIn({
+      afterSignInUrl: window.location.origin + "/workspace.html",
+      afterSignUpUrl: window.location.origin + "/workspace.html",
+      redirectUrl: window.location.origin + "/workspace.html"
+    });
+  }catch(e){
+    console.error(e);
+    window.location.href = "login.html";
+  }
+}
+
+async function renderWorkspace(){
+  try{
+    const clerk = await waitForClerk();
+    hide("loading");
+
+    if(!clerk.user || !clerk.session){
+      hide("workspace");
+      hide("logout");
+      show("not-authenticated");
+      return;
+    }
+
+    hide("not-authenticated");
+    show("workspace");
+    show("logout");
+
+    const userLabel = clerk.user.fullName || clerk.user.firstName || (clerk.user.primaryEmailAddress && clerk.user.primaryEmailAddress.emailAddress) || "authenticated user";
+    const userLine = document.getElementById("user-line");
+    if(userLine) userLine.textContent = "Signed in as " + userLabel;
+
+    document.getElementById("logout").onclick = async function(){
+      await clerk.signOut();
+      window.location.href = "index.html";
+    };
+
+    otWireProjectMemory();
+    await otLoadProjects();
+  }catch(e){
+    console.error("Workspace authentication error:", e);
+    hide("loading");
+    hide("workspace");
+    show("not-authenticated");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+  const loginNow = document.getElementById("login-now");
+  if(loginNow) loginNow.onclick = openWorkspaceLogin;
+  renderWorkspace();
+});
+</script>
+</body>
+</html>
