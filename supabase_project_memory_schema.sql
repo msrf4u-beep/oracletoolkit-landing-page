@@ -153,3 +153,18 @@ begin
     execute format('create policy %I on public.%I for delete using (clerk_user_id = auth.jwt() ->> ''sub'')', t || '_delete_own', t);
   end loop;
 end $$;
+
+
+
+-- v2.1.0-alpha Project Memory Bridge
+-- Adds project_memory_key so external Streamlit accelerators can save into the selected project context.
+-- This key is not a Supabase secret. It is a project-scoped bridge token.
+
+alter table public.projects
+add column if not exists project_memory_key uuid default gen_random_uuid();
+
+update public.projects
+set project_memory_key = gen_random_uuid()
+where project_memory_key is null;
+
+create index if not exists idx_projects_memory_key on public.projects(project_memory_key);
