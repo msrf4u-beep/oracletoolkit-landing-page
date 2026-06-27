@@ -31,6 +31,7 @@ function otSowMemoryLaunchUrl(){
   const params = new URLSearchParams({
     project_id: p.id,
     project_memory_key: p.project_memory_key,
+    clerk_user_id: p.clerk_user_id || "",
     source: "oracletoolkit_workspace"
   });
   return base + "?" + params.toString();
