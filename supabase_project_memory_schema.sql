@@ -168,3 +168,50 @@ set project_memory_key = gen_random_uuid()
 where project_memory_key is null;
 
 create index if not exists idx_projects_memory_key on public.projects(project_memory_key);
+
+
+-- v2.2.0-alpha Saved Deliverables
+create table if not exists public.project_deliverables (
+  id uuid primary key default gen_random_uuid(),
+  clerk_user_id text not null,
+  project_id uuid not null references public.projects(id) on delete cascade,
+  deliverable_type text not null,
+  title text not null,
+  source_accelerator text,
+  module_summary text,
+  item_count integer default 0,
+  status text default 'Generated',
+  payload_json jsonb,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+alter table public.project_deliverables add column if not exists clerk_user_id text;
+alter table public.project_deliverables add column if not exists project_id uuid references public.projects(id) on delete cascade;
+alter table public.project_deliverables add column if not exists deliverable_type text;
+alter table public.project_deliverables add column if not exists title text;
+alter table public.project_deliverables add column if not exists source_accelerator text;
+alter table public.project_deliverables add column if not exists module_summary text;
+alter table public.project_deliverables add column if not exists item_count integer default 0;
+alter table public.project_deliverables add column if not exists status text default 'Generated';
+alter table public.project_deliverables add column if not exists payload_json jsonb;
+alter table public.project_deliverables add column if not exists created_at timestamptz not null default now();
+alter table public.project_deliverables add column if not exists updated_at timestamptz not null default now();
+
+alter table public.rice_items add column if not exists deliverable_id uuid references public.project_deliverables(id) on delete set null;
+
+create index if not exists idx_project_deliverables_project on public.project_deliverables(project_id);
+create index if not exists idx_project_deliverables_clerk_user on public.project_deliverables(clerk_user_id);
+create index if not exists idx_rice_items_deliverable on public.rice_items(deliverable_id);
+
+alter table public.project_deliverables enable row level security;
+
+drop policy if exists project_deliverables_select_own on public.project_deliverables;
+drop policy if exists project_deliverables_insert_own on public.project_deliverables;
+drop policy if exists project_deliverables_update_own on public.project_deliverables;
+drop policy if exists project_deliverables_delete_own on public.project_deliverables;
+
+create policy project_deliverables_select_own on public.project_deliverables for select using (clerk_user_id = auth.jwt() ->> 'sub');
+create policy project_deliverables_insert_own on public.project_deliverables for insert with check (clerk_user_id = auth.jwt() ->> 'sub');
+create policy project_deliverables_update_own on public.project_deliverables for update using (clerk_user_id = auth.jwt() ->> 'sub') with check (clerk_user_id = auth.jwt() ->> 'sub');
+create policy project_deliverables_delete_own on public.project_deliverables for delete using (clerk_user_id = auth.jwt() ->> 'sub');
