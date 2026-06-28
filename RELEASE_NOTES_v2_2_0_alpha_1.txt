@@ -1,0 +1,17 @@
+OracleToolkit v2.2.0-alpha.1 — UI Cleanup
+
+Scope:
+- UI-only polish release.
+- Renames Saved Memory Items to Saved Deliverables.
+- Improves Saved Deliverables wording and empty state.
+- Adds Project Memory Lifecycle visual chips.
+- Improves deliverable card hierarchy.
+- Renames Export Project Memory to Export Project Snapshot.
+- Separates Implementation Deliverables from Detailed Project Memory.
+
+No changes:
+- No schema changes.
+- No Clerk/auth changes.
+- No Supabase persistence logic changes.
+- No navigation/SEO changes.
+- No accelerator integration changes.
