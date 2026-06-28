@@ -8,7 +8,7 @@ function otProjectPayload(){const u=otUserId();return{clerk_user_id:u,project_na
 function otFillProject(p){otById("cloud-project-id").value=p?.id||"";otById("cloud-project-name").value=p?.project_name||"";otById("cloud-client-name").value=p?.client_name||"";otById("cloud-sector").value=p?.sector||"Public Sector / K-12";otById("cloud-phase").value=p?.phase||"Discovery & Scope Planning";otById("cloud-module").value=p?.module||"";otById("cloud-golive").value=p?.go_live_date||"";otById("cloud-notes").value=p?.notes||""}
 function otTotalMemoryCount(){return Object.values(otMemory).reduce((s,a)=>s+(a?.length||0),0)}
 function otRender(){const p=otCurrentProject(),sw=otById("cloud-project-switcher");if(sw){sw.innerHTML='<option value="">Select cloud project...</option>'+otProjects.map(x=>`<option value="${x.id}" ${x.id===otSelectedProjectId?"selected":""}>${otEscape(x.project_name)} — ${otEscape(x.phase||"Phase")}</option>`).join("")}otById("engine-current-project").textContent=p?p.project_name:"No cloud project selected";otById("engine-current-meta").textContent=p?`${p.client_name||"Client"} • ${p.phase||"Phase"} • ${p.module||"Module"}`:"Create or select a project to begin saving project memory.";otById("project-count").textContent=otProjects.length;otById("run-count").textContent=(otMemory.deliverables||[]).length;const pl=otById("cloud-project-list");if(pl){pl.innerHTML=otProjects.length?otProjects.map(x=>`<article class="project-card ${x.id===otSelectedProjectId?"active":""}"><div><strong>${otEscape(x.project_name)}</strong><span>${otEscape(x.client_name||"Client")} • ${otEscape(x.phase||"Phase")}</span></div><button type="button" data-select="${x.id}">Open</button></article>`).join(""):'<div class="empty">No cloud projects yet. Create your first project memory workspace.</div>';pl.querySelectorAll("[data-select]").forEach(b=>b.onclick=()=>otSelectProject(b.getAttribute("data-select")))}otRenderDeliverables();otRenderAllMemory();otUpdateV21LaunchLinks()}
-async function otLoadProjects(){const c=await otGetSupabaseClient();if(!c)return;otStatus("Loading cloud project memory...","info");const{data,error}=await c.from(OT_TABLES.projects).select("*").order("updated_at",{ascending:false});if(error){console.error(error);otStatus(`Failed to load projects: ${error.message}`,"error");return}otProjects=data||[];if(otSelectedProjectId&&!otProjects.some(p=>p.id===otSelectedProjectId)){otSelectedProjectId="";localStorage.removeItem("oracletoolkit_selected_project_id")}if(!otSelectedProjectId&&otProjects.length){otSelectedProjectId=otProjects[0].id;localStorage.setItem("oracletoolkit_selected_project_id",otSelectedProjectId)}const p=otCurrentProject();if(p)otFillProject(p);await otLoadAllMemory();otRender();otStatus("Cloud project memory loaded.","success")}
+async function otLoadProjects(){const c=await otGetSupabaseClient();if(!c)return;otStatus("Loading cloud project memory...","info");const{data,error}=await c.from(OT_TABLES.projects).select("*").order("updated_at",{ascending:false});if(error){console.error(error);otStatus(`Failed to load projects: ${error.message}`,"error");return}otProjects=data||[];if(otSelectedProjectId&&!otProjects.some(p=>p.id===otSelectedProjectId)){otSelectedProjectId="";localStorage.removeItem("oracletoolkit_selected_project_id")}if(!otSelectedProjectId&&otProjects.length){otSelectedProjectId=otProjects[0].id;localStorage.setItem("oracletoolkit_selected_project_id",otSelectedProjectId)}const p=otCurrentProject();if(p)otFillProject(p);await otLoadAllMemory();otRender();otWireMemoryNavigation();otStatus("Cloud project memory loaded.","success")}
 async function otSaveProject(e){e.preventDefault();const c=await otGetSupabaseClient();if(!c)return;const payload=otProjectPayload();if(!payload.project_name){otStatus("Project name is required.","error");return}const id=otById("cloud-project-id").value;const res=id?await c.from(OT_TABLES.projects).update(payload).eq("id",id).select().single():await c.from(OT_TABLES.projects).insert(payload).select().single();if(res.error){console.error(res.error);otStatus(`Save failed: ${res.error.message}`,"error");return}otSelectedProjectId=res.data.id;localStorage.setItem("oracletoolkit_selected_project_id",otSelectedProjectId);await otLoadProjects();otStatus(id?"Project updated in cloud.":"Project created in cloud.","success")}
 function otNewProject(){otSelectedProjectId="";localStorage.removeItem("oracletoolkit_selected_project_id");otFillProject(null);otMemory={runs:[],decisions:[],discovery:[],rice:[],coa:[],testing:[],deliverables:[]};otRender();otStatus("Ready to create a new cloud project.","info")}
 async function otSelectProject(id){otSelectedProjectId=id||"";localStorage.setItem("oracletoolkit_selected_project_id",otSelectedProjectId);const p=otCurrentProject();if(p)otFillProject(p);await otLoadAllMemory();otRender()}
@@ -73,7 +73,7 @@ function otRenderDeliverables(){
   el.querySelectorAll("[data-delete-id]").forEach(b=>b.onclick=()=>otDeleteMemory(b.getAttribute("data-table"),b.getAttribute("data-delete-id")));
 }
 
-function otRenderAllMemory(){const list=otById("accelerator-runs-list");if(!list)return;const cards=[];otMemory.decisions.forEach(x=>cards.push(otCard(`Decision ${x.decision_id||""} ${x.module?"• "+x.module:""}`,`<strong>Decision:</strong> ${otEscape(x.decision)}<br><strong>Reason:</strong> ${otEscape(x.reason)}<br><strong>Impact:</strong> ${otEscape(x.impact)}<br><strong>Owner:</strong> ${otEscape(x.owner)}<br><strong>Date:</strong> ${otEscape(x.decision_date)}`,OT_TABLES.decisions,x.id,x.status||"Decision")));otMemory.discovery.forEach(x=>cards.push(otCard(`Discovery • ${x.module||"General"}`,`<strong>Requirement:</strong> ${otEscape(x.requirement)}<br><strong>Pain Point:</strong> ${otEscape(x.pain_point)}<br><strong>Open Questions:</strong> ${otEscape(x.open_questions)}`,OT_TABLES.discovery,x.id,x.priority||"Discovery")));otMemory.rice.forEach(x=>cards.push(otCard(`${x.rice_type||"RICE"} • ${x.title}`,`<strong>Description:</strong> ${otEscape(x.description)}<br><strong>Module:</strong> ${otEscape(x.module)}<br><strong>Owner:</strong> ${otEscape(x.owner)}<br><strong>Complexity:</strong> ${otEscape(x.complexity)}`,OT_TABLES.rice,x.id,x.status||"RICE")));otMemory.coa.forEach(x=>cards.push(otCard(`COA • ${x.ledger||"Ledger"}`,`<strong>Legal Entity:</strong> ${otEscape(x.legal_entity)}<br><strong>BU:</strong> ${otEscape(x.business_unit)}<br><strong>Segments:</strong> ${otEscape(x.segment_structure)}<br><strong>Hierarchy:</strong> ${otEscape(x.hierarchy)}<br><strong>Financial Categories:</strong> ${otEscape(x.financial_categories)}<br><strong>Notes:</strong> ${otEscape(x.notes)}`,OT_TABLES.coa,x.id,"COA")));otMemory.testing.forEach(x=>cards.push(otCard(`Testing • ${x.module||"General"}`,`<strong>Scenario:</strong> ${otEscape(x.scenario)}<br><strong>Expected Result:</strong> ${otEscape(x.expected_result)}<br><strong>Evidence:</strong> ${x.evidence_link?`<a href="${otEscape(x.evidence_link)}" target="_blank" rel="noopener">${otEscape(x.evidence_link)}</a>`:""}`,OT_TABLES.testing,x.id,x.status||"Testing")));otMemory.runs.forEach(x=>cards.push(otCard(x.accelerator_name||"General Memory",`<strong>Module:</strong> ${otEscape(x.module)}<br><strong>Notes:</strong> ${otEscape(x.notes)}`,OT_TABLES.runs,x.id,x.status||"Memory")));list.innerHTML=cards.length?cards.join(""):'<div class="empty">No saved project memory yet. Save a decision, discovery output, RICE item, COA design, or testing scenario.</div>';list.querySelectorAll("[data-delete-id]").forEach(b=>b.onclick=()=>otDeleteMemory(b.getAttribute("data-table"),b.getAttribute("data-delete-id")))}
+function otRenderAllMemory_legacy(){const list=otById("accelerator-runs-list");if(!list)return;const cards=[];otMemory.decisions.forEach(x=>cards.push(otCard(`Decision ${x.decision_id||""} ${x.module?"• "+x.module:""}`,`<strong>Decision:</strong> ${otEscape(x.decision)}<br><strong>Reason:</strong> ${otEscape(x.reason)}<br><strong>Impact:</strong> ${otEscape(x.impact)}<br><strong>Owner:</strong> ${otEscape(x.owner)}<br><strong>Date:</strong> ${otEscape(x.decision_date)}`,OT_TABLES.decisions,x.id,x.status||"Decision")));otMemory.discovery.forEach(x=>cards.push(otCard(`Discovery • ${x.module||"General"}`,`<strong>Requirement:</strong> ${otEscape(x.requirement)}<br><strong>Pain Point:</strong> ${otEscape(x.pain_point)}<br><strong>Open Questions:</strong> ${otEscape(x.open_questions)}`,OT_TABLES.discovery,x.id,x.priority||"Discovery")));otMemory.rice.forEach(x=>cards.push(otCard(`${x.rice_type||"RICE"} • ${x.title}`,`<strong>Description:</strong> ${otEscape(x.description)}<br><strong>Module:</strong> ${otEscape(x.module)}<br><strong>Owner:</strong> ${otEscape(x.owner)}<br><strong>Complexity:</strong> ${otEscape(x.complexity)}`,OT_TABLES.rice,x.id,x.status||"RICE")));otMemory.coa.forEach(x=>cards.push(otCard(`COA • ${x.ledger||"Ledger"}`,`<strong>Legal Entity:</strong> ${otEscape(x.legal_entity)}<br><strong>BU:</strong> ${otEscape(x.business_unit)}<br><strong>Segments:</strong> ${otEscape(x.segment_structure)}<br><strong>Hierarchy:</strong> ${otEscape(x.hierarchy)}<br><strong>Financial Categories:</strong> ${otEscape(x.financial_categories)}<br><strong>Notes:</strong> ${otEscape(x.notes)}`,OT_TABLES.coa,x.id,"COA")));otMemory.testing.forEach(x=>cards.push(otCard(`Testing • ${x.module||"General"}`,`<strong>Scenario:</strong> ${otEscape(x.scenario)}<br><strong>Expected Result:</strong> ${otEscape(x.expected_result)}<br><strong>Evidence:</strong> ${x.evidence_link?`<a href="${otEscape(x.evidence_link)}" target="_blank" rel="noopener">${otEscape(x.evidence_link)}</a>`:""}`,OT_TABLES.testing,x.id,x.status||"Testing")));otMemory.runs.forEach(x=>cards.push(otCard(x.accelerator_name||"General Memory",`<strong>Module:</strong> ${otEscape(x.module)}<br><strong>Notes:</strong> ${otEscape(x.notes)}`,OT_TABLES.runs,x.id,x.status||"Memory")));list.innerHTML=cards.length?cards.join(""):'<div class="empty">No saved project memory yet. Save a decision, discovery output, RICE item, COA design, or testing scenario.</div>';list.querySelectorAll("[data-delete-id]").forEach(b=>b.onclick=()=>otDeleteMemory(b.getAttribute("data-table"),b.getAttribute("data-delete-id")))}
 
 function otSowMemoryLaunchUrl(){
   const p = otCurrentProject();
@@ -101,6 +101,61 @@ function otUpdateV21LaunchLinks(){
     el.classList.add("disabled");
     el.textContent = "Select a project to launch SOW to RICE";
   }
+}
+
+
+let otActiveMemoryFilter = "";
+let otMemorySearchTerm = "";
+
+function otDetailedMemoryRows(){
+  const rows = [];
+  (otMemory.decisions||[]).forEach(x=>rows.push({category:"decisions",type:"Design Decision",title:x.decision_id||x.decision||"Design Decision",module:x.module||"",status:x.status||"",description:[x.decision,x.reason,x.impact,x.owner].filter(Boolean).join(" | "),id:x.id,table:OT_TABLES.decisions}));
+  (otMemory.discovery||[]).forEach(x=>rows.push({category:"discovery",type:"Discovery Output",title:x.requirement||"Discovery Output",module:x.module||"",status:x.priority||"",description:[x.pain_point,x.open_questions].filter(Boolean).join(" | "),id:x.id,table:OT_TABLES.discovery}));
+  (otMemory.rice||[]).forEach(x=>rows.push({category:"rice",type:x.rice_type||"RICE",title:x.title||"RICE Item",module:x.module||"",status:x.status||"",description:x.description||"",id:x.id,table:OT_TABLES.rice}));
+  (otMemory.coa||[]).forEach(x=>rows.push({category:"coa",type:"COA",title:x.ledger||"COA Memory",module:x.business_unit||"",status:"",description:[x.legal_entity,x.segment_structure,x.hierarchy,x.financial_categories,x.notes].filter(Boolean).join(" | "),id:x.id,table:OT_TABLES.coa}));
+  (otMemory.testing||[]).forEach(x=>rows.push({category:"testing",type:"Testing",title:x.scenario||"Testing Memory",module:x.module||"",status:x.status||"",description:[x.expected_result,x.evidence_link].filter(Boolean).join(" | "),id:x.id,table:OT_TABLES.testing}));
+  (otMemory.runs||[]).forEach(x=>rows.push({category:"runs",type:x.accelerator_name||"Accelerator Note",title:x.accelerator_name||"Accelerator Note",module:x.module||"",status:x.status||"",description:x.notes||"",id:x.id,table:OT_TABLES.runs}));
+  return rows;
+}
+
+function otSetMemoryFilter(filter){
+  otActiveMemoryFilter = filter || "";
+  const search = document.getElementById("memory-search");
+  if(search) search.value = "";
+  otMemorySearchTerm = "";
+  document.querySelectorAll("[data-memory-filter]").forEach(btn=>btn.classList.toggle("active", btn.getAttribute("data-memory-filter") === otActiveMemoryFilter));
+  const detail = document.getElementById("detailed-memory");
+  if(detail) detail.scrollIntoView({behavior:"smooth", block:"start"});
+  otRenderAllMemory();
+}
+
+function otRenderAllMemory(){
+  const el = document.getElementById("accelerator-runs-list");
+  if(!el) return;
+  let rows = otDetailedMemoryRows();
+  const filterMap = {discovery:["discovery"],decisions:["decisions"],coa:["coa"],bcea:["decisions","coa"],rice:["rice"],testing:["testing"],cutover:["runs"],lessons:["runs"]};
+  if(otActiveMemoryFilter && filterMap[otActiveMemoryFilter]) rows = rows.filter(r => filterMap[otActiveMemoryFilter].includes(r.category));
+  const q = String(otMemorySearchTerm||"").trim().toLowerCase();
+  if(q) rows = rows.filter(r => [r.type,r.title,r.module,r.status,r.description].join(" ").toLowerCase().includes(q));
+  const active = document.getElementById("active-memory-filter");
+  if(active){
+    const label = otActiveMemoryFilter ? `Filtered by: ${otActiveMemoryFilter.toUpperCase()}` : "Showing all detailed memory rows";
+    active.textContent = `${label} • ${rows.length} row(s)`;
+  }
+  if(!rows.length){
+    el.innerHTML = '<div class="empty">No detailed memory rows found for the selected filter/search.</div>';
+    return;
+  }
+  el.innerHTML = `<div class="memory-table-wrap"><table class="memory-table"><thead><tr><th>Type</th><th>Title / Description</th><th>Module</th><th>Status</th><th>Action</th></tr></thead><tbody>${rows.map(r=>`<tr><td><strong>${otEscape(r.type)}</strong></td><td><strong>${otEscape(r.title)}</strong><br><span class="small">${otEscape(String(r.description||"").slice(0,260))}</span></td><td>${otEscape(r.module||"")}</td><td>${otEscape(r.status||"")}</td><td><button class="action-btn delete-btn" type="button" data-table="${r.table}" data-delete-id="${r.id}">Delete</button></td></tr>`).join("")}</tbody></table></div>`;
+  el.querySelectorAll("[data-delete-id]").forEach(b=>b.onclick=()=>otDeleteMemory(b.getAttribute("data-table"),b.getAttribute("data-delete-id")));
+}
+
+function otWireMemoryNavigation(){
+  document.querySelectorAll("[data-memory-filter]").forEach(btn=>btn.onclick=()=>otSetMemoryFilter(btn.getAttribute("data-memory-filter")));
+  const search = document.getElementById("memory-search");
+  if(search) search.oninput=()=>{otMemorySearchTerm=search.value||"";otRenderAllMemory();};
+  const clear = document.getElementById("memory-clear-filter");
+  if(clear) clear.onclick=()=>{otActiveMemoryFilter="";otMemorySearchTerm="";if(search) search.value="";document.querySelectorAll("[data-memory-filter]").forEach(b=>b.classList.remove("active"));otRenderAllMemory();};
 }
 
 function otExportJson(){const data={projects:otProjects,selected_project_id:otSelectedProjectId,project_memory:otMemory};const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="oracletoolkit-project-memory-v2.json";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}

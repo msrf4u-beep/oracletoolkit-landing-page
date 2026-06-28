@@ -1,0 +1,15 @@
+OracleToolkit v2.2.0 — Final Project Memory UI Polish
+
+Scope:
+1. Memory Category pills are now clickable and filter/scroll to Detailed Project Memory.
+2. Detailed Project Memory cards replaced with a searchable enterprise-style table.
+3. Added left-side Jump to Section navigation for the application-sized Workspace page.
+
+Project Memory is now frozen as the stable deliverables foundation before expanding to additional accelerators.
+
+No changes:
+- No schema changes.
+- No Clerk/auth changes.
+- No Supabase persistence changes.
+- No SEO changes.
+- No SOW accelerator changes.
