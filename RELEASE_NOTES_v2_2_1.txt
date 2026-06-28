@@ -1,0 +1,15 @@
+OracleToolkit v2.2.1 — Saved Deliverables Stabilization
+
+Scope:
+- Duplicate/version handling support from SOW accelerator.
+- Better RICE item titles from SOW accelerator.
+- Delete confirmation in Workspace.
+- Rename SOW Bridge to Accelerator Bridge.
+- Remove alpha labels from production Workspace UI.
+
+No changes:
+- No schema redesign.
+- No Clerk/auth changes.
+- No Supabase ownership model changes.
+- No SEO changes.
+- No new accelerator integration.
