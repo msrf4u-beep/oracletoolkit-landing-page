@@ -1,0 +1,12 @@
+OracleToolkit v2.3.0-alpha — Cross-Accelerator Knowledge: COA Integration
+
+Scope:
+- Adds Workspace bridge link for COA Accelerator.
+- Adds shared Streamlit save layer pattern.
+- COA Accelerator can save one COA Design deliverable.
+- COA detail saved into coa_memory for traceability.
+- SOW flow remains intact.
+
+No database schema change required if v2.2 project_deliverables and coa_memory already exist.
+No auth changes.
+No SEO changes.
