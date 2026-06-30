@@ -1,0 +1,9 @@
+OracleToolkit v2.3.0-alpha.1 Fix Release
+
+Fixes:
+- Correct COA Streamlit URL in Workspace bridge.
+- Adds bulk delete for selected deliverables and detailed memory rows.
+- Updates SOW replace-current behavior to update the existing current deliverable instead of creating another visible deliverable.
+
+No schema changes.
+No Supabase SQL rerun required.
