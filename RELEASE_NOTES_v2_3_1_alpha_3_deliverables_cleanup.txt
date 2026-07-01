@@ -1,0 +1,9 @@
+OracleToolkit v2.3.1-alpha.3 — Deliverables Launch Cleanup
+
+Scope:
+- Removes stray application Launch artifacts from Saved Deliverables.
+- Keeps Applications as the only launch surface.
+- Preserves Download JSON, Download CSV, and Delete actions.
+- Preserves SOW, COA, and Discovery application cards and URLs.
+
+No schema/auth/SEO/Streamlit changes.
