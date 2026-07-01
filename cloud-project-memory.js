@@ -89,24 +89,18 @@ function otSowMemoryLaunchUrl(){
 }
 
 
+
 function otUpdateV21LaunchLinks(){
   const el = document.getElementById("sow-memory-launch");
   if(!el) return;
   const url = otSowMemoryLaunchUrl();
   if(url){
-    el.href = url;
-    el.classList.remove("disabled");
-    el.setAttribute("aria-disabled","false");
-    el.onclick = null;
-    el.textContent = "SOW to RICE";
+    el.href = url; el.classList.remove("disabled"); el.setAttribute("aria-disabled","false"); el.onclick = null; el.textContent = "Launch"; otSetAppCardState("sow", true);
   }else{
-    el.href = "#";
-    el.classList.add("disabled");
-    el.setAttribute("aria-disabled","true");
-    el.onclick = (e)=>e.preventDefault();
-    el.textContent = "Select project first — SOW to RICE";
+    el.href = "#"; el.classList.add("disabled"); el.setAttribute("aria-disabled","true"); el.onclick = (e)=>e.preventDefault(); el.textContent = "Launch"; otSetAppCardState("sow", false);
   }
 }
+
 
 
 
@@ -179,24 +173,18 @@ function otCoaMemoryLaunchUrl(){
 }
 
 
+
 function otUpdateV23LaunchLinks(){
   const el = document.getElementById("coa-memory-launch");
   if(!el) return;
   const url = otCoaMemoryLaunchUrl();
   if(url){
-    el.href = url;
-    el.classList.remove("disabled");
-    el.setAttribute("aria-disabled","false");
-    el.onclick = null;
-    el.textContent = "COA Accelerator";
+    el.href = url; el.classList.remove("disabled"); el.setAttribute("aria-disabled","false"); el.onclick = null; el.textContent = "Launch"; otSetAppCardState("coa", true);
   }else{
-    el.href = "#";
-    el.classList.add("disabled");
-    el.setAttribute("aria-disabled","true");
-    el.onclick = (e)=>e.preventDefault();
-    el.textContent = "Select project first — COA Accelerator";
+    el.href = "#"; el.classList.add("disabled"); el.setAttribute("aria-disabled","true"); el.onclick = (e)=>e.preventDefault(); el.textContent = "Launch"; otSetAppCardState("coa", false);
   }
 }
+
 
 
 
@@ -237,22 +225,28 @@ function otDiscoveryMemoryLaunchUrl(){
   return base + "?" + params.toString();
 }
 
+
 function otUpdateDiscoveryLaunchLinks(){
   const el = document.getElementById("discovery-memory-launch");
   if(!el) return;
   const url = otDiscoveryMemoryLaunchUrl();
   if(url){
-    el.href = url;
-    el.classList.remove("disabled");
-    el.setAttribute("aria-disabled","false");
-    el.onclick = null;
-    el.textContent = "Discovery Command Center";
+    el.href = url; el.classList.remove("disabled"); el.setAttribute("aria-disabled","false"); el.onclick = null; el.textContent = "Launch"; otSetAppCardState("discovery", true);
   }else{
-    el.href = "#";
-    el.classList.add("disabled");
-    el.setAttribute("aria-disabled","true");
-    el.onclick = (e)=>e.preventDefault();
-    el.textContent = "Select project first — Discovery Command Center";
+    el.href = "#"; el.classList.add("disabled"); el.setAttribute("aria-disabled","true"); el.onclick = (e)=>e.preventDefault(); el.textContent = "Launch"; otSetAppCardState("discovery", false);
+  }
+}
+
+
+
+function otSetAppCardState(appKey, ready){
+  const card = document.querySelector(`[data-app-card="${appKey}"]`);
+  const status = document.getElementById(`${appKey}-app-status`);
+  if(card){ card.classList.toggle("app-disabled", !ready); }
+  if(status){
+    status.textContent = ready ? "Project Selected" : "Select Project";
+    status.classList.toggle("app-status-ready", !!ready);
+    status.classList.toggle("app-status-waiting", !ready);
   }
 }
 

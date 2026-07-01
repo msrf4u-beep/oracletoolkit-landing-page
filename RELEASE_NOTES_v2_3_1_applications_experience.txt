@@ -1,0 +1,10 @@
+OracleToolkit v2.3.1 — Workspace Applications Experience
+
+Commit 2 scope:
+- Wires existing launch logic into the new application cards.
+- Keeps Launch button text consistent.
+- Launch buttons are disabled until a project is selected.
+- Application status changes from Select Project to Project Selected.
+- Preserves SOW, COA, and Discovery launch URLs.
+
+No schema/auth/SEO/Streamlit changes.
