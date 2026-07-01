@@ -8,7 +8,7 @@ function otProjectPayload(){const u=otUserId();return{clerk_user_id:u,project_na
 function otFillProject(p){otById("cloud-project-id").value=p?.id||"";otById("cloud-project-name").value=p?.project_name||"";otById("cloud-client-name").value=p?.client_name||"";otById("cloud-sector").value=p?.sector||"Public Sector / K-12";otById("cloud-phase").value=p?.phase||"Discovery & Scope Planning";otById("cloud-module").value=p?.module||"";otById("cloud-golive").value=p?.go_live_date||"";otById("cloud-notes").value=p?.notes||""}
 function otTotalMemoryCount(){return Object.values(otMemory).reduce((s,a)=>s+(a?.length||0),0)}
 function otRender(){const p=otCurrentProject(),sw=otById("cloud-project-switcher");if(sw){sw.innerHTML='<option value="">Select cloud project...</option>'+otProjects.map(x=>`<option value="${x.id}" ${x.id===otSelectedProjectId?"selected":""}>${otEscape(x.project_name)} — ${otEscape(x.phase||"Phase")}</option>`).join("")}otById("engine-current-project").textContent=p?p.project_name:"No cloud project selected";otById("engine-current-meta").textContent=p?`${p.client_name||"Client"} • ${p.phase||"Phase"} • ${p.module||"Module"}`:"Create or select a project to begin saving project memory.";otById("project-count").textContent=otProjects.length;otById("run-count").textContent=(otMemory.deliverables||[]).length;const pl=otById("cloud-project-list");if(pl){pl.innerHTML=otProjects.length?otProjects.map(x=>`<article class="project-card ${x.id===otSelectedProjectId?"active":""}"><div><strong>${otEscape(x.project_name)}</strong><span>${otEscape(x.client_name||"Client")} • ${otEscape(x.phase||"Phase")}</span></div><button type="button" data-select="${x.id}">Open</button></article>`).join(""):'<div class="empty">No cloud projects yet. Create your first project memory workspace.</div>';pl.querySelectorAll("[data-select]").forEach(b=>b.onclick=()=>otSelectProject(b.getAttribute("data-select")))}otRenderDeliverables();otRenderAllMemory();otUpdateV21LaunchLinks();otUpdateV23LaunchLinks()}
-async function otLoadProjects(){const c=await otGetSupabaseClient();if(!c)return;otStatus("Loading cloud project memory...","info");const{data,error}=await c.from(OT_TABLES.projects).select("*").order("updated_at",{ascending:false});if(error){console.error(error);otStatus(`Failed to load projects: ${error.message}`,"error");return}otProjects=data||[];if(otSelectedProjectId&&!otProjects.some(p=>p.id===otSelectedProjectId)){otSelectedProjectId="";localStorage.removeItem("oracletoolkit_selected_project_id")}if(!otSelectedProjectId&&otProjects.length){otSelectedProjectId=otProjects[0].id;localStorage.setItem("oracletoolkit_selected_project_id",otSelectedProjectId)}const p=otCurrentProject();if(p)otFillProject(p);await otLoadAllMemory();otRender();otWireMemoryNavigation();otWireBulkDelete();otUpdateV23LaunchLinks();otUpdateDiscoveryLaunchLinks();otStatus("Cloud project memory loaded.","success")}
+async function otLoadProjects(){const c=await otGetSupabaseClient();if(!c)return;otStatus("Loading cloud project memory...","info");const{data,error}=await c.from(OT_TABLES.projects).select("*").order("updated_at",{ascending:false});if(error){console.error(error);otStatus(`Failed to load projects: ${error.message}`,"error");return}otProjects=data||[];if(otSelectedProjectId&&!otProjects.some(p=>p.id===otSelectedProjectId)){otSelectedProjectId="";localStorage.removeItem("oracletoolkit_selected_project_id")}if(!otSelectedProjectId&&otProjects.length){otSelectedProjectId=otProjects[0].id;localStorage.setItem("oracletoolkit_selected_project_id",otSelectedProjectId)}const p=otCurrentProject();if(p)otFillProject(p);await otLoadAllMemory();otRender();otWireMemoryNavigation();otWireBulkDelete();otUpdateV23LaunchLinks();otUpdateDiscoveryLaunchLinks();otRefreshApplicationCards();otStatus("Cloud project memory loaded.","success")}
 async function otSaveProject(e){e.preventDefault();const c=await otGetSupabaseClient();if(!c)return;const payload=otProjectPayload();if(!payload.project_name){otStatus("Project name is required.","error");return}const id=otById("cloud-project-id").value;const res=id?await c.from(OT_TABLES.projects).update(payload).eq("id",id).select().single():await c.from(OT_TABLES.projects).insert(payload).select().single();if(res.error){console.error(res.error);otStatus(`Save failed: ${res.error.message}`,"error");return}otSelectedProjectId=res.data.id;localStorage.setItem("oracletoolkit_selected_project_id",otSelectedProjectId);await otLoadProjects();otStatus(id?"Project updated in cloud.":"Project created in cloud.","success")}
 function otNewProject(){otSelectedProjectId="";localStorage.removeItem("oracletoolkit_selected_project_id");otFillProject(null);otMemory={runs:[],decisions:[],discovery:[],rice:[],coa:[],testing:[],deliverables:[]};otRender();otStatus("Ready to create a new cloud project.","info")}
 async function otSelectProject(id){otSelectedProjectId=id||"";localStorage.setItem("oracletoolkit_selected_project_id",otSelectedProjectId);const p=otCurrentProject();if(p)otFillProject(p);await otLoadAllMemory();otRender()}
@@ -250,6 +250,43 @@ function otSetAppCardState(appKey, ready){
   }
 }
 
+
+function otRefreshApplicationCards(){
+  try{
+    const appMap = [
+      ["sow", "sow-memory-launch", typeof otSowMemoryLaunchUrl === "function" ? otSowMemoryLaunchUrl : null],
+      ["coa", "coa-memory-launch", typeof otCoaMemoryLaunchUrl === "function" ? otCoaMemoryLaunchUrl : null],
+      ["discovery", "discovery-memory-launch", typeof otDiscoveryMemoryLaunchUrl === "function" ? otDiscoveryMemoryLaunchUrl : null]
+    ];
+    appMap.forEach(([key, id, urlFn]) => {
+      const el = document.getElementById(id);
+      if(!el || !urlFn) return;
+      const url = urlFn();
+      const ready = !!url;
+      if(ready){
+        el.href = url;
+        el.classList.remove("disabled");
+        el.setAttribute("aria-disabled","false");
+        el.onclick = null;
+      }else{
+        el.href = "#";
+        el.classList.add("disabled");
+        el.setAttribute("aria-disabled","true");
+        el.onclick = (e)=>e.preventDefault();
+      }
+      el.textContent = "Launch";
+      if(typeof otSetAppCardState === "function"){
+        otSetAppCardState(key, ready);
+      }else{
+        const status = document.getElementById(`${key}-app-status`);
+        const card = document.querySelector(`[data-app-card="${key}"]`);
+        if(card) card.classList.toggle("app-disabled", !ready);
+        if(status) status.textContent = ready ? "Project Selected" : "Select Project";
+      }
+    });
+  }catch(e){ console.warn("Application card refresh skipped", e); }
+}
+
 function otExportJson(){const data={projects:otProjects,selected_project_id:otSelectedProjectId,project_memory:otMemory};const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="oracletoolkit-project-memory-v2.json";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
 function otWireProjectMemory(){otById("cloud-project-form")?.addEventListener("submit",otSaveProject);otById("cloud-new-project-btn")?.addEventListener("click",otNewProject);otById("cloud-refresh-projects-btn")?.addEventListener("click",otLoadProjects);otById("cloud-project-switcher")?.addEventListener("change",e=>otSelectProject(e.target.value));otById("accelerator-run-form")?.addEventListener("submit",otSaveRun);otById("design-decision-form")?.addEventListener("submit",otSaveDecision);otById("discovery-output-form")?.addEventListener("submit",otSaveDiscovery);otById("rice-memory-form")?.addEventListener("submit",otSaveRice);otById("coa-memory-form")?.addEventListener("submit",otSaveCoa);otById("testing-memory-form")?.addEventListener("submit",otSaveTesting);otById("export-json")?.addEventListener("click",otExportJson);const d=otById("decision-date");if(d&&!d.value)d.value=otToday()}
 
@@ -319,3 +356,6 @@ function otExportJson(){
   otStatus("Project snapshot exported.", "success");
 }
 
+
+// v231_alpha2_refresh_timer
+setInterval(()=>{try{otRefreshApplicationCards();}catch(e){}},1500);
