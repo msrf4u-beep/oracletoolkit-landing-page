@@ -1,0 +1,11 @@
+OracleToolkit v2.3.0 — Discovery Bridge URL Fix
+
+Updated Discovery Command Center Workspace bridge URL.
+
+Old:
+https://discovery-command-center-pro.streamlit.app/
+
+New:
+https://discoverycommandcenterpro-fu9jxdqbb4qtc28jexi7ul.streamlit.app/
+
+No schema/auth/SEO/accelerator logic changes.

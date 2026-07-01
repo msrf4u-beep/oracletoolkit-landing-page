@@ -1,0 +1,17 @@
+OracleToolkit v2.3.0 — Discovery Command Center Integration
+
+Scope:
+- Adds Discovery Command Center bridge button to Workspace.
+- Adds Project Memory enabled Discovery Streamlit app.
+- Saves one Discovery Package deliverable.
+- Saves discovery outputs and design decisions into Project Memory.
+- Reuses the same Project Memory pattern as SOW and COA.
+
+Important:
+- Verify the deployed Discovery Streamlit URL. The current bridge uses:
+  https://discovery-command-center-pro.streamlit.app/
+- If your actual deployed URL differs, update base URL in cloud-project-memory.js.
+
+No schema changes.
+No auth changes.
+No SEO changes.
