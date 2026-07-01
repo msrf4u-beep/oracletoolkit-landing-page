@@ -1,0 +1,22 @@
+OracleToolkit v2.3.1-alpha.1 — Workspace Applications Experience
+
+Commit 1 scope:
+- HTML/CSS-only Workspace presentation release.
+- Renames Accelerator Bridge to Applications.
+- Replaces plain launch buttons with premium OracleToolkit application cards.
+- Uses product names:
+  - Discovery Command Center
+  - COA Transformation Accelerator
+  - SOW Intelligence Engine
+- Preserves existing anchor IDs used by JavaScript:
+  - discovery-memory-launch
+  - coa-memory-launch
+  - sow-memory-launch
+
+No changes:
+- No JavaScript logic changes.
+- No Supabase schema changes.
+- No Clerk/auth changes.
+- No Streamlit app changes.
+- No SEO changes.
+- No Project Memory persistence changes.
