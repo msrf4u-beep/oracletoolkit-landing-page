@@ -88,6 +88,7 @@ function otSowMemoryLaunchUrl(){
   return base + "?" + params.toString();
 }
 
+
 function otUpdateV21LaunchLinks(){
   const el = document.getElementById("sow-memory-launch");
   if(!el) return;
@@ -95,13 +96,18 @@ function otUpdateV21LaunchLinks(){
   if(url){
     el.href = url;
     el.classList.remove("disabled");
+    el.setAttribute("aria-disabled","false");
+    el.onclick = null;
     el.textContent = "Open SOW to RICE with Project Memory";
   }else{
     el.href = "#";
     el.classList.add("disabled");
+    el.setAttribute("aria-disabled","true");
+    el.onclick = (e)=>e.preventDefault();
     el.textContent = "Select a project to launch SOW to RICE";
   }
 }
+
 
 
 let otActiveMemoryFilter = "";
@@ -172,6 +178,7 @@ function otCoaMemoryLaunchUrl(){
   return base + "?" + params.toString();
 }
 
+
 function otUpdateV23LaunchLinks(){
   const el = document.getElementById("coa-memory-launch");
   if(!el) return;
@@ -179,13 +186,18 @@ function otUpdateV23LaunchLinks(){
   if(url){
     el.href = url;
     el.classList.remove("disabled");
+    el.setAttribute("aria-disabled","false");
+    el.onclick = null;
     el.textContent = "Open COA Accelerator with Project Memory";
   }else{
     el.href = "#";
     el.classList.add("disabled");
+    el.setAttribute("aria-disabled","true");
+    el.onclick = (e)=>e.preventDefault();
     el.textContent = "Select a project to launch COA Accelerator";
   }
 }
+
 
 
 async function otBulkDeleteDeliverables(){
@@ -213,3 +225,37 @@ function otWireBulkDelete(){
 
 function otExportJson(){const data={projects:otProjects,selected_project_id:otSelectedProjectId,project_memory:otMemory};const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="oracletoolkit-project-memory-v2.json";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
 function otWireProjectMemory(){otById("cloud-project-form")?.addEventListener("submit",otSaveProject);otById("cloud-new-project-btn")?.addEventListener("click",otNewProject);otById("cloud-refresh-projects-btn")?.addEventListener("click",otLoadProjects);otById("cloud-project-switcher")?.addEventListener("change",e=>otSelectProject(e.target.value));otById("accelerator-run-form")?.addEventListener("submit",otSaveRun);otById("design-decision-form")?.addEventListener("submit",otSaveDecision);otById("discovery-output-form")?.addEventListener("submit",otSaveDiscovery);otById("rice-memory-form")?.addEventListener("submit",otSaveRice);otById("coa-memory-form")?.addEventListener("submit",otSaveCoa);otById("testing-memory-form")?.addEventListener("submit",otSaveTesting);otById("export-json")?.addEventListener("click",otExportJson);const d=otById("decision-date");if(d&&!d.value)d.value=otToday()}
+
+
+// v2.3 workspace stabilization export override
+function otExportJson(){
+  const p = otCurrentProject();
+  const snapshot = {
+    exported_at: new Date().toISOString(),
+    platform: "OracleToolkit",
+    workspace_version: "v2.3",
+    current_project: p || null,
+    deliverables: otMemory.deliverables || [],
+    detailed_memory: {
+      design_decisions: otMemory.decisions || [],
+      discovery_outputs: otMemory.discovery || [],
+      rice_items: otMemory.rice || [],
+      coa_memory: otMemory.coa || [],
+      testing_memory: otMemory.testing || [],
+      accelerator_notes: otMemory.runs || []
+    }
+  };
+  const nameBase = p && p.project_name ? p.project_name : "oracletoolkit-project";
+  const safe = String(nameBase).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") || "oracletoolkit-project";
+  const blob = new Blob([JSON.stringify(snapshot, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${safe}-project-snapshot.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  otStatus("Project snapshot exported.", "success");
+}
+

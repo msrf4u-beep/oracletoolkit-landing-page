@@ -1,0 +1,1 @@
+Verified and patched: current project Loading state and Jump navigation anchors. No schema/auth/SEO changes.

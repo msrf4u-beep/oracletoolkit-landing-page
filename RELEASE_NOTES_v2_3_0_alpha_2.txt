@@ -1,0 +1,16 @@
+OracleToolkit v2.3.0-alpha.2 — Workspace Stabilization
+
+Scope:
+- Fix Start Guided Workflow to open Methodology Command Center.
+- Make Export Project Snapshot download a JSON project snapshot.
+- Replace initial zero-flash counters with Loading... state.
+- Disable accelerator bridge buttons until a project is selected.
+- Ensure delete confirmations remain in place.
+- Update browser title.
+- Remove visible alpha label from Workspace UI; production-facing badge shows v2.3.
+
+No schema changes.
+No Clerk/auth changes.
+No Supabase persistence changes.
+No SEO changes.
+No accelerator integration changes.
