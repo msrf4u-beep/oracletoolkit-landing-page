@@ -1,0 +1,12 @@
+OracleToolkit v2.3.0 — Accelerator Bridge Wording Cleanup
+
+Scope:
+- Simplifies Accelerator Bridge button names.
+- Removes repeated "with Project Memory" wording from each button.
+- Keeps heading and description responsible for Project Memory context.
+
+No schema changes.
+No auth changes.
+No SEO changes.
+No accelerator logic changes.
+No URL changes.

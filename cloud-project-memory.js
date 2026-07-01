@@ -98,13 +98,13 @@ function otUpdateV21LaunchLinks(){
     el.classList.remove("disabled");
     el.setAttribute("aria-disabled","false");
     el.onclick = null;
-    el.textContent = "Open SOW to RICE with Project Memory";
+    el.textContent = "SOW to RICE";
   }else{
     el.href = "#";
     el.classList.add("disabled");
     el.setAttribute("aria-disabled","true");
     el.onclick = (e)=>e.preventDefault();
-    el.textContent = "Select a project to launch SOW to RICE";
+    el.textContent = "Select project first — SOW to RICE";
   }
 }
 
@@ -188,13 +188,13 @@ function otUpdateV23LaunchLinks(){
     el.classList.remove("disabled");
     el.setAttribute("aria-disabled","false");
     el.onclick = null;
-    el.textContent = "Open COA Accelerator with Project Memory";
+    el.textContent = "COA Accelerator";
   }else{
     el.href = "#";
     el.classList.add("disabled");
     el.setAttribute("aria-disabled","true");
     el.onclick = (e)=>e.preventDefault();
-    el.textContent = "Select a project to launch COA Accelerator";
+    el.textContent = "Select project first — COA Accelerator";
   }
 }
 
@@ -246,13 +246,13 @@ function otUpdateDiscoveryLaunchLinks(){
     el.classList.remove("disabled");
     el.setAttribute("aria-disabled","false");
     el.onclick = null;
-    el.textContent = "Open Discovery Command Center with Project Memory";
+    el.textContent = "Discovery Command Center";
   }else{
     el.href = "#";
     el.classList.add("disabled");
     el.setAttribute("aria-disabled","true");
     el.onclick = (e)=>e.preventDefault();
-    el.textContent = "Select a project to launch Discovery Command Center";
+    el.textContent = "Select project first — Discovery Command Center";
   }
 }
 
@@ -284,13 +284,13 @@ function otUpdateDiscoveryLaunchLinks(){
     el.classList.remove("disabled");
     el.setAttribute("aria-disabled","false");
     el.onclick = null;
-    el.textContent = "Open Discovery Command Center with Project Memory";
+    el.textContent = "Discovery Command Center";
   }else{
     el.href = "#";
     el.classList.add("disabled");
     el.setAttribute("aria-disabled","true");
     el.onclick = (e)=>e.preventDefault();
-    el.textContent = "Select a project to launch Discovery Command Center";
+    el.textContent = "Select project first — Discovery Command Center";
   }
 }
 
