@@ -1,0 +1,9 @@
+OracleToolkit v2.3.3 — Sanity Fix
+
+Scope:
+- Replaces hardcoded deliverable label "RICE Items" with type-aware labels.
+- Discovery/BCEA deliverables now show Knowledge Records instead of RICE Items.
+- RICE deliverables still show RICE Items.
+- Preserves compact application launcher and all launch URLs.
+
+No schema/auth/SEO/Streamlit changes.

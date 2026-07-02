@@ -37,6 +37,22 @@
 
 .app-card.app-bcea:before{background:#059669}
 .app-bcea .app-icon{background:#d1fae5}
+
+/* v2.3.3 Compact Applications Launcher */
+.compact-app-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:16px}
+.app-tile{min-height:220px;padding:18px;border-radius:18px;gap:10px}
+.app-tile:hover{transform:translateY(-2px)}
+.app-tile:before{width:4px;border-radius:18px 0 0 18px}
+.app-tile-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.app-tile .app-icon{width:38px;height:38px;border-radius:13px;font-size:20px}
+.app-tile h3{font-size:17px;margin:0;line-height:1.2}
+.app-tile p{font-size:12.5px;line-height:1.45;min-height:42px;margin:0;color:#475569}
+.app-tile .app-chips{gap:6px;margin-top:auto}
+.app-tile .app-chips span{font-size:11px;padding:5px 8px}
+.app-tile .app-status{font-size:10.5px;padding:5px 8px}
+.app-tile .app-launch{min-height:36px;padding:9px 12px;font-size:12px;margin-top:2px}
+@media(max-width:1180px){.compact-app-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.compact-app-grid{grid-template-columns:1fr}.app-tile{min-height:auto}}
 </style></head><body><header class="top"><div class="top-inner"><div class="brand"><svg viewBox="0 0 96 96"><rect x="6" y="6" width="84" height="84" rx="22" fill="#0A2040"></rect><rect x="13" y="13" width="70" height="70" rx="17" fill="none" stroke="#CBD5E1" stroke-width="5"></rect><text x="48" y="58" text-anchor="middle" font-family="Arial" font-size="31" font-weight="800" fill="#F8FAFC">OT</text></svg><span>OracleToolkit Workspace</span></div><div class="nav-actions"><a class="btn secondary" href="index.html">Home</a><a class="btn secondary" href="methodology-command-center.html">Command Center</a><button id="logout" class="btn secondary hidden" type="button">Logout</button></div></div></header><main class="wrap">
 <nav class="workspace-jump-nav" aria-label="Project Memory navigation">
   <a href="#workspace-overview">Overview</a>
@@ -52,64 +68,64 @@
   <h2>OracleToolkit Applications</h2>
   <p>Launch OracleToolkit applications for the selected project. Each application contributes reusable implementation intelligence to your workspace.</p>
 
-  <div class="app-grid">
-    <article class="app-card app-discovery" data-app-card="discovery">
-      <div class="app-card-top">
+  
+  <div class="app-grid compact-app-grid">
+    <article class="app-card app-tile app-discovery" data-app-card="discovery">
+      <div class="app-tile-head">
         <div class="app-icon">🔍</div>
         <span id="discovery-app-status" class="app-status app-status-waiting">Select Project</span>
       </div>
       <h3>Discovery Command Center</h3>
-      <p>Capture discovery workshops, requirements, risks, dependencies, and implementation readiness.</p>
+      <p>Requirements, risks, decisions, and readiness.</p>
       <div class="app-chips">
-        <span>Discovery Questions</span>
-        <span>Risk Radar</span>
-        <span>Decision Register</span>
+        <span>Discovery</span>
+        <span>Risks</span>
+        <span>Decisions</span>
       </div>
       <a id="discovery-memory-launch" class="btn app-launch secondary disabled" href="#" target="_blank" rel="noopener" aria-disabled="true">Launch</a>
     </article>
 
-    <article class="app-card app-coa" data-app-card="coa">
-      <div class="app-card-top">
+    <article class="app-card app-tile app-coa" data-app-card="coa">
+      <div class="app-tile-head">
         <div class="app-icon">🏛</div>
         <span id="coa-app-status" class="app-status app-status-waiting">Select Project</span>
       </div>
-      <h3>COA Transformation Accelerator</h3>
-      <p>Design Oracle Cloud Chart of Accounts with intelligent mapping, crosswalks, and validation.</p>
+      <h3>COA Transformation</h3>
+      <p>COA design, mapping, crosswalks, and validation.</p>
       <div class="app-chips">
-        <span>COA Design</span>
+        <span>COA</span>
         <span>Crosswalk</span>
         <span>Validation</span>
       </div>
       <a id="coa-memory-launch" class="btn app-launch secondary disabled" href="#" target="_blank" rel="noopener" aria-disabled="true">Launch</a>
     </article>
 
-    <article class="app-card app-bcea" data-app-card="bcea">
-      <div class="app-card-top">
+    <article class="app-card app-tile app-bcea" data-app-card="bcea">
+      <div class="app-tile-head">
         <div class="app-icon">🧭</div>
         <span id="bcea-app-status" class="app-status app-status-waiting">Select Project</span>
       </div>
       <h3>BCEA Architect</h3>
-      <p>Design budgetary control architecture, control budgets, funds check behavior, dependencies, and test scenarios.</p>
+      <p>Control budgets, funds check, exceptions, and testing.</p>
       <div class="app-chips">
-        <span>Control Budgets</span>
+        <span>BCEA</span>
         <span>Funds Check</span>
-        <span>Budget Exceptions</span>
+        <span>Testing</span>
       </div>
       <a id="bcea-memory-launch" class="btn app-launch secondary disabled" href="#" target="_blank" rel="noopener" aria-disabled="true">Launch</a>
     </article>
 
-
-    <article class="app-card app-sow" data-app-card="sow">
-      <div class="app-card-top">
+    <article class="app-card app-tile app-sow" data-app-card="sow">
+      <div class="app-tile-head">
         <div class="app-icon">📄</div>
         <span id="sow-app-status" class="app-status app-status-waiting">Select Project</span>
       </div>
-      <h3>SOW Intelligence Engine</h3>
-      <p>Convert implementation scope into delivery intelligence, RICE inventory, process gaps, and PMO-ready outputs.</p>
+      <h3>SOW Intelligence</h3>
+      <p>RICE, process gaps, cutover risks, and PMO outputs.</p>
       <div class="app-chips">
-        <span>RICE Inventory</span>
-        <span>Process Gaps</span>
-        <span>PMO Workbook</span>
+        <span>RICE</span>
+        <span>Gaps</span>
+        <span>PMO</span>
       </div>
       <a id="sow-memory-launch" class="btn app-launch primary disabled" href="#" target="_blank" rel="noopener" aria-disabled="true">Launch</a>
     </article>

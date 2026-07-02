@@ -44,6 +44,18 @@ function otDownloadDeliverable(id, format){
   if(format === "csv") otDownloadText(`${safe}.csv`, otRowsToCsv(payload.rows || []), "text/csv");
   else otDownloadText(`${safe}.json`, JSON.stringify(d,null,2), "application/json");
 }
+
+function otDeliverableMetricLabel(d){
+  const type = String(d?.deliverable_type || "").toLowerCase();
+  const source = String(d?.source_accelerator || "").toLowerCase();
+  if(type.includes("rice") || source.includes("sow")) return "RICE Items";
+  if(type.includes("discovery")) return "Knowledge Records";
+  if(type.includes("bcea") || source.includes("bcea")) return "Knowledge Records";
+  if(type.includes("coa") || source.includes("coa")) return "COA Records";
+  if(type.includes("testing") || type.includes("scenario")) return "Test Scenarios";
+  return "Knowledge Records";
+}
+
 function otRenderDeliverables(){
   const el = document.getElementById("saved-deliverables-list");
   if(!el) return;
@@ -58,7 +70,7 @@ function otRenderDeliverables(){
       <div class="run-card-top"><label><input class="row-check deliverable-check" type="checkbox" value="${d.id}"> <strong class="deliverable-title">📘 ${otEscape(d.title||"Saved Deliverable")}</strong></label><em>${otEscape(d.status||"Generated")}</em></div>
       <p><strong>Type:</strong> ${otEscape(d.deliverable_type||"")}<br>
       <strong>Source:</strong> ${otEscape(d.source_accelerator||"")}<br>
-      <span class="deliverable-metric">${otEscape(d.item_count||0)} RICE Items</span><br>
+      <span class="deliverable-metric">${otEscape(d.item_count||0)} ${otDeliverableMetricLabel(d)}</span><br>
       <strong>Modules:</strong> ${otEscape(d.module_summary||"")}<br>
       <strong>Created:</strong> ${otEscape(created)}</p>
       <div class="run-actions">

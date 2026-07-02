@@ -1,0 +1,13 @@
+OracleToolkit v2.3.3 — Compact Applications Launcher
+
+Scope:
+- Converts Applications from large cards into compact application tiles.
+- Supports 4 applications now and 10+ applications later.
+- Responsive layout: 4 columns desktop, 2 columns tablet, 1 column mobile.
+- Preserves existing launch IDs and JavaScript behavior:
+  - discovery-memory-launch
+  - coa-memory-launch
+  - bcea-memory-launch
+  - sow-memory-launch
+
+No schema/auth/SEO/Streamlit changes.
