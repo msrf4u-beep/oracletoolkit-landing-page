@@ -1,0 +1,16 @@
+flowchart LR
+    Login[Login] --> Dashboard[Executive Dashboard]
+    Dashboard --> Workspace[Project Workspace]
+    Workspace --> Lifecycle[Implementation Lifecycle]
+    Lifecycle --> CurrentPhase[Current Phase Command Center]
+    CurrentPhase --> Activities[Activities]
+    CurrentPhase --> Gates[Gate Review]
+    CurrentPhase --> Apps[Applications]
+    CurrentPhase --> Deliverables[Deliverables]
+    CurrentPhase --> Governance[Governance]
+    CurrentPhase --> Timeline[Timeline]
+    Apps --> Memory[Project Memory]
+    Deliverables --> Memory
+    Governance --> Memory
+    Memory --> Analytics[Analytics]
+    Memory --> AI[AI Advisor]

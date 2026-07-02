@@ -1,0 +1,13 @@
+flowchart TB
+    L1[User Experience Layer<br/>Executive Dashboard, Workspace, Lifecycle, Applications]
+    L2[Operating System Layer<br/>Phase Engine, Gate Engine, Governance Engine]
+    L3[Intelligence Layer<br/>Project Memory, Timeline, Analytics, AI Advisor]
+    L4[Application Layer<br/>Discovery, COA, BCEA, SOW, Scenario, Configuration]
+    L5[Data Layer<br/>Supabase tables, Clerk identity, payload JSON, evidence links]
+    L6[Integration Layer<br/>Streamlit apps, future APIs, export/import adapters]
+    L1 --> L2
+    L2 --> L3
+    L4 --> L3
+    L3 --> L5
+    L4 --> L6
+    L6 --> L5
