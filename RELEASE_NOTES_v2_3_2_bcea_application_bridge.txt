@@ -1,0 +1,13 @@
+OracleToolkit v2.3.2 — BCEA Application Bridge
+
+Scope:
+- Adds BCEA Architect as the 4th OracleToolkit Workspace application card.
+- Adds BCEA launch bridge with project_id, project_memory_key, clerk_user_id.
+- Uses deployed BCEA Streamlit URL:
+  https://budgetarycontrol-architectv3-yt4uifrftfksbjezcycgak.streamlit.app/
+- Preserves Discovery, COA, and SOW application cards.
+- Preserves existing Project Memory, Deliverables, Project Switcher, auth, and SEO.
+
+No schema changes.
+No Supabase persistence changes.
+No Streamlit app changes.

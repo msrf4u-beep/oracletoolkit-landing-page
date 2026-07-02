@@ -34,6 +34,9 @@
 .run-card a#sow-memory-launch,
 .run-card a#coa-memory-launch,
 .run-card a#discovery-memory-launch{display:none!important}
+
+.app-card.app-bcea:before{background:#059669}
+.app-bcea .app-icon{background:#d1fae5}
 </style></head><body><header class="top"><div class="top-inner"><div class="brand"><svg viewBox="0 0 96 96"><rect x="6" y="6" width="84" height="84" rx="22" fill="#0A2040"></rect><rect x="13" y="13" width="70" height="70" rx="17" fill="none" stroke="#CBD5E1" stroke-width="5"></rect><text x="48" y="58" text-anchor="middle" font-family="Arial" font-size="31" font-weight="800" fill="#F8FAFC">OT</text></svg><span>OracleToolkit Workspace</span></div><div class="nav-actions"><a class="btn secondary" href="index.html">Home</a><a class="btn secondary" href="methodology-command-center.html">Command Center</a><button id="logout" class="btn secondary hidden" type="button">Logout</button></div></div></header><main class="wrap">
 <nav class="workspace-jump-nav" aria-label="Project Memory navigation">
   <a href="#workspace-overview">Overview</a>
@@ -79,6 +82,22 @@
       </div>
       <a id="coa-memory-launch" class="btn app-launch secondary disabled" href="#" target="_blank" rel="noopener" aria-disabled="true">Launch</a>
     </article>
+
+    <article class="app-card app-bcea" data-app-card="bcea">
+      <div class="app-card-top">
+        <div class="app-icon">🧭</div>
+        <span id="bcea-app-status" class="app-status app-status-waiting">Select Project</span>
+      </div>
+      <h3>BCEA Architect</h3>
+      <p>Design budgetary control architecture, control budgets, funds check behavior, dependencies, and test scenarios.</p>
+      <div class="app-chips">
+        <span>Control Budgets</span>
+        <span>Funds Check</span>
+        <span>Budget Exceptions</span>
+      </div>
+      <a id="bcea-memory-launch" class="btn app-launch secondary disabled" href="#" target="_blank" rel="noopener" aria-disabled="true">Launch</a>
+    </article>
+
 
     <article class="app-card app-sow" data-app-card="sow">
       <div class="app-card-top">
